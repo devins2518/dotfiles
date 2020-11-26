@@ -1,7 +1,6 @@
 (cat ~/.cache/wal/sequences &)
 # Dotfiles management
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-complete -F _complete_alias config
 alias vim=nvim
 alias flamegraph=flamegraph.pl
 alias temps='nvidia-smi -q --display=TEMPERATURE | grep Current; sensors | grep Tdie'
