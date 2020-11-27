@@ -1,5 +1,6 @@
 (cat ~/.cache/wal/sequences &)
 # Dotfiles management
+alias pacupdate="pacman -Qqe > ~/Pkglist.txt"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias vim=nvim
 alias flamegraph=flamegraph.pl

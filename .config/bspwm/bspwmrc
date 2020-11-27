@@ -16,6 +16,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 ## BSPWM Settings
 ########################################################################
 bspc monitor -d I II III
+bspc desktop \^2 --layout monocle
 
 bspc config border_width            3
 bspc config top_padding            40
@@ -29,10 +30,13 @@ bspc config borderless_monocle  false
 bspc config gapless_monocle     false
 bspc config paddless_monocle    false
 
-bspc rule -a firefox desktop='^2' state=monocle follow=on
-bspc rule -a Gimp-2.10 desktop='^2' state=monocle follow=on
-bspc rule -a Steam desktop='^2' state=monocle follow=on
-bspc rule -a Steam desktop='^1' follow=on
+bspc rule -a firefox desktop='^2' layout=monocle follow=on
+bspc rule -a Gimp-2.10 desktop='^2' layout=monocle follow=on
+bspc rule -a Steam desktop='^2' layout=monocle follow=on
+bspc rule -a kitty desktop='^1' state=tiled follow=on
+# Change position and shape of windows for polybar
+bspc rule -a Pavucontrol state=floating rectangle=530x400+210+40
+bspc rule -a Nm-connection-editor state=floating rectangle=530x400+265+40
 
 # Use pywal color
 . "${HOME}/.cache/wal/colors.sh"
