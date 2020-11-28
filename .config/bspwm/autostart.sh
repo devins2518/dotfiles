@@ -5,8 +5,8 @@ twmnd &
 # Compositor
 picom --experimental-backends --backend glx &
 # Background and colorscheme setter
-feh --bg-fill $HOME/.config/wallpaper/wallhaven-e7zogk.jpg &
-wal -i $HOME/.config//wallpaper/wallhaven-e7zogk.jpg &
+feh --bg-fill $HOME/Downloads/wallhaven-0pqp2m.jpg &
+flavours generate dark $HOME/Downloads/wallhaven-0pqp2m.jpg && flavours apply generated &
 # Nvidia Fan Controller
 nvfancontrol &
 # Alt tab daemon

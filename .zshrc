@@ -1,4 +1,3 @@
-(cat ~/.cache/wal/sequences &)
 # Dotfiles management
 alias pacupdate="pacman -Qqe > ~/Pkglist.txt"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -6,11 +5,12 @@ alias vim=nvim
 alias flamegraph=flamegraph.pl
 alias temps='nvidia-smi -q --display=TEMPERATURE | grep Current; sensors | grep Tdie'
 # Do neofetch on startup
+echo '\n'
 neofetch
 
 export EDITOR=nvim
 export SUDO_EDITOR=nvim
-export TERM=kitty
+export TERM=alacritty
 
 # Fuzzy finding
 zstyle ':completion:*' matcher-list '' \
@@ -162,6 +162,3 @@ zstyle :compinstall filename '/home/devin/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin

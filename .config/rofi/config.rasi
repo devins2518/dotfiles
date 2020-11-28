@@ -1,3 +1,12 @@
 configuration {
-	theme: "~/.cache/wal/colors-rofi-dark";
+    icon-theme:          "WhiteSur-dark";
+    drun-display-format: "{icon} {name}";
+    threads:             0;
+    scroll-method:       0;
+    disable-history:     false;
+    fullscreen:          false;
+    hide-scrollbar:      true;
+    run-command: "zsh -i -c '{cmd}'";
+    run-shell-command: "kitty -1 --listen-on=unix:@reloadkitty '{cmd}'";
+    font: "Fira Sans 12";
 }
