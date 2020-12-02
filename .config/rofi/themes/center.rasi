@@ -1,0 +1,65 @@
+@import "styles/colors.rasi"
+* {
+  background-color: @background;
+  border-color: @background;
+  text-color: @foreground;
+  spacing: 0;
+  width: 512px;
+}
+
+window {
+    transparency:       "real";
+    background-color:   @background;
+    text-color:         @foreground;
+    height:             50%;
+    width:              40%;
+    x-offset:           0;
+    y-offset:           0;
+}
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [prompt,entry];
+}
+
+prompt {
+  padding: 16px;
+  border: 0 1px 0 0;
+}
+
+textbox {
+  background-color: @lightbg;
+  border: 0 0 1px 0;
+  border-color: @lightfg;
+  padding: 8px 16px;
+}
+
+entry {
+  padding: 16px;
+}
+
+listview {
+  cycle: false;
+  margin: 0 0 -1px 0;
+  scrollbar: false;
+}
+
+element {
+  border: 0 0 1px 0;
+  padding: 16px;
+}
+
+element-icon {
+    size: 32px;
+    border: 0px;
+}
+
+element-text {
+    expand:                         true;
+    vertical-align:                 0.5;
+}
+
+element selected {
+  background-color: @foreground;
+  text-color: @background;
+}

@@ -1,0 +1,37 @@
+# Example item, with default values
+# [[item]]
+# file = '~/.config/example' (required)
+# template = 'example' (required)
+# subtemplate = 'default'
+# rewrite = false
+# start = '# Start flavours'
+# end = '# End flavours'
+# hook = ''
+
+[[item]]
+file = '~/.config/polybar/colors.ini'
+template = 'polybar'
+rewrite = false
+
+[[item]]
+file = '~/.config/bspwm/colors.sh'
+template = 'bspwm'
+rewrite = true
+
+[[item]]
+file = '~/.config/alacritty/alacritty.yml'
+template = 'alacritty'
+subtemplate = 'default-256'
+rewrite = false
+
+[[item]]
+file = '~/.config/rofi/themes/styles/colors.rasi'
+template = 'rofi'
+subtemplate = 'colors'
+rewrite = true
+
+[[item]]
+file = '~/.config/kitty/colors.sh'
+template = 'shell'
+subtemplate = 'default'
+rewrite = true
