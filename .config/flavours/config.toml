@@ -29,9 +29,3 @@ file = '~/.config/rofi/themes/styles/colors.rasi'
 template = 'rofi'
 subtemplate = 'colors'
 rewrite = true
-
-[[item]]
-file = '~/.config/kitty/colors.sh'
-template = 'shell'
-subtemplate = 'default'
-rewrite = true

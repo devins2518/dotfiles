@@ -1,10 +1,7 @@
-# Notification daemon
-twmnd &
 # Compositor
 picom --experimental-backends --backend glx &
 # Background and colorscheme setter
-feh --bg-fill $HOME/.config/wallpaper/summer/earlymorning.png &
-flavours generate dark $HOME/.config/wallpaper/summer/earlymorning.png && flavours apply generated &
+feh --bg-fill $HOME/.config/wallpaper/earlymorning.png &
 # Nvidia Fan Controller
 nvfancontrol &
 # Alt tab daemon

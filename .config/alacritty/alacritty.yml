@@ -111,7 +111,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: monospace
+    family: FiraCode Medium
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
@@ -122,7 +122,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: monospace
+    family: FiraCode Medium
 
     # The `style` can be specified to pick a specific face.
     #style: Bold
@@ -133,7 +133,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
+    #family: FiraCode
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -144,7 +144,7 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: monospace
+    family: FiraCode
 
     # The `style` can be specified to pick a specific face.
     #style: Bold Italic
@@ -176,42 +176,33 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 # Colors (Tomorrow Night)
-# Start flavours
-# Base16 Generated 256 - alacritty color config
-# Flavours
 colors:
   # Default colors
   primary:
-    background: '0x182137'
-    foreground: '0xc9cbb5'
+    background: '0x1a1b26'
+    foreground: '0xa9b1d6'
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x182137'
-    cursor: '0xc9cbb5'
-
-  # Normal colors
+    # Normal colors
   normal:
-    black:   '0x182137'
-    red:     '0x8e7457'
-    green:   '0xce8cbd'
-    yellow:  '0x1ffc08'
-    blue:    '0xfa7373'
-    magenta: '0x89cff4'
-    cyan:    '0x8777af'
-    white:   '0xc9cbb5'
+    black:   '0x32344a'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xad8ee6'
+    cyan:    '0x449dab'
+    white:   '0x787c99'
 
-  # Bright colors
+    # Bright colors
   bright:
-    black:   '0x828782'
-    red:     '0x8e7457'
-    green:   '0xce8cbd'
-    yellow:  '0x1ffc08'
-    blue:    '0xfa7373'
-    magenta: '0x89cff4'
-    cyan:    '0x8777af'
-    white:   '0xd9dbcb'
-
+    black:   '0x444b6a'
+    red:     '0xff7a93'
+    green:   '0xb9f27c'
+    yellow:  '0xff9e64'
+    blue:    '0x7da6ff'
+    magenta: '0xbb9af7'
+    cyan:    '0x0db9d7'
+    white:   '0xacb0d0'
   indexed_colors:
     - { index: 16, color: '0xfc456c' }
     - { index: 17, color: '0x5174d2' }
@@ -219,7 +210,6 @@ colors:
     - { index: 19, color: '0x5f6569' }
     - { index: 20, color: '0xa5a99b' }
     - { index: 21, color: '0xd1d3c0' }
-# End flavours
 
 # Bell
 #

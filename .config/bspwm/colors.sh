@@ -1,20 +1,21 @@
 ## Base16 bspwm
 # Author: devins2518
 
-# Colors¬
-color0=#182137
-color1=#3c4350
-color2=#5f6569
-color3=#828782
-color4=#a5a99b
-color5=#c9cbb5
-color6=#d1d3c0
-color7=#d9dbcb
-color8=#8e7457
-color9=#fc456c
-color10=#1ffc08
-color11=#ce8cbd
-color12=#8777af
-color13=#fa7373
-color14=#89cff4
-color15=#5174d2
+# Colors
+color0=#0E1827
+color1=#284F9D
+color2=#3558A9
+color3=#56619E
+color4=#9076AE
+color5=#688BD0
+color6=#f0a8d7
+color7=#e8c9cf
+color8=#a28c90
+color9=#284F9D
+color10=#3558A9
+color11=#56619E
+color12=#9076AE
+color13=#688BD0
+color14=#B19ABA
+color15=#e8c9cf
+
