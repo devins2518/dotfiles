@@ -7,7 +7,7 @@ configuration {
     fullscreen:          false;
     hide-scrollbar:      true;
     run-command: "zsh -i -c '{cmd}'";
-    font: "Fira Sans 12";
+    font: "Fira Sans 25";
 }
 
 @import "/themes/center.rasi"

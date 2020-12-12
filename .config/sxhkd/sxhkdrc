@@ -6,13 +6,9 @@
 super + Return
     alacritty
 
-# Open rofi
+# program launcher
 super + d
 	$HOME/.config/rofi/launch.sh
-
-# Open rofi as root
-super + shift + d
-	sudo $HOME/.config/rofi/launch.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -20,10 +16,6 @@ super + Escape
 
 super + e
     pcmanfm
-
-# lockscreen
-alt + shift + x
-    systemctl suspend
 
 #
 # bspwm hotkeys
@@ -47,18 +39,29 @@ super + m
 
 # Picture in picture mode
 super + p
-    bspc node --state \~floating; bspc node -g sticky; xdotool getactivewindow windowsize 768 432 windowmove 1146 640
+    bspc node --state \~floating
+    xdotool getactivewindow windowsize 768 432 windowmove 0 648 
+
+# Change volume
+XF86Audio{Raise,Lower}Volume
+    pactl -- set-sink-volume 0 {+,-}2%
+
+# lockscreen
+alt + shift + x
+    betterlockscreen -l dim
 
 #
 # state/flags
 #
 
-# set the window state
+# Change to tiled mode
 super + t
 	bspc node -t tiled
 
+# Change to pseudo_tiled, floating, fullscreen mode
 super + shift + {t,s,f}
 	bspc node -t {pseudo_tiled,floating,fullscreen}
+
 # set the node flags
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}

@@ -25,10 +25,11 @@ bspc monitor -d I II III
 bspc desktop \^2 --layout monocle
 
 bspc config border_width            3
-bspc config top_padding            40
-bspc config left_padding           10
-bspc config right_padding          10
-bspc config window_gap              6
+bspc config top_padding            80
+bspc config left_padding           20
+bspc config right_padding          20
+bspc config bottom_padding         20
+bspc config window_gap             12
 
 bspc config split_ratio          0.50
 bspc config single_monocle       true
@@ -38,20 +39,18 @@ bspc config paddless_monocle    false
 
 bspc rule -a firefox desktop='^2' layout=monocle follow=on
 bspc rule -a Gimp-2.10 desktop='^2' layout=monocle follow=on
-bspc rule -a Steam desktop='^2' layout=monocle follow=on
-bspc rule -a Spotify desktop='^3' layout=monocle follow=on
 bspc rule -a Alacritty desktop='^1' state=tiled follow=on
 # Change position and shape of windows for polybar
-bspc rule -a Pavucontrol state=floating rectangle=530x400+210+40
-bspc rule -a Nm-connection-editor state=floating rectangle=530x400+265+40
+bspc rule -a Pavucontrol state=floating rectangle=1000x750+450+70
+bspc rule -a Nm-connection-editor state=floating rectangle=600x600+500+70
 
 # Use pywal color
 . "${HOME}/.config/bspwm/colors.sh"
 
 ## Set the border colors.
-bspc config normal_border_color $color3
-bspc config active_border_color $color6
-bspc config focused_border_color $color6
+bspc config normal_border_color '$color01'
+bspc config active_border_color '$color10'
+bspc config focused_border_color '$color15'
 # Use the line below if you are on bspwm >= 0.9.4
-bspc config presel_feedback_color $color4
+bspc config presel_feedback_color '$color11'
 ########################################################################

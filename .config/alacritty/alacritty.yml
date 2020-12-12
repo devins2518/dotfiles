@@ -133,7 +133,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: FiraCode
+    #family: monospace
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -144,7 +144,7 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: FiraCode
+    family: monospace
 
     # The `style` can be specified to pick a specific face.
     #style: Bold Italic
@@ -179,37 +179,43 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x1a1b26'
-    foreground: '0xa9b1d6'
+    background: '#190000'
+    foreground: '#97c7cb'
 
-    # Normal colors
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x462921'
+    cursor: '#97c8cb'
+
+  # Normal colors
   normal:
-    black:   '0x32344a'
-    red:     '0xf7768e'
-    green:   '0x9ece6a'
-    yellow:  '0xe0af68'
-    blue:    '0x7aa2f7'
-    magenta: '0xad8ee6'
-    cyan:    '0x449dab'
-    white:   '0x787c99'
+    black:   '#03130D'
+    red:     '#E32613'
+    green:   '#A32B2B'
+    yellow:  '#DF561B'
+    blue:    '#965649'
+    magenta: '#D1544B'
+    cyan:    '#DB9F48'
+    white:   '#97c8cb'
 
-    # Bright colors
+  # Bright colors
   bright:
-    black:   '0x444b6a'
-    red:     '0xff7a93'
-    green:   '0xb9f27c'
-    yellow:  '0xff9e64'
-    blue:    '0x7da6ff'
-    magenta: '0xbb9af7'
-    cyan:    '0x0db9d7'
-    white:   '0xacb0d0'
+    black:   '#698c8e'
+    red:     '#E32613'
+    green:   '#A34B2B'
+    yellow:  '#DF561B'
+    blue:    '#965649'
+    magenta: '#D1544B'
+    cyan:    '#DB9F48'
+    white:   '#97c7cb'
+
   indexed_colors:
-    - { index: 16, color: '0xfc456c' }
-    - { index: 17, color: '0x5174d2' }
-    - { index: 18, color: '0x3c4350' }
-    - { index: 19, color: '0x5f6569' }
-    - { index: 20, color: '0xa5a99b' }
-    - { index: 21, color: '0xd1d3c0' }
+    - { index: 16, color: '0x3f837c' }
+    - { index: 17, color: '0x54807a' }
+    - { index: 18, color: '0x60483e' }
+    - { index: 19, color: '0x7b685b' }
+    - { index: 20, color: '0xafa795' }
+    - { index: 21, color: '0xd2cebe' }
 
 # Bell
 #
