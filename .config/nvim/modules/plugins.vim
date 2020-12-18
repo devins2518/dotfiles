@@ -9,16 +9,12 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 
 " Language Server
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'nvim-lua/completion-nvim'
-"Plug 'nvim-lua/diagnostic-nvim'
-"Plug 'tjdevries/nlua.nvim'
-"Plug 'tjdevries/lsp_extensions.nvim'
-"Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets'
-"Plug 'jiangmiao/auto-pairs'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tweekmonster/startuptime.vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/completion-treesitter'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 " Ctrlp fuzzy finding
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
@@ -45,9 +41,6 @@ Plug 'frazrepo/vim-rainbow'
 
 " Rust stuff
 Plug 'rust-lang/rust.vim'
-
-" Discord rich presence
-Plug 'hugolgst/vimsence'
 
 " Auto surrounding parens, brackets, etc
 Plug 'tpope/vim-surround'

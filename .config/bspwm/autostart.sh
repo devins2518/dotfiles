@@ -6,3 +6,5 @@ feh --bg-fill $HOME/.config/wallpaper/ &
 picom --experimental-backends --backend glx &
 # Alt tab daemon
 alttab -w 1 -i 128x128 &
+# Touchscreen
+touchegg &

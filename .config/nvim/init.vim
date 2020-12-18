@@ -3,10 +3,9 @@ let g:easyescape_chars = { "j": 1, "k": 1 }
 let g:easyescape_timeout = 100
 cnoremap jk <ESC>
 cnoremap kj <ESC>
-set mouse=a
+set mouse=
 
 source $HOME/.config/nvim/modules/plugins.vim
-source $HOME/.config/nvim/modules/coc.vim
 source $HOME/.config/nvim/modules/ctrlp.vim
 source $HOME/.config/nvim/modules/gitgutter.vim
 source $HOME/.config/nvim/modules/nerdtree.vim
@@ -14,23 +13,9 @@ source $HOME/.config/nvim/modules/vim-airline.vim
 source $HOME/.config/nvim/modules/vim-devicons.vim
 source $HOME/.config/nvim/modules/rainbow.vim
 source $HOME/.config/nvim/modules/theme.vim
-"luafile $HOME/.config/nvim/modules/lsp.lua
-
-"nmap <tab> <Plug>(completion_smart_tab)
-"nmap <s-tab> <Plug>(completion_smart_s_tab)
-"let g:completion_trigger_on_delete = 1
-"let g:diagnostic_enable_virtual_text = 1
-"let g:diagnostic_auto_popup_while_jump = 1
-"let g:diagnostic_insert_delay = 1
-"" Set completeopt to have a better completion experience
-"set completeopt=menuone,noinsert
-
-"" Avoid showing message extra message when using completion
-"set shortmess+=c
-
-"let g:completion_confirm_key = "\<Tab>"
-"let g:completion_enable_snippet = 'UltiSnips'
-"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+source $HOME/.config/nvim/modules/vimtex.vim
+source $HOME/.config/nvim/modules/lsp.vim
+luafile $HOME/.config/nvim/modules/lsp.lua
 
 set noerrorbells
 set tabstop=4 softtabstop=4
@@ -76,10 +61,10 @@ set showmatch
 " Split settings
 set splitbelow
 set splitright
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-j> <C-W><C-J>
+nnoremap <C-k> <C-W><C-K>
+nnoremap <C-l> <C-W><C-L>
+nnoremap <C-h> <C-W><C-H>
 
 let g:rustfmt_autosave = 1
 " Run with :!
