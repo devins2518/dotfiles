@@ -10,12 +10,20 @@ super + Return
 super + d
 	$HOME/.config/rofi/launch.sh
 
+# Open rofi as root
+super + shift + d
+	sudo $HOME/.config/rofi/launch.sh
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
 
 super + e
     pcmanfm
+
+# Volume keys
+Audio{Raise,Lower}Volume
+    amixer sset Master {1+,1-} unmute
 
 #
 # bspwm hotkeys

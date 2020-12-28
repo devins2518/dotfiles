@@ -196,7 +196,7 @@ colors:
     blue:    '#965649'
     magenta: '#D1544B'
     cyan:    '#DB9F48'
-    white:   '#97c8cb'
+    white:   '#FBEBD8'
 
   # Bright colors
   bright:
@@ -207,7 +207,7 @@ colors:
     blue:    '#965649'
     magenta: '#D1544B'
     cyan:    '#DB9F48'
-    white:   '#97c7cb'
+    white:   '#FBEBD8'
 
   indexed_colors:
     - { index: 16, color: '0x3f837c' }
@@ -262,7 +262,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.90
+background_opacity: 0.8
 
 #selection:
   # This string contains all characters that are used as separators for
