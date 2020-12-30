@@ -2,18 +2,16 @@ local home = os.getenv("HOME")
 cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
 fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
 g = vim.g      -- a table to access global variables
+api = vim.api  -- accessing vim api function
 
 g.mapleader = " "
 
--- Option settings
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 
 function opt(scope, key, value)
   scopes[scope][key] = value
   if scope ~= 'o' then scopes['o'][key] = value end
 end
-
-cmd 'colorscheme ron'                                   -- Put your favorite colorscheme here
 
 opt('o', 'errorbells', false)                           -- Disable annoying error bells
 opt('b', 'tabstop', 4)                                  -- Number of spaces that tabs count for
@@ -45,6 +43,7 @@ opt('o', 'showmatch', true)                             -- When a bracket is ins
 opt('o', 'splitbelow', true)                            -- Better split options
 opt('o', 'splitright', true)                            -- Better split options
 opt('w', 'signcolumn', 'yes:1')                         -- Always show two columns
+
 -- Mappings
 function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
@@ -62,9 +61,26 @@ map('n', '<C-k>', '<C-W><C-K>')      -- Easy window switching
 map('n', '<C-l>', '<C-W><C-L>')      -- Easy window switching
 map('n', '<C-h>', '<C-W><C-H>')      -- Easy window switching
 
+-- Autocommands
+function create_augroups(definitions)
+    for group_name, definition in pairs(definitions) do
+        api.nvim_command('augroup '..group_name)
+        api.nvim_command('autocmd!')
+        for _, def in ipairs(definition) do
+            -- if type(def) == 'table' and type(def[#def]) == 'function' then
+            -- 	def[#def] = lua_callback(def[#def])
+            -- end
+            local command = table.concat(vim.tbl_flatten{'autocmd', def}, ' ')
+            api.nvim_command(command)
+        end
+        api.nvim_command('augroup END')
+    end
+end
+
 require('plugins')
-require('gitgutter')
-require('deoplete')
---require('fzf')
---require('theme')
+require('lsp')
+require('gitsymbols')
+require('airline')
+require('theme')
+require('fzf')
 --require('rust')
