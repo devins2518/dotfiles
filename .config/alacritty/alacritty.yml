@@ -374,7 +374,7 @@ mouse:
     #   - (Linux/BSD) xdg-open
     #   - (Windows) explorer
     launcher:
-      program: firefox
+    #  program: firefox
     #  args: []
 
     # URL modifiers

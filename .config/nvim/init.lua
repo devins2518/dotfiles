@@ -43,6 +43,8 @@ opt('o', 'showmatch', true)                             -- When a bracket is ins
 opt('o', 'splitbelow', true)                            -- Better split options
 opt('o', 'splitright', true)                            -- Better split options
 opt('w', 'signcolumn', 'yes:1')                         -- Always show two columns
+opt('o', 'mouse', '')                                  -- Allow mouse usage in normal mode
+opt('o', 'termguicolors', true)                         -- Allow mouse usage in normal mode
 
 -- Mappings
 function map(mode, lhs, rhs, opts)
@@ -51,15 +53,15 @@ function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-map('c', 'jk', '<ESC>')              -- Allow jk to escape cmd mode
-map('c', 'kj', '<ESC>')              -- Allow jk to escape cmd mode
-map('n', '<C-n>', '<cmd>noh<CR>')    -- Clear highlights
-map('n', '/', '/\\v')                -- Require explicit pattern escaping
-map('v', '/', '/\\v')                -- Require explicit pattern escaping
-map('n', '<C-j>', '<C-W><C-J>')      -- Easy window switching
-map('n', '<C-k>', '<C-W><C-K>')      -- Easy window switching
-map('n', '<C-l>', '<C-W><C-L>')      -- Easy window switching
-map('n', '<C-h>', '<C-W><C-H>')      -- Easy window switching
+map('c', 'jk', '<ESC>')                                 -- Allow jk to escape cmd mode
+map('c', 'kj', '<ESC>')                                 -- Allow jk to escape cmd mode
+map('n', '<C-n>', '<cmd>noh<CR>')                       -- Clear highlights
+map('n', '/', '/\\v')                                   -- Require explicit pattern escaping
+map('v', '/', '/\\v')                                   -- Require explicit pattern escaping
+map('n', '<C-j>', '<C-W><C-J>')                         -- Easy window switching
+map('n', '<C-k>', '<C-W><C-K>')                         -- Easy window switching
+map('n', '<C-l>', '<C-W><C-L>')                         -- Easy window switching
+map('n', '<C-h>', '<C-W><C-H>')                         -- Easy window switching
 
 -- Autocommands
 function create_augroups(definitions)
@@ -81,6 +83,7 @@ require('plugins')
 require('lsp')
 require('gitsymbols')
 require('airline')
+require('treesitter')
 require('theme')
 require('fzf')
---require('rust')
+require('rust')
