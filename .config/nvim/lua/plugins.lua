@@ -29,7 +29,7 @@ paq {'luochen1990/rainbow'}
 -- Rust stuff
 paq {'rust-lang/rust.vim'}
 
--- Auto surrounding parens, brackets, etc
+-- Commands to help work with parens, brackets, etc
 paq {'tpope/vim-surround'}
 
 -- Quick escape
@@ -42,5 +42,8 @@ paq {'iamcco/markdown-preview.nvim', hook = fn['mkdp#util#install()']}
 paq {'vim-airline/vim-airline'}
 paq {'vim-airline/vim-airline-themes'}
 paq {'ryanoasis/vim-devicons'}
+
+-- Autopairs for parens, brackets, etc
+paq {'windwp/nvim-autopairs'}
 
 paq {'tweekmonster/startuptime.vim'}

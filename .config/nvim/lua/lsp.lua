@@ -89,13 +89,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
---local autocmds = {
---    completion = {
---        {"BufEnter",     "*",     "lua require'completion'.on_attach()"};
---    };
---}
---
---create_augroups(autocmds)
 --
 --vim.cmd("highlight LspDiagnosticsLineNrWarning guifg=#E5C07B guibg=#4E4942 gui=bold")
 vim.fn.sign_define("LspDiagnosticsSignError",
@@ -103,7 +96,7 @@ vim.fn.sign_define("LspDiagnosticsSignError",
 vim.fn.sign_define("LspDiagnosticsSignWarning",
     {text = "", texthl = "LspDiagnosticsSignWarning"})
 vim.fn.sign_define("LspDiagnosticsSignInformation",
-    {text = "🛈", texthl = "LspDiagnosticsSignInformation"})
+    {text = "?", texthl = "LspDiagnosticsSignInformation"})
 vim.fn.sign_define("LspDiagnosticsSignHint",
     {text = "!", texthl = "LspDiagnosticsSignHint"})
 
