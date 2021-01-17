@@ -1,49 +1,52 @@
-fn = vim.fn                          -- to call Vim functions e.g. fn.bufnr()
-cmd 'packadd paq-nvim'               -- load the package manager
-local paq = require('paq-nvim').paq  -- a convenient alias
-paq {'savq/paq-nvim', opt = true}    -- paq-nvim manages itself
+vim.api.nvim_exec(
+[[
+" auto-install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  "autocmd VimEnter * PlugInstall
+  autocmd VimEnter * PlugInstall | luafile $MYVIMRC
+endif
 
--- LSP
-paq {'nvim-treesitter/nvim-treesitter'}
-paq {'neovim/nvim-lspconfig'}
-paq {'nvim-lua/completion-nvim'}
-paq {'nvim-lua/lsp-status.nvim'}
-paq {'hrsh7th/vim-vsnip'}
-paq {'hrsh7th/vim-vsnip-integ'}
+call plug#begin('~/.config/nvim/autoload/plugged')
 
--- Fuzzy finding
-paq {'junegunn/fzf', hook = fn['fzf#install']}
-paq {'junegunn/fzf.vim'}
-paq {'ojroques/nvim-lspfuzzy'}
+" Language Server
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
--- Gitgutter symbols
-paq {'lewis6991/gitsigns.nvim'}
-paq {'nvim-lua/plenary.nvim'}
+Plug 'tweekmonster/startuptime.vim'
 
--- Theme
-paq {'p00f/nvim-ts-rainbow'}
-paq {'tomasiser/vim-code-dark'}
-paq {'norcalli/nvim-colorizer.lua'}
-paq {'luochen1990/rainbow'}
+" Ctrlp fuzzy finding
+Plug 'ctrlpvim/ctrlp.vim'
 
--- Rust stuff
-paq {'rust-lang/rust.vim'}
+" Gitgutter symbols
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'nvim-lua/plenary.nvim'
 
--- Commands to help work with parens, brackets, etc
-paq {'tpope/vim-surround'}
+" Commenting help
+Plug 'scrooloose/nerdcommenter'
 
--- Quick escape
-paq {'zhou13/vim-easyescape'}
+" Status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
 
--- Markdown live editing
-paq {'iamcco/markdown-preview.nvim', hook = fn['mkdp#util#install()']}
+" Theme
+Plug 'tomasiser/vim-code-dark'
+Plug 'frazrepo/vim-rainbow'
 
--- Status bar
-paq {'vim-airline/vim-airline'}
-paq {'vim-airline/vim-airline-themes'}
-paq {'ryanoasis/vim-devicons'}
+" Rust stuff
+Plug 'rust-lang/rust.vim'
 
--- Autopairs for parens, brackets, etc
-paq {'windwp/nvim-autopairs'}
+" Auto surrounding parens, brackets, etc
+Plug 'tpope/vim-surround'
 
-paq {'tweekmonster/startuptime.vim'}
+" Quick escape
+Plug 'zhou13/vim-easyescape'
+
+" Live Markdown editing
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+call plug#end()
+
+" Automatically install missing plugins on startup
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) |   PlugInstall --sync | q | endif
+]], false)
