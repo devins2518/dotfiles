@@ -79,7 +79,7 @@ function create_augroups(definitions)
     end
 end
 
-require('plugins')
+vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/plugins.vim', false)
 vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/coc.vim', false)
 vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/comments.vim', false)
 vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/ctrlp.vim', false)
