@@ -42,7 +42,7 @@ opt('o', 'hlsearch', true)                              -- Highlight searches
 opt('o', 'showmatch', true)                             -- When a bracket is inserted, switch to the other one
 opt('o', 'splitbelow', true)                            -- Better split options
 opt('o', 'splitright', true)                            -- Better split options
-opt('w', 'signcolumn', 'yes:1')                         -- Always show two columns
+opt('w', 'signcolumn', 'yes:2')                         -- Always show two columns
 opt('o', 'mouse', '')                                  -- Allow mouse usage in normal mode
 opt('o', 'termguicolors', true)                         -- Allow mouse usage in normal mode
 
@@ -79,11 +79,12 @@ function create_augroups(definitions)
     end
 end
 
-vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/plugins.vim', false)
+require('plugins')
 vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/coc.vim', false)
 vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/comments.vim', false)
 vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/ctrlp.vim', false)
 vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/rainbow.vim', false)
+vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/fugitive.vim', false)
 require('gitsymbols')
 require('airline')
 require('theme')

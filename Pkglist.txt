@@ -11,7 +11,6 @@ arch-install-scripts
 autoconf
 automake
 base
-bash-language-server
 betterlockscreen
 binutils
 bison
@@ -65,6 +64,7 @@ network-manager-applet
 networkmanager
 nomacs
 notepadqq
+npm
 openssh
 os-prober
 pacman
@@ -80,7 +80,6 @@ powertop
 pulseaudio
 python-pip
 rofi
-rust-analyzer-git
 rustup
 scrot
 sed
@@ -98,7 +97,6 @@ ttf-twemoji-color
 ufetch-git
 unzip
 update-grub
-vim-language-server
 wget
 which
 wireless_tools

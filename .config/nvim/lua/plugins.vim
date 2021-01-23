@@ -7,6 +7,9 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
+" Git stuffs
+Plug 'tpope/vim-fugitive'
+
 " Language Server
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
