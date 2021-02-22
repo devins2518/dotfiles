@@ -11,7 +11,7 @@ arch-install-scripts
 autoconf
 automake
 base
-betterlockscreen
+betterlockscreen-git
 binutils
 bison
 bless
@@ -61,6 +61,7 @@ mesa
 neofetch
 neovim-git
 nerd-fonts-fira-code
+nerd-fonts-iosevka
 network-manager-applet
 networkmanager
 nomacs
@@ -93,7 +94,6 @@ tmux
 touchegg
 touchegg-gce-git
 tree
-ttf-fira-code
 ttf-twemoji-color
 ufetch-git
 unzip

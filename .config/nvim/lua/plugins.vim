@@ -31,7 +31,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 
 " Theme
-Plug 'tomasiser/vim-code-dark'
+Plug 'b4skyx/serenade'
+Plug '~/Repos/fire.vim'
 Plug 'frazrepo/vim-rainbow'
 
 " Rust stuff

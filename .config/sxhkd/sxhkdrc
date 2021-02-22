@@ -56,7 +56,7 @@ XF86Audio{Raise,Lower}Volume
 
 # lockscreen
 alt + shift + x
-    betterlockscreen -l dim
+    betterlockscreen -l blur
 
 #
 # state/flags
