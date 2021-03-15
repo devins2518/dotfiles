@@ -176,39 +176,34 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
-# Colors (Tomorrow Night)
+# Colors (custom)
 colors:
   # Default colors
   primary:
-    background: '#0f2123'
-    foreground: '#f7e6b2'
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  #cursor:
-    #text: '0x462921'
-    #cursor: '#97c8cb'
+    background: '#0F2123'
+    foreground: '#F8F8F2'
 
   # Normal colors
   normal:
     black:   '#03130D'
-    red:     '#ff7777'
-    green:   '#A32B2B'
-    yellow:  '#DF561B'
-    blue:    '#965649'
-    magenta: '#D1544B'
-    cyan:    '#81bbbc'
-    white:   '#FBEBD8'
+    red:     '#D75656'
+    green:   '#5DBE54'
+    yellow:  '#E4E65C'
+    blue:    '#5F7BFF'
+    magenta: '#DD78AE'
+    cyan:    '#32CBCD'
+    white:   '#FFE5EB'
 
   # Bright colors
   bright:
-    black:   '#698c8e'
-    red:     '#E32613'
-    green:   '#A34B2B'
-    yellow:  '#DF561B'
-    blue:    '#965649'
-    magenta: '#D1544B'
-    cyan:    '#77bec9'
-    white:   '#cae9fd'
+    black:   '#698C8E'
+    red:     '#FF7F7F'
+    green:   '#82DD6D'
+    yellow:  '#FFF190'
+    blue:    '#90AFFF'
+    magenta: '#EAA9CE'
+    cyan:    '#9CE6E7'
+    white:   '#FFF0F0'
 
 # Bell
 #

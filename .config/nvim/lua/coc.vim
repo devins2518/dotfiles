@@ -1,6 +1,8 @@
 " coc config
 let g:coc_global_extensions = [
   \ 'coc-rust-analyzer',
+  \ 'coc-toml',
+  \ 'coc-prettier',
   \ 'coc-pairs',
   \ 'coc-snippets',
   \ 'coc-python',

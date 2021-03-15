@@ -1,4 +1,4 @@
-g["airline_theme"] = 'serenade'
+g["airline_theme"] = 'edge'
 g["airline#extensions#tabline#enabled"] = 1
 g["airline#extensions#tabline#left_sep"] = ' '
 g["airline#extensions#tabline#left_alt_sep"] = '|'

@@ -42,9 +42,9 @@ opt('o', 'hlsearch', true)                              -- Highlight searches
 opt('o', 'showmatch', true)                             -- When a bracket is inserted, switch to the other one
 opt('o', 'splitbelow', true)                            -- Better split options
 opt('o', 'splitright', true)                            -- Better split options
-opt('w', 'signcolumn', 'yes:2')                         -- Always show two columns
-opt('o', 'mouse', '')                                  -- Allow mouse usage in normal mode
-opt('o', 'termguicolors', true)                         -- Allow mouse usage in normal mode
+opt('w', 'signcolumn', 'yes:1')                         -- Always show two columns
+opt('o', 'mouse', '')                                   -- Allow mouse usage in normal mode
+opt('o', 'termguicolors', true)                         -- True color
 
 -- Mappings
 function map(mode, lhs, rhs, opts)
@@ -88,5 +88,6 @@ vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/fugitive.vim', false)
 vim.api.nvim_exec('source ' .. home .. '/.config/nvim/lua/folds.vim', false)
 require('gitsymbols')
 require('airline')
+require('color')
 require('theme')
 require('rust')
