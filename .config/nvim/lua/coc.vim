@@ -1,14 +1,16 @@
 " coc config
 let g:coc_global_extensions = [
-  \ 'coc-rust-analyzer',
-  \ 'coc-toml',
-  \ 'coc-prettier',
-  \ 'coc-pairs',
-  \ 'coc-snippets',
-  \ 'coc-python',
-  \ 'coc-json',
-  \ 'coc-sh',
   \ 'coc-clangd',
+  \ 'coc-discord-neovim',
+  \ 'coc-html',
+  \ 'coc-json',
+  \ 'coc-pairs',
+  \ 'coc-prettier',
+  \ 'coc-python',
+  \ 'coc-rust-analyzer',
+  \ 'coc-sh',
+  \ 'coc-snippets',
+  \ 'coc-toml',
   \ ]
 
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
