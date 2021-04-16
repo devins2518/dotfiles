@@ -25,6 +25,7 @@ dhclient
 dialog
 diffuse
 diffutils
+discord_arch_electron
 dnsmasq
 efibootmgr
 endeavouros-keyring
@@ -115,6 +116,7 @@ ipw2200-fw
 iwd
 jfsutils
 keyserver-rank
+libatomic_ops
 libdvdcss
 libgsf
 libopenraw
