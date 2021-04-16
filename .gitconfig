@@ -1,0 +1,15 @@
+[commit]
+	gpgsign = true
+[credential]
+	helper = store
+[rebase]
+	rebase = false
+[user]
+	name = Devin Singh
+	email = drsingh2518@icloud.com
+[pull]
+	rebase = false
+[alias]
+	cush = !git commit && git push
+[init]
+	defaultBranch = master

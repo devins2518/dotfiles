@@ -1,3 +1,0 @@
-#! /bin/sh
-
-pgrep -x panel > /dev/null || panel &
