@@ -17,6 +17,7 @@ bison
 bless
 bottom-bin
 bspwm
+bunnyfetch-git
 dosfstools
 efibootmgr
 fakeroot
@@ -33,6 +34,7 @@ gimp
 git
 glxgears
 glxinfo
+go
 grep
 groff
 grub
@@ -58,7 +60,6 @@ lxappearance
 m4
 make
 mesa
-neofetch
 neovim-git
 nerd-fonts-fira-code
 nerd-fonts-iosevka
@@ -95,7 +96,6 @@ touchegg
 touchegg-gce-git
 tree
 ttf-twemoji-color
-ufetch-git
 unzip
 update-grub
 wget

@@ -11,7 +11,7 @@ alias flamegraph=flamegraph.pl
 alias temps='sensors | grep coretemp -A 5'
 alias pacdate='~/.config/scripts/pacdate'
 # Do neofetch on startup
-ufetch
+bunnyfetch
 
 # Fuzzy finding
 zstyle ':completion:*' matcher-list '' \

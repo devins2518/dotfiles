@@ -24,7 +24,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 bspc monitor -d I II III
 bspc desktop \^2 --layout monocle
 
-bspc config border_width            3
+#bspc config border_width            3
 bspc config top_padding            80
 bspc config left_padding           20
 bspc config right_padding          20
