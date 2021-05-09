@@ -111,26 +111,25 @@
   sound.enable = true;
   hardware = {
     pulseaudio.enable = true;
-    acpilight.enable = true;
-    video.hidpi.enable = true;
-    cpu.intel.updateMicrocode = true;
-    opengl = {
-      enable = true;
-      extraPackages = with pkgs; [
-        intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
-    };
-  };
+  acpilight.enable = true;
+  video.hidpi.enable = true;
+  cpu.intel.updateMicrocode = true;
+  opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.devin = {
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "Devin Singh";
-    extraGroups = [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
   security.sudo.wheelNeedsPassword = false; # wheel ALL=(ALL) NOPASSWD:ALL
@@ -139,8 +138,7 @@
   nixpkgs.config = { allowUnfree = true; };
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
-      url =
-        "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
+      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
     }))
   ];
   environment.systemPackages = with pkgs; [
@@ -153,6 +151,7 @@
     home-manager
     zsh-powerlevel10k
     lm_sensors
+    nodejs
     # p10k isn't available for some reason
   ];
 
@@ -167,7 +166,7 @@
   programs.zsh = {
     enable = true;
     histSize = 2000;
-    histFile = "~/.zsh/HISTFILE";
+    histFile = "~/.zsh/HIST";
 
     autosuggestions = {
       enable = true;

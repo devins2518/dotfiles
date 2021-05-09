@@ -1,5 +1,3 @@
-vim.o.termguicolors = true
-
 -- colors for active , inactive buffer tabs 
 require "bufferline".setup {
     options = {
@@ -52,11 +50,3 @@ require "bufferline".setup {
         }
     }
 }
-
-local opt = {silent = true}
-
-vim.g.mapleader = " "
-
--- tabnew and tabprev
-vim.api.nvim_set_keymap("n", "<Leader>tn", [[<Cmd>BufferLineCycleNext<CR>]], opt)
-vim.api.nvim_set_keymap("n", "<Leader>tp", [[<Cmd>BufferLineCyclePrev<CR>]], opt)
