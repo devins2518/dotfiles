@@ -1,0 +1,1 @@
+/home/devin/.config/nixpkgs/p10k.zsh
