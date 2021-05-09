@@ -71,6 +71,36 @@
       defaultSession = "none+awesome";
     };
 
+ windowManager = {
+
+        awesome = {
+
+          package = (pkgs.awesome.overrideAttrs (old: rec {
+            version = "a4572b9b52d89369ce3bd462904d536ec116dc35";
+            src = pkgs.fetchFromGitHub {
+              owner = "awesomeWM";
+              repo = "awesome";
+              rev = "a4572b9b52d89369ce3bd462904d536ec116dc35";
+              sha256 = "1kj2qz2ns0jn5gha4ryr8w8vvy23s3bb5z3vjhwwfnrv7ypb40iz";
+            };
+            GI_TYPELIB_PATH = "${pkgs.playerctl}/lib/girepository-1.0:" + old.GI_TYPELIB_PATH;
+          })).override {
+            stdenv = pkgs.clangStdenv;
+            luaPackages = pkgs.lua52Packages;
+            gtk3Support = true;
+          };
+
+          enable = true;
+
+          luaModules = with pkgs.lua52Packages; [
+            lgi
+            ldbus
+            luarocks-nix
+            luadbi-mysql
+            luaposix
+          ];
+
+        };};
     windowManager.awesome = {
       enable = true;
       luaModules = with pkgs.luaPackages;
@@ -151,7 +181,6 @@
     home-manager
     zsh-powerlevel10k
     lm_sensors
-    nodejs
     # p10k isn't available for some reason
   ];
 

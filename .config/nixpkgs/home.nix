@@ -15,7 +15,6 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      env.TERM = "tmux-256color";
 
       window = {
         decorations = "none";
@@ -91,6 +90,7 @@
 
     vimAlias = true;
     withRuby = false;
+    withNodeJs = true;
 
     extraConfig = ''
       let mapleader = " " "
