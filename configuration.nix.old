@@ -11,7 +11,6 @@
 
   # Use the GRUB boot loader.
   boot = {
-    consoleLogLevel = 3;
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -39,20 +38,38 @@
   };
 
   networking = {
+    hostName = "nixos"; # Define your hostname.
     networkmanager = {
+      enable = true; # Enables wireless support via Network Manager
       wifi.powersave = false;
     };
-    interfaces.wlp2s0.useDHCP = true;
   };
+
+  # Set your time zone.
+  time.timeZone = "America/Chicago";
+
+  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+  # Per-interface useDHCP will be mandatory in the future, so this generated config
+  # replicates the default behaviour.
+  networking.useDHCP = false;
+  networking.interfaces.wlp2s0.useDHCP = true;
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+  # console = {
+  #   font = "Lat2-Terminus16";
+  #   keyMap = "us";
+  # };
 
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     # Doesn't work?
+    # wacom.enable = true;
     videoDrivers = [ "intel" ];
+    #Option "DRI" "2"
     deviceSection = ''
       Option "TearFree" "true"
-      #Option "DRI" "2"
     '';
     dpi = 192;
 
@@ -64,11 +81,25 @@
 
         greeters.gtk = {
           enable = true;
+
+          #cursorTheme = {
+          #package = pkgs.capitaine-cursors;
+          #name = "Capitaine";
+          #size = 32;
+          #};
+
           theme = {
             package = pkgs.sierra-gtk-theme;
             name = "Sierra";
           };
-          indicators = [ "~spacer" "~clock" "~spacer" "~session" "~power" ];
+
+          indicators = [
+            "~spacer"
+            "~clock"
+            "~spacer"
+            "~session"
+            "~power"
+          ];
         };
       };
     };
@@ -92,6 +123,7 @@
     layout = "us";
   };
 
+  nix.maxJobs = 4;
   powerManagement = {
     enable = true;
     cpuFreqGovernor = "powersave";
@@ -119,23 +151,61 @@
     };
   };
 
-  nixpkgs.config = { allowUnfree = true; };
-  # List packages installed in system profile.
-  environment = {
-    variables = {
-      GDK_SCALE = "2";
-      GDK_DPI_SCALE = "0.5";
-      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-      # Doesn't work?
-      #XCURSOR_SIZE = "48px";
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users.devin = {
+      isNormalUser = true;
+      shell = pkgs.zsh;
+      description = "Devin Singh";
+      extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     };
   };
 
-  programs = {
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
+  security.sudo.wheelNeedsPassword = false; # wheel ALL=(ALL) NOPASSWD:ALL
+
+  nixpkgs.config = { allowUnfree = true; };
+  # List packages installed in system profile.
+  environment.systemPackages = with pkgs; [
+    alacritty
+    firefox
+    rustup
+    discord
+    nixfmt
+    home-manager
+    lm_sensors
+    rofi
+    pcmanfm
+    xdotool
+    polybar
+    alttab
+    feh
+    gcc
+    picom
+    #gnomeExtensions.dash-to-dock
+    dunst
+    bottom
+    go
+    tokei
+  ];
+
+  environment.variables = {
+    GDK_SCALE = "2";
+    GDK_DPI_SCALE = "0.5";
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+    # Doesn't work?
+    #XCURSOR_SIZE = "48px";
+  };
+
+  programs.zsh = {
+    enable = true;
+    histSize = 2000;
+    histFile = "$HOME/.zsh/HISTFILE";
+  };
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
   };
 
   fonts = {
@@ -147,8 +217,10 @@
     ];
   };
 
-  nix = {
-    package = pkgs.nixUnstable;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
   # This value determines the NixOS release from which the default
