@@ -1,12 +1,6 @@
 { pkgs, config, lib, inputs, ... }:
 
 {
-  programs.zsh = {
-    enable = true;
-    histSize = 2000;
-    histFile = "$HOME/.zsh/HISTFILE";
-  };
-
   #age.secrets.variables = {
   #file = ./secrets/variables.age;
   #owner = "nix";
@@ -53,37 +47,38 @@
     nixPath = [ "nixpkgs=${pkgs.path}" "home-manager=${inputs.home-manager}" ];
   };
 
-  programs.command-not-found.enable = false;
+  programs = {
+    command-not-found.enable = false;
+    zsh = {
+      enable = true;
+      histSize = 2000;
+      histFile = "$HOME/.zsh/HISTFILE";
+    };
+  };
 
   nixpkgs.config = { allowUnfree = true; };
   environment.systemPackages = with pkgs; [
-      alacritty
-      firefox
-      rustup
-      discord
-      nixfmt
-      home-manager
-      lm_sensors
-      rofi
-      pcmanfm
-      xdotool
-      polybar
-      alttab
-      feh
-      gcc
-      picom
-      #gnomeExtensions.dash-to-dock
-      dunst
-      bottom
-      go
-      tokei
+    alacritty
+    firefox
+    rustup
+    discord
+    nixfmt
+    home-manager
+    lm_sensors
+    rofi
+    pcmanfm
+    xdotool
+    polybar
+    alttab
+    feh
+    gcc
+    picom
+    #gnomeExtensions.dash-to-dock
+    dunst
+    bottom
+    go
+    tokei
   ];
-
-  networking = {
-    hostName = "nixos"; # Define your hostname.
-    networkmanager.enable = true;
-    useDHCP = false;
-  };
 
   time.timeZone = "America/Chicago";
 

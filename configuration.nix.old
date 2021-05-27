@@ -90,7 +90,7 @@
 
           theme = {
             package = pkgs.sierra-gtk-theme;
-            name = "Sierra";
+            name = "Sierra-dark";
           };
 
           indicators = [

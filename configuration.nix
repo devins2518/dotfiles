@@ -39,56 +39,18 @@
   };
 
   networking = {
-    networkmanager = {
-      wifi.powersave = false;
-    };
+    networkmanager = { wifi.powersave = false; };
     interfaces.wlp2s0.useDHCP = true;
   };
 
   # Enable the X11 windowing system.
   services.xserver = {
-    enable = true;
-    # Doesn't work?
     videoDrivers = [ "intel" ];
     deviceSection = ''
       Option "TearFree" "true"
       #Option "DRI" "2"
     '';
     dpi = 192;
-
-    displayManager = {
-      lightdm = {
-        enable = true;
-
-        background = "/etc/nixos/spaceman.png";
-
-        greeters.gtk = {
-          enable = true;
-          theme = {
-            package = pkgs.sierra-gtk-theme;
-            name = "Sierra";
-          };
-          indicators = [ "~spacer" "~clock" "~spacer" "~session" "~power" ];
-        };
-      };
-    };
-
-    windowManager = { bspwm.enable = true; };
-    #desktopManager = { gnome.enable = true; };
-
-    # Enable touchpad support (enabled default in most desktopManager).
-    libinput = {
-      enable = true;
-
-      touchpad = {
-        naturalScrolling = true;
-        accelSpeed = "1.0";
-        accelProfile = "flat";
-        # Doesn't work?
-        # calibrationMatrix = "1.6 0 0 0 1.6 0 0 0 1";
-      };
-    };
-
     layout = "us";
   };
 
@@ -147,9 +109,7 @@
     ];
   };
 
-  nix = {
-    package = pkgs.nixUnstable;
-  };
+  nix = { package = pkgs.nixUnstable; };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
