@@ -69,6 +69,7 @@
 
   nixpkgs.config = { allowUnfree = true; };
   environment.systemPackages = with pkgs; [
+    zls
     zig
     firefox
     rustup

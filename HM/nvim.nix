@@ -12,6 +12,16 @@ in {
   home.file.".config/nvim".source = ./nvim;
   home.file.".config/nvim".recursive = true;
 
+  home.file.".config/nvim/coc-settings.json".text = ''
+    {
+       "languageserver": {
+           "zls" : {
+               "command": "zig",
+               "filetypes": ["zig"]
+           }
+       }
+    }'';
+
   programs.neovim = {
     enable = true;
     package = package;
@@ -132,6 +142,13 @@ in {
         config = "luafile $HOME/.config/nvim/nvimTree.lua";
       }
       {
+        plugin = zig-vim;
+        config = ''
+          autocmd BufNewFile,BufRead *.zig set filetype=zig
+          let g:zig_fmt_autosave = 1
+        '';
+      }
+      {
         plugin = rust-vim;
         config = ''
           let g:rustfmt_autosave=1
@@ -230,5 +247,6 @@ in {
         '';
       }
 
-    ];};
+    ];
+  };
 }
