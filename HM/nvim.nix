@@ -17,6 +17,71 @@ in {
     package = package;
     withNodeJs = true;
     withRuby = false;
+    viAlias = true;
+    vimAlias = true;
+
+    extraConfig = ''
+      let mapleader = " " "
+      colorscheme edge
+      let g:edge_style = "aura"
+      set noerrorbells
+      set tabstop=4
+      set softtabstop=4
+      set shiftwidth=4
+      set expandtab
+      set smartindent
+      set number
+      set nowrap
+      set ignorecase
+      set smartcase
+      set noswapfile
+      set nobackup
+      set undodir=~/.config/nvim/undodir
+      set undofile
+      set incsearch
+      set ruler
+      set formatoptions=tcqrn1
+      set expandtab
+      set noshiftround
+      set scrolloff=4
+      set backspace=indent,eol,start
+      set matchpairs+=<:>
+      set laststatus=2
+      set showmode
+      set showcmd
+      set hlsearch
+      set showmatch
+      set splitbelow
+      set splitright
+      set signcolumn=yes:1
+      set mouse=nv
+      set termguicolors
+      set colorcolumn=100
+      set numberwidth=2
+      set cmdheight=1
+      set updatetime=250
+      set clipboard=unnamedplus
+      set list
+      set listchars=tab:▸\ ,eol:¬
+      " TODO: REMOVE
+      highlight CursorLine guibg=#69696
+      set cursorline
+      highlight CursorLine guibg=#69696
+      nmap <C-M> :noh<CR>
+      nmap / /\v
+      vmap / /\v
+      nmap <C-j> <C-W><C-J>
+      nmap <C-k> <C-W><C-K>
+      nmap <C-l> <C-W><C-L>
+      nmap <C-h> <C-W><C-H>
+      nmap <C-S-.> <C-W>>
+
+      augroup remember_folds
+        autocmd!
+        au BufWinLeave ?* mkview 1
+        au BufWinEnter ?* silent! loadview 1
+      augroup END
+    '';
     plugins = with pkgs.vimPlugins; [
 
       vim-nix
@@ -165,70 +230,5 @@ in {
         '';
       }
 
-    ];
-    extraConfig = ''
-      let mapleader = " " "
-      colorscheme edge
-      let g:edge_style = "aura"
-      set noerrorbells
-      set tabstop=4
-      set softtabstop=4
-      set shiftwidth=4
-      set expandtab
-      set smartindent
-      set number
-      set nowrap
-      set ignorecase
-      set smartcase
-      set noswapfile
-      set nobackup
-      set undodir=~/.config/nvim/undodir
-      set undofile
-      set incsearch
-      set ruler
-      set formatoptions=tcqrn1
-      set expandtab
-      set noshiftround
-      set scrolloff=4
-      set backspace=indent,eol,start
-      set matchpairs+=<:>
-      set laststatus=2
-      set showmode
-      set showcmd
-      set hlsearch
-      set showmatch
-      set splitbelow
-      set splitright
-      set signcolumn=yes:1
-      set mouse=nv
-      set termguicolors
-      set colorcolumn=100
-      set numberwidth=2
-      set cmdheight=1
-      set updatetime=250
-      set clipboard=unnamedplus
-      set list
-      set listchars=tab:▸\ ,eol:¬
-      " TODO: REMOVE
-      highlight CursorLine guibg=#69696
-      set cursorline
-      highlight CursorLine guibg=#69696
-      nmap <C-M> :noh<CR>
-      nmap / /\v
-      vmap / /\v
-      nmap <C-j> <C-W><C-J>
-      nmap <C-k> <C-W><C-K>
-      nmap <C-l> <C-W><C-L>
-      nmap <C-h> <C-W><C-H>
-      nmap <C-S-.> <C-W>>
-
-      augroup remember_folds
-        autocmd!
-        au BufWinLeave ?* mkview 1
-        au BufWinEnter ?* silent! loadview 1
-      augroup END
-    '';
-  };
-  programs.neovim.viAlias = true;
-  programs.neovim.vimAlias = true;
+    ];};
 }

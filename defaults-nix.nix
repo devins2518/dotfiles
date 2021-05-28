@@ -13,8 +13,19 @@
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
-  environment.sessionVariables = {
-    NIXOS_CONFIG = "/home/devin/Repos/dotfiles";
+  environment = {
+    sessionVariables = { NIXOS_CONFIG = "/home/devin/Repos/dotfiles"; };
+    shellAliases = {
+      nix-repl = "nix repl ${inputs.utils.lib.repl}";
+      nshell = "nix-shell";
+      ls = "ls -l --color=always";
+    };
+    etc."spaceman.png" = {
+      source = pkgs.fetchurl {
+        url = "https://w.wallhaven.cc/full/ox/wallhaven-oxkjgm.jpg";
+        sha256 = "sha256-k5lZlGipd1dpOLCBXtOQ58sHxvTH81COTMg/XKuxb6Y=";
+      };
+    };
   };
 
   users = {

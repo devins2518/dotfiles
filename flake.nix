@@ -57,42 +57,38 @@
       channels.nixpkgs-unstable = { input = nixpkgs; };
 
       hosts = {
-        #pain = {
-        #modules = with self.nixosModules; [
-        ## system wide config
-        #./hosts/pain/configuration.nix
-        #xorg
-        #v4l2
-        #nixos-hardware.nixosModules.common-cpu-intel
-        #network
-        #printer
-        #({ pkgs, ... }: {
-        #home-manager.useUserPackages = true;
-        #home-manager.useGlobalPkgs = true;
-        #home-manager.users.devin = ({ config, pkgs, ... }:
-        #with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-        #imports = [
-        #firefox
-        #git
-        #alacritty
-        #dunst
-        #mpv
-        #xorg-hm
-        #pass
-        #neofetch
-        #qt
-        #proton
-        #zsh
-        ##nvim
-        #defaults
-        #gtk
-        #];
+        pain = {
+          modules = with self.nixosModules; [
+            # system wide config
+            ./hosts/pain/configuration.nix
+            network
+            xorg
+            ({ pkgs, ... }: {
+              home-manager.useUserPackages = true;
+              home-manager.useGlobalPkgs = true;
+              home-manager.users.devin = ({ config, pkgs, ... }:
+                with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+                  imports = [
+                    #firefox
+                    git
+                    alacritty
+                    dunst
+                    mpv
+                    xorg-hm
+                    #pass
+                    qt
+                    #proton
+                    zsh
+                    nvim
+                    defaults
+                    gtk
+                  ];
 
-        #home.packages = with pkgs; [ screenshot ];
-        #});
-        #})
-        #];
-        #};
+                  home.packages = with pkgs; [ screenshot ];
+                });
+            })
+          ];
+        };
         despair = {
           modules = with self.nixosModules; [
             # system wide config
@@ -111,18 +107,6 @@
                       screenshot
                     ];
                 });
-              environment.shellAliases = {
-                nix-repl = "nix repl ${inputs.utils.lib.repl}";
-                nshell = "nix-shell";
-                ls = "ls -l --color=always";
-              };
-              environment.etc."spaceman.png" = {
-                source = pkgs.fetchurl {
-                  url = "https://w.wallhaven.cc/full/ox/wallhaven-oxkjgm.jpg";
-                  sha256 =
-                    "sha256-k5lZlGipd1dpOLCBXtOQ58sHxvTH81COTMg/XKuxb6Y=";
-                };
-              };
             })
           ];
         };

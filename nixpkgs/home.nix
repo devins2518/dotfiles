@@ -3,4 +3,3 @@
 rec {
   imports = import ./programs ++ [ ./bspwm/default.nix ];
 }
-
