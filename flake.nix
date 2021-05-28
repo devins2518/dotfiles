@@ -26,7 +26,7 @@
         ./HM/qt.nix
         ./HM/dunst.nix
         ./HM/zsh.nix
-        #./HM/nvim.nix
+        ./HM/nvim.nix
         ###########
         ./HM/defaults.nix
         ./HM/git.nix
@@ -102,17 +102,8 @@
             ({ pkgs, ... }: {
               home-manager.users.devin = ({ config, pkgs, ... }:
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                  imports = [
-                    #git
-                    qt
-                    dunst
-                    alacritty
-                    zsh
-                    #nvim
-                    gtk
-                    xorg-hm
-                    defaults
-                  ];
+                  imports =
+                    [ git qt dunst alacritty zsh nvim gtk xorg-hm defaults ];
 
                   home.packages = with pkgs;
                     [
@@ -128,7 +119,8 @@
               environment.etc."spaceman.png" = {
                 source = pkgs.fetchurl {
                   url = "https://w.wallhaven.cc/full/ox/wallhaven-oxkjgm.jpg";
-                  sha256 = "sha256-k5lZlGipd1dpOLCBXtOQ58sHxvTH81COTMg/XKuxb6Y=";
+                  sha256 =
+                    "sha256-k5lZlGipd1dpOLCBXtOQ58sHxvTH81COTMg/XKuxb6Y=";
                 };
               };
             })

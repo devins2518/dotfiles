@@ -9,7 +9,7 @@
       lightdm = {
         enable = true;
 
-        background = "/etc/nixos/spaceman.png";
+        background = "/etc/spaceman.png";
 
         greeters.gtk = {
           enable = true;

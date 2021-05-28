@@ -80,6 +80,9 @@
     tokei
   ];
 
+  # Needed for home manager to not get borked
+  services.dbus.packages = with pkgs; [ gnome3.dconf ];
+
   time.timeZone = "America/Chicago";
 
   i18n.defaultLocale = "en_US.UTF-8";
