@@ -1,0 +1,57 @@
+#! /bin/sh
+
+########################################################################
+## Clear all rules
+########################################################################
+bspc rule -r "*"
+########################################################################
+
+########################################################################
+## Autostart
+########################################################################
+$HOME/.config/bspwm/autostart.sh
+########################################################################
+
+########################################################################
+## Start Hotkeys
+########################################################################
+#pgrep -x sxhkd > /dev/null || sxhkd &
+########################################################################
+
+########################################################################
+## BSPWM Settings
+########################################################################
+bspc monitor -d I II III IV V VI
+bspc desktop \^2 --layout monocle
+
+#bspc config border_width            3
+bspc config top_padding            80
+bspc config left_padding           20
+bspc config right_padding          20
+bspc config bottom_padding         20
+bspc config window_gap             12
+
+bspc config split_ratio          0.50
+bspc config single_monocle       true
+bspc config borderless_monocle  false
+bspc config gapless_monocle     false
+bspc config paddless_monocle    false
+
+bspc rule -a Firefox desktop='^2' layout=monocle follow=on
+bspc rule -a Gimp-2.10 desktop='^2' layout=monocle follow=on
+bspc rule -a Alacritty desktop='^1' state=tiled follow=on
+bspc rule -a discord desktop='^3' layout=monocle follow=on
+# Change position and shape of windows for polybar
+bspc rule -a Pavucontrol state=floating rectangle=1000x750+450+70
+bspc rule -a Nm-connection-editor state=floating rectangle=600x600+500+70
+
+# Source colors
+. "${HOME}/.config/bspwm/colors.sh"
+
+## Set the border colors.
+bspc config normal_border_color '$color01'
+bspc config active_border_color '$color10'
+bspc config focused_border_color '$color15'
+# Use the line below if you are on bspwm >= 0.9.4
+bspc config presel_feedback_color '$color11'
+########################################################################

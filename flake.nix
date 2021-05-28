@@ -18,21 +18,22 @@
 
       nixosModules = utils.lib.modulesFromList [
         ########### Not done
+        # add other scripts here
+        ./HM/shell-scripts.nix
+        ########### Done for despair
         ./xorg.nix
         ./HM/xorg-hm.nix
         ./HM/qt.nix
         ./HM/dunst.nix
         ./HM/zsh.nix
         #./HM/nvim.nix
-        # add other scripts here
-        ./HM/shell-scripts.nix
         ###########
         ./HM/defaults.nix
         ./HM/git.nix
         ./HM/gtk.nix
         ./HM/mpv.nix
-        ./HM/pass.nix
-        ./programs/alacritty.nix
+        #./HM/pass.nix
+        ./HM/alacritty.nix
         #./HM/firefox.nix
         ./network.nix
         ./defaults-nix.nix
@@ -43,7 +44,7 @@
           utils.nixosModules.saneFlakeDefaults
           home-manager.nixosModules.home-manager
           #agenix.nixosModules.age
-          self.nixosModules.defaults-nixos
+          self.nixosModules.defaults-nix
         ];
         extraArgs = { inherit utils inputs; };
       };
@@ -56,71 +57,79 @@
       channels.nixpkgs-unstable = { input = nixpkgs; };
 
       hosts = {
-        pain = {
+        #pain = {
+        #modules = with self.nixosModules; [
+        ## system wide config
+        #./hosts/pain/configuration.nix
+        #xorg
+        #v4l2
+        #nixos-hardware.nixosModules.common-cpu-intel
+        #network
+        #printer
+        #({ pkgs, ... }: {
+        #home-manager.useUserPackages = true;
+        #home-manager.useGlobalPkgs = true;
+        #home-manager.users.devin = ({ config, pkgs, ... }:
+        #with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+        #imports = [
+        #firefox
+        #git
+        #alacritty
+        #dunst
+        #mpv
+        #xorg-hm
+        #pass
+        #neofetch
+        #qt
+        #proton
+        #zsh
+        ##nvim
+        #defaults
+        #gtk
+        #];
+
+        #home.packages = with pkgs; [ screenshot ];
+        #});
+        #})
+        #];
+        #};
+        despair = {
           modules = with self.nixosModules; [
             # system wide config
-            ./hosts/pain/configuration.nix
-            xorg
-            v4l2
-            nixos-hardware.nixosModules.common-cpu-intel
+            ./hosts/despair/configuration.nix
             network
-            printer
+            xorg
             ({ pkgs, ... }: {
-              home-manager.useUserPackages = true;
-              home-manager.useGlobalPkgs = true;
               home-manager.users.devin = ({ config, pkgs, ... }:
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                   imports = [
-                    firefox
-                    git
-                    htop
-                    alacritty
-                    dunst
-                    mpv
-                    xorg-hm
-                    pass
-                    neofetch
+                    #git
                     qt
-                    proton
+                    dunst
+                    alacritty
                     zsh
                     #nvim
-                    defaults
                     gtk
-                  ];
-
-                  home.packages = with pkgs; [ screenshot ];
-                });
-            })
-          ];
-        };
-        despair = {
-          system = "aarch64-linux";
-          modules = with self.nixosModules; [
-            # system wide config
-            ./hosts/pi/configuration.nix
-            network
-            ({ pkgs, ... }: {
-              home-manager.users.nix = ({ config, pkgs, ... }:
-                with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                  imports = [
-                    git
-                    htop
-                    fish
-                    # nvim
+                    xorg-hm
                     defaults
                   ];
 
-                  home.packages = with pkgs; [
-                    # custom shell script
-                    zerox0
-
-                    nixpkgs-fmt
-                    ncdu
-                    unzip
-                  ];
+                  home.packages = with pkgs;
+                    [
+                      # custom shell script
+                      screenshot
+                    ];
                 });
               environment.shellAliases = {
                 nix-repl = "nix repl ${inputs.utils.lib.repl}";
+                nshell = "nix-shell";
+                ls = "ls -l --color=always";
+              };
+              environment.etc."spaceman.png" = {
+                source = pkgs.fetchurl {
+                  url = "https://w.wallhaven.cc/full/ox/wallhaven-oxkjgm.jpg";
+                  sha256 = "sha256-k5lZlGipd1dpOLCBXtOQ58sHxvTH81COTMg/XKuxb6Y=";
+                };
               };
             })
           ];
@@ -129,9 +138,9 @@
 
       sharedOverlays = [ neovim-nightly.overlay self.overlay ];
 
-      #packagesBuilder = channels: {
-      #inherit (channels.nixpkgs) alacritty-ligatures neovim-nightly;
-      #};
+      packagesBuilder = channels: {
+        inherit (channels.nixpkgs) alacritty-ligatures neovim-nightly;
+      };
 
       appsBuilder = channels:
         with channels.nixpkgs; {

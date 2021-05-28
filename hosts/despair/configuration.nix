@@ -5,7 +5,7 @@
 
 {
   imports = [ # Include the results of the hardware scan.
-    <nixos-hardware/microsoft/surface>
+    #<nixos-hardware/microsoft/surface>
     ./hardware-configuration.nix
   ];
 
@@ -60,9 +60,6 @@
     powertop.enable = true;
   };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
   # Enable sound.
   sound.enable = true;
   hardware = {
@@ -93,23 +90,10 @@
     };
   };
 
-  programs = {
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-  };
 
   fonts = {
     fontconfig.dpi = 192;
-
-    fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" ]; })
-      font-awesome
-    ];
   };
-
-  nix = { package = pkgs.nixUnstable; };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -119,4 +103,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 }
-

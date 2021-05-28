@@ -58,7 +58,7 @@
 
   nixpkgs.config = { allowUnfree = true; };
   environment.systemPackages = with pkgs; [
-    alacritty
+    #alacritty use alacritty-ligatures
     firefox
     rustup
     discord
@@ -87,5 +87,11 @@
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
+  };
+  fonts = {
+    fonts = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" ]; })
+      font-awesome
+    ];
   };
 }
