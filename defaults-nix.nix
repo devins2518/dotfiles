@@ -58,7 +58,7 @@
 
   nixpkgs.config = { allowUnfree = true; };
   environment.systemPackages = with pkgs; [
-    #alacritty use alacritty-ligatures
+    zig
     firefox
     rustup
     discord
