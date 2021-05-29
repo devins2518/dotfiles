@@ -71,6 +71,7 @@
   environment.systemPackages = with pkgs; [
     zls
     zig
+    rnix-lsp
     firefox
     rustup
     discord

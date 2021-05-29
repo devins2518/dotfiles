@@ -1,5 +1,5 @@
 {
-  description = "LegendOfMiracles's system config";
+  description = "Devins2518's system config";
 
   inputs = {
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -23,11 +23,14 @@
         ########### Done for despair
         ./xorg.nix
         ./HM/xorg-hm.nix
-        ./HM/qt.nix
         ./HM/dunst.nix
+        ########### Done fully i think
+        ./HM/zsh-despair.nix
+        ./HM/zsh-pain.nix
         ./HM/zsh.nix
-        ./HM/nvim.nix
         ###########
+        ./HM/nvim.nix
+        ./HM/qt.nix
         ./HM/defaults.nix
         ./HM/git.nix
         ./HM/gtk.nix
@@ -79,6 +82,7 @@
                     qt
                     #proton
                     zsh
+                    zsh-pain
                     nvim
                     defaults
                     gtk
@@ -99,7 +103,7 @@
               home-manager.users.devin = ({ config, pkgs, ... }:
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                   imports =
-                    [ git qt dunst alacritty zsh nvim gtk xorg-hm defaults ];
+                    [ git qt dunst alacritty zsh zsh-despair nvim gtk xorg-hm defaults ];
 
                   home.packages = with pkgs;
                     [

@@ -11,14 +11,17 @@ in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
   home.file.".config/nvim".source = ./nvim;
   home.file.".config/nvim".recursive = true;
-
   home.file.".config/nvim/coc-settings.json".text = ''
     {
        "languageserver": {
            "zls" : {
-               "command": "zig",
+               "command": "$HOME/zls/zig-out/bin/zls",
                "filetypes": ["zig"]
-           }
+           },
+            "rnix-lsp" : {
+                "command": "rnix-lsp",
+                "filetypes": ["nix"]
+            }
        }
     }'';
 
@@ -112,6 +115,12 @@ in {
       {
         plugin = gitsigns-nvim;
         config = "luafile $HOME/.config/nvim/gitsigns.lua";
+      }
+      {
+        plugin = zig-vim;
+        config = ''
+          let g:zig_fmt_autosave = 1
+        '';
       }
       {
         plugin = nerdcommenter;

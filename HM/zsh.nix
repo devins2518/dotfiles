@@ -77,11 +77,6 @@
           };
         }
       ];
-
-      shellAliases = {
-        # TODO change
-        temps = "sensors | grep coretemp -A 5";
-      };
     };
 
     tmux = {
@@ -97,7 +92,7 @@
         bind C new-window -c "#{pane_current_path}"
         bind | split-window -h -c "#{pane_current_path}"
         bind - split-window -v -c "#{pane_current_path}"
-        bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+        bind r source-file ~/tmux/tmux.conf \; display-message "Config reloaded..."
         unbind '"'
         unbind %
 
