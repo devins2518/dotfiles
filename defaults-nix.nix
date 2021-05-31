@@ -115,6 +115,7 @@ in {
     tokei
     cachix
     gyro
+    nixpkgs-review
   ];
 
   # Needed for home manager to not get borked

@@ -379,6 +379,9 @@ with import ./colors.nix { }; {
         super + ctrl + {h,j,k,l}
             bspc node -p {west,south,north,east}
 
+        super + {h,v}
+            bspc node -p {east,south}
+
         # preselect the ratio
         super + ctrl + {1-9}
             bspc node -o 0.{1-9}
@@ -409,19 +412,19 @@ with import ./colors.nix { }; {
 
         # Print screen with selection and upload
         Print
-            $HOME/.config/scripts/screenshot.sh 0 0
+            screenshot 0 0
 
         # Print screen with selection, local
         shift + Print
-            $HOME/.config/scripts/screenshot.sh 1 0
+            screenshot 1 0
 
         # Print screen and upload
         control + Print
-            $HOME/.config/scripts/screenshot.sh 0 1
+            screenshot 0 1
 
         # Print screen local
         control + shift + Print
-            $HOME/.config/scripts/screenshot.sh 1 1
+            screenshot 1 1
       '';
     };
 }
