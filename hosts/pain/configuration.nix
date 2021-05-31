@@ -33,49 +33,38 @@
   # Enable the X11 windowing system.
   services.xserver = {
     videoDrivers = [ "nvidia" ];
-    config = ''
-      Section "InputClass"
-          Identifier "mouse accel"
-          Driver "libinput"
-          MatchIsPointer "on"
-          Option "AccelProfile" "flat"
-          Option "AccelSpeed" "0"
-      EndSection
-
-      Section "Device"
-          Identifier     "Device0" 
-          Driver         "nvidia" 
-          VendorName     "NVIDIA Corporation" 
-          BoardName      "GeForce GTX 1660 SUPER" 
-          Option         "Coolbits" "4" 
-      EndSection 
-
-      Section "Monitor"
-          # HorizSync source: edid, VertRefresh source: edid 
-          Identifier     "Monitor0" 
-          VendorName     "Unknown" 
-          ModelName      "AUS ASUS VP249" 
-          HorizSync       180.0 - 180.0 
-          VertRefresh     48.0 - 144.0 
-          Option         "DPMS" 
-      EndSection 
-
-      Section "Screen"
-	  Identifier     "Screen0" 
-          Device         "Device0" 
-          Monitor        "Monitor0" 
-          DefaultDepth    24
-          Option         "Stereo" "0"
-          Option         "nvidiaXineramaInfoOrder" "DFP-2"
-          Option         "metamodes" "1920x1080_144 +0+0"
-          Option         "SLI" "Off"
-          Option         "MultiGPU" "Off"
-          Option         "BaseMosaic" "off"
-          SubSection     "Display"
-              Depth       24
-          EndSubSection
-      EndSection 
+    screenSection = ''
+      DefaultDepth    24
+      Option         "Stereo" "0"
+      Option         "nvidiaXineramaInfoOrder" "DFP-2"
+      Option         "metamodes" "1920x1080_144 +0+0"
+      Option         "SLI" "Off"
+      Option         "MultiGPU" "Off"
+      Option         "BaseMosaic" "off"
+      SubSection     "Display"
+          Depth       24
+      EndSubSection
     '';
+    deviceSection = ''
+      VendorName     "NVIDIA Corporation"
+      BoardName      "GeForce GTX 1660 SUPER"
+      Option         "Coolbits" "4"
+    '';
+    monitorSection = ''
+      VendorName     "Unknown"
+      ModelName      "AUS ASUS VP249"
+      HorizSync       180.0 - 180.0
+      VertRefresh     48.0 - 144.0
+      Option         "DPMS"
+    '';
+    inputClassSections = [''
+      Identifier "mouse accel"
+      Driver "libinput"
+      MatchIsPointer "on"
+      Option "AccelProfile" "flat"
+      Option "AccelSpeed" "0"
+    ''];
+    exportConfiguration = true;
   };
 
   # Enable CUPS to print documents.
