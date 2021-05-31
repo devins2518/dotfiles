@@ -7,7 +7,7 @@ let
     "https://neovim-nightly.cachix.org"
     "https://nix-community.cachix.org"
   ];
-  gyro = pkgs.callPackage ./overlays/gyro.nix {};
+  gyro = pkgs.callPackage ./overlays/gyro.nix { };
 in {
   #age.secrets.variables = {
   #file = ./secrets/variables.age;

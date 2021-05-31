@@ -35,7 +35,7 @@
         ./HM/git.nix
         ./HM/gtk.nix
         ./HM/mpv.nix
-        #./HM/pass.nix
+        ./HM/pass.nix
         ./HM/alacritty.nix
         #./HM/firefox.nix
         ./network.nix
@@ -78,7 +78,7 @@
                     dunst
                     mpv
                     xorg-hm
-                    #pass
+                    pass
                     qt
                     #proton
                     zsh
@@ -107,6 +107,7 @@
                     git
                     qt
                     dunst
+                    pass
                     alacritty
                     zsh
                     zsh-despair
