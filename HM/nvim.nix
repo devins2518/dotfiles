@@ -121,7 +121,10 @@ in {
       }
       {
         plugin = zig-vim;
-        config = "let g:zig_fmt_autosave = 1";
+        config = ''
+          let g:zig_fmt_autosave = 1
+          autocmd BufNewFile,BufRead gyro.zzz set filetype=yaml
+        '';
       }
       {
         plugin = nerdcommenter;

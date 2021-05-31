@@ -306,8 +306,7 @@ with import ./colors.nix { }; {
 
         # Picture in picture mode
         super + p
-            bspc node --state \~floating
-            xdotool getactivewindow windowsize 768 432 windowmove 0 648 
+            bspc node --state \~floating; bspc node -g sticky; xdotool getactivewindow windowsize 768 432 windowmove 1137 632
 
         # Change volume
         XF86Audio{Raise,Lower}Volume
