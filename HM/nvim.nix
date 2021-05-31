@@ -68,7 +68,6 @@ in {
       set splitright
       set signcolumn=yes:1
       set mouse=nv
-      set termguicolors
       set colorcolumn=100
       set numberwidth=2
       set cmdheight=1
@@ -110,7 +109,11 @@ in {
       }
       {
         plugin = nvim-colorizer-lua;
-        config = ''lua require "colorizer".setup()'';
+        config = ''
+          " needed because home-mananger puts this stuff at the top
+          set termguicolors
+          lua require "colorizer".setup()
+        '';
       }
       {
         plugin = gitsigns-nvim;
@@ -118,9 +121,7 @@ in {
       }
       {
         plugin = zig-vim;
-        config = ''
-          let g:zig_fmt_autosave = 1
-        '';
+        config = "let g:zig_fmt_autosave = 1";
       }
       {
         plugin = nerdcommenter;
