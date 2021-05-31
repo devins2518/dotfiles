@@ -46,7 +46,7 @@
         modules = [
           utils.nixosModules.saneFlakeDefaults
           home-manager.nixosModules.home-manager
-          #agenix.nixosModules.age
+          agenix.nixosModules.age
           self.nixosModules.defaults-nix
         ];
         extraArgs = { inherit utils inputs; };
@@ -99,11 +99,22 @@
             ./hosts/despair/configuration.nix
             network
             xorg
+            #nixos-hardware.nixosModules.microsoft-surface
             ({ pkgs, ... }: {
               home-manager.users.devin = ({ config, pkgs, ... }:
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                  imports =
-                    [ git qt dunst alacritty zsh zsh-despair nvim gtk xorg-hm defaults ];
+                  imports = [
+                    git
+                    qt
+                    dunst
+                    alacritty
+                    zsh
+                    zsh-despair
+                    nvim
+                    gtk
+                    xorg-hm
+                    defaults
+                  ];
 
                   home.packages = with pkgs;
                     [

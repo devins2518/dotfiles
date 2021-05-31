@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 rec {
-  screenshot = pkgs.writeShellScriptBin "screenshot" ''
+  screenshot = pkgs.writeScriptBin "screenshot" ''
     #! /usr/bin/env nix-shell
     #! nix-shell -i bash -p scrot libnotify curl jq xclip
     #

@@ -243,7 +243,7 @@ with import ./colors.nix { }; {
     #};
   #};
 
-    #home.file.".config/picom.conf".source = ./picom.conf;
+    home.file.".config/picom.conf".source = ./picom.conf;
 
     home.file.".icons/default".source =
       "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors";

@@ -5,7 +5,6 @@
 
 {
   imports = [ # Include the results of the hardware scan.
-    #<nixos-hardware/microsoft/surface>
     ./hardware-configuration.nix
   ];
 
