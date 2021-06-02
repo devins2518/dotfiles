@@ -1,12 +1,6 @@
 { pkgs, config, lib, inputs, ... }:
 
 let
-  caches = [
-    "https://devins2518.cachix.org"
-    "https://cache.nixos.org"
-    "https://neovim-nightly.cachix.org"
-    "https://nix-community.cachix.org"
-  ];
   gyro = pkgs.callPackage ./overlays/gyro.nix { };
 in {
   #age.secrets.variables = {
@@ -65,18 +59,6 @@ in {
       options = "--delete-older-than 7d";
     };
 
-    # TODO
-    binaryCaches = caches;
-
-    binaryCachePublicKeys = [
-      "devins2518.cachix.org-1:R0BYXkgRm24m+gHUlYzrI2DxwNEOKWXF1/VdYSPCXyQ="
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "neovim-nightly.cachix.org-1:feIoInHRevVEplgdZvQDjhp11kYASYCE2NGY9hNrwxY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-
-    trustedBinaryCaches = caches;
-
     nixPath = [ "nixpkgs=${pkgs.path}" "home-manager=${inputs.home-manager}" ];
   };
 
@@ -113,9 +95,9 @@ in {
     bottom
     go
     tokei
-    cachix
     gyro
     nixpkgs-review
+    xarchiver
   ];
 
   # Needed for home manager to not get borked

@@ -99,7 +99,7 @@
             ./hosts/despair/configuration.nix
             network
             xorg
-            #nixos-hardware.nixosModules.microsoft-surface
+            nixos-hardware.nixosModules.microsoft-surface
             ({ pkgs, ... }: {
               home-manager.users.devin = ({ config, pkgs, ... }:
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {

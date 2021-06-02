@@ -34,7 +34,6 @@ in {
     vimAlias = true;
 
     extraConfig = ''
-      let mapleader = " " "
       colorscheme edge
       let g:edge_style = "aura"
       set noerrorbells
@@ -110,6 +109,7 @@ in {
       {
         plugin = nvim-colorizer-lua;
         config = ''
+          let mapleader = " "
           " needed because home-mananger puts this stuff at the top
           set termguicolors
           lua require "colorizer".setup()
