@@ -29,8 +29,8 @@
       mouse.accelProfile = "flat";
       touchpad = {
         naturalScrolling = true;
-        accelSpeed = "1.0";
-        accelProfile = "flat";
+        accelSpeed = "0.3";
+        #accelProfile = "flat";
       };
     };
     config = ''

@@ -48,11 +48,14 @@ in {
         echo '*~
         *.swp
         zig-cache/
+        zig-out/
         answers/
         patches/healed/
-        
+
         .direnv/*
-        !.direnv/.git-keep' >> .gitignore
+        !.direnv/.git-keep
+
+        .gyro/' >> .gitignore
       '';
     };
     etc."spaceman.png" = {
