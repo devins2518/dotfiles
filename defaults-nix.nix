@@ -23,6 +23,37 @@ in {
       nix-repl = "nix repl ${inputs.utils.lib.repl}";
       nshell = "nix-shell";
       ls = "ls -l --color=always";
+      zig-flake = ''
+        echo '{
+          inputs = {
+            nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+            utils.url = "github:numtide/flake-utils";
+            zig.url = "github:arqv/zig-overlay";
+          };
+      
+          outputs = { self, nixpkgs, utils, zig }:
+            utils.lib.eachDefaultSystem (system:
+              let
+                pkgs = nixpkgs.legacyPackages."''${system}";
+              in {
+               devShell = pkgs.mkShell {
+                  nativeBuildInputs = [
+                    zig.packages."''${system}".master.latest
+                  ];
+                };
+              });
+        }' >> flake.nix
+        echo 'use flake' >> .envrc
+        direnv allow
+        echo '*~
+        *.swp
+        zig-cache/
+        answers/
+        patches/healed/
+        
+        .direnv/*
+        !.direnv/.git-keep' >> .gitignore
+      '';
     };
     etc."spaceman.png" = {
       source = pkgs.fetchurl {
