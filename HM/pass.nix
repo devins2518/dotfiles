@@ -3,9 +3,6 @@
 {
   programs.gpg = {
     enable = true;
-    settings = {
-      no-tty = true;
-    };
   };
 
   services.gpg-agent = {

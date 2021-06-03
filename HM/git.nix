@@ -26,6 +26,7 @@
       rebase = { abbreviateCommands = true; };
       pack = { threads = 0; };
       core = { editor = "nvim"; };
+      commit = { gpgsign = true; };
       credential = { helper = "store --file ~/.git-credentials"; };
     };
   };
