@@ -132,6 +132,7 @@ in {
     gyro
     nixpkgs-review
     xarchiver
+    bunnyfetch
   ];
 
   # Needed for home manager to not get borked
