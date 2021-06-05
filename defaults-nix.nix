@@ -114,7 +114,6 @@ in {
     rustup
     discord
     nixfmt
-    home-manager
     lm_sensors
     rofi
     pcmanfm
@@ -133,6 +132,7 @@ in {
     nixpkgs-review
     xarchiver
     bunnyfetch
+    stlink
   ];
 
   # Needed for home manager to not get borked
