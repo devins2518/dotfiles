@@ -68,7 +68,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    #nvfancontrol
+    nvfancontrol
   ];
 
   # Enable CUPS to print documents.

@@ -27,6 +27,7 @@
         ./HM/zsh-despair.nix
         ./HM/zsh-pain.nix
         ./HM/zsh.nix
+        ./HM/nvfancontrol.nix
         ###########
         ./HM/nvim.nix
         ./HM/qt.nix
@@ -79,12 +80,12 @@
                     xorg-hm
                     pass
                     qt
-                    #proton
                     zsh
                     zsh-pain
                     nvim
                     defaults
                     gtk
+                    nvfancontrol
                   ];
 
                   home.packages = with pkgs; [ screenshot ];
