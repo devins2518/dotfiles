@@ -38,6 +38,7 @@
   };
 
   networking = {
+    hostName = "despair";
     networkmanager = { wifi.powersave = false; };
     interfaces.wlp2s0.useDHCP = true;
   };

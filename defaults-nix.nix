@@ -133,6 +133,7 @@ in {
     xarchiver
     bunnyfetch
     stlink
+    bsp-layout
   ];
 
   # Needed for home manager to not get borked
