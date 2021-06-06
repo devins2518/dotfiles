@@ -7,7 +7,6 @@
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
     home-manager.url = "github:nix-community/home-manager";
-    agenix.url = "github:ryantm/agenix";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
   };
 

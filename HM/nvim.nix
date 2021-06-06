@@ -153,11 +153,10 @@ in {
           nmap <leader>gf :diffget //2<CR>
         '';
       }
-      {
-        plugin = nvim-compe;
-        config = luaConfig ''
-
-        '';
+      #{
+      #  plugin = nvim-compe;
+      #  config = luaConfig ''
+      #  '';
       #}
       #{
       #  plugin = nvim-lspconfig;
