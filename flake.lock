@@ -7,15 +7,13 @@
       "locked": {
         "lastModified": 1620877075,
         "narHash": "sha256-XvgTqtmQZHegu9UMDSR50gK5cHEM2gbnRH0qecmdN54=",
-        "owner": "ryantm",
-        "repo": "agenix",
+        "path": "/nix/store/3lgbyjd9iwx5nxgyngmjwsv1src5575v-source",
         "rev": "e543aa7d68f222e1e771165da9e9a64b5bf7b3e3",
-        "type": "github"
+        "type": "path"
       },
       "original": {
-        "owner": "ryantm",
-        "repo": "agenix",
-        "type": "github"
+        "id": "agenix",
+        "type": "indirect"
       }
     },
     "flake-compat": {

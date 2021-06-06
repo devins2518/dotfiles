@@ -1,13 +1,15 @@
 { config, pkgs, ... }:
 
 {
-  programs.gnupg = {
-    enable = true;
+  programs.gpg = { enable = true;
 
-    gpg-agent = {
-      enable = true;
-      pinentryFlavor = "curses";
-    };
+};
+
+  services.gpg-agent = {
+    enable = true;
+    pinentryFlavor = "curses";
+    #extraConfig = ''
+      #pinentry-program ${pkgs.pinentry-gtk2}/bin/pinentry-curses
+    #'';
   };
 }
-
