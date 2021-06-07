@@ -72,7 +72,6 @@
               home-manager.users.devin = ({ config, pkgs, ... }:
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                   imports = [
-                    #firefox
                     git
                     alacritty
                     dunst
@@ -105,16 +104,17 @@
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                   imports = [
                     git
-                    qt
-                    dunst
-                    pass
                     alacritty
+                    dunst
+                    mpv
+                    xorg-hm
+                    pass
+                    qt
                     zsh
                     zsh-despair
                     nvim
-                    gtk
-                    xorg-hm
                     defaults
+                    gtk
                   ];
 
                   home.packages = with pkgs;
