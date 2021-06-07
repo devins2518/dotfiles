@@ -134,6 +134,8 @@ in {
     bunnyfetch
     stlink
     bsp-layout
+    rust-analyzer
+    gopls
   ];
 
   # Needed for home manager to not get borked

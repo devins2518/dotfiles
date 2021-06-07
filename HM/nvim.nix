@@ -12,18 +12,18 @@ in {
   home.file.".config/nvim".source = ./nvim;
   home.file.".config/nvim".recursive = true;
   #home.file.".config/nvim/coc-settings.json".text = ''
-    #{
-       #"languageserver": {
-           #"zls" : {
-               #"command": "zls",
-               #"filetypes": ["zig"]
-           #},
-            #"rnix-lsp" : {
-                #"command": "rnix-lsp",
-                #"filetypes": ["nix"]
-            #}
-       #}
-    #}'';
+  #{
+  #"languageserver": {
+  #"zls" : {
+  #"command": "zls",
+  #"filetypes": ["zig"]
+  #},
+  #"rnix-lsp" : {
+  #"command": "rnix-lsp",
+  #"filetypes": ["nix"]
+  #}
+  #}
+  #}'';
 
   programs.neovim = {
     enable = true;
@@ -86,6 +86,7 @@ in {
       nmap <C-l> <C-W><C-L>
       nmap <C-h> <C-W><C-H>
       nmap <C-S-.> <C-W>>
+      nnoremap <silent> gb <C-^>
 
       augroup remember_folds
         autocmd!
@@ -153,15 +154,37 @@ in {
           nmap <leader>gf :diffget //2<CR>
         '';
       }
-      #{
-      #  plugin = nvim-compe;
-      #  config = luaConfig ''
-      #  '';
-      #}
-      #{
-      #  plugin = nvim-lspconfig;
-      #  config = "luafile $HOME/.config/nvim/nvim-lspconfig/lua.lua";
-      #}
+      {
+        plugin = nvim-compe;
+        config = "luafile $HOME/.config/nvim/nvim-compe.lua";
+      }
+      {
+        plugin = nvim-lspconfig;
+        config = "luafile $HOME/.config/nvim/nvim-lspconfig.lua";
+      }
+      {
+        plugin = lsp_signature-nvim;
+        config = luaConfig ''
+          cfg = {
+            bind = false, -- This is mandatory, otherwise border config won't get registered.
+            doc_lines = 2, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
+
+            floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+            hint_enable = true, -- virtual hint enable
+            hint_scheme = "String",
+            use_lspsaga = false,  -- set to true if you want to use lspsaga popup
+            hi_parameter = "Search", -- how your parameter will be highlight
+            max_height = 12, -- max height of signature floating_window, if content is more than max_height, you can scroll down
+                             -- to view the hiding contents
+            max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
+            handler_opts = {
+              border = "shadow"   -- double, single, shadow, none
+            },
+          }
+
+          require'lsp_signature'.on_attach(cfg)
+        '';
+      }
       {
         plugin = nvim-tree-lua;
         config = "luafile $HOME/.config/nvim/nvimTree.lua";
@@ -203,67 +226,6 @@ in {
           let g:indentLine_char_list = ['|', '¦', '┆', '┊']
         '';
       }
-      #{
-        #plugin = coc-nvim;
-        #config = ''
-          #" coc config
-          #let g:coc_global_extensions = [
-            #\ "coc-clangd",
-            #\ "coc-discord-neovim",
-            #\ "coc-go",
-            #\ "coc-html",
-            #\ "coc-json",
-            #\ "coc-pairs",
-            #\ "coc-prettier",
-            #\ "coc-python",
-            #\ "coc-rust-analyzer",
-            #\ "coc-sh",
-            #\ "coc-snippets",
-            #\ "coc-toml",
-            #\ ]
-
-          #" Use <C-k> for jump to previous placeholder, it"s default of coc.nvim
-          #let g:coc_snippet_prev = "<c-k>"
-
-          #" Rename symbol
-          #nmap <leader>rn <Plug>(coc-rename)
-
-          #inoremap <silent><expr> <TAB>
-                #\ pumvisible() ? coc#_select_confirm() :
-                #\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump','''])\<CR>" :
-                #\ <SID>check_back_space() ? "\<TAB>" :
-                #\ coc#refresh()
-
-          #function! s:check_back_space() abort
-            #let col = col('.') - 1
-            #return !col || getline('.')[col - 1]  =~# '\s'
-          #endfunction
-
-          #" from readme
-          #" if hidden is not set, TextEdit might fail.
-          #set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it"s default 4000.
-          #set updatetime=300
-
-          #" GoTo code navigation.
-          #nmap <silent> gd <Plug>(coc-definition)
-          #nmap <silent> gy <Plug>(coc-type-definition)
-          #nmap <silent> gi <Plug>(coc-implementation)
-          #nmap <silent> gr <Plug>(coc-references)
-          #nnoremap <silent> K :call <SID>show_documentation()<CR>
-          #nnoremap <silent> gh :call <SID>show_documentation()<CR>
-          #inoremap <silent><expr> <c-space> coc#refresh()
-          #nnoremap <silent> gb <C-^>
-
-          #" Show documentation
-          #function! s:show_documentation()
-            #if &filetype == "vim"
-              #execute "h ".expand("<cword>")
-            #else
-              #call CocAction("doHover")
-            #endif
-          #endfunction
-        #'';
-      #}
     ];
   };
 }

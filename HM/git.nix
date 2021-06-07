@@ -9,7 +9,7 @@
 
     signing = {
       signByDefault = true;
-      key = "1673 E934 018F 8BEA 805A  FAF9 FF51 EB50 C2CC 97C2";
+      key = null;
     };
     aliases = {
       lg =
