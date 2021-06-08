@@ -14,11 +14,7 @@ g["nvim_tree_root_folder_modifier"] = ":~"
 g["nvim_tree_tab_open"] = 1
 g["nvim_tree_allow_resize"] = 1
 
-g.nvim_tree_show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1
-}
+g.nvim_tree_show_icons = {git = 1, folders = 1, files = 1}
 
 g.nvim_tree_icons = {
     default = " ",
@@ -30,25 +26,14 @@ g.nvim_tree_icons = {
         renamed = "➜",
         untracked = "★"
     },
-    folder = {
-        default = "",
-        open = "",
-        symlink = ""
-    }
+    folder = {default = "", open = "", symlink = ""}
 }
 
 -- Mappings for nvimtree
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
-vim.api.nvim_set_keymap(
-    "n",
-    "<C-n>",
-    ":NvimTreeToggle<CR>",
-    {
-        noremap = true,
-        silent = true
-    }
-)
+vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>",
+                        {noremap = true, silent = true})
 
 vim.g.nvim_tree_bindings = {
     ["<CR>"] = tree_cb("edit"),
@@ -74,5 +59,5 @@ vim.g.nvim_tree_bindings = {
     ["p"] = tree_cb("paste"),
     ["[c"] = tree_cb("prev_git_item"),
     ["]c"] = tree_cb("next_git_item"),
-    ["-"] = tree_cb("dir_up"),
+    ["-"] = tree_cb("dir_up")
 }

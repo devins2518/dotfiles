@@ -3,21 +3,11 @@
 let
   gyro = pkgs.callPackage ./overlays/gyro.nix { };
 in {
-  #age.secrets.variables = {
-  #file = ./secrets/variables.age;
-  #owner = "nix";
-  #mode = "0700";
-  #};
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
-  #age.secrets.variables = {
-  #file = ./secrets/variables.age;
-  #owner = "nix";
-  #mode = "0700";
-  #};
-
   environment = {
+    homeBinInPath = true;
     sessionVariables = { NIXOS_CONFIG = "/home/devin/Repos/dotfiles"; };
     shellAliases = {
       nix-repl = "nix repl ${inputs.utils.lib.repl}";
@@ -107,35 +97,35 @@ in {
 
   nixpkgs.config = { allowUnfree = true; };
   environment.systemPackages = with pkgs; [
-    zls
-    zig
-    rnix-lsp
-    firefox
-    rustup
-    discord
-    nixfmt
-    lm_sensors
-    rofi
-    pcmanfm
-    xdotool
-    polybar
     alttab
-    feh
-    gcc
-    picom
-    #gnomeExtensions.dash-to-dock
-    dunst
     bottom
-    go
-    tokei
-    gyro
-    nixpkgs-review
-    xarchiver
-    bunnyfetch
-    stlink
     bsp-layout
-    rust-analyzer
+    bunnyfetch
+    discord
+    dunst
+    feh
+    firefox
+    gcc
+    go
     gopls
+    gyro
+    luaformatter
+    lm_sensors
+    nixfmt
+    nixpkgs-review
+    pcmanfm
+    picom
+    polybar
+    rnix-lsp
+    rofi
+    rust-analyzer
+    rustup
+    stlink
+    tokei
+    xarchiver
+    xdotool
+    zig
+    #zls
   ];
 
   # Needed for home manager to not get borked

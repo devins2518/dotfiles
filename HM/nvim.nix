@@ -96,13 +96,17 @@ in {
     '';
     plugins = with pkgs.vimPlugins; [
 
+      auto-pairs
       edge
+      lspsaga-nvim
       markdown-preview-nvim
       vim-easyescape
       vim-go
       vim-nix
       vim-startuptime
       vim-surround
+      vim-vsnip
+      which-key-nvim
 
       {
         plugin = nvim-colorizer-lua;
@@ -117,7 +121,7 @@ in {
         plugin = nvim-treesitter;
         config = luaConfig ''
           require'nvim-treesitter.configs'.setup {
-            ensure_installed = { "go", "gomod", "lua", "nix", "rust", "toml", "yaml", "zig" },
+            ensure_installed = { "c", "cpp", "go", "gomod", "lua", "nix", "rust", "toml", "yaml", "zig" },
             highlight = {
               enable = true,              -- false will disable the whole extension
             },
@@ -207,10 +211,10 @@ in {
           nmap <leader>cl :Cclean<CR>
         '';
       }
-      {
-        plugin = nvim-autopairs;
-        config = ''lua require("nvim-autopairs").setup()'';
-      }
+      #{
+        #plugin = nvim-autopairs;
+        #config = ''lua require("nvim-autopairs").setup()'';
+      #}
       {
         plugin = galaxyline-nvim;
         config = "luafile $HOME/.config/nvim/statusline.lua";

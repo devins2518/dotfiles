@@ -3,7 +3,7 @@ vim.cmd [[packadd nvim-compe]]
 
 vim.o.completeopt = "menuone,noinsert,preview"
 
-require "compe".setup {
+require"compe".setup {
     enabled = true,
     autocomplete = true,
     debug = false,
@@ -26,12 +26,12 @@ require "compe".setup {
         calc = true,
         vsnip = false,
         spell = true,
-        tags = true,
+        tags = true
     }
 }
 
 local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 local check_back_space = function()
@@ -47,20 +47,20 @@ end
 --- move to prev/next item in completion menuone
 --- jump to prev/next snippet's placeholder
 _G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
+    if vim.fn.pumvisible() == 1 then
+        return t "<C-n>"
+    elseif check_back_space() then
+        return t "<Tab>"
+    else
+        return vim.fn['compe#complete']()
+    end
 end
 _G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  else
-    return t "<S-Tab>"
-  end
+    if vim.fn.pumvisible() == 1 then
+        return t "<C-p>"
+    else
+        return t "<S-Tab>"
+    end
 end
 
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
@@ -79,6 +79,9 @@ function _G.completions()
 end
 
 vim.api.nvim_set_keymap("i", "<CR>", "v:lua.completions()", {expr = true})
-vim.api.nvim_set_keymap("i", "<C-space>", "compe#complete()", {expr = true, silent = true})
-vim.api.nvim_set_keymap("i", "<Up>", "compe#scroll({ 'delta': +1 })", {expr = true, silent = true})
-vim.api.nvim_set_keymap("i", "<Down>", "compe#scroll({ 'delta': -1 })", {expr = true, silent = true})
+vim.api.nvim_set_keymap("i", "<C-space>", "compe#complete()",
+                        {expr = true, silent = true})
+vim.api.nvim_set_keymap("i", "<Up>", "compe#scroll({ 'delta': +1 })",
+                        {expr = true, silent = true})
+vim.api.nvim_set_keymap("i", "<Down>", "compe#scroll({ 'delta': -1 })",
+                        {expr = true, silent = true})
