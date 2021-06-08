@@ -1,7 +1,6 @@
 { pkgs, config, lib, inputs, ... }:
 
-let
-  gyro = pkgs.callPackage ./overlays/gyro.nix { };
+let gyro = pkgs.callPackage ./overlays/gyro.nix { };
 in {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
@@ -20,7 +19,7 @@ in {
             utils.url = "github:numtide/flake-utils";
             zig.url = "github:arqv/zig-overlay";
           };
-      
+
           outputs = { self, nixpkgs, utils, zig }:
             utils.lib.eachDefaultSystem (system:
               let
@@ -97,6 +96,7 @@ in {
 
   nixpkgs.config = { allowUnfree = true; };
   environment.systemPackages = with pkgs; [
+    #aerc
     alttab
     bottom
     bsp-layout

@@ -11,19 +11,6 @@ in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
   home.file.".config/nvim".source = ./nvim;
   home.file.".config/nvim".recursive = true;
-  #home.file.".config/nvim/coc-settings.json".text = ''
-  #{
-  #"languageserver": {
-  #"zls" : {
-  #"command": "zls",
-  #"filetypes": ["zig"]
-  #},
-  #"rnix-lsp" : {
-  #"command": "rnix-lsp",
-  #"filetypes": ["nix"]
-  #}
-  #}
-  #}'';
 
   programs.neovim = {
     enable = true;

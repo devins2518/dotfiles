@@ -82,6 +82,4 @@ end
 -- and map buffer local keybindings when the language server attaches
 local nvim_lsp = require('lspconfig')
 local servers = {"rust_analyzer", "zls", "gopls", "rnix"}
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {on_attach = on_attach}
-end
+for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
