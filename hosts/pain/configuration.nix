@@ -68,9 +68,7 @@
     exportConfiguration = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    nvfancontrol
-  ];
+  environment.systemPackages = with pkgs; [ nvfancontrol ];
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;

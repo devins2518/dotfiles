@@ -11,6 +11,10 @@ in {
     shellAliases = {
       nix-repl = "nix repl ${inputs.utils.lib.repl}";
       nshell = "nix-shell";
+      fupdate =
+        "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'";
+      fclup =
+        "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'; sudo nix-collect-garbage -d";
       ls = "ls -l --color=always";
       zig-flake = ''
         echo '{
