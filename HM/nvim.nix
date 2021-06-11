@@ -7,15 +7,16 @@ let
     EOF
   '';
   package = pkgs.neovim-nightly;
-  rosepine = pkgs.vimUtils.buildVimPlugin {
-    name = "neovim";
+  tokyonight = pkgs.vimUtils.buildVimPlugin {
+    name = "tokyonight.nvim";
     src = pkgs.fetchFromGitHub {
-      owner = "rose-pine";
-      repo = "neovim";
-      rev = "4c62b167ea746a402cd7517cd644a2f0825f0060";
-      sha256 = "sha256-5EXZy5w8x/r3/3b4trr1DA5moh0smTMnSv7ZZPwmNLE=";
+      owner = "folke";
+      repo = "tokyonight.nvim";
+      rev = "852c9a846808a47d6ff922fcdbebc5dbaf69bb56";
+      sha256 = "sha256-SnI2lLGsMe4+1GVlihTv68Y/Kqi9SjFDHOdy5ucAd7o=";
     };
   };
+  theme = import ./colors.nix { };
 in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
   home.file.".config/nvim".source = ./nvim;
@@ -61,17 +62,15 @@ in {
       set splitright
       set signcolumn=yes:1
       set mouse=nv
-      set colorcolumn=100
       set numberwidth=2
       set cmdheight=1
       set updatetime=250
       set clipboard=unnamedplus
       set list
       set listchars=tab:▸\ ,eol:¬
-      " TODO: REMOVE
-      highlight CursorLine guibg=#69696
+      set colorcolumn=100
+      autocmd ColorScheme * highlight! link ColorColumn CursorLine
       set cursorline
-      highlight CursorLine guibg=#69696
       nmap <C-M> :noh<CR>
       nmap / /\v
       vmap / /\v
@@ -101,17 +100,13 @@ in {
       vim-vsnip
       which-key-nvim
 
-      #{
-      #plugin = edge;
-      #config = ''
-      #colorscheme edge
-      #let g:edge_style = "aura"'';
-      #}
       {
-        plugin = rosepine;
-        config = luaConfig ''
-          require('rose-pine').set()
-          vim.g.rose_pine_variant = 'moon'
+        plugin = tokyonight;
+        config = ''
+          let g:tokyonight_style = 'night' " available: night, storm
+          let g:tokyonight_enable_italic = 1
+          
+          colorscheme tokyonight
         '';
       }
       {

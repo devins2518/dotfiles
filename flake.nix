@@ -21,7 +21,9 @@
         ./HM/shell-scripts.nix
         ########### Done for despair
         ./xorg.nix
+        ./HM/tmux.nix
         ./HM/xorg-hm.nix
+        ./HM/zathura.nix
         ./HM/dunst.nix
         ########### Done fully i think
         ./HM/zsh/zsh-despair.nix
@@ -85,6 +87,8 @@
                     defaults
                     gtk
                     nvfancontrol
+                    zathura
+                    tmux
                   ];
 
                   home.packages = with pkgs; [ screenshot ];
@@ -115,6 +119,8 @@
                     nvim
                     defaults
                     gtk
+                    zathura
+                    tmux
                   ];
 
                   home.packages = with pkgs;

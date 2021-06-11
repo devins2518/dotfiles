@@ -1,243 +1,323 @@
 { pkgs, config, lib, ... }:
 
-with import ./colors.nix { }; {
+let
+  theme = import ./colors.nix {};
+  normal = theme.normal;
+  bright = theme.bright;
+in {
   xsession.scriptPath = ".xinitrc";
   xsession.initExtra = "feh /etc/wallpaper/wallpaper.png --bg-fill &";
 
-  home.file.".config/polybar".source = ./polybar;
-  home.file.".config/polybar".recursive = true;
-  #services.polybar = {
-  #enable = true;
-  #package = pkgs.polybarFull;
-  #script = ''
-  #polybar eDP1 &
-  #'';
-  #extraConfig = ''
-  #[colors]
-  #; background = ''${xrdb:background}
-  #background = ${drbg}
-  #background-alt = #444444
-  #; foreground =
-  #foreground = ${fg}
-  #foreground-alt = ''${xrdb:color7}
-  #primary = ${pink}
-  #secondary = #0000ff
-  #alert = #ffff00
+  #home.file.".config/polybar".source = ./polybar;
+  #home.file.".config/polybar".recursive = true;
+  services.polybar = {
+    enable = true;
+    package = pkgs.polybarFull;
+    #--config=$HOME/.config/polybar/config.ini 
+    script = ''
+      polybar bar >>/tmp/polybar1.log 2>&1 & disown
+    '';
+    settings = {
+      "bar/bar" = {
+        monitor = "eDP1";
+        monitor-fallback = "DP-2";
+        width = "100%";
+        height = 65;
+        background = normal.black;
+        foreground = normal.red;
+        bottom = false;
 
-  #[bar/eDP1]
-  #;monitor = eDP-1
-  #width = 100%
-  #height = 15
-  #;offset-x = 1%
-  #;offset-y = 1%
-  #;radius = 15.5
-  #fixed-center = false
-  #tray-position = right
+        line-size = 5;
 
-  #background = ''${colors.background}
-  #foreground = ''${colors.foreground}
+        font-0 = "JetBrainsMono Nerd Font:style=Bold:size=20;2";
+        font-1 = "Font Awesome 5 Free:style=Solid:size=20;2";
+        font-2 = "Font Awesome 5 Free:style=Regular:size=20;2";
+        font-3 = "Font Awesome 5 Brands:style=Regular:size=20;2";
+        font-4 = "Material Design Icons:style=Regular:size=20;2";
 
-  #line-size = 2
-  #line-color = #f00
+        wm-restack = "bspwm";
+        tray-position = "right";
 
-  #;border-left-size = 16
-  #;border-right-size = 16
-  #;border-top-size = 8
-  #;border-bottom-size = 0
-  #border-color = #00000000
+        modules-left = "bspwm";
+        modules-center = "xwindow";
+        modules-right =
+          "mem wlan audio right-end-middle-two xbacklight right-end-middle battery right-end-middle-twoo date powermenu";
+      };
 
-  #;padding-left = 2
-  #;padding-right = 2
+      "module/mem" = {
+        type = "custom/script";
+        exec =
+          "/run/current-system/sw/bin/free -m | /run/current-system/sw/bin/sed -n 's/^Mem:s+[0-9]+s+([0-9]+)s.+/1/p'";
+        format = "<label>";
+        label = " %output%Mb";
+        label-padding = 1;
+      };
 
-  #module-margin-left = 1
-  #module-margin-right = 1
+      "module/bspwm" = {
+        type = "internal/bspwm";
 
-  #font-0 = "Hack:pixelsize=12;2"
-  #font-1 = "Font Awesome 5 Free:style=Regular:pixelsize=14;3"
-  #font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=14;3"
-  #font-3 = "Font Awesome 5 Brands:pixelsize=14;3"
+        pin-workspaces = true;
+        inline-mode = true;
+        enable-click = true;
+        enable-scroll = true;
+        reverse-scroll = false;
 
-  #modules-left = i3
-  #modules-right =  network-wlan battery-internal pulseaudio date separator power-menu
+        format = "<label-state>";
 
-  #wm-restack = i3
+        ws-icon-0 = "I;%{F#c2f0fc}";
+        ws-icon-1 = "II;%{F#fabea7}";
+        ws-icon-2 = "III;%{F#88e1f2}";
+        ws-icon-3 = "IV;%{F#e36387}";
+        ws-icon-4 = "V;%{F#cceabb}";
+        ws-icon-5 = "VI;%{F#eaa9ce}";
 
-  #override-redirect = false
+        label-focused = "%icon%";
+        label-focused-underline = normal.red;
 
-  #;scroll-up = bspwm-desknext
-  #;scroll-down = bspwm-deskprev
+        label-focused-padding = 1;
 
-  #scroll-up = i3wm-wsnext
-  #scroll-down = i3wm-wsprev
+        label-occupied = "%icon%";
+        label-occupied-foreground = "#ffffff";
+        label-occupied-padding = 1;
 
-  #cursor-click = pointer
-  #cursor-scroll = ns-resize
+        label-empty = "%icon%";
+        label-empty-foreground = "#ffffff";
+        label-empty-padding = 1;
 
-  #;enable-ipc = true
+        label-urgent = "%icon%";
+        xxlabel-urgent-foreground = "#88C0D0";
+        label-urgent-padding = 1;
+      };
 
-  #[module/network-wlan]
-  #type = internal/network
-  #interface = wlp0s20f3
-  #format-connected = %{F${pink}}%{F-} <label-connected>
-  #label-connected =  %essid%
-  #label-connected-foreground = #eefafafa
-  #label-disconnected = not connected
-  #label-disconnected-foreground = #66ffffff
-  #animation-packetloss-framerate = 500
-  #interval = 10.0;
+      "module/xwindow" = {
+        type = "internal/xwindow";
+        label = "%title%";
+        label-maxlen = 30;
+        format-foreground = normal.red;
+        format-background = normal.black;
+        format-padding = 1;
+      };
 
-  #[module/battery-internal]
-  #type = internal/battery
+      "module/xbacklight" = {
+        type = "internal/xbacklight";
+        format = "<label>";
+        format-prefix = " ";
+        format-prefix-foreground = normal.black;
+        format-prefix-background = normal.red;
+        label = "%percentage%%";
+        format-foreground = normal.black;
+        format-background = normal.red;
+        format-padding = 1;
+      };
 
-  #; This is useful in case the battery never reports 100% charge
-  #; full-at = 99
+      "module/date" = {
+        type = "internal/date";
+        interval = 5;
 
-  #; Use the following command to list batteries and adapters:
-  #; $ ls -1 /sys/class/power_supply/
-  #battery = BAT0
-  #adapter = AC
+        time = "%I:%M";
+        format-prefix = " ";
+        format-prefix-foreground = normal.black;
+        format-prefix-background = normal.blue;
+        format-foreground = normal.black;
+        format-background = normal.blue;
+        label = "%time%";
+        format-padding = 1;
+      };
 
-  #poll-interval = 100
+      "module/audio" = {
+        type = "internal/alsa";
+        interval = 5;
+        format-volume = "<ramp-volume><label-volume>";
+        format-muted = "<label-muted>";
+        format-muted-prefix-font = 2;
+        format-muted-prefix = "";
+        format-muted-prefix-foreground = normal.green;
+        format-muted-prefix-background = normal.black;
+        format-muted-prefix-padding = 1;
 
-  #time-format = %H:%M
+        label-volume = "%percentage%%";
+        label-volume-foreground = normal.green;
+        label-volume-background = normal.black;
+        label-volume-padding = 1;
 
-  #format-charging = <animation-charging> <label-charging>
-  #format-discharging = <ramp-capacity> <label-discharging>
+        label-muted = "Muted";
+        label-muted-foreground = normal.green;
+        label-muted-background = normal.black;
+        label-muted-padding = 1;
 
-  #label-charging = %percentage%%
+        ramp-volume = [ "" "" "" ];
+        ramp-volume-foreground = normal.green;
+        ramp-volume-background = normal.black;
+        ramp-volume-padding = 1;
 
-  #label-discharging = %percentage%%
+        click-right = "$HOME/.config/polybar/scripts/autoclose.sh pavucontrol";
+      };
 
-  #label-full = %{F${pink}}%{F-} 100%
+      "module/battery" = {
+        type = "internal/battery";
+        battery = "BAT1";
+        adapter = "AC0";
+        full-at = 98;
 
-  #ramp-capacity-0 =%{F${pink}}%{F-}
-  #ramp-capacity-1 =%{F${pink}}%{F-}
-  #ramp-capacity-2 =%{F${pink}}%{F-}
-  #ramp-capacity-3 =%{F${pink}}%{F-}
-  #ramp-capacity-4 =%{F${pink}}%{F-}
+        format-charging = "<animation-charging> <label-charging>";
+        label-charging = "%percentage%%";
+        format-charging-foreground = normal.blue;
+        format-charging-background = normal.black;
 
-  #bar-capacity-width = 10
+        format-discharging = "<ramp-capacity> <label-discharging>";
+        label-discharging = "%percentage%%";
+        format-discharging-foreground = normal.red;
+        format-discharging-background = normal.black;
 
-  #animation-charging-0 =%{F${pink}}%{F-}
-  #animation-charging-1 =%{F${pink}}%{F-}
-  #animation-charging-2 =%{F${pink}}%{F-}
-  #animation-charging-3 =%{F${pink}}%{F-}
-  #animation-charging-4 =%{F${pink}}%{F-}
-  #; Framerate in milliseconds
-  #animation-charging-framerate = 500
+        format-full-prefix = " ";
+        format-full-prefix-foreground = normal.blue;
+        format-foreground = normal.blue;
+        format-background = normal.black;
 
-  #animation-discharging-0 =%{F${pink}}%{F-}
-  #animation-discharging-1 =%{F${pink}}%{F-}
-  #animation-discharging-2 =%{F${pink}}%{F-}
-  #animation-discharging-3 =%{F${pink}}%{F-}
-  #animation-discharging-4 =%{F${pink}}%{F-}
+        label-discharging-foreground = normal.red;
+        label-charging-foreground = normal.blue;
+        label-padding = 1;
 
-  #animation-discharging-framerate = 500
+        ramp-capacity = [ "" "" "" "" "" ];
+        ramp-capacity-foreground = normal.red;
 
-  #[module/pulseaudio]
-  #type = internal/pulseaudio
+        animation-charging = [ "" "" "" "" "" ];
+        animation-charging-foreground = normal.blue;
+        animation-charging-framerate = 750;
 
-  #use-ui-max = true
+        format-charging-padding = 1;
+        format-discharging-padding = 1;
+      };
 
-  #interval = 5
+      "module/left-end" = {
+        type = "custom/text";
+        content-background = normal.blue;
+        content-foreground = normal.black;
+        content = "%{T3}%{T-}";
+      };
 
-  #format-volume = <ramp-volume> <label-volume>
+      "module/right-end" = {
+        type = "custom/text";
+        content-background = normal.blue;
+        content-foreground = normal.black;
+        content = "%{T}%{T}";
+      };
 
-  #label-muted = %{F${pink}}%{F-} off
+      "module/right-end-middle" = {
+        type = "custom/text";
+        content-background = normal.red;
+        content-foreground = normal.black;
+        content = "%{T3}%{T-}";
+      };
 
-  #ramp-volume-0 =%{F${pink}}%{F-}
-  #ramp-volume-1 =%{F${pink}}%{F-}
-  #ramp-volume-2 =%{F${pink}}%{F-}
+      "module/right-mid" = {
+        type = "custom/text";
+        content-background = normal.cyan;
+        content-foreground = normal.black;
+        content = "%{T3}%{T-}";
+      };
 
-  #click-right = pavucontrol &
+      "module/right-end-middlee" = {
+        type = "custom/text";
+        content-background = normal.red;
+        content-foreground = normal.black;
+        content = "%{T3}%{T-}";
+      };
 
-  #[module/power-menu]
-  #type = custom/menu
+      "module/right-end-middle-two" = {
+        type = "custom/text";
+        content-background = normal.black;
+        content-foreground = normal.red;
+        content = "%{T3}%{T-}";
+      };
 
-  #expand-right = true
+      "module/right-end-middle-tww" = {
+        type = "custom/text";
+        content-background = normal.black;
+        content-foreground = normal.cyan;
+        content = "%{T3}%{T-}";
+      };
 
-  #menu-0-0 ="|"
-  #menu-0-0-exec =
-  #menu-0-1 ="%{F${pink}}%{F-}"
-  #menu-0-1-exec = systemctl suspend
-  #menu-0-2 = "%{F${pink}}%{F-}"
-  #menu-0-2-exec = reboot
-  #menu-0-3 = "%{F${pink}}%{F-}"
-  #menu-0-3-exec = shutdown now
-  #menu-0-4 = "%{F${pink}}%{F-}"
-  #menu-0-4-exec = loginctl lock-session
+      "module/right-end-middle-twoo" = {
+        type = "custom/text";
+        content-background = normal.black;
+        content-foreground = normal.blue;
+        content = "%{T3}%{T-}";
+      };
 
-  #format =<menu>  <label-toggle>
+      "module/square" = {
+        type = "custom/text";
+        content-background = normal.blue;
+        content-foreground = normal.black;
+        content = "%{T3}%{T-}";
+      };
 
-  #label-open = "%{F${pink}}%{F-}"
+      "module/powermenu" = {
+        type = custom/menu;
 
-  #label-close = "%{F${pink}}%{F-}"
+        expand-right = false;
 
-  #label-separator = "  "
+        label-open-font = 2;
+        label-open = "";
+        label-open-foreground = normal.black;
+        label-open-background = normal.green;
+        label-open-padding = 1;
+        label-close = "";
+        label-close-foreground = normal.black;
+        label-close-background = normal.red;
 
-  #[settings]
-  #screenchange-reload = true
-  #pseudo-transparency = true
+        label-close-padding = 1;
 
-  #[global/wm]
-  #margin-top = 0
-  #margin-bottom = 0
+        label-separator = " | ";
 
-  #[module/i3]
-  #type = internal/i3
-  #format = <label-state> <label-mode>
-  #index-sort = true
-  #wrapping-scroll = false
+        menu-0 = [ " " "" "" "" "" ];
+        menu-0-0-exec = "poweroff";
+        menu-0-1-exec = "reboot";
+        menu-0-2-exec = "systemctl suspend";
+        menu-0-3-exec = "bspc quit";
+        menu-0-4-exec = "xset dpms force off";
+      };
 
-  #label-mode-padding = 2
-  #label-mode-foreground = #000
+      "module/wlan" = {
+        type = "internal/network";
+        interface = "wlp2s0";
+        interval = 3.0;
 
-  #label-focused = %index%
-  #label-focused-background = ${pink}
-  #label-focused-underline = ''${colors.primary}
-  #label-focused-padding = 2
+        format-connected = "<label-connected>";
+        label-connected = " 直 ";
+        label-connected-foreground = normal.cyan;
+      };
 
-  #label-unfocused = %index%
-  #label-unfocused-padding = 2
-
-  #label-visible = %index%
-  #label-visible-background = ''${self.label-focused-background}
-  #label-visible-underline = ''${self.label-focused-underline}
-  #label-visible-padding = ''${self.label-focused-padding}
-
-  #label-urgent = %index%
-  #label-urgent-background = ''${colors.alert}
-  #label-urgent-padding = 2
-  #'';
-  #};
+    };
+  };
   #programs.rofi = {
-  #package =
-  #pkgs.rofi.override { plugins = with pkgs; [ rofi-calc rofi-emoji ]; };
-  #enable = true;
-  #extraConfig = {
-  #modi = "combi,calc";
-  #combi-modi = "drun,run,window,file-browser,ssh,keys,emoji";
-  #};
-  #font = "Cascadia Code 10";
-  #colors = {
-  #rows = {
-  #normal = {
-  #background = bg;
-  #foreground = fg;
-  #backgroundAlt = bg;
-  #highlight = {
-  #background = pink;
-  #foreground = fg;
-  #};
-  #};
+    #package =
+      #pkgs.rofi.override { plugins = with pkgs; [ rofi-calc rofi-emoji ]; };
+    #enable = true;
+    #extraConfig = {
+      #modi = "combi,calc";
+      #combi-modi = "drun,run,window,file-browser,ssh,keys,emoji";
+    #};
+    #font = "Cascadia Code 10";
+    #colors = {
+      #rows = {
+        #normal = {
+          #background = bg;
+          #foreground = fg;
+          #backgroundAlt = bg;
+          #highlight = {
+            #background = pink;
+            #foreground = fg;
+          #};
+        #};
 
-  #};
-  #window = {
-  #background = bg;
-  #separator = pink;
-  #border = pink;
-  #};
-  #};
+      #};
+      #window = {
+        #background = bg;
+        #separator = pink;
+        #border = pink;
+      #};
+    #};
   #};
 
   home.file.".config/picom.conf".source = ./picom.conf;
