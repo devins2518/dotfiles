@@ -71,6 +71,7 @@ in {
       set colorcolumn=100
       autocmd ColorScheme * highlight! link ColorColumn CursorLine
       set cursorline
+
       nmap <C-M> :noh<CR>
       nmap / /\v
       vmap / /\v

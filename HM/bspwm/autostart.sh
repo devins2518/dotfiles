@@ -1,5 +1,5 @@
 # Top bar
-~/.config/polybar/launch.sh &
+#~/.config/polybar/launch.sh &
 # Background and colorscheme setter
 feh --bg-fill /etc/wallpaper/wallpaper.png &
 # Compositor

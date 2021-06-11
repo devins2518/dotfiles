@@ -23,8 +23,10 @@
         ./xorg.nix
         ./HM/tmux.nix
         ./HM/xorg-hm.nix
+        ./HM/rofi.nix
         ./HM/zathura.nix
         ./HM/dunst.nix
+        ./HM/polybar.nix
         ########### Done fully i think
         ./HM/zsh/zsh-despair.nix
         ./HM/zsh/zsh-pain.nix
@@ -89,9 +91,14 @@
                     nvfancontrol
                     zathura
                     tmux
+                    polybar
+                    rofi
                   ];
 
-                  home.packages = with pkgs; [ screenshot ];
+                  home.packages = with pkgs; [ 
+                    screenshot
+                    autoclose
+                  ];
                 });
             })
           ];
@@ -121,12 +128,15 @@
                     gtk
                     zathura
                     tmux
+                    polybar
+                    rofi
                   ];
 
                   home.packages = with pkgs;
                     [
                       # custom shell script
                       screenshot
+                      autoclose
                     ];
                 });
             })

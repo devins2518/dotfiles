@@ -120,9 +120,7 @@ in {
     nixpkgs-review
     pcmanfm
     picom
-    polybar
     rnix-lsp
-    rofi
     rust-analyzer
     rustup
     stlink
