@@ -7,6 +7,15 @@ let
     EOF
   '';
   package = pkgs.neovim-nightly;
+  rosepine = pkgs.vimUtils.buildVimPlugin {
+    name = "neovim";
+    src = pkgs.fetchFromGitHub {
+      owner = "rose-pine";
+      repo = "neovim";
+      rev = "4c62b167ea746a402cd7517cd644a2f0825f0060";
+      sha256 = "sha256-5EXZy5w8x/r3/3b4trr1DA5moh0smTMnSv7ZZPwmNLE=";
+    };
+  };
 in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
   home.file.".config/nvim".source = ./nvim;
@@ -21,8 +30,6 @@ in {
     vimAlias = true;
 
     extraConfig = ''
-      colorscheme edge
-      let g:edge_style = "aura"
       set noerrorbells
       set tabstop=4
       set softtabstop=4
@@ -84,7 +91,6 @@ in {
     plugins = with pkgs.vimPlugins; [
 
       auto-pairs
-      edge
       lspsaga-nvim
       markdown-preview-nvim
       vim-easyescape
@@ -95,6 +101,19 @@ in {
       vim-vsnip
       which-key-nvim
 
+      #{
+      #plugin = edge;
+      #config = ''
+      #colorscheme edge
+      #let g:edge_style = "aura"'';
+      #}
+      {
+        plugin = rosepine;
+        config = luaConfig ''
+          require('rose-pine').set()
+          vim.g.rose_pine_variant = 'moon'
+        '';
+      }
       {
         plugin = nvim-colorizer-lua;
         config = ''
@@ -199,8 +218,8 @@ in {
         '';
       }
       #{
-        #plugin = nvim-autopairs;
-        #config = ''lua require("nvim-autopairs").setup()'';
+      #plugin = nvim-autopairs;
+      #config = ''lua require("nvim-autopairs").setup()'';
       #}
       {
         plugin = galaxyline-nvim;

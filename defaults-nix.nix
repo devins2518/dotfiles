@@ -51,10 +51,11 @@ in {
         .gyro/' >> .gitignore
       '';
     };
-    etc."spaceman.png" = {
+    etc."wallpaper/wallpaper.png" = {
       source = pkgs.fetchurl {
-        url = "https://w.wallhaven.cc/full/ox/wallhaven-oxkjgm.jpg";
-        sha256 = "sha256-k5lZlGipd1dpOLCBXtOQ58sHxvTH81COTMg/XKuxb6Y=";
+        url =
+          "https://raw.githubusercontent.com/manderio/manpapers/main/original/dark_road.png";
+        sha256 = "sha256-/sUQhvFC12JBVfbU/AUHD2lZutGVHitIK7VnUaGsY1o=";
       };
     };
   };

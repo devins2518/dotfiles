@@ -1,7 +1,1 @@
-[
-  ./alacritty.nix
-  ./git.nix
-  ./misc.nix
-  ./neovim
-  ./shell
-]
+[ ./alacritty.nix ./git.nix ./misc.nix ./neovim ./shell ]

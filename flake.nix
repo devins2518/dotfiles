@@ -24,9 +24,9 @@
         ./HM/xorg-hm.nix
         ./HM/dunst.nix
         ########### Done fully i think
-        ./HM/zsh-despair.nix
-        ./HM/zsh-pain.nix
-        ./HM/zsh.nix
+        ./HM/zsh/zsh-despair.nix
+        ./HM/zsh/zsh-pain.nix
+        ./HM/zsh/zsh.nix
         ./HM/nvfancontrol.nix
         ###########
         ./HM/nvim.nix

@@ -90,10 +90,7 @@
     };
   };
 
-
-  fonts = {
-    fontconfig.dpi = 192;
-  };
+  fonts = { fontconfig.dpi = 192; };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

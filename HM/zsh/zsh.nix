@@ -124,8 +124,8 @@
         set-option -g set-titles on
 
         # Use 24 bit color
-        set -g status-bg colour01
-        set -g status-fg colour00
+        #set -g status-bg colour01
+        set -g status-fg colour04
 
         # Neovim settings
         set-option -sa terminal-overrides 'alacritty:RGB'

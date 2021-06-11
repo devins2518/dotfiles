@@ -1,7 +1,7 @@
 # Top bar
 ~/.config/polybar/launch.sh &
 # Background and colorscheme setter
-feh --bg-fill /etc/spaceman.png &
+feh --bg-fill /etc/wallpaper/wallpaper.png &
 # Compositor
 picom --config $HOME/.config/picom.conf &
 # Alt tab daemon

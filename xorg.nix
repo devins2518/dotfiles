@@ -9,7 +9,7 @@
       lightdm = {
         enable = true;
 
-        background = "/etc/spaceman.png";
+        background = "/etc/wallpaper/wallpaper.png";
 
         greeters.gtk = {
           enable = true;

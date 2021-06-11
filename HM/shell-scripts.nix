@@ -6,7 +6,7 @@ rec {
     #! nix-shell -i bash -p scrot libnotify curl jq xclip
     #
     # syntax screenshot.sh local fullscreen
-    
+
     if [ $1 == "1" ]; then
         if [ $2 == "1" ]; then
             scrot $HOME/'Pictures/%Y-%m-%d_%H%M%S-$wx$h_scrot.png'
@@ -24,7 +24,7 @@ rec {
     fi
     if [[ $? == 1 ]]; then exit 1; fi
     notify-send -t 2000 "Screenshot taken, uploading..."
-    
+
     # URL to uplaod to
     url="https://shion.is-inside.me/upload"
     # Authentication Key
@@ -33,7 +33,7 @@ rec {
     formkey="key"
     # JSON key to image URl
     image="url"
-    
+
     curl --request POST -H "$formkey: $authtoken" -F "file=@/tmp/screenshot.png" $url | jq -r ".$image" | xclip -selection clipboard
     notify-send "Screenshot uploaded!"
     rm /tmp/screenshot.png
