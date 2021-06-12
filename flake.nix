@@ -24,6 +24,7 @@
         ./HM/tmux.nix
         ./HM/xorg-hm.nix
         ./HM/rofi.nix
+        ./HM/bspwm.nix
         ./HM/zathura.nix
         ./HM/dunst.nix
         ./HM/polybar.nix
@@ -93,12 +94,10 @@
                     tmux
                     polybar
                     rofi
+                    bspwm
                   ];
 
-                  home.packages = with pkgs; [ 
-                    screenshot
-                    autoclose
-                  ];
+                  home.packages = with pkgs; [ screenshot autoclose ];
                 });
             })
           ];
@@ -111,6 +110,8 @@
             xorg
             nixos-hardware.nixosModules.microsoft-surface
             ({ pkgs, ... }: {
+              home-manager.useUserPackages = true;
+              home-manager.useGlobalPkgs = true;
               home-manager.users.devin = ({ config, pkgs, ... }:
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                   imports = [
@@ -130,14 +131,10 @@
                     tmux
                     polybar
                     rofi
+                    bspwm
                   ];
 
-                  home.packages = with pkgs;
-                    [
-                      # custom shell script
-                      screenshot
-                      autoclose
-                    ];
+                  home.packages = with pkgs; [ screenshot autoclose ];
                 });
             })
           ];

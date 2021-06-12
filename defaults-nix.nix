@@ -6,7 +6,6 @@ in {
   home-manager.useGlobalPkgs = true;
 
   environment = {
-    homeBinInPath = true;
     sessionVariables = { NIXOS_CONFIG = "/home/devin/Repos/dotfiles"; };
     shellAliases = {
       nix-repl = "nix repl ${inputs.utils.lib.repl}";
@@ -128,7 +127,7 @@ in {
     xarchiver
     xdotool
     zig
-    #zls
+    zls
   ];
 
   # Needed for home manager to not get borked

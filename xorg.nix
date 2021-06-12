@@ -6,6 +6,12 @@
     enable = true;
 
     displayManager = {
+      session = [{
+        manage = "desktop";
+        name = "xsession";
+        start = "exec $HOME/.xsession";
+      }];
+
       lightdm = {
         enable = true;
 
@@ -21,8 +27,6 @@
         };
       };
     };
-
-    windowManager = { bspwm.enable = true; };
 
     libinput = {
       enable = true;

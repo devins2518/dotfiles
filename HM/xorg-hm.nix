@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 
 let
-  theme = import ./colors.nix {};
+  theme = import ./colors.nix { };
   normal = theme.normal;
   bright = theme.bright;
 in {
@@ -10,9 +10,7 @@ in {
   home.file.".icons/default".source =
     "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors";
 
-  home.file.".config/bspwm".source = ./bspwm;
-  home.file.".config/bspwm".recursive = true;
-
+  # TODO: breaks if you restart display-manager.service?
   services.sxhkd = {
     enable = true;
     extraConfig = ''
