@@ -146,6 +146,7 @@ in {
       (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" ]; })
       font-awesome
       scientifica
+      tenderness
     ];
   };
 }

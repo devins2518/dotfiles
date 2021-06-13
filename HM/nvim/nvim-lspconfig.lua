@@ -50,13 +50,6 @@ vim.lsp.protocol.CompletionItemKind = {
     "   (Operator)", "   (TypeParameter)"
 }
 
---[[ " autoformat
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
--- Java
--- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
-
 local function documentHighlight(client, bufnr)
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
@@ -81,10 +74,22 @@ end
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
 local nvim_lsp = require('lspconfig')
-local servers = {"rust_analyzer", "zls", "rnix"}
+local servers = {"rust_analyzer", "rnix"}
 for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
 -- 	https://github.com/golang/go/issues/41081
 nvim_lsp.gopls.setup {
     cmd = {"gopls", "serve"},
     settings = {gopls = {staticcheck = true, env = {GOFLAGS = "-tags=test"}}}
+}
+
+nvim_lsp.zls.setup {
+    cmd = {"zls"},
+    settings = {
+        zls = {
+            enable_semantic_tokens = true,
+            enable_snippets = true,
+            operator_completions = true,
+            warn_style = true
+        }
+    }
 }
