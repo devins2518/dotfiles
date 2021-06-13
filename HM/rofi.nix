@@ -8,8 +8,21 @@ in {
   programs.rofi = {
     enable = true;
     extraConfig = {
-      modi = "combi";
-      combi-modi = "drun,run,window";
+      modi = "drun";
+      width = 40;
+      columns = 1;
+      lines = 5;
+      font = "Iosevka Nerd Font Mono 20";
+      show-icons = true;
+      icon-theme = "Papirus-Dark";
+      terminal = "alacritty";
+      drun-display-format = "{icon} {name}";
+      display-drun = "Open";
+      location = 0;
+      separator-style = "solid";
+      disable-history = true;
+      hide-scrollbar = true;
+
     };
     font = "Iosevka 25";
 
@@ -20,7 +33,6 @@ in {
         border-color = mkLiteral normal.blue;
         text-color = mkLiteral normal.white;
         separator-color = mkLiteral "@border-color";
-        # TODO: icons no work
         show-icons = mkLiteral "true";
       };
 
