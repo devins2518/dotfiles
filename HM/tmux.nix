@@ -1,6 +1,11 @@
 { pkgs, config, ... }:
 
-{
+let
+  theme = import ./colors.nix { };
+  normal = theme.normal;
+  bright = theme.bright;
+  vim = theme.vim;
+in {
   programs = {
     tmux = {
       enable = true;
@@ -46,9 +51,6 @@
         set-window-option -g automatic-rename on
         set-option -g set-titles on
 
-        # Use 24 bit color
-        set -g status-bg color00
-        set -g status-fg color04
 
         # Neovim settings
         set-option -sa terminal-overrides 'alacritty:RGB'
@@ -64,6 +66,34 @@
 
         # Watch temps
         bind-key T split-window -h "watch -n .5 'sensors | grep coretemp -A 5'"
+
+        set -g mode-style "fg=${vim.blue},bg=${vim.fg_gutter}"
+
+        set -g message-style "fg=${vim.blue},bg=${vim.fg_gutter}"
+        set -g message-command-style "fg=${vim.blue},bg=${vim.fg_gutter}"
+
+        set -g pane-border-style "fg=${vim.fg_gutter}"
+        set -g pane-active-border-style "fg=${vim.blue}"
+
+        set -g status "on"
+        set -g status-justify "left"
+
+        set -g status-style "fg=${vim.blue},bg=${vim.bg_dark}"
+
+        set -g status-left-length "100"
+        set -g status-right-length "100"
+
+        set -g status-left-style NONE
+        set -g status-right-style NONE
+
+        set -g status-left "#[fg=${bright.black},bg=${vim.blue},bold] #S #[fg=${bright.blue},bg=${vim.bg_dark},nobold,nounderscore,noitalics]"
+        set -g status-right "#[fg=${vim.bg_dark},bg=${vim.bg_dark},nobold,nounderscore,noitalics]#[fg=${vim.blue},bg=${vim.bg_dark}] #{prefix_highlight} #[fg=${vim.fg_gutter},bg=${vim.bg_dark},nobold,nounderscore,noitalics]#[fg=${bright.blue},bg=${vim.fg_gutter}] %Y-%m-%d  %I:%M %p #[fg=${bright.blue},bg=${vim.fg_gutter},nobold,nounderscore,noitalics]#[fg=${bright.black},bg=${bright.blue},bold] #h "
+
+        setw -g window-status-activity-style "underscore,fg=${vim.fg_dark},bg=${vim.bg_dark}"
+        setw -g window-status-separator ""
+        setw -g window-status-style "NONE,fg=${vim.fg_dark},bg=${vim.bg_dark}"
+        setw -g window-status-format "#[fg=${vim.bg_dark},bg=${vim.bg_dark},nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=${vim.bg_dark},bg=${vim.bg_dark},nobold,nounderscore,noitalics]"
+        setw -g window-status-current-format "#[fg=${vim.bg_dark},bg=${vim.fg_gutter},nobold,nounderscore,noitalics]#[fg=${vim.blue},bg=${vim.fg_gutter},bold] #I  #W #F #[fg=${vim.fg_gutter},bg=${vim.bg_dark},nobold,nounderscore,noitalics]"
       '';
     };
   };
