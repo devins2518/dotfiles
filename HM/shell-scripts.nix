@@ -48,4 +48,24 @@ rec {
     bspc subscribe -c 1 node_focus desktop_focus
     bspc node $n -c
   '';
+
+  compilenote = pkgs.writeScriptBin "compilenote" ''
+    #! /usr/bin/env nix-shell
+    #! nix-shell -i bash -p pandoc texlive.combined.scheme-small
+
+    pkill pandoc
+
+    filename=$1
+    target="/home/devin/Repos/notes/pdfs"
+    outputFile="$(basename "$filename" .md).pdf"
+
+    mkdir -p $target
+
+    pandoc \
+        --pdf-engine=xelatex \
+        --wrap=auto \
+        -f gfm \
+        -V "geometry:left=3cm,right=3cm,top=2cm,bottom=2cm" \
+        -o "$target/$outputFile" $filename
+  '';
 }

@@ -6,12 +6,13 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
+    nur.url = "github:nix-community/NUR/master";
     home-manager.url = "github:nix-community/home-manager";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
   };
 
   outputs = { self, nixpkgs, home-manager, utils, nixos-hardware, neovim-nightly
-    , agenix }@inputs:
+    , agenix, nur }@inputs:
     utils.lib.systemFlake {
       inherit self inputs;
 
@@ -28,6 +29,7 @@
         ./HM/zathura.nix
         ./HM/dunst.nix
         ./HM/polybar.nix
+        ./HM/pdf.nix
         ########### Done fully i think
         ./HM/zsh/zsh-despair.nix
         ./HM/zsh/zsh-pain.nix
@@ -95,9 +97,14 @@
                     polybar
                     rofi
                     bspwm
+                    pdf
                   ];
 
-                  home.packages = with pkgs; [ screenshot autoclose ];
+                  home.packages = with pkgs; [
+                    screenshot
+                    autoclose
+                    compilenote
+                  ];
                 });
             })
           ];
@@ -132,16 +139,21 @@
                     polybar
                     rofi
                     bspwm
+                    pdf
                   ];
 
-                  home.packages = with pkgs; [ screenshot autoclose ];
+                  home.packages = with pkgs; [
+                    screenshot
+                    autoclose
+                    compilenote
+                  ];
                 });
             })
           ];
         };
       };
 
-      sharedOverlays = [ neovim-nightly.overlay self.overlay ];
+      sharedOverlays = [ self.overlay neovim-nightly.overlay nur.overlay ];
 
       packagesBuilder = channels: {
         inherit (channels.nixpkgs) alacritty-ligatures neovim-nightly;

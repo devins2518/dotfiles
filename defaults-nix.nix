@@ -1,11 +1,15 @@
 { pkgs, config, lib, inputs, ... }:
 
-let gyro = pkgs.callPackage ./overlays/gyro.nix { };
+let
+  gyro = pkgs.callPackage ./overlays/gyro.nix { };
+  zigup = pkgs.callPackage ./overlays/zigup.nix { };
+  nur-packages = with pkgs.nur.repos; [ fortuneteller2k.impure.eww ];
 in {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
   environment = {
+    homeBinInPath = true;
     sessionVariables = { NIXOS_CONFIG = "/home/devin/Repos/dotfiles"; };
     shellAliases = {
       nix-repl = "nix repl ${inputs.utils.lib.repl}";
@@ -15,46 +19,13 @@ in {
       fclup =
         "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'; sudo nix-collect-garbage -d";
       ls = "ls -l --color=always";
-      zig-flake = ''
-        echo '{
-          inputs = {
-            nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-            utils.url = "github:numtide/flake-utils";
-            zig.url = "github:arqv/zig-overlay";
-          };
-
-          outputs = { self, nixpkgs, utils, zig }:
-            utils.lib.eachDefaultSystem (system:
-              let
-                pkgs = nixpkgs.legacyPackages."''${system}";
-              in {
-               devShell = pkgs.mkShell {
-                  nativeBuildInputs = [
-                    zig.packages."''${system}".master.latest
-                  ];
-                };
-              });
-        }' >> flake.nix
-        echo 'use flake' >> .envrc
-        direnv allow
-        echo '*~
-        *.swp
-        zig-cache/
-        zig-out/
-        answers/
-        patches/healed/
-
-        .direnv/*
-        !.direnv/.git-keep
-
-        .gyro/' >> .gitignore
-      '';
     };
+
     etc."wallpaper/wallpaper.png" = {
       source = pkgs.fetchurl {
         url =
-          "https://raw.githubusercontent.com/manderio/manpapers/main/original/dark_road.png";
-        sha256 = "sha256-/sUQhvFC12JBVfbU/AUHD2lZutGVHitIK7VnUaGsY1o=";
+          "https://raw.githubusercontent.com/manderio/manpapers/main/edited/devins2518/dark_road_upscaled_tokyonight.png";
+        sha256 = "sha256-aebWDaDAG0wkOXLKrApbQkrrChzdrmi1Vn/JZV77nPw=";
       };
     };
   };
@@ -87,6 +58,20 @@ in {
     };
 
     nixPath = [ "nixpkgs=${pkgs.path}" "home-manager=${inputs.home-manager}" ];
+
+    binaryCaches = [
+      "https://cache.nixos.org?priority=10"
+      "https://nix-community.cachix.org"
+      "https://fortuneteller2k.cachix.org"
+      "https://devins2518.cachix.org"
+    ];
+
+    binaryCachePublicKeys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
+      "devins2518.cachix.org-1:VQepMECpWpT95AjVOU30xz6kbrBRUMpHAOdKP/tulB0="
+    ];
   };
 
   programs = {
@@ -99,36 +84,41 @@ in {
   };
 
   nixpkgs.config = { allowUnfree = true; };
-  environment.systemPackages = with pkgs; [
-    #aerc
-    alttab
-    bottom
-    bsp-layout
-    bunnyfetch
-    discord
-    dunst
-    feh
-    firefox
-    gcc
-    go
-    gopls
-    gyro
-    luaformatter
-    lm_sensors
-    nixfmt
-    nixpkgs-review
-    pcmanfm
-    picom
-    rnix-lsp
-    rust-analyzer
-    rustup
-    stlink
-    tokei
-    xarchiver
-    xdotool
-    zig
-    zls
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      #aerc
+      alttab
+      bottom
+      bsp-layout
+      bunnyfetch
+      discord
+      dunst
+      feh
+      firefox
+      gcc
+      gdb
+      go
+      gopls
+      gyro
+      lm_sensors
+      luaformatter
+      nixfmt
+      nixpkgs-review
+      pandoc
+      pcmanfm
+      picom
+      rnix-lsp
+      rust-analyzer
+      rustup
+      stlink
+      texlive.combined.scheme-small
+      tokei
+      wkhtmltopdf
+      xarchiver
+      xdotool
+      zigup
+      zls
+    ] ++ nur-packages;
 
   # Needed for home manager to not get borked
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
@@ -147,6 +137,7 @@ in {
       font-awesome
       scientifica
       tenderness
+      dejavu_fonts
     ];
   };
 }

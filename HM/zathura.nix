@@ -45,8 +45,10 @@ in {
       recolor = true;
       recolor-keephue = true;
 
-      window-title-basename = true;
+      show-recent = 0;
       selection-clipboard = "clipboard";
+      window-title-basename = true;
+      statusbar-basename = true;
     };
   };
 }

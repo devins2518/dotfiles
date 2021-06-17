@@ -16,6 +16,15 @@ let
       sha256 = "sha256-SnI2lLGsMe4+1GVlihTv68Y/Kqi9SjFDHOdy5ucAd7o=";
     };
   };
+  truezen = pkgs.vimUtils.buildVimPlugin {
+    name = "TrueZen.nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "Pocco81";
+      repo = "TrueZen.nvim";
+      rev = "6009da02423ad5a327bb9e07c8c7c0928e77edc9";
+      sha256 = "sha256-atETWiyJA71KI6YAUGeKsDbLq8o+8vOKZF6q34bMhr0=";
+    };
+  };
   theme = import ./colors.nix { };
 in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
@@ -69,7 +78,7 @@ in {
       set list
       set listchars=tab:▸\ ,eol:¬
       set colorcolumn=100
-      autocmd ColorScheme * highlight! link ColorColumn CursorLine
+      autocmd! ColorScheme * highlight! link ColorColumn CursorLine
       set cursorline
 
       nmap <C-M> :noh<CR>
@@ -230,6 +239,51 @@ in {
         config = ''
           let g:indentLine_enabled = 1
           let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+        '';
+      }
+      {
+        plugin = truezen;
+        config = ''
+          augroup markdown
+            au!
+            autocmd BufNewFile,BufRead *.md set filetype=markdown
+            autocmd FileType markdown set conceallevel=2
+            autocmd Filetype markdown set wrap
+            autocmd FileType markdown setlocal spell spelllang=en
+            autocmd FileType markdown set colorcolumn=
+            autocmd FileType markdown set scrolloff=999
+            autocmd FileType markdown nmap <leader>cp :!compilenote %<CR>
+            autocmd FileType markdown nmap <leader>tz :TZAtaraxis<CR>
+            autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &
+            augroup SENTENCES
+            autocmd InsertCharPre *.md if search('\v(%^|[.!?]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
+          augroup END
+
+        '' + luaConfig ''
+          local true_zen = require("true-zen")
+
+          -- setup for TrueZen.nvim
+          true_zen.setup({
+              ataraxis = {
+                  ideal_writing_area_width = 0,
+                  just_do_it_for_me = false,
+                  left_padding = 5,
+                  right_padding = 5,
+                  top_padding = 3,
+                  bottom_padding = 3,
+                  quit_untoggles_ataraxis = false
+              },
+              integrations = {
+                integration_galaxyline = true,
+                integration_gitgutter = true,
+              }
+          })
+        '';
+      }
+      {
+        plugin = vim-markdown;
+        config = ''
+          let g:vim_markdown_folding_disabled = 1
         '';
       }
     ];
