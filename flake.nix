@@ -30,6 +30,7 @@
         ./HM/dunst.nix
         ./HM/polybar.nix
         ./HM/pdf.nix
+        ./HM/zoxide.nix
         ########### Done fully i think
         ./HM/zsh/zsh-despair.nix
         ./HM/zsh/zsh-pain.nix
@@ -98,6 +99,7 @@
                     rofi
                     bspwm
                     pdf
+                    zoxide
                   ];
 
                   home.packages = with pkgs; [
@@ -140,6 +142,7 @@
                     rofi
                     bspwm
                     pdf
+                    zoxide
                   ];
 
                   home.packages = with pkgs; [

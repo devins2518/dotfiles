@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 
 {
   programs = {
@@ -11,6 +11,7 @@
       };
 
       initExtra = ''
+        eval "$(zoxide init zsh --cmd j)"
         # Fuzzy finding
         zstyle ':completion:*' matcher-list "" \
           'm:{a-z\-}={A-Z\_}' \
@@ -57,7 +58,6 @@
           };
         }
         {
-          # will source zsh-autosuggestions.plugin.zsh
           name = "zsh-autosuggestions";
           src = pkgs.fetchFromGitHub {
             owner = "zsh-users";
