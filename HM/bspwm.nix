@@ -5,7 +5,6 @@ let
   normal = theme.normal;
   bright = theme.bright;
 in {
-
   home.packages = with pkgs; [ bspwm ];
   xsession = {
     enable = true;
