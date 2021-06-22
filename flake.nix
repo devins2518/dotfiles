@@ -36,7 +36,7 @@
         ########### Done fully i think
         ./HM/devin/zsh-devin.nix
         ./HM/dev/zsh-dev.nix
-        ./HM/zsh/zsh.nix
+        ./HM/zsh.nix
         ./HM/nvfancontrol.nix
         ###########
         ./HM/nvim.nix

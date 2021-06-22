@@ -11,12 +11,6 @@
       };
 
       initExtra = ''
-        eval "$(zoxide init zsh --cmd j)"
-        # Fuzzy finding
-        zstyle ':completion:*' matcher-list "" \
-          'm:{a-z\-}={A-Z\_}' \
-          'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-          'r:|?=** m:{a-z\-}={A-Z\_}'
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
         function top-dir() {
             (du -ah $1 | sort -n -r | head -n $2) 2>/dev/null
@@ -27,23 +21,20 @@
         export EDITOR=nvim
         export VISUAL=nvim
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
+
+        zstyle ':autocomplete:*' widget-style menu-select
+        zstyle ':autocomplete:*' recent-dirs zoxide
+        zstyle ':autocomplete:*' list-lines 7
       '';
 
-      initExtraBeforeCompInit = ''
+      initExtraFirst = ''
+        bunnyfetch
         if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
-        bunnyfetch
       '';
 
-      shellAliases = {
-        nshell = "nix-shell";
-        fupdate =
-          "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'";
-        fclup =
-          "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'; sudo nix-collect-garbage -d";
-        ls = "ls -l --color=always";
-      };
+      completionInit = "";
 
       plugins = [
         {
@@ -67,15 +58,6 @@
           };
         }
         {
-          name = "zsh-autosuggestions";
-          src = pkgs.fetchFromGitHub {
-            owner = "zsh-users";
-            repo = "zsh-autosuggestions";
-            rev = "v0.4.0";
-            sha256 = "0z6i9wjjklb4lvr7zjhbphibsyx51psv50gm07mbb0kj9058j6kc";
-          };
-        }
-        {
           name = "zsh-nix-shell";
           file = "nix-shell.plugin.zsh";
           src = pkgs.fetchFromGitHub {
@@ -83,6 +65,16 @@
             repo = "zsh-nix-shell";
             rev = "v0.2.0";
             sha256 = "1gfyrgn23zpwv1vj37gf28hf5z0ka0w5qm6286a7qixwv7ijnrx9";
+          };
+        }
+        {
+          name = "zsh-autocomplete";
+          file = "zsh-autocomplete.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "marlonrichert";
+            repo = "zsh-autocomplete";
+            rev = "ff84e8d2c987614083903723f933c921f0f16056";
+            sha256 = "sha256-Lxz4MaIupaaB7WhIyPsuJ80cnVNpH47R5JOrenxPn94=";
           };
         }
       ];

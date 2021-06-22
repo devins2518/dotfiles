@@ -14,6 +14,15 @@ in {
   environment = {
     homeBinInPath = true;
     sessionVariables = { NIXOS_CONFIG = "/home/devin/Repos/dotfiles"; };
+    shellAliases = {
+      nix-repl = "nix repl ${inputs.utils.lib.repl}";
+      nshell = "nix-shell";
+      fupdate =
+        "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'";
+      fclup =
+        "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'; sudo nix-collect-garbage -d";
+      ls = "ls -l --color=always";
+    };
     etc."wallpaper/wallpaper.png" = {
       source = pkgs.fetchurl {
         url =
@@ -74,6 +83,9 @@ in {
   programs = {
     command-not-found.enable = false;
     zsh = {
+      enable = true;
+      enableGlobalCompInit = false;
+      enableCompletion = false;
       histSize = 2000;
       histFile = "$HOME/.zsh/HISTFILE";
     };
