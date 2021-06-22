@@ -71,11 +71,36 @@ function lsp_config.common_on_attach(client, bufnr)
     documentHighlight(client, bufnr)
 end
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    virtual_text = true,
+    signs = true,
+    update_in_insert = false,
+  }
+)
+
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
 local nvim_lsp = require('lspconfig')
-local servers = {"rust_analyzer", "zls", "rnix"}
-for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
+local servers = {"rust_analyzer", "gopls", "zls", "rnix"}
+for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {
+    on_attach = lsp_status.on_attach,
+    capabilities = lsp_status.capabilities
+} end
+
+nvim_lsp.clangd.setup({
+  handlers = lsp_status.extensions.clangd.setup(),
+  init_options = {
+    clangdFileStatus = true
+  },
+  on_attach = lsp_status.on_attach,
+  capabilities = lsp_status.capabilities
+})
+
 -- 	https://github.com/golang/go/issues/41081
 nvim_lsp.gopls.setup {
     cmd = {"gopls", "serve"},

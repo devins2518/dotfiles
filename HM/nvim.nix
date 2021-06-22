@@ -100,6 +100,7 @@ in {
     plugins = with pkgs.vimPlugins; [
 
       auto-pairs
+      lsp-status-nvim
       lspsaga-nvim
       markdown-preview-nvim
       vim-easyescape
@@ -249,7 +250,6 @@ in {
             autocmd BufNewFile,BufRead *.md set filetype=markdown
             autocmd FileType markdown set conceallevel=2
             autocmd Filetype markdown set wrap
-            autocmd FileType markdown setlocal spell spelllang=en
             autocmd FileType markdown set colorcolumn=
             autocmd FileType markdown set scrolloff=999
             autocmd FileType markdown nmap <leader>cp :!compilenote %<CR>

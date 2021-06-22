@@ -3,7 +3,11 @@
 let
   gyro = pkgs.callPackage ./overlays/gyro.nix { };
   zigup = pkgs.callPackage ./overlays/zigup.nix { };
-  nur-packages = with pkgs.nur.repos; [ fortuneteller2k.impure.eww ];
+  nur-packages = with pkgs.nur.repos; [
+    fortuneteller2k.impure.eww
+    devins2518.gyro
+    devins2518.zigup
+  ];
 in {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
@@ -34,10 +38,15 @@ in {
     defaultUserShell = pkgs.zsh;
     users.devin = {
       isNormalUser = true;
+      hashedPassword = "$6$frNducsvL8EJ7hUe$P6PbYTwjzFpi9ZIPl2lczGlg4Lx5B0prno1STZe/mAo4h8zSPCSETzaBpQl0b911ujMFinaNG580o78ss6lIm.";
       shell = pkgs.zsh;
       description = "Devin Singh";
       extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     };
+  };
+
+  boot = {
+    cleanTmpDir = true;
   };
 
   security.sudo.wheelNeedsPassword = false; # wheel ALL=(ALL) NOPASSWD:ALL
@@ -86,7 +95,7 @@ in {
   nixpkgs.config = { allowUnfree = true; };
   environment.systemPackages = with pkgs;
     [
-      #aerc
+      aerc
       alttab
       bottom
       bsp-layout
@@ -99,7 +108,6 @@ in {
       gdb
       go
       gopls
-      gyro
       hyperfine
       lm_sensors
       luaformatter
@@ -112,13 +120,18 @@ in {
       rust-analyzer
       rustup
       stlink
+      tabbed
       texlive.combined.scheme-small
       tokei
+      tree
       wkhtmltopdf
       xarchiver
       xdotool
-      zigup
       zls
+      scrot
+      libnotify
+      jq
+      xclip
     ] ++ nur-packages;
 
   # Needed for home manager to not get borked
@@ -139,6 +152,7 @@ in {
       scientifica
       tenderness
       dejavu_fonts
+      material-design-icons
     ];
   };
 }

@@ -38,7 +38,7 @@
   };
 
   networking = {
-    hostName = "despair";
+    hostName = "devin";
     networkmanager = { wifi.powersave = false; };
     interfaces.wlp2s0.useDHCP = true;
   };
@@ -50,10 +50,12 @@
       Option "TearFree" "true"
       #Option "DRI" "2"
     '';
+    wacom.enable = false;
     dpi = 192;
     layout = "us";
   };
 
+  # check config_hz in /proc/config.gz
   powerManagement = {
     enable = true;
     cpuFreqGovernor = "powersave";
@@ -77,6 +79,15 @@
       ];
     };
   };
+
+  services.upower = {
+    enable = true;
+  };
+
+  services.logind.extraConfig = ''
+    # don’t shutdown when power button is short-pressed
+    HandlePowerKey=suspend
+  '';
 
   nixpkgs.config = { allowUnfree = true; };
   # List packages installed in system profile.

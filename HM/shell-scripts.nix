@@ -2,8 +2,7 @@
 
 rec {
   screenshot = pkgs.writeScriptBin "screenshot" ''
-    #! /usr/bin/env nix-shell
-    #! nix-shell -i bash -p scrot libnotify curl jq xclip
+    #! /usr/bin/env bash
     #
     # syntax screenshot.sh local fullscreen
 
@@ -40,7 +39,7 @@ rec {
   '';
 
   autoclose = pkgs.writeScriptBin "autoclose" ''
-    #! /usr/bin/env nix-shell
+    #! /usr/bin/env bash
     #! nix-shell -i bash -p pavucontrol
     $@&
     read -r _ _ _ _ n < <(bspc subscribe -c 1 node_add)
@@ -50,10 +49,7 @@ rec {
   '';
 
   compilenote = pkgs.writeScriptBin "compilenote" ''
-    #! /usr/bin/env nix-shell
-    #! nix-shell -i bash -p pandoc texlive.combined.scheme-small
-
-    pkill pandoc
+    #! /usr/bin/env bash
 
     filename=$1
     target="/home/devin/Repos/notes/pdfs"

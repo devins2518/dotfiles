@@ -22,6 +22,11 @@ in {
         ];
 
         extraConfig = ''
+          #eww daemon && sleep 1 && eww open gnome-right
+          #if [ -e /tmp/ewwpipe ]; then
+          #  mkfifo /tmp/ewwpipe
+          #fi
+
           bspc desktop \^2 --layout monocle
           bspc rule -a Firefox desktop='^2' layout=monocle follow=on
           bspc rule -a Gimp-2.10 desktop='^2' layout=monocle follow=on

@@ -129,6 +129,24 @@ gls.left[12] = {
     }
 }
 
+gls.left[13] = {
+    GetLspClient = {
+        provider = function()
+            -- if #vim.lsp.buf_get_clients() > 0 then
+            if #vim.lsp.get_active_clients() > 0 then
+                return ' ' .. require'lsp-status'.status()
+            end
+            return ''
+        end,
+        condition = check_active_lsp,
+        highlight = {
+            require("galaxyline.provider_fileinfo").get_file_icon_color,
+            colors.lightbg
+        }
+
+    }
+}
+
 gls.right[1] = {
     GitIcon = {
         provider = function() return "   " end,
