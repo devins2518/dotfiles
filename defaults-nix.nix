@@ -100,6 +100,7 @@ in {
       go
       gopls
       gyro
+      hyperfine
       lm_sensors
       luaformatter
       nixfmt

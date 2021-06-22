@@ -26,7 +26,7 @@
   };
 
   networking = {
-    hostName = "pain";
+    hostName = "dev";
     interfaces.enp5s0.useDHCP = true;
     interfaces.wlp4s0.useDHCP = true;
   };

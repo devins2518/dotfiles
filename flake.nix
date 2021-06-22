@@ -68,10 +68,10 @@
       channels.nixpkgs-unstable = { input = nixpkgs; };
 
       hosts = {
-        pain = {
+        dev = {
           modules = with self.nixosModules; [
             # system wide config
-            ./hosts/pain/configuration.nix
+            ./hosts/dev/configuration.nix
             network
             xorg
             ({ pkgs, ... }: {
@@ -111,10 +111,10 @@
             })
           ];
         };
-        despair = {
+        devin = {
           modules = with self.nixosModules; [
             # system wide config
-            ./hosts/despair/configuration.nix
+            ./hosts/devin/configuration.nix
             network
             xorg
             nixos-hardware.nixosModules.microsoft-surface
