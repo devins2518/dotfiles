@@ -1,12 +1,11 @@
 { pkgs, config, lib, inputs, ... }:
 
 let
-  gyro = pkgs.callPackage ./overlays/gyro.nix { };
-  zigup = pkgs.callPackage ./overlays/zigup.nix { };
   nur-packages = with pkgs.nur.repos; [
     fortuneteller2k.impure.eww
     devins2518.gyro
     devins2518.zigup
+    devins2518.bunnyfetch-rs
   ];
 in {
   home-manager.useUserPackages = true;
@@ -15,16 +14,6 @@ in {
   environment = {
     homeBinInPath = true;
     sessionVariables = { NIXOS_CONFIG = "/home/devin/Repos/dotfiles"; };
-    shellAliases = {
-      nix-repl = "nix repl ${inputs.utils.lib.repl}";
-      nshell = "nix-shell";
-      fupdate =
-        "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'";
-      fclup =
-        "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'; sudo nix-collect-garbage -d";
-      ls = "ls -l --color=always";
-    };
-
     etc."wallpaper/wallpaper.png" = {
       source = pkgs.fetchurl {
         url =
@@ -38,16 +27,15 @@ in {
     defaultUserShell = pkgs.zsh;
     users.devin = {
       isNormalUser = true;
-      hashedPassword = "$6$frNducsvL8EJ7hUe$P6PbYTwjzFpi9ZIPl2lczGlg4Lx5B0prno1STZe/mAo4h8zSPCSETzaBpQl0b911ujMFinaNG580o78ss6lIm.";
+      hashedPassword =
+        "$6$frNducsvL8EJ7hUe$P6PbYTwjzFpi9ZIPl2lczGlg4Lx5B0prno1STZe/mAo4h8zSPCSETzaBpQl0b911ujMFinaNG580o78ss6lIm.";
       shell = pkgs.zsh;
       description = "Devin Singh";
       extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     };
   };
 
-  boot = {
-    cleanTmpDir = true;
-  };
+  boot = { cleanTmpDir = true; };
 
   security.sudo.wheelNeedsPassword = false; # wheel ALL=(ALL) NOPASSWD:ALL
 
@@ -86,7 +74,6 @@ in {
   programs = {
     command-not-found.enable = false;
     zsh = {
-      enable = true;
       histSize = 2000;
       histFile = "$HOME/.zsh/HISTFILE";
     };
@@ -99,7 +86,6 @@ in {
       alttab
       bottom
       bsp-layout
-      bunnyfetch
       discord
       dunst
       feh
@@ -109,16 +95,20 @@ in {
       go
       gopls
       hyperfine
+      jq
+      libnotify
       lm_sensors
       luaformatter
       nixfmt
       nixpkgs-review
       pandoc
+      pavucontrol
       pcmanfm
       picom
       rnix-lsp
       rust-analyzer
       rustup
+      scrot
       stlink
       tabbed
       texlive.combined.scheme-small
@@ -126,12 +116,10 @@ in {
       tree
       wkhtmltopdf
       xarchiver
+      xclip
       xdotool
       zls
-      scrot
-      libnotify
-      jq
-      xclip
+      zsh
     ] ++ nur-packages;
 
   # Needed for home manager to not get borked

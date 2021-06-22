@@ -1,9 +1,5 @@
 { pkgs, config, lib, ... }:
 
 {
-  programs = {
-    zoxide = {
-      enable = true;
-    };
-  };
+  programs = { zoxide = { enable = true; }; };
 }

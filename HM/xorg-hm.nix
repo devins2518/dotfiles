@@ -49,7 +49,7 @@ in {
 
       # Picture in picture mode
       "super + p" =
-        "bspc node --state ~floating; bspc node -g sticky; xdotool getactivewindow windowsize 768 432 windowmove 1137 632";
+        "bspc node --state floating; bspc node -g sticky; xdotool getactivewindow windowsize 768 432 windowmove 1137 632";
 
       # Change volume
       "XF86Audio{Raise,Lower}Volume" = "pactl -- set-sink-volume 0 {+,-}2%";

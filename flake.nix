@@ -26,14 +26,15 @@
         ./HM/xorg-hm.nix
         ./HM/rofi.nix
         ./HM/bspwm.nix
+        ./HM/dev/bspwm-dev.nix
         ./HM/zathura.nix
         ./HM/dunst.nix
         ./HM/polybar.nix
         ./HM/pdf.nix
         ./HM/zoxide.nix
         ########### Done fully i think
-        ./HM/zsh/zsh-despair.nix
-        ./HM/zsh/zsh-pain.nix
+        ./HM/devin/zsh-devin.nix
+        ./HM/dev/zsh-dev.nix
         ./HM/zsh/zsh.nix
         ./HM/nvfancontrol.nix
         ###########
@@ -88,7 +89,7 @@
                     pass
                     qt
                     zsh
-                    zsh-pain
+                    zsh-dev
                     nvim
                     defaults
                     gtk
@@ -98,6 +99,7 @@
                     polybar
                     rofi
                     bspwm
+                    bspwm-dev
                     pdf
                     zoxide
                   ];
@@ -132,7 +134,7 @@
                     pass
                     qt
                     zsh
-                    zsh-despair
+                    zsh-devin
                     nvim
                     defaults
                     gtk

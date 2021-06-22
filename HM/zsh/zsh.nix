@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, ... }:
 
 {
   programs = {
@@ -35,6 +35,15 @@
         fi
         bunnyfetch
       '';
+
+      shellAliases = {
+        nshell = "nix-shell";
+        fupdate =
+          "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'";
+        fclup =
+          "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'; sudo nix-collect-garbage -d";
+        ls = "ls -l --color=always";
+      };
 
       plugins = [
         {
