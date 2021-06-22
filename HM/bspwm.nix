@@ -59,13 +59,6 @@ in {
         };
 
         settings = {
-          border_width = 5;
-          top_padding = 80;
-          left_padding = 20;
-          right_padding = 20;
-          bottom_padding = 20;
-          window_gap = 12;
-
           split_ratio = 0.5;
           single_monocle = true;
           borderless_monocle = false;

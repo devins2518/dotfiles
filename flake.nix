@@ -27,6 +27,7 @@
         ./HM/rofi.nix
         ./HM/bspwm.nix
         ./HM/dev/bspwm-dev.nix
+        ./HM/devin/bspwm-devin.nix
         ./HM/zathura.nix
         ./HM/dunst.nix
         ./HM/polybar.nix
@@ -143,6 +144,7 @@
                     polybar
                     rofi
                     bspwm
+                    bspwm-devin
                     pdf
                     zoxide
                   ];

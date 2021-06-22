@@ -14,14 +14,13 @@ in {
           bspc rule -a Pavucontrol state=floating rectangle=1000x750+450+70
           bspc rule -a Nm-connection-editor state=floating rectangle=600x600+500+70
         '';
-
         settings = {
-          border_width = 3;
-          top_padding = 40;
-          left_padding = 10;
-          right_padding = 10;
-          bottom_padding = 10;
-          window_gap = 6;
+          border_width = 5;
+          top_padding = 80;
+          left_padding = 20;
+          right_padding = 20;
+          bottom_padding = 20;
+          window_gap = 12;
         };
       };
     };
