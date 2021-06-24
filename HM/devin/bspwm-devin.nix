@@ -8,6 +8,8 @@ in {
   xsession = {
     windowManager = {
       bspwm = {
+        monitors = { "eDP1" = [ "I" "II" "III" "IV" "V" "VI" ]; };
+
         startupPrograms = [ "nvfancontrol" ];
 
         extraConfig = ''

@@ -12,7 +12,6 @@ in {
 
       bspwm = {
         enable = true;
-        monitors = { "" = [ "I" "II" "III" "IV" "V" "VI" ]; };
 
         startupPrograms = [
           "feh --bg-fill /etc/wallpaper/wallpaper.png"
@@ -63,7 +62,7 @@ in {
           single_monocle = true;
           borderless_monocle = false;
           gapless_monocle = false;
-          paddless_monocle = false;
+          padless_monocle = false;
 
           normal_border_color = normal.blue;
           active_border_color = normal.green;
