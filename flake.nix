@@ -31,6 +31,8 @@
         ./HM/zathura.nix
         ./HM/dunst.nix
         ./HM/polybar.nix
+        ./HM/dev/polybar-dev.nix
+        ./HM/devin/polybar-devin.nix
         ./HM/pdf.nix
         ./HM/zoxide.nix
         ########### Done fully i think
@@ -98,6 +100,7 @@
                     zathura
                     tmux
                     polybar
+                    polybar-dev
                     rofi
                     bspwm
                     bspwm-dev
@@ -142,6 +145,7 @@
                     zathura
                     tmux
                     polybar
+                    polybar-devin
                     rofi
                     bspwm
                     bspwm-devin
