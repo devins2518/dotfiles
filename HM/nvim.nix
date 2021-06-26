@@ -257,7 +257,7 @@ in {
             autocmd FileType markdown nmap <leader>tz :TZAtaraxis<CR>
             autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &
             augroup SENTENCES
-            autocmd InsertCharPre *.md if search('\v(%^|[.!?]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
+            autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
           augroup END
 
         '' + luaConfig ''
