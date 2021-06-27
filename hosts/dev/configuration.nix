@@ -17,10 +17,21 @@
         efiSysMountPoint = "/boot"; # ← use the same mount point here.
       };
       grub = {
-        devices = [ "nodev" ];
         enable = true;
+        devices = [ "nodev" ];
         version = 2;
         efiSupport = true;
+
+        extraEntries = ''
+          menuentry "Windows" {
+            insmod part_gpt
+            insmod fat
+            insmod search_fs_uuid
+            insmod chain
+            search --fs-uuid --set=root F5F4-286C
+            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+          }
+        '';
       };
     };
   };
@@ -68,7 +79,10 @@
     exportConfiguration = true;
   };
 
-  environment.systemPackages = with pkgs; [ nvfancontrol ];
+  environment.systemPackages = with pkgs; [ 
+    nvfancontrol
+    gimp
+  ];
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
