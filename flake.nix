@@ -21,45 +21,41 @@
         # add other scripts here
         ./HM/shell-scripts.nix
         ########### Done for despair
-        ./xorg.nix
+        ./HM/bspwm.nix
+        ./HM/dev
+        ./HM/devin
+        ./HM/dunst.nix
+        ./HM/pdf.nix
+        ./HM/polybar.nix
+        ./HM/rofi.nix
         ./HM/tmux.nix
         ./HM/xorg-hm.nix
-        ./HM/rofi.nix
-        ./HM/bspwm.nix
-        ./HM/dev/bspwm-dev.nix
-        ./HM/devin/bspwm-devin.nix
         ./HM/zathura.nix
-        ./HM/dunst.nix
-        ./HM/polybar.nix
-        ./HM/dev/polybar-dev.nix
-        ./HM/devin/polybar-devin.nix
-        ./HM/pdf.nix
         ./HM/zoxide.nix
+        ./xorg.nix
         ########### Done fully i think
-        ./HM/devin/zsh-devin.nix
-        ./HM/dev/zsh-dev.nix
-        ./HM/zsh.nix
         ./HM/nvfancontrol.nix
+        ./HM/zsh.nix
         ###########
-        ./HM/nvim.nix
-        ./HM/qt.nix
+        ./HM/alacritty.nix
         ./HM/defaults.nix
         ./HM/git.nix
         ./HM/gtk.nix
         ./HM/mpv.nix
+        ./HM/nvim.nix
         ./HM/pass.nix
-        ./HM/alacritty.nix
+        ./HM/qt.nix
         #./HM/firefox.nix
-        ./network.nix
         ./defaults-nix.nix
+        ./network.nix
       ];
 
       hostDefaults = {
         modules = [
-          utils.nixosModules.saneFlakeDefaults
-          home-manager.nixosModules.home-manager
           agenix.nixosModules.age
+          home-manager.nixosModules.home-manager
           self.nixosModules.defaults-nix
+          utils.nixosModules.saneFlakeDefaults
         ];
         extraArgs = { inherit utils inputs; };
       };
@@ -84,34 +80,32 @@
               home-manager.users.devin = ({ config, pkgs, ... }:
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                   imports = [
-                    git
                     alacritty
-                    dunst
-                    mpv
-                    xorg-hm
-                    pass
-                    qt
-                    zsh
-                    zsh-dev
-                    nvim
-                    defaults
-                    gtk
-                    nvfancontrol
-                    zathura
-                    tmux
-                    polybar
-                    polybar-dev
-                    rofi
                     bspwm
-                    bspwm-dev
+                    defaults
+                    dev
+                    dunst
+                    git
+                    gtk
+                    mpv
+                    nvfancontrol
+                    nvim
+                    pass
                     pdf
+                    polybar
+                    qt
+                    rofi
+                    tmux
+                    xorg-hm
+                    zathura
                     zoxide
+                    zsh
                   ];
 
                   home.packages = with pkgs; [
-                    screenshot
                     autoclose
                     compilenote
+                    screenshot
                   ];
                 });
             })
@@ -122,41 +116,39 @@
             # system wide config
             ./hosts/devin/configuration.nix
             network
-            xorg
             nixos-hardware.nixosModules.microsoft-surface
+            xorg
             ({ pkgs, ... }: {
               home-manager.useUserPackages = true;
               home-manager.useGlobalPkgs = true;
               home-manager.users.devin = ({ config, pkgs, ... }:
                 with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                   imports = [
-                    git
                     alacritty
-                    dunst
-                    mpv
-                    xorg-hm
-                    pass
-                    qt
-                    zsh
-                    zsh-devin
-                    nvim
-                    defaults
-                    gtk
-                    zathura
-                    tmux
-                    polybar
-                    polybar-devin
-                    rofi
                     bspwm
-                    bspwm-devin
+                    defaults
+                    devin
+                    dunst
+                    git
+                    gtk
+                    mpv
+                    nvim
+                    pass
                     pdf
+                    polybar
+                    qt
+                    rofi
+                    tmux
+                    xorg-hm
+                    zathura
                     zoxide
+                    zsh
                   ];
 
                   home.packages = with pkgs; [
-                    screenshot
                     autoclose
                     compilenote
+                    screenshot
                   ];
                 });
             })

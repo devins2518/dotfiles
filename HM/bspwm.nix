@@ -4,6 +4,7 @@ let
   theme = import ./colors.nix { };
   normal = theme.normal;
   bright = theme.bright;
+  vim = theme.vim;
 in {
   home.packages = with pkgs; [ bspwm ];
   xsession = {
@@ -64,10 +65,10 @@ in {
           gapless_monocle = false;
           padless_monocle = false;
 
-          normal_border_color = normal.blue;
+          normal_border_color = vim.cyan;
           active_border_color = normal.green;
-          focused_border_color = normal.magenta;
-          presel_feedback_color = normal.yellow;
+          focused_border_color = normal.blue;
+          presel_feedback_color = normal.magenta;
         };
       };
     };

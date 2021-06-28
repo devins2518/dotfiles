@@ -4,6 +4,7 @@ let
   theme = import ./colors.nix { };
   normal = theme.normal;
   bright = theme.bright;
+  vim = theme.vim;
 in {
   programs.rofi = {
     enable = true;
@@ -29,9 +30,9 @@ in {
     theme = let inherit (config.lib.formats.rasi) mkLiteral;
     in {
       "*" = {
-        background-color = mkLiteral normal.black;
-        border-color = mkLiteral normal.blue;
-        text-color = mkLiteral normal.white;
+        background-color = mkLiteral vim.bg_highlight;
+        border-color = mkLiteral vim.blue;
+        text-color = mkLiteral bright.white;
         separator-color = mkLiteral "@border-color";
         show-icons = mkLiteral "true";
       };
@@ -68,7 +69,7 @@ in {
       "element" = { padding = mkLiteral "10px"; };
 
       "element selected" = {
-        background-color = mkLiteral normal.cyan;
+        background-color = mkLiteral vim.blue0;
         text-color = mkLiteral "@background-color";
       };
 

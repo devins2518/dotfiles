@@ -4,6 +4,7 @@ let
   theme = import ./colors.nix { };
   normal = theme.normal;
   bright = theme.bright;
+  vim = theme.vim;
 in {
   services.polybar = {
     enable = true;
@@ -15,7 +16,7 @@ in {
     settings = {
       "bar/bar" = {
         width = "100%";
-        background = normal.black;
+        background = vim.bg_dark;
         foreground = normal.red;
         bottom = false;
 
@@ -80,7 +81,7 @@ in {
         label = "%title%";
         label-maxlen = 30;
         format-foreground = normal.red;
-        format-background = normal.black;
+        format-background = vim.bg_dark;
         format-padding = 1;
       };
 
@@ -88,10 +89,10 @@ in {
         type = "internal/xbacklight";
         format = "<label>";
         format-prefix = " ";
-        format-prefix-foreground = normal.black;
+        format-prefix-foreground = vim.bg_dark;
         format-prefix-background = normal.red;
         label = "%percentage%%";
-        format-foreground = normal.black;
+        format-foreground = vim.bg_dark;
         format-background = normal.red;
         format-padding = 1;
       };
@@ -102,9 +103,9 @@ in {
 
         time = "%I:%M";
         format-prefix = " ";
-        format-prefix-foreground = normal.black;
+        format-prefix-foreground = vim.bg_dark;
         format-prefix-background = normal.blue;
-        format-foreground = normal.black;
+        format-foreground = vim.bg_dark;
         format-background = normal.blue;
         label = "%time%";
         format-padding = 1;
@@ -118,22 +119,22 @@ in {
         format-muted-prefix-font = 2;
         format-muted-prefix = "";
         format-muted-prefix-foreground = normal.green;
-        format-muted-prefix-background = normal.black;
+        format-muted-prefix-background = vim.bg_dark;
         format-muted-prefix-padding = 1;
 
         label-volume = "%percentage%%";
         label-volume-foreground = normal.green;
-        label-volume-background = normal.black;
+        label-volume-background = vim.bg_dark;
         label-volume-padding = 1;
 
         label-muted = "Muted";
         label-muted-foreground = normal.green;
-        label-muted-background = normal.black;
+        label-muted-background = vim.bg_dark;
         label-muted-padding = 1;
 
         ramp-volume = [ "" "" "" ];
         ramp-volume-foreground = normal.green;
-        ramp-volume-background = normal.black;
+        ramp-volume-background = vim.bg_dark;
         ramp-volume-padding = 1;
 
         click-right = "$HOME/.config/polybar/scripts/autoclose.sh pavucontrol";
@@ -148,17 +149,17 @@ in {
         format-charging = "<animation-charging> <label-charging>";
         label-charging = "%percentage%%";
         format-charging-foreground = normal.blue;
-        format-charging-background = normal.black;
+        format-charging-background = vim.bg_dark;
 
         format-discharging = "<ramp-capacity> <label-discharging>";
         label-discharging = "%percentage%%";
         format-discharging-foreground = normal.red;
-        format-discharging-background = normal.black;
+        format-discharging-background = vim.bg_dark;
 
         format-full-prefix = " ";
         format-full-prefix-foreground = normal.blue;
         format-foreground = normal.blue;
-        format-background = normal.black;
+        format-background = vim.bg_dark;
 
         label-discharging-foreground = normal.red;
         label-charging-foreground = normal.blue;
@@ -178,55 +179,55 @@ in {
       "module/left-end" = {
         type = "custom/text";
         content-background = normal.blue;
-        content-foreground = normal.black;
+        content-foreground = vim.bg_dark;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end" = {
         type = "custom/text";
         content-background = normal.blue;
-        content-foreground = normal.black;
+        content-foreground = vim.bg_dark;
         content = "%{T}%{T}";
       };
 
       "module/right-end-middle" = {
         type = "custom/text";
         content-background = normal.red;
-        content-foreground = normal.black;
+        content-foreground = vim.bg_dark;
         content = "%{T3}%{T-}";
       };
 
       "module/right-mid" = {
         type = "custom/text";
         content-background = normal.cyan;
-        content-foreground = normal.black;
+        content-foreground = vim.bg_dark;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end-middlee" = {
         type = "custom/text";
         content-background = normal.red;
-        content-foreground = normal.black;
+        content-foreground = vim.bg_dark;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end-middle-two" = {
         type = "custom/text";
-        content-background = normal.black;
+        content-background = vim.bg_dark;
         content-foreground = normal.red;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end-middle-tww" = {
         type = "custom/text";
-        content-background = normal.black;
+        content-background = vim.bg_dark;
         content-foreground = normal.cyan;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end-middle-twoo" = {
         type = "custom/text";
-        content-background = normal.black;
+        content-background = vim.bg_dark;
         content-foreground = normal.blue;
         content = "%{T3}%{T-}";
       };
@@ -234,7 +235,7 @@ in {
       "module/square" = {
         type = "custom/text";
         content-background = normal.blue;
-        content-foreground = normal.black;
+        content-foreground = vim.bg_dark;
         content = "%{T3}%{T-}";
       };
 
@@ -245,11 +246,11 @@ in {
 
         label-open-font = 2;
         label-open = "";
-        label-open-foreground = normal.black;
+        label-open-foreground = vim.bg_dark;
         label-open-background = normal.green;
         label-open-padding = 1;
         label-close = "";
-        label-close-foreground = normal.black;
+        label-close-foreground = vim.bg_dark;
         label-close-background = normal.red;
 
         label-close-padding = 1;
