@@ -44,7 +44,7 @@
           ${pkgs.pandoc}/bin/pandoc --pdf-engine=wkhtmltopdf -t html5 -V margin-top=1 -V margin-left=0 -V margin-right=0 -V margin-bottom=1 -V papersize=letter -o $out -s $downloadedFile
         '';
 
-        sha256 = "sha256-KxMEXYp8KZvGvTMV1RKJcIJPOTw93moA5VAH0DHilVE=";
+        sha256 = "sha256-Yy8oUXU+97b35lHVS896um2PWkNKdTHnCCTDCGzbSLI=";
       };
     };
 
