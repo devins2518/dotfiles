@@ -70,7 +70,7 @@ in {
 
       "element selected" = {
         background-color = mkLiteral vim.blue0;
-        text-color = mkLiteral "@background-color";
+        text-color = mkLiteral "@text-color";
       };
 
       "element urgent" = {
