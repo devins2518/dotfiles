@@ -80,8 +80,9 @@
   };
 
   environment.systemPackages = with pkgs; [ 
-    nvfancontrol
     gimp
+    minicom
+    nvfancontrol
   ];
 
   # Enable CUPS to print documents.

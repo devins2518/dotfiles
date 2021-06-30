@@ -98,6 +98,7 @@ in {
       alttab
       bottom
       bsp-layout
+      clang-tools
       discord
       dunst
       feh
