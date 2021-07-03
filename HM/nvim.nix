@@ -16,15 +16,6 @@ let
       sha256 = "sha256-SnI2lLGsMe4+1GVlihTv68Y/Kqi9SjFDHOdy5ucAd7o=";
     };
   };
-  truezen = pkgs.vimUtils.buildVimPlugin {
-    name = "TrueZen.nvim";
-    src = pkgs.fetchFromGitHub {
-      owner = "Pocco81";
-      repo = "TrueZen.nvim";
-      rev = "6009da02423ad5a327bb9e07c8c7c0928e77edc9";
-      sha256 = "sha256-atETWiyJA71KI6YAUGeKsDbLq8o+8vOKZF6q34bMhr0=";
-    };
-  };
   theme = import ./colors.nix { };
 in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
@@ -159,6 +150,7 @@ in {
       {
         plugin = nerdcommenter;
         config = ''
+          let g:NERDCreateDefaultMappings = 0
           vmap ++ <plug>NERDCommenterToggle<CR>
           nmap ++ <plug>NERDCommenterToggle<CR>
         '';
@@ -216,12 +208,15 @@ in {
       {
         plugin = rust-vim;
         config = ''
-          let g:rustfmt_autosave=1
-          let g:cargo_shell_command_runner="!"
-          nmap <leader>cc :Ccheck<CR>
-          nmap <leader>cb :Cbuild<CR>
-          nmap <leader>cr :Crun<CR>
-          nmap <leader>cl :Cclean<CR>
+          augroup rust
+            au!
+            autocmd FileType rust let g:rustfmt_autosave=1
+            autocmd Filetype rust let g:cargo_shell_command_runner="!"
+            autocmd FileType rust nmap <leader>cc :Ccheck<CR>
+            autocmd FileType rust nmap <leader>cb :Cbuild<CR>
+            autocmd FileType rust nmap <leader>cr :Crun<CR>
+            autocmd FileType rust nmap <leader>cl :Cclean<CR>
+          augroup END
         '';
       }
       #{
@@ -244,8 +239,9 @@ in {
         '';
       }
       {
-        plugin = truezen;
+        plugin = vim-markdown;
         config = ''
+          let g:vim_markdown_folding_disabled = 1
           augroup markdown
             au!
             autocmd BufNewFile,BufRead *.md set filetype=markdown
@@ -254,37 +250,9 @@ in {
             autocmd FileType markdown set colorcolumn=
             autocmd FileType markdown set scrolloff=999
             autocmd FileType markdown nmap <leader>cp :!compilenote %<CR>
-            autocmd FileType markdown nmap <leader>tz :TZAtaraxis<CR>
             autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &
-            augroup SENTENCES
             autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
           augroup END
-
-        '' + luaConfig ''
-          local true_zen = require("true-zen")
-
-          -- setup for TrueZen.nvim
-          true_zen.setup({
-              ataraxis = {
-                  ideal_writing_area_width = 0,
-                  just_do_it_for_me = false,
-                  left_padding = 5,
-                  right_padding = 5,
-                  top_padding = 3,
-                  bottom_padding = 3,
-                  quit_untoggles_ataraxis = false
-              },
-              integrations = {
-                integration_galaxyline = true,
-                integration_gitgutter = true,
-              }
-          })
-        '';
-      }
-      {
-        plugin = vim-markdown;
-        config = ''
-          let g:vim_markdown_folding_disabled = 1
         '';
       }
     ];

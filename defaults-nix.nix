@@ -112,6 +112,7 @@ in {
       libnotify
       lm_sensors
       luaformatter
+      maim
       nixfmt
       nixpkgs-review
       pandoc
@@ -121,7 +122,6 @@ in {
       rnix-lsp
       rust-analyzer
       rustup
-      scrot
       stlink
       tabbed
       texlive.combined.scheme-small
