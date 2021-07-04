@@ -15,13 +15,13 @@ require"bufferline".setup {
         separator_style = "thin"
     },
     highlights = {
-        background = {guifg = comment_fg, guibg = "#282c34"},
-        fill = {guifg = comment_fg, guibg = "#282c34"},
-        buffer_selected = {guifg = normal_fg, guibg = "#3A3E44", gui = "bold"},
-        separator_visible = {guifg = "#282c34", guibg = "#282c34"},
-        separator_selected = {guifg = "#282c34", guibg = "#282c34"},
-        separator = {guifg = "#282c34", guibg = "#282c34"},
-        indicator_selected = {guifg = "#282c34", guibg = "#282c34"},
-        modified_selected = {guifg = string_fg, guibg = "#3A3E44"}
+        --background = {guifg = comment_fg, guibg = "#282c34"},
+        --fill = {guifg = comment_fg, guibg = "#282c34"},
+        --buffer_selected = {guifg = normal_fg, guibg = "#3A3E44", gui = "bold"},
+        --separator_visible = {guifg = "#282c34", guibg = "#282c34"},
+        --separator_selected = {guifg = "#282c34", guibg = "#282c34"},
+        --separator = {guifg = "#282c34", guibg = "#282c34"},
+        --indicator_selected = {guifg = "#282c34", guibg = "#282c34"},
+        --modified_selected = {guifg = string_fg, guibg = "#3A3E44"}
     }
 }

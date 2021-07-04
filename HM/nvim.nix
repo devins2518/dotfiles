@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   luaConfig = text: ''
@@ -16,7 +16,19 @@ let
       sha256 = "sha256-SnI2lLGsMe4+1GVlihTv68Y/Kqi9SjFDHOdy5ucAd7o=";
     };
   };
+  fch = pkgs.vimUtils.buildVimPlugin {
+    name = "FixCursorHold.nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "antoinemadec";
+      repo = "FixCursorHold.nvim";
+      rev = "b5158c93563ee6192ce8d903bfef839393bfeccd";
+      sha256 = "sha256-/6fpdYCXyqQi+iVcYgZmID4pB6HitL+GWx8ZQffZ0Pg=";
+    };
+  };
   theme = import ./colors.nix { };
+  normal = theme.normal;
+  bright = theme.bright;
+  vim = theme.vim;
 in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
   home.file.".config/nvim".source = ./nvim;
@@ -38,6 +50,7 @@ in {
       set expandtab
       set smartindent
       set number
+      set relativenumber
       set nowrap
       set ignorecase
       set smartcase
@@ -91,7 +104,9 @@ in {
     plugins = with pkgs.vimPlugins; [
 
       auto-pairs
+      lsp-colors-nvim
       lsp-status-nvim
+      lsp_extensions-nvim
       lspsaga-nvim
       markdown-preview-nvim
       vim-easyescape
@@ -100,7 +115,6 @@ in {
       vim-startuptime
       vim-surround
       vim-vsnip
-      which-key-nvim
 
       {
         plugin = tokyonight;
@@ -127,7 +141,7 @@ in {
           require'nvim-treesitter.configs'.setup {
             ensure_installed = { "c", "cpp", "go", "gomod", "lua", "nix", "rust", "toml", "yaml", "zig" },
             highlight = {
-              enable = true,              -- false will disable the whole extension
+              enable = true, -- false will disable the whole extension
             },
           }
         '';
@@ -172,29 +186,6 @@ in {
         config = "luafile $HOME/.config/nvim/nvim-lspconfig.lua";
       }
       {
-        plugin = lsp_signature-nvim;
-        config = luaConfig ''
-          cfg = {
-            bind = false, -- This is mandatory, otherwise border config won't get registered.
-            doc_lines = 2, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
-
-            floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
-            hint_enable = true, -- virtual hint enable
-            hint_scheme = "String",
-            use_lspsaga = false,  -- set to true if you want to use lspsaga popup
-            hi_parameter = "Search", -- how your parameter will be highlight
-            max_height = 12, -- max height of signature floating_window, if content is more than max_height, you can scroll down
-                             -- to view the hiding contents
-            max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
-            handler_opts = {
-              border = "shadow"   -- double, single, shadow, none
-            },
-          }
-
-          require'lsp_signature'.on_attach(cfg)
-        '';
-      }
-      {
         plugin = nvim-tree-lua;
         config = "luafile $HOME/.config/nvim/nvimTree.lua";
       }
@@ -216,12 +207,39 @@ in {
             autocmd FileType rust nmap <leader>cb :Cbuild<CR>
             autocmd FileType rust nmap <leader>cr :Crun<CR>
             autocmd FileType rust nmap <leader>cl :Cclean<CR>
+            autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
           augroup END
+        '';
+      }
+      {
+        plugin = nvim-ts-rainbow;
+        config = luaConfig ''
+          require'nvim-treesitter.configs'.setup {
+            rainbow = {
+              enable = true,
+              extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+              max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+              colors = {
+                "${vim.blue}",
+                "${vim.cyan}",
+                "${vim.blue1}",
+                "${vim.blue0}",
+                "${vim.green1}",
+                "${vim.green2}",
+                "${vim.fg}",
+              },
+            }
+          }
         '';
       }
       #{
       #plugin = nvim-autopairs;
-      #config = ''lua require("nvim-autopairs").setup()'';
+      #config = luaConfig ''
+      #require("nvim-autopairs.completion.compe").setup({
+      #  map_cr = true, --  map <CR> on insert mode
+      #  map_complete = true -- it will auto insert `(` after select function or method item
+      #})
+      #'';
       #}
       {
         plugin = galaxyline-nvim;
@@ -230,6 +248,13 @@ in {
       {
         plugin = nvim-web-devicons;
         config = "luafile $HOME/.config/nvim/web-devicons.lua";
+      }
+      {
+        plugin = fch;
+        config = ''
+          let g:cursorhold_updatetime = 100
+          autocmd CursorHold * lua require('lspsaga.diagnostic').show_cursor_diagnostics()
+        '';
       }
       {
         plugin = indentLine;
