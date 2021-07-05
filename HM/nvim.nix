@@ -16,6 +16,7 @@ let
       sha256 = "sha256-SnI2lLGsMe4+1GVlihTv68Y/Kqi9SjFDHOdy5ucAd7o=";
     };
   };
+  # TODO: use nixpkgs
   fch = pkgs.vimUtils.buildVimPlugin {
     name = "FixCursorHold.nvim";
     src = pkgs.fetchFromGitHub {
@@ -24,6 +25,18 @@ let
       rev = "b5158c93563ee6192ce8d903bfef839393bfeccd";
       sha256 = "sha256-/6fpdYCXyqQi+iVcYgZmID4pB6HitL+GWx8ZQffZ0Pg=";
     };
+  };
+  nvim-comment = pkgs.vimUtils.buildVimPlugin {
+    buildPhase = ":";
+    configurePhase =":";
+    name = "nvim-comment";
+    src = pkgs.fetchFromGitHub {
+      owner = "terrortylor";
+      repo = "nvim-comment";
+      rev = "05feb57a7b1f2db36794063fa5e738bbdc12315a";
+      sha256 = "sha256-hJJxEw4iTrsW3e7Mxn0YNLH95hFPq4KhoqrXEhr2YUo=";
+    };
+    doCheck = false;
   };
   theme = import ./colors.nix { };
   normal = theme.normal;
@@ -94,6 +107,8 @@ in {
       nmap <C-h> <C-W><C-H>
       nmap <C-S-.> <C-W>>
       nnoremap <silent> gb <C-^>
+      inoremap jk <esc>
+      set timeoutlen=100
 
       augroup remember_folds
         autocmd!
@@ -109,12 +124,12 @@ in {
       lsp_extensions-nvim
       lspsaga-nvim
       markdown-preview-nvim
-      vim-easyescape
       vim-go
       vim-nix
       vim-startuptime
       vim-surround
       vim-vsnip
+      which-key-nvim
 
       {
         plugin = tokyonight;
@@ -162,11 +177,24 @@ in {
         '';
       }
       {
-        plugin = nerdcommenter;
-        config = ''
-          let g:NERDCreateDefaultMappings = 0
-          vmap ++ <plug>NERDCommenterToggle<CR>
-          nmap ++ <plug>NERDCommenterToggle<CR>
+        plugin = nvim-comment;
+        config = luaConfig ''
+          require('nvim_comment').setup({
+            -- Linters prefer comment and line to have a space in between markers
+            marker_padding = true,
+            -- should comment out empty or whitespace only lines
+            comment_empty = false,
+            -- Should key mappings be created
+            create_mappings = false,
+          })
+
+          local function map(mode, lhs, rhs, opts)
+              local options = {noremap = true}
+              if opts then options = vim.tbl_extend("force", options, opts) end
+              vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+          end
+          map("n", "++", [[:CommentToggle<CR>]], opt)
+          map("v", "++", [[:'<,'>CommentToggle<CR>]], opt)
         '';
       }
       {
