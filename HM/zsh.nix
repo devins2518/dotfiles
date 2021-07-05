@@ -11,6 +11,11 @@
       };
 
       initExtra = ''
+        # Fuzzy finding
+        zstyle ':completion:*' matcher-list "" \
+          'm:{a-z\-}={A-Z\_}' \
+          'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+          'r:|?=** m:{a-z\-}={A-Z\_}'
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
         function top-dir() {
             (du -ah $1 | sort -n -r | head -n $2) 2>/dev/null
@@ -21,10 +26,6 @@
         export EDITOR=nvim
         export VISUAL=nvim
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
-
-        zstyle ':autocomplete:*' widget-style menu-select
-        zstyle ':autocomplete:*' recent-dirs zoxide
-        zstyle ':autocomplete:*' list-lines 7
       '';
 
       initExtraFirst = ''
@@ -33,8 +34,6 @@
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
       '';
-
-      completionInit = "";
 
       plugins = [
         {
@@ -68,13 +67,12 @@
           };
         }
         {
-          name = "zsh-autocomplete";
-          file = "zsh-autocomplete.plugin.zsh";
+          name = "zsh-autosuggestions";
           src = pkgs.fetchFromGitHub {
-            owner = "marlonrichert";
-            repo = "zsh-autocomplete";
-            rev = "ff84e8d2c987614083903723f933c921f0f16056";
-            sha256 = "sha256-Lxz4MaIupaaB7WhIyPsuJ80cnVNpH47R5JOrenxPn94=";
+            owner = "zsh-users";
+            repo = "zsh-autosuggestions";
+            rev = "v0.4.0";
+            sha256 = "0z6i9wjjklb4lvr7zjhbphibsyx51psv50gm07mbb0kj9058j6kc";
           };
         }
       ];

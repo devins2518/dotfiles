@@ -33,7 +33,6 @@
         ./HM/tmux.nix
         ./HM/xorg-hm.nix
         ./HM/zathura.nix
-        ./HM/zoxide.nix
         ./xorg.nix
         ########### Done fully i think
         ./HM/nvfancontrol.nix
@@ -100,7 +99,6 @@
                     tmux
                     xorg-hm
                     zathura
-                    zoxide
                     zsh
                   ];
 
@@ -143,7 +141,6 @@
                     tmux
                     xorg-hm
                     zathura
-                    zoxide
                     zsh
                   ];
 
