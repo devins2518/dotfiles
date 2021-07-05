@@ -10,10 +10,8 @@ in {
     enable = true;
     extraConfig = {
       modi = "drun";
-      width = 40;
       columns = 1;
       lines = 5;
-      font = "Iosevka Nerd Font Mono 20";
       show-icons = true;
       icon-theme = "Papirus-Dark";
       terminal = "alacritty";
@@ -23,9 +21,7 @@ in {
       separator-style = "solid";
       disable-history = true;
       hide-scrollbar = true;
-
     };
-    font = "Iosevka 25";
 
     theme = let inherit (config.lib.formats.rasi) mkLiteral;
     in {

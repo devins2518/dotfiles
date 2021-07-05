@@ -27,8 +27,6 @@ in {
 
         modules-left = "bspwm";
         modules-center = "xwindow";
-        modules-right =
-          "mem wlan audio right-end-middle-two xbacklight right-end-middle battery right-end-middle-twoo date powermenu";
       };
 
       "module/mem" = {
@@ -264,17 +262,6 @@ in {
         menu-0-3-exec = "bspc quit";
         menu-0-4-exec = "xset dpms force off";
       };
-
-      "module/wlan" = {
-        type = "internal/network";
-        interface = "wlp2s0";
-        interval = 3.0;
-
-        format-connected = "<label-connected>";
-        label-connected = " 直 ";
-        label-connected-foreground = normal.cyan;
-      };
-
     };
   };
 }

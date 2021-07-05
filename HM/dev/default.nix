@@ -1,1 +1,1 @@
-{ imports = [ ./bspwm-dev.nix ./polybar-dev.nix ./zsh-dev.nix ]; }
+{ imports = [ ./bspwm.nix ./rofi.nix ./polybar.nix ./zsh.nix ]; }
