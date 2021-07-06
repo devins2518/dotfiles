@@ -25,7 +25,7 @@
         }
         export EDITOR=nvim
         export VISUAL=nvim
-        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
+        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=blue,underline"
       '';
 
       initExtraFirst = ''

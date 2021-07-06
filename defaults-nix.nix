@@ -2,10 +2,10 @@
 
 let
   nur-packages = with pkgs.nur.repos; [
-    fortuneteller2k.impure.eww
+    devins2518.bunnyfetch-rs
     devins2518.gyro
     devins2518.zigup
-    devins2518.bunnyfetch-rs
+    fortuneteller2k.impure.eww
   ];
 in {
   home-manager.useUserPackages = true;
@@ -123,6 +123,7 @@ in {
       rust-analyzer
       rustup
       stlink
+      sumneko-lua-language-server
       tabbed
       texlive.combined.scheme-small
       tokei
@@ -148,12 +149,13 @@ in {
   };
   fonts = {
     fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" ]; })
+      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+      dejavu_fonts
       font-awesome
+      material-design-icons
+      nur.repos.devins2518.iosevka-serif
       scientifica
       tenderness
-      dejavu_fonts
-      material-design-icons
     ];
   };
 }

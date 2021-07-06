@@ -10,9 +10,9 @@ in {
   programs.rofi = {
     extraConfig = {
       width = 40;
-      font = "Iosevka Nerd Font Mono 20";
+      font = "Iosevka Serif 20";
     };
 
-    font = "Iosevka 20";
+    font = "Iosevka Serif 20";
   };
 }

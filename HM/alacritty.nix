@@ -12,24 +12,20 @@ in {
         ligatures = true;
         size = 11;
         normal = {
-          family = "Luxi Mono";
-          style = "Regular";
+          family = "Iosevka Serif Term";
+          style = "Medium Regular";
         };
         bold = {
-          family = "FiraCode Nerd Font Mono";
+          family = "Iosevka Serif Term";
           style = "Bold";
         };
         italic = {
-          family = "Luxi Mono";
-          style = "Oblique";
-          # family = "Iosevka Nerd Font Mono";
-          # style = "Bold Italic";
+          family = "Iosevka Serif Term";
+          style = "Italic";
         };
         bold_italic = {
-          family = "Luxi Mono";
-          style = "Bold Oblique";
-          # family = "Iosevka Nerd Font Mono";
-          # style = "Bold Italic";
+          family = "Iosevka Serif Term";
+          style = "Bold Italic";
         };
       };
 

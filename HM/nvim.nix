@@ -28,7 +28,7 @@ let
   };
   nvim-comment = pkgs.vimUtils.buildVimPlugin {
     buildPhase = ":";
-    configurePhase =":";
+    configurePhase = ":";
     name = "nvim-comment";
     src = pkgs.fetchFromGitHub {
       owner = "terrortylor";
@@ -118,10 +118,10 @@ in {
     '';
     plugins = with pkgs.vimPlugins; [
 
-      auto-pairs
       lsp-colors-nvim
       lsp-status-nvim
       lsp_extensions-nvim
+      lsp_signature-nvim
       lspsaga-nvim
       markdown-preview-nvim
       vim-go
@@ -129,7 +129,6 @@ in {
       vim-startuptime
       vim-surround
       vim-vsnip
-      which-key-nvim
 
       {
         plugin = tokyonight;
@@ -260,15 +259,21 @@ in {
           }
         '';
       }
-      #{
-      #plugin = nvim-autopairs;
-      #config = luaConfig ''
-      #require("nvim-autopairs.completion.compe").setup({
-      #  map_cr = true, --  map <CR> on insert mode
-      #  map_complete = true -- it will auto insert `(` after select function or method item
-      #})
-      #'';
-      #}
+      {
+        plugin = nvim-autopairs;
+        config = luaConfig ''
+          require('nvim-autopairs').setup({
+            enable_check_bracket_line = false
+          })
+            
+          require("nvim-autopairs.completion.compe").setup({
+            map_cr = true, --  map <CR> on insert mode
+            map_complete = true -- it will auto insert `(` after select function or method item
+          })
+
+          require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
+        '';
+      }
       {
         plugin = galaxyline-nvim;
         config = "luafile $HOME/.config/nvim/statusline.lua";

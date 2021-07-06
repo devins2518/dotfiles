@@ -1,42 +1,49 @@
 -- TODO broken
 local g = vim.g
 
+g["nvim_tree_add_trailing"] = 1
 g["nvim_tree_allow_resize"] = 1
-g["nvim_tree_auto_close"] = 1
-g["nvim_tree_auto_open"] = 1
+g["nvim_tree_auto_close"] = 0
+g["nvim_tree_auto_open"] = 0
 g["nvim_tree_disable_default_keybindings"] = 1
 g["nvim_tree_follow"] = 1
 g["nvim_tree_git_hl"] = 1
+g["nvim_tree_group_empty"] = 1
 g["nvim_tree_hide_dotfiles"] = 1
-g["nvim_tree_ignore"] = {".git", "node_modules", ".cache", "Cargo.lock"}
+g["nvim_tree_ignore"] = {
+    ".git", "target", "node_modules", ".cache", "Cargo.lock"
+}
 g["nvim_tree_indent_markers"] = 1
-g["nvim_tree_quit_on_open"] = 0
+g["nvim_tree_quit_on_open"] = 1
 g["nvim_tree_root_folder_modifier"] = ":~"
+g["nvim_tree_show_icons"] = {git = 1, folders = 1, files = 1}
 g["nvim_tree_side"] = "left"
 g["nvim_tree_tab_open"] = 1
 g["nvim_tree_update_cwd"] = 1
 g["nvim_tree_width"] = 25
-
-g["nvim_tree_show_icons"] = {git = 1, folders = 1, files = 1}
-
+g["nvim_tree_width_allow_resize"] = 1
 g["nvim_tree_icons"] = {
     default = " ",
     symlink = " ",
     git = {
-        unstaged = " ",
+        unstaged = '✗',
         staged = "✓",
         unmerged = "",
         renamed = "➜",
         untracked = "★"
     },
-    folder = {default = "", open = "", symlink = ""}
+    folder = {
+        default = '',
+        open = '',
+        empty = '',
+        empty_open = '',
+        symlink = '',
+        symlink_open = ''
+    }
 }
 
 -- Mappings for nvimtree
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-
-vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>",
-                        {noremap = true, silent = true})
 
 g["nvim_tree_bindings"] = {
     {key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit")},
@@ -56,3 +63,30 @@ g["nvim_tree_bindings"] = {
     {key = "]c", cb = tree_cb("next_git_item")},
     {key = "-", cb = tree_cb("dir_up")}
 }
+
+local view = require "nvim-tree.view"
+
+toggle_tree = function()
+    if view.win_open() then
+        require("nvim-tree").close()
+        if package.loaded["bufferline.state"] then
+            require("bufferline.state").set_offset(0)
+        end
+    else
+        if package.loaded["bufferline.state"] then
+            -- require'bufferline.state'.set_offset(31, 'File Explorer')
+            require("bufferline.state").set_offset(31, "")
+        end
+        require("nvim-tree").find_file(true)
+    end
+end
+
+local function map(mode, lhs, rhs, opts)
+    local options = {noremap = true, silent = true}
+    if opts then options = vim.tbl_extend("force", options, opts) end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+local opt = {}
+
+map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)

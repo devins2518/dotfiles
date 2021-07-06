@@ -1,4 +1,4 @@
-vim.o.completeopt = "menuone,noinsert,preview"
+vim.o.completeopt = "menuone"
 
 require'compe'.setup {
     enabled = true,
@@ -25,38 +25,9 @@ require'compe'.setup {
         spell = {kind = "   (Spell)", filetypes = {"markdown", "text"}},
         tags = false,
         vim_dadbod_completion = false,
-        -- snippets_nvim = {kind = "  "},
-        -- ultisnips = {kind = "  "},
-        -- treesitter = {kind = "  "},
         emoji = {kind = " ﲃ  (Emoji)", filetypes = {"markdown", "text"}}
-        -- for emoji press : (idk if that in compe tho)
     }
 }
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- ﬘
--- 
--- 
--- 
--- m
--- 
--- 
--- 
--- 
 
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
