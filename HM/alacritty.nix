@@ -10,22 +10,22 @@ in {
 
       font = {
         ligatures = true;
-        size = 11;
+        size = 12;
         normal = {
-          family = "Iosevka Serif Term";
-          style = "Medium Regular";
+          family = "Iosevka Serif Term Medium";
+          style = "Regular";
         };
         bold = {
           family = "Iosevka Serif Term";
           style = "Bold";
         };
         italic = {
-          family = "Iosevka Serif Term";
-          style = "Italic";
+          family = "Iosevka Serif Term MdObl";
+          style = "Oblique";
         };
         bold_italic = {
-          family = "Iosevka Serif Term";
-          style = "Bold Italic";
+          family = "Iosevka Serif Term SmBdObl";
+          style = "Semibold Oblique";
         };
       };
 
