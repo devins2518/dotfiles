@@ -97,6 +97,7 @@ in {
       set colorcolumn=100
       autocmd! ColorScheme * highlight! link ColorColumn CursorLine
       set cursorline
+      set termguicolors
 
       nmap <C-M> :noh<CR>
       nmap / /\v
@@ -133,11 +134,10 @@ in {
       {
         plugin = tokyonight;
         config = ''
-          colorscheme tokyonight
-
           let g:tokyonight_style = 'night' " available: night, storm
           let g:tokyonight_enable_italic = 1
 
+          colorscheme tokyonight
         '';
       }
       {
@@ -145,7 +145,6 @@ in {
         config = ''
           let mapleader = " "
           " needed because home-mananger puts this stuff at the top
-          set termguicolors
           lua require "colorizer".setup()
         '';
       }

@@ -102,6 +102,7 @@ in {
       discord
       dunst
       feh
+      ffmpeg
       firefox
       gcc
       gdb

@@ -26,7 +26,7 @@ in {
     theme = let inherit (config.lib.formats.rasi) mkLiteral;
     in {
       "*" = {
-        background-color = mkLiteral vim.bg_highlight;
+        background-color = mkLiteral vim.bg;
         border-color = mkLiteral vim.blue;
         text-color = mkLiteral bright.white;
         separator-color = mkLiteral "@border-color";

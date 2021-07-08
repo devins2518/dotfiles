@@ -12,7 +12,7 @@ in {
     options = {
       font = "tenderness 12";
 
-      default-bg = vim.bg_dark;
+      default-bg = vim.bg;
       default-fg = bright.white;
 
       statusbar-bg = vim.fg_gutter;
@@ -36,10 +36,10 @@ in {
       completion-bg = vim.fg_gutter;
       completion-fg = vim.blue;
 
-      completion-highlight-bg = vim.bg_dark;
+      completion-highlight-bg = vim.bg;
       completion-highlight-fg = bright.white;
 
-      recolor-lightcolor = vim.bg_dark;
+      recolor-lightcolor = vim.bg;
       recolor-darkcolor = bright.white;
 
       recolor = true;

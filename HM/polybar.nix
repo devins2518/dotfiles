@@ -16,7 +16,7 @@ in {
     settings = {
       "bar/bar" = {
         width = "100%";
-        background = vim.bg_dark;
+        background = vim.bg;
         foreground = normal.red;
         bottom = false;
 
@@ -79,7 +79,7 @@ in {
         label = "%title%";
         label-maxlen = 30;
         format-foreground = normal.red;
-        format-background = vim.bg_dark;
+        format-background = vim.bg;
         format-padding = 1;
       };
 
@@ -87,10 +87,10 @@ in {
         type = "internal/xbacklight";
         format = "<label>";
         format-prefix = " ";
-        format-prefix-foreground = vim.bg_dark;
+        format-prefix-foreground = vim.bg;
         format-prefix-background = normal.red;
         label = "%percentage%%";
-        format-foreground = vim.bg_dark;
+        format-foreground = vim.bg;
         format-background = normal.red;
         format-padding = 1;
       };
@@ -101,9 +101,9 @@ in {
 
         time = "%I:%M";
         format-prefix = " ";
-        format-prefix-foreground = vim.bg_dark;
+        format-prefix-foreground = vim.bg;
         format-prefix-background = normal.blue;
-        format-foreground = vim.bg_dark;
+        format-foreground = vim.bg;
         format-background = normal.blue;
         label = "%time%";
         format-padding = 1;
@@ -117,22 +117,22 @@ in {
         format-muted-prefix-font = 2;
         format-muted-prefix = "";
         format-muted-prefix-foreground = normal.green;
-        format-muted-prefix-background = vim.bg_dark;
+        format-muted-prefix-background = vim.bg;
         format-muted-prefix-padding = 1;
 
         label-volume = "%percentage%%";
         label-volume-foreground = normal.green;
-        label-volume-background = vim.bg_dark;
+        label-volume-background = vim.bg;
         label-volume-padding = 1;
 
         label-muted = "Muted";
         label-muted-foreground = normal.green;
-        label-muted-background = vim.bg_dark;
+        label-muted-background = vim.bg;
         label-muted-padding = 1;
 
         ramp-volume = [ "" "" "" ];
         ramp-volume-foreground = normal.green;
-        ramp-volume-background = vim.bg_dark;
+        ramp-volume-background = vim.bg;
         ramp-volume-padding = 1;
 
         click-right = "$HOME/.config/polybar/scripts/autoclose.sh pavucontrol";
@@ -147,17 +147,17 @@ in {
         format-charging = "<animation-charging> <label-charging>";
         label-charging = "%percentage%%";
         format-charging-foreground = normal.blue;
-        format-charging-background = vim.bg_dark;
+        format-charging-background = vim.bg;
 
         format-discharging = "<ramp-capacity> <label-discharging>";
         label-discharging = "%percentage%%";
         format-discharging-foreground = normal.red;
-        format-discharging-background = vim.bg_dark;
+        format-discharging-background = vim.bg;
 
         format-full-prefix = " ";
         format-full-prefix-foreground = normal.blue;
         format-foreground = normal.blue;
-        format-background = vim.bg_dark;
+        format-background = vim.bg;
 
         label-discharging-foreground = normal.red;
         label-charging-foreground = normal.blue;
@@ -177,55 +177,55 @@ in {
       "module/left-end" = {
         type = "custom/text";
         content-background = normal.blue;
-        content-foreground = vim.bg_dark;
+        content-foreground = vim.bg;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end" = {
         type = "custom/text";
         content-background = normal.blue;
-        content-foreground = vim.bg_dark;
+        content-foreground = vim.bg;
         content = "%{T}%{T}";
       };
 
       "module/right-end-middle" = {
         type = "custom/text";
         content-background = normal.red;
-        content-foreground = vim.bg_dark;
+        content-foreground = vim.bg;
         content = "%{T3}%{T-}";
       };
 
       "module/right-mid" = {
         type = "custom/text";
         content-background = normal.cyan;
-        content-foreground = vim.bg_dark;
+        content-foreground = vim.bg;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end-middlee" = {
         type = "custom/text";
         content-background = normal.red;
-        content-foreground = vim.bg_dark;
+        content-foreground = vim.bg;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end-middle-two" = {
         type = "custom/text";
-        content-background = vim.bg_dark;
+        content-background = vim.bg;
         content-foreground = normal.red;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end-middle-tww" = {
         type = "custom/text";
-        content-background = vim.bg_dark;
+        content-background = vim.bg;
         content-foreground = normal.cyan;
         content = "%{T3}%{T-}";
       };
 
       "module/right-end-middle-twoo" = {
         type = "custom/text";
-        content-background = vim.bg_dark;
+        content-background = vim.bg;
         content-foreground = normal.blue;
         content = "%{T3}%{T-}";
       };
@@ -233,7 +233,7 @@ in {
       "module/square" = {
         type = "custom/text";
         content-background = normal.blue;
-        content-foreground = vim.bg_dark;
+        content-foreground = vim.bg;
         content = "%{T3}%{T-}";
       };
 
@@ -244,11 +244,11 @@ in {
 
         label-open-font = 2;
         label-open = "";
-        label-open-foreground = vim.bg_dark;
+        label-open-foreground = vim.bg;
         label-open-background = normal.green;
         label-open-padding = 1;
         label-close = "";
-        label-close-foreground = vim.bg_dark;
+        label-close-foreground = vim.bg;
         label-close-background = normal.red;
 
         label-close-padding = 1;

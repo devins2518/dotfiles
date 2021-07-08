@@ -148,6 +148,7 @@
                     autoclose
                     compilenote
                     screenshot
+                    airplane-mode
                   ];
                 });
             })

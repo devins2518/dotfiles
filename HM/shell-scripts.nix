@@ -2,7 +2,7 @@
 
 rec {
   screenshot = pkgs.writeScriptBin "screenshot" ''
-    #! /usr/bin/env bash
+    #!/usr/bin/env bash
     #
     # syntax screenshot.sh local fullscreen
 
@@ -35,8 +35,7 @@ rec {
   '';
 
   autoclose = pkgs.writeScriptBin "autoclose" ''
-    #! /usr/bin/env bash
-    #! nix-shell -i bash -p pavucontrol
+    #!/usr/bin/env bash
     $@&
     read -r _ _ _ _ n < <(bspc subscribe -c 1 node_add)
     bspc node $n -f
@@ -45,7 +44,7 @@ rec {
   '';
 
   compilenote = pkgs.writeScriptBin "compilenote" ''
-    #! /usr/bin/env bash
+    #!/usr/bin/env bash
 
     filename=$1
     target="/home/devin/Repos/notes/pdfs"
@@ -60,4 +59,24 @@ rec {
         -V "geometry:left=3cm,right=3cm,top=2cm,bottom=2cm" \
         -o "$target/$outputFile" $filename
   '';
+  airplane-mode = pkgs.writeScriptBin "airplane-mode" ''
+    #!/usr/bin/env bash
+
+    radio="$(nmcli radio all | awk 'FNR == 2 {print $2}')"
+
+    if [ "$radio" = "enabled" ]
+     then
+        nmcli radio all off
+        notify-send "Airplane mode enabled"
+    else
+        nmcli radio all on
+        notify-send "Airplane mode disabled"
+    fi
+
+    if rfkill list bluetooth | grep -q 'yes$' ; then
+        sudo rfkill unblock bluetooth
+    else
+        sudo rfkill block bluetooth
+    fi
+      '';
 }

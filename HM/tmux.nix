@@ -80,7 +80,7 @@ in {
         set -g status "on"
         set -g status-justify "left"
 
-        set -g status-style "fg=${vim.blue},bg=${vim.bg_dark}"
+        set -g status-style "fg=${vim.blue},bg=${vim.bg}"
 
         set -g status-left-length "100"
         set -g status-right-length "100"
@@ -88,14 +88,14 @@ in {
         set -g status-left-style NONE
         set -g status-right-style NONE
 
-        set -g status-left "#[fg=${bright.black},bg=${vim.blue},bold] #S #[fg=${bright.blue},bg=${vim.bg_dark},nobold,nounderscore,noitalics]"
-        set -g status-right "#[fg=${vim.bg_dark},bg=${vim.bg_dark},nobold,nounderscore,noitalics]#[fg=${vim.blue},bg=${vim.bg_dark}] #{prefix_highlight} #[fg=${vim.fg_gutter},bg=${vim.bg_dark},nobold,nounderscore,noitalics]#[fg=${bright.blue},bg=${vim.fg_gutter}] %Y-%m-%d  %I:%M %p #[fg=${bright.blue},bg=${vim.fg_gutter},nobold,nounderscore,noitalics]#[fg=${bright.black},bg=${bright.blue},bold] #h "
+        set -g status-left "#[fg=${bright.black},bg=${vim.blue},bold] #S #[fg=${bright.blue},bg=${vim.bg},nobold,nounderscore,noitalics]"
+        set -g status-right "#[fg=${vim.bg},bg=${vim.bg},nobold,nounderscore,noitalics]#[fg=${vim.blue},bg=${vim.bg}] #{prefix_highlight} #[fg=${vim.fg_gutter},bg=${vim.bg},nobold,nounderscore,noitalics]#[fg=${bright.blue},bg=${vim.fg_gutter}] %Y-%m-%d  %I:%M %p #[fg=${bright.blue},bg=${vim.fg_gutter},nobold,nounderscore,noitalics]#[fg=${bright.black},bg=${bright.blue},bold] #h "
 
-        setw -g window-status-activity-style "underscore,fg=${vim.fg_dark},bg=${vim.bg_dark}"
+        setw -g window-status-activity-style "underscore,fg=${vim.fg_dark},bg=${vim.bg}"
         setw -g window-status-separator ""
-        setw -g window-status-style "NONE,fg=${vim.fg_dark},bg=${vim.bg_dark}"
-        setw -g window-status-format "#[fg=${vim.bg_dark},bg=${vim.bg_dark},nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=${vim.bg_dark},bg=${vim.bg_dark},nobold,nounderscore,noitalics]"
-        setw -g window-status-current-format "#[fg=${vim.bg_dark},bg=${vim.fg_gutter},nobold,nounderscore,noitalics]#[fg=${vim.blue},bg=${vim.fg_gutter},bold] #I  #W #F #[fg=${vim.fg_gutter},bg=${vim.bg_dark},nobold,nounderscore,noitalics]"
+        setw -g window-status-style "NONE,fg=${vim.fg_dark},bg=${vim.bg}"
+        setw -g window-status-format "#[fg=${vim.bg},bg=${vim.bg},nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=${vim.bg},bg=${vim.bg},nobold,nounderscore,noitalics]"
+        setw -g window-status-current-format "#[fg=${vim.bg},bg=${vim.fg_gutter},nobold,nounderscore,noitalics]#[fg=${vim.blue},bg=${vim.fg_gutter},bold] #I  #W #F #[fg=${vim.fg_gutter},bg=${vim.bg},nobold,nounderscore,noitalics]"
       '';
     };
   };
