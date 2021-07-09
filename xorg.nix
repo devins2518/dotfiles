@@ -24,6 +24,7 @@
             package = pkgs.whitesur-gtk-theme;
           };
           indicators = [ "~spacer" "~clock" "~spacer" "~session" "~power" ];
+          clock-format = "%I:%M";
         };
       };
     };
