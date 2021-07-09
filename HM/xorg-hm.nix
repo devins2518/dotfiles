@@ -7,9 +7,6 @@ let
 in {
   home.file.".config/picom.conf".source = ./picom.conf;
 
-  home.file.".icons/default".source =
-    "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors";
-
   # TODO: breaks if you restart display-manager.service?
   services.sxhkd = {
     enable = true;

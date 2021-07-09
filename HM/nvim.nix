@@ -108,8 +108,6 @@ in {
       nmap <C-h> <C-W><C-H>
       nmap <C-S-.> <C-W>>
       nnoremap <silent> gb <C-^>
-      inoremap jk <esc>
-      set timeoutlen=100
 
       augroup remember_folds
         autocmd!
@@ -125,6 +123,7 @@ in {
       lsp_signature-nvim
       lspsaga-nvim
       markdown-preview-nvim
+      vim-easyescape
       vim-go
       vim-nix
       vim-startuptime

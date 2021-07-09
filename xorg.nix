@@ -20,8 +20,8 @@
         greeters.gtk = {
           enable = true;
           theme = {
-            package = pkgs.sierra-gtk-theme;
-            name = "Sierra";
+            name = "WhiteSur-dark-alt-purple";
+            package = pkgs.whitesur-gtk-theme;
           };
           indicators = [ "~spacer" "~clock" "~spacer" "~session" "~power" ];
         };
