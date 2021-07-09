@@ -12,19 +12,19 @@ in {
         ligatures = true;
         size = 12;
         normal = {
-          family = "Iosevka Serif Term Medium";
-          style = "Regular";
+          family = "Iosevka Nerd Font Mono";
+          style = "Medium";
         };
         bold = {
-          family = "Iosevka Serif Term";
-          style = "Bold";
+          family = "Iosevka Nerd Font Mono";
+          style = "Semibold";
         };
         italic = {
-          family = "Iosevka Serif Term MdObl";
+          family = "Iosevka Nerd Font Mono";
           style = "Oblique";
         };
         bold_italic = {
-          family = "Iosevka Serif Term SmBdObl";
+          family = "Iosevka Nerd Font Mono";
           style = "Semibold Oblique";
         };
       };

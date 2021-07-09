@@ -3,7 +3,7 @@
 
   inputs = {
     nixos-hardware.url =
-      "github:NixOS/nixos-hardware/7305b276c90cfd3ad0a2452101a49c0b52c784c0";
+      "github:NixOS/nixos-hardware?rev=7305b276c90cfd3ad0a2452101a49c0b52c784c0";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
