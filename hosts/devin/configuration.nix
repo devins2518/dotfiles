@@ -48,7 +48,6 @@
     videoDrivers = [ "intel" ];
     deviceSection = ''
       Option "TearFree" "true"
-      #Option "DRI" "2"
     '';
     wacom.enable = false;
     dpi = 192;

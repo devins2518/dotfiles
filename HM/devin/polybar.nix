@@ -31,6 +31,43 @@ in {
         label-connected = " 直 ";
         label-connected-foreground = normal.cyan;
       };
+
+      "module/battery" = {
+        type = "internal/battery";
+        battery = "BAT1";
+        adapter = "AC0";
+        full-at = 98;
+
+        format-charging = "<animation-charging> <label-charging>";
+        label-charging = "%percentage%%";
+        format-charging-foreground = normal.blue;
+        format-charging-background = vim.bg;
+
+        format-discharging = "<ramp-capacity> <label-discharging>";
+        label-discharging = "%percentage%%";
+        format-discharging-foreground = normal.red;
+        format-discharging-background = vim.bg;
+
+        format-full-prefix = " ";
+        format-full-prefix-foreground = normal.blue;
+        format-foreground = normal.blue;
+        format-background = vim.bg;
+
+        label-discharging-foreground = normal.red;
+        label-charging-foreground = normal.blue;
+        label-padding = 1;
+
+        ramp-capacity = [ "" "" "" "" "" ];
+        ramp-capacity-foreground = normal.red;
+
+        animation-charging = [ "" "" "" "" "" ];
+        animation-charging-foreground = normal.blue;
+        animation-charging-framerate = 750;
+
+        format-charging-padding = 1;
+        format-discharging-padding = 1;
+      };
+
     };
   };
 }

@@ -151,11 +151,10 @@ in {
   fonts = {
     fonts = with pkgs; [
       (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
-      dejavu_fonts
       font-awesome
       material-design-icons
+      sarasa-gothic
       nur.repos.devins2518.iosevka-serif
-      scientifica
       tenderness
     ];
   };

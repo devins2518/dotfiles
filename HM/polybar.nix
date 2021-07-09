@@ -48,6 +48,7 @@ in {
         reverse-scroll = false;
 
         format = "<label-state>";
+        format-font = 5;
 
         ws-icon-0 = "I;%{F#c2f0fc}";
         ws-icon-1 = "II;%{F#fabea7}";
@@ -136,42 +137,6 @@ in {
         ramp-volume-padding = 1;
 
         click-right = "$HOME/.config/polybar/scripts/autoclose.sh pavucontrol";
-      };
-
-      "module/battery" = {
-        type = "internal/battery";
-        battery = "BAT1";
-        adapter = "AC0";
-        full-at = 98;
-
-        format-charging = "<animation-charging> <label-charging>";
-        label-charging = "%percentage%%";
-        format-charging-foreground = normal.blue;
-        format-charging-background = vim.bg;
-
-        format-discharging = "<ramp-capacity> <label-discharging>";
-        label-discharging = "%percentage%%";
-        format-discharging-foreground = normal.red;
-        format-discharging-background = vim.bg;
-
-        format-full-prefix = " ";
-        format-full-prefix-foreground = normal.blue;
-        format-foreground = normal.blue;
-        format-background = vim.bg;
-
-        label-discharging-foreground = normal.red;
-        label-charging-foreground = normal.blue;
-        label-padding = 1;
-
-        ramp-capacity = [ "" "" "" "" "" ];
-        ramp-capacity-foreground = normal.red;
-
-        animation-charging = [ "" "" "" "" "" ];
-        animation-charging-foreground = normal.blue;
-        animation-charging-framerate = 750;
-
-        format-charging-padding = 1;
-        format-discharging-padding = 1;
       };
 
       "module/left-end" = {
