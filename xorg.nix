@@ -23,6 +23,10 @@
             name = "WhiteSur-dark-alt-purple";
             package = pkgs.whitesur-gtk-theme;
           };
+          cursorTheme = {
+            name = "Quintom_Ink";
+            package = pkgs.quintom-cursor-theme;
+          };
           indicators = [ "~spacer" "~clock" "~spacer" "~session" "~power" ];
           clock-format = "%I:%M";
         };

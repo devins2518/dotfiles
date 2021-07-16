@@ -6,11 +6,12 @@ let
   bright = theme.bright;
 in {
   xsession = {
+    pointerCursor.size = 40;
+
     windowManager = {
       bspwm = {
         monitors = { "eDP1" = [ "I" "II" "III" "IV" "V" "VI" ]; };
 
-        startupPrograms = [ "nvfancontrol" ];
 
         extraConfig = ''
           bspc rule -a Pavucontrol state=floating rectangle=1000x750+450+70

@@ -117,11 +117,11 @@ in {
     '';
     plugins = with pkgs.vimPlugins; [
 
+      # auto-pairs
       lsp-colors-nvim
       lsp-status-nvim
       lsp_extensions-nvim
       lsp_signature-nvim
-      lspsaga-nvim
       markdown-preview-nvim
       vim-easyescape
       vim-go
@@ -133,7 +133,7 @@ in {
       {
         plugin = tokyonight;
         config = ''
-          let g:tokyonight_style = 'night' " available: night, storm
+          let g:tokyonight_style = 'night'
           let g:tokyonight_enable_italic = 1
 
           colorscheme tokyonight
@@ -157,6 +157,29 @@ in {
             },
           }
         '';
+      }
+      {
+        plugin = nvim-autopairs;
+        config = luaConfig ''
+          require('nvim-autopairs').setup({
+            enable_check_bracket_line = false
+          })
+
+          require("nvim-autopairs.completion.compe").setup({
+            map_cr = true, --  map <CR> on insert mode
+            map_complete = true -- it will auto insert `(` after select function or method item
+          })
+
+          require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
+          '';
+      }
+      {
+        plugin = nvim-compe;
+        config = "luafile $HOME/.config/nvim/nvim-compe.lua";
+      }
+      {
+        plugin = nvim-lspconfig;
+        config = "luafile $HOME/.config/nvim/nvim-lspconfig.lua";
       }
       {
         plugin = nvim-bufferline-lua;
@@ -202,23 +225,22 @@ in {
           nmap <leader>gf :diffget //2<CR>
         '';
       }
-      {
-        plugin = nvim-compe;
-        config = "luafile $HOME/.config/nvim/nvim-compe.lua";
-      }
-      {
-        plugin = nvim-lspconfig;
-        config = "luafile $HOME/.config/nvim/nvim-lspconfig.lua";
-      }
+
       {
         plugin = nvim-tree-lua;
         config = "luafile $HOME/.config/nvim/nvimTree.lua";
       }
       {
-        plugin = zig-vim;
-        config = ''
-          autocmd BufNewFile,BufRead *.zig set filetype=zig
-          let g:zig_fmt_autosave = 1
+        plugin = lspsaga-nvim;
+        config = luaConfig ''
+          require('lspsaga').init_lsp_saga {
+            code_action_keys = {
+              quit = 'q',exec = '<CR>'
+            },
+            rename_action_keys = {
+              quit = 'q',exec = '<CR>'  -- quit can be a table
+            },
+          }
         '';
       }
       {
@@ -258,24 +280,13 @@ in {
         '';
       }
       {
-        plugin = nvim-autopairs;
-        config = luaConfig ''
-          require('nvim-autopairs').setup({
-            enable_check_bracket_line = false
-          })
-            
-          require("nvim-autopairs.completion.compe").setup({
-            map_cr = true, --  map <CR> on insert mode
-            map_complete = true -- it will auto insert `(` after select function or method item
-          })
-
-          require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
-        '';
-      }
-      {
-        plugin = galaxyline-nvim;
+        plugin = lualine-nvim;
         config = "luafile $HOME/.config/nvim/statusline.lua";
       }
+      # {
+      #   plugin = galaxyline-nvim;
+      #   config = "luafile $HOME/.config/nvim/statusline.lua";
+      # }
       {
         plugin = nvim-web-devicons;
         config = "luafile $HOME/.config/nvim/web-devicons.lua";

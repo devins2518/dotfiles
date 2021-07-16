@@ -22,6 +22,7 @@ in {
       fclup =
         "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'; sudo nix-collect-garbage -d";
       ls = "ls -l --color=always";
+      grep = "rg";
     };
     etc."wallpaper/wallpaper.png" = {
       source = pkgs.fetchurl {
@@ -120,6 +121,7 @@ in {
       pavucontrol
       pcmanfm
       picom
+      ripgrep
       rnix-lsp
       rust-analyzer
       rustup

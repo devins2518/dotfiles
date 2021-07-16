@@ -21,6 +21,8 @@ in {
       separator-style = "solid";
       disable-history = true;
       hide-scrollbar = true;
+      matching = "fuzzy";
+      show-match = false;
     };
 
     theme = let inherit (config.lib.formats.rasi) mkLiteral;

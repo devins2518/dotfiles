@@ -52,6 +52,7 @@
     wacom.enable = false;
     dpi = 192;
     layout = "us";
+    displayManager.lightdm.greeters.gtk.cursorTheme.size = 40;
   };
 
   # check config_hz in /proc/config.gz

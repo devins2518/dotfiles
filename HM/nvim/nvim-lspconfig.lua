@@ -34,9 +34,9 @@ vim.cmd("nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.definition()<CR>")
 vim.cmd("nnoremap <silent> <leader>lD <cmd>lua vim.lsp.buf.declaration()<CR>")
 vim.cmd("nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.references()<CR>")
 vim.cmd("nnoremap <silent> <leader>li <cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.cmd("nnoremap <silent> <leader>ln :Lspsaga code_action<CR>")
+vim.cmd("nnoremap <silent> <leader>lc :Lspsaga code_action<CR>")
 vim.cmd("nnoremap <silent> K :Lspsaga hover_doc<CR>")
-vim.cmd("nnoremap <silent> <leader>rn :Lspsaga rename<CR>")
+vim.cmd("nnoremap <silent> <leader>ln :Lspsaga rename<CR>")
 vim.cmd("nnoremap <silent> [d :Lspsaga diagnostic_jump_prev<CR>")
 vim.cmd("nnoremap <silent> ]d :Lspsaga diagnostic_jump_next<CR>")
 
@@ -155,4 +155,4 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
         -- Disable a feature
         update_in_insert = false
     }, require('lsp_extensions.workspace.diagnostic').handler,
-                 {signs = {severity_limit = "Error"}})
+                 {signs = {severity_limit = "Hint"}})

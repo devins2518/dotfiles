@@ -1,4 +1,4 @@
-vim.o.completeopt = "menuone"
+vim.o.completeopt = "menuone,noselect"
 
 require'compe'.setup {
     enabled = true,
@@ -12,7 +12,9 @@ require'compe'.setup {
     max_abbr_width = 100,
     max_kind_width = 100,
     max_menu_width = 100,
-    documentation = true,
+    documentation = {
+        border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
+    },
 
     source = {
         path = {kind = "   (Path)"},
@@ -21,7 +23,7 @@ require'compe'.setup {
         vsnip = {kind = "   (Snippet)"},
         nvim_lsp = {kind = "   (LSP)"},
         -- nvim_lua = {kind = "  "},
-        nvim_lua = false,
+        nvim_lua = {filetypes = {"lua"}},
         spell = {kind = "   (Spell)", filetypes = {"markdown", "text"}},
         tags = false,
         vim_dadbod_completion = false,
@@ -70,5 +72,8 @@ vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.cmd("inoremap <silent><expr> <C-Space> compe#complete()")
-vim.cmd("inoremap <silent><expr> <CR> compe#confirm('<CR>')")
+vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()",
+                        {noremap = true, silent = true, expr = true})
+vim.api.nvim_set_keymap("i", "<CR>",
+                        "compe#confirm(luaeval(\"require 'nvim-autopairs'.autopairs_cr()\"))",
+                        {noremap = true, silent = true, expr = true})
