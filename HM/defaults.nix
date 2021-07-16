@@ -5,7 +5,7 @@
     enable = true;
     userDirs = {
       enable = true;
-      createDirectories = false;
+      createDirectories = true;
     };
   };
 

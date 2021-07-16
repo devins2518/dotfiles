@@ -64,23 +64,6 @@ g["nvim_tree_bindings"] = {
     {key = "-", cb = tree_cb("dir_up")}
 }
 
-local view = require "nvim-tree.view"
-
-toggle_tree = function()
-    if view.win_open() then
-        require("nvim-tree").close()
-        if package.loaded["bufferline.state"] then
-            require("bufferline.state").set_offset(0)
-        end
-    else
-        if package.loaded["bufferline.state"] then
-            -- require'bufferline.state'.set_offset(31, 'File Explorer')
-            require("bufferline.state").set_offset(31, "")
-        end
-        require("nvim-tree").find_file(true)
-    end
-end
-
 local function map(mode, lhs, rhs, opts)
     local options = {noremap = true, silent = true}
     if opts then options = vim.tbl_extend("force", options, opts) end

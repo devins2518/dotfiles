@@ -155,4 +155,4 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
         -- Disable a feature
         update_in_insert = false
     }, require('lsp_extensions.workspace.diagnostic').handler,
-                 {signs = {severity_limit = "Hint"}})
+                 {signs = {severity_limit = "Error"}})
