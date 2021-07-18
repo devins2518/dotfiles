@@ -16,6 +16,15 @@ let
       sha256 = "sha256-SnI2lLGsMe4+1GVlihTv68Y/Kqi9SjFDHOdy5ucAd7o=";
     };
   };
+  formatter = pkgs.vimUtils.buildVimPlugin {
+    name = "formatter.nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "mhartington";
+      repo = "formatter.nvim";
+      rev = "9efa18bc9552a8b2a00644f79d41f279be322e45";
+      sha256 = "sha256-fk0fN/w6nU380ENN6g3pKikeWfiXkJfY/JSPZwEq2EE=";
+    };
+  };
   # TODO: use nixpkgs
   fch = pkgs.vimUtils.buildVimPlugin {
     name = "FixCursorHold.nvim";
@@ -117,7 +126,6 @@ in {
     '';
     plugins = with pkgs.vimPlugins; [
 
-      # auto-pairs
       lsp-colors-nvim
       lsp-status-nvim
       lsp_extensions-nvim
@@ -129,6 +137,7 @@ in {
       vim-startuptime
       vim-surround
       vim-vsnip
+      which-key-nvim
 
       {
         plugin = tokyonight;
@@ -171,7 +180,7 @@ in {
           })
 
           require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
-          '';
+        '';
       }
       {
         plugin = nvim-compe;
@@ -185,6 +194,14 @@ in {
         plugin = nvim-bufferline-lua;
         config = "luafile $HOME/.config/nvim/bufferline.lua";
       }
+      # {
+      #   plugin = telescope-nvim;
+      #   config = "luafile $HOME/.config/nvim/telescope-nvim.lua";
+      # }
+      {
+        plugin = formatter;
+        config = "luafile $HOME/.config/nvim/format.lua";
+      }
       {
         plugin = gitsigns-nvim;
         config = "luafile $HOME/.config/nvim/gitsigns.lua";
@@ -192,7 +209,7 @@ in {
       {
         plugin = zig-vim;
         config = ''
-          let g:zig_fmt_autosave = 1
+          let g:zig_fmt_autosave = 0
           autocmd BufNewFile,BufRead gyro.zzz set filetype=yaml
         '';
       }
@@ -225,7 +242,6 @@ in {
           nmap <leader>gf :diffget //2<CR>
         '';
       }
-
       {
         plugin = nvim-tree-lua;
         config = "luafile $HOME/.config/nvim/nvimTree.lua";
@@ -248,13 +264,17 @@ in {
         config = ''
           augroup rust
             au!
-            autocmd FileType rust let g:rustfmt_autosave=1
+            autocmd FileType rust let g:rustfmt_autosave=0
             autocmd Filetype rust let g:cargo_shell_command_runner="!"
             autocmd FileType rust nmap <leader>cc :Ccheck<CR>
             autocmd FileType rust nmap <leader>cb :Cbuild<CR>
             autocmd FileType rust nmap <leader>cr :Crun<CR>
             autocmd FileType rust nmap <leader>cl :Cclean<CR>
-            autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
+            autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{
+              \ highlight = "NonText",
+              \ prefix = " » ",
+              \ enabled = {"TypeHint", "ChainingHint", "ParameterHint"}
+            \ }
           augroup END
         '';
       }
@@ -283,10 +303,6 @@ in {
         plugin = lualine-nvim;
         config = "luafile $HOME/.config/nvim/statusline.lua";
       }
-      # {
-      #   plugin = galaxyline-nvim;
-      #   config = "luafile $HOME/.config/nvim/statusline.lua";
-      # }
       {
         plugin = nvim-web-devicons;
         config = "luafile $HOME/.config/nvim/web-devicons.lua";
