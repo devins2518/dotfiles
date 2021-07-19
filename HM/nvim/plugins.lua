@@ -98,7 +98,7 @@ return packer.startup(function()
         after = {"lsp-status.nvim"},
         config = function()
             vim.cmd [[packadd nvim-lspconfig]]
-            require 'plugins.nvim-lspconfig'
+            require 'nvim-lspconfig'
         end
     }
     use {
@@ -107,14 +107,14 @@ return packer.startup(function()
         after = {"nvim-lspconfig"},
         config = function()
             vim.cmd [[packadd nvim-compe]]
-            require 'plugins.nvim-compe'
+            require 'nvim-compe'
         end
     }
     use {
         "glepnir/lspsaga.nvim",
         config = function()
             vim.cmd [[packadd lspsaga.nvim]]
-            require('lspsaga').init_lsp_saga {
+            require'lspsaga'.init_lsp_saga {
                 code_action_keys = {quit = 'q', exec = '<CR>'},
                 rename_action_keys = {
                     quit = 'q',
@@ -126,10 +126,9 @@ return packer.startup(function()
     }
     use {
         "nvim-lua/lsp-status.nvim",
-        ft = common_ft,
         config = function()
             vim.cmd [[packadd lsp-status.nvim]]
-            local lsp_status = require('lsp-status')
+            local lsp_status = require 'lsp-status'
             lsp_status.register_progress()
 
             lsp_status.config({
@@ -143,7 +142,28 @@ return packer.startup(function()
             })
         end
     }
-    use {"nvim-lua/lsp_extensions.nvim", after = "nvim-compe"}
+    use {
+        "nvim-lua/lsp_extensions.nvim",
+        after = "nvim-compe",
+        config = function()
+
+            vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+                                                                      vim.lsp
+                                                                          .diagnostic
+                                                                          .on_publish_diagnostics,
+                                                                      {
+                    -- Enable underline, use default values
+                    underline = true,
+                    -- Enable virtual text, override spacing to 4
+                    virtual_text = {prefix = "", spacing = 2},
+                    signs = {enable = true, priority = 20},
+                    -- Disable a feature
+                    update_in_insert = false
+                }, require('lsp_extensions.workspace.diagnostic').handler, {
+                    signs = {severity_limit = "Error"}
+                })
+        end
+    }
     use {"ray-x/lsp_signature.nvim", after = "nvim-compe"}
 
     use {"folke/lsp-colors.nvim", after = "nvim-compe"}
@@ -157,11 +177,10 @@ return packer.startup(function()
         config = function()
             vim.cmd [[packadd zig.vim]]
             G["zig_fmt_autosave"] = 0
-            vim.api.nvim_command([[
-                    augroup zig
-                        autocmd BufNewFile,BufRead gyro.zzz set filetype=yaml
-                    augroup END 
-                ]])
+            vim.api.nvim_command([[augroup zig]])
+            vim.api.nvim_command(
+                [[autocmd BufNewFile,BufRead gyro.zzz set filetype=yaml]])
+            vim.api.nvim_command([[augroup END]])
         end
     }
     use {
@@ -169,22 +188,28 @@ return packer.startup(function()
         ft = {"rust"},
         comfig = function()
             vim.cmd [[packadd rust.vim]]
-            vim.api.nvim_command([[
-                   augroup rust
-                       au!
-                       autocmd FileType rust let g:rustfmt_autosave=0
-                       autocmd Filetype rust let g:cargo_shell_command_runner="!"
-                       autocmd FileType rust nmap <leader>cc :Ccheck<CR>
-                       autocmd FileType rust nmap <leader>cb :Cbuild<CR>
-                       autocmd FileType rust nmap <leader>cr :Crun<CR>
-                       autocmd FileType rust nmap <leader>cl :Cclean<CR>
-                       autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{
-                        \ highlight = "NonText",
-                        \ prefix = " » ",
-                        \ enabled = {"TypeHint", "ChainingHint", "ParameterHint"}
-                        \ }
-                    augroup END 
-                ]])
+            vim.api.nvim_command([[augroup rust]])
+            vim.api.nvim_command([[au!]])
+            vim.api.nvim_command(
+                [[autocmd FileType rust let g:rustfmt_autosave=0]])
+            vim.api.nvim_command(
+                [[autocmd Filetype rust let g:cargo_shell_command_runner="!"]])
+            vim.api.nvim_command(
+                [[autocmd FileType rust nmap <leader>cc :Ccheck<CR>]])
+            vim.api.nvim_command(
+                [[autocmd FileType rust nmap <leader>cb :Cbuild<CR>]])
+            vim.api.nvim_command(
+                [[autocmd FileType rust nmap <leader>cr :Crun<CR>]])
+            vim.api.nvim_command(
+                [[autocmd FileType rust nmap <leader>cl :Cclean<CR>]])
+            vim.api.nvim_command(
+                [[autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{]])
+            vim.api.nvim_command([[\ highlight = "NonText",]])
+            vim.api.nvim_command([[\ prefix = " » ",]])
+            vim.api.nvim_command(
+                [[\ enabled = {"TypeHint", "ChainingHint", "ParameterHint"}]])
+            vim.api.nvim_command([[\ }]])
+            vim.api.nvim_command([[augroup END ]])
         end
     }
     use {
@@ -193,19 +218,23 @@ return packer.startup(function()
         config = function()
             vim.cmd [[packadd vim-markdown]]
             G["vim_markdown_folding_disabled"] = 1
-            vim.api.nvim_command([[
-                 augroup markdown
-                   au!
-                   autocmd BufNewFile,BufRead *.md set filetype=markdown
-                   autocmd FileType markdown set conceallevel=2
-                   autocmd Filetype markdown set wrap
-                   autocmd FileType markdown set colorcolumn=
-                   autocmd FileType markdown set scrolloff=999
-                   autocmd FileType markdown nmap <leader>cp :!compilenote %<CR>
-                   autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &
-                   autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
-                 augroup END
-                 ]])
+            vim.api.nvim_command([[augroup Markdown]])
+            vim.api.nvim_command([[au!]])
+            vim.api.nvim_command(
+                [[autocmd BufNewFile,BufRead *.md set filetype=markdown]])
+            vim.api.nvim_command(
+                [[autocmd FileType markdown set conceallevel=2]])
+            vim.api.nvim_command([[autocmd Filetype markdown set wrap]])
+            vim.api.nvim_command([[autocmd FileType markdown set colorcolumn=]])
+            vim.api
+                .nvim_command([[autocmd FileType markdown set scrolloff=999]])
+            vim.api.nvim_command(
+                [[autocmd FileType markdown nmap <leader>cp :!compilenote %<CR>]])
+            vim.api.nvim_command(
+                [[autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &]])
+            vim.api.nvim_command(
+                [[autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif]])
+            vim.api.nvim_command([[augroup END]])
         end
     }
 
@@ -213,7 +242,7 @@ return packer.startup(function()
     use {
         "lewis6991/gitsigns.nvim",
         requires = {'nvim-lua/plenary.nvim'},
-        config = function() require 'plugins.gitsigns' end
+        config = function() require 'gitsymbols' end
     }
     use {
         "tpope/vim-fugitive",
@@ -227,21 +256,19 @@ return packer.startup(function()
     -- Bars
     use {
         "akinsho/nvim-bufferline.lua",
-        config = function() require 'plugins.bufferline' end
+        config = function() require 'buffer' end
     }
     use {
         "hoob3rt/lualine.nvim",
         after = {"lsp-status.nvim", "tokyonight.nvim"},
-        config = function()
-            vim.cmd [[packadd lualine.nvim]]
-            require 'plugins.statusline'
-        end
+        config = function() require 'statusline' end
     }
 
     -- Telescope
     use {
         "nvim-telescope/telescope.nvim",
-        config = function() require 'plugins.telescope-nvim' end
+        config = function() require 'telescope-nvim' end,
+        requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}
     }
 
     -- Formatting
@@ -251,7 +278,7 @@ return packer.startup(function()
         ft = common_ft,
         config = function()
             vim.cmd [[packadd formatter.nvim]]
-            require 'plugins.format'
+            require 'format'
         end,
         cmd = "FormatWrite"
     }
@@ -289,10 +316,7 @@ return packer.startup(function()
     use {"tpope/vim-surround"}
     use {"hrsh7th/vim-vsnip"}
     -- use {"windwp/nvim-autopairs"}
-    use {
-        "kyazdani42/nvim-tree.lua",
-        config = function() require 'plugins.format' end
-    }
+    use {"kyazdani42/nvim-tree.lua", config = function() require 'nvimTree' end}
     use {
         "Yggdroot/indentLine",
         config = function()

@@ -18,8 +18,8 @@ let
   vim = theme.vim;
 in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
-  xdg.configFile."nvim/plugins".source = ./nvim;
-  xdg.configFile."nvim/plugins".recursive = true;
+  xdg.configFile."nvim/lua".source = ./nvim;
+  xdg.configFile."nvim/lua".recursive = true;
 
   programs.neovim = {
     enable = true;
@@ -90,7 +90,7 @@ in {
         au BufWinEnter ?* silent! loadview 1
       augroup END
 
-      lua require'plugins.plugins'
+      luafile $HOME/.config/nvim/lua/plugins.lua
     '';
     plugins = with pkgs.vimPlugins;
       [
