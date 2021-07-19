@@ -1,51 +1,16 @@
 { pkgs, config, lib, ... }:
 
 let
-  luaConfig = text: ''
-    lua << EOF
-    ${text}
-    EOF
-  '';
   package = pkgs.neovim-nightly;
-  tokyonight = pkgs.vimUtils.buildVimPlugin {
-    name = "tokyonight.nvim";
+  packer = pkgs.vimUtils.buildVimPlugin {
+    name = "packer.nvim";
     src = pkgs.fetchFromGitHub {
-      owner = "folke";
-      repo = "tokyonight.nvim";
-      rev = "852c9a846808a47d6ff922fcdbebc5dbaf69bb56";
-      sha256 = "sha256-SnI2lLGsMe4+1GVlihTv68Y/Kqi9SjFDHOdy5ucAd7o=";
+      owner = "wbthomason";
+      repo = "packer.nvim";
+      rev = "b6a904b341c56c5386bdd5c991439a834d061874";
+      sha256 = "sha256-BNSJsCgCF3bLBIshS+LLJSg0mMmDGB1ShLZsw1mZRsk=";
     };
-  };
-  formatter = pkgs.vimUtils.buildVimPlugin {
-    name = "formatter.nvim";
-    src = pkgs.fetchFromGitHub {
-      owner = "mhartington";
-      repo = "formatter.nvim";
-      rev = "9efa18bc9552a8b2a00644f79d41f279be322e45";
-      sha256 = "sha256-fk0fN/w6nU380ENN6g3pKikeWfiXkJfY/JSPZwEq2EE=";
-    };
-  };
-  # TODO: use nixpkgs
-  fch = pkgs.vimUtils.buildVimPlugin {
-    name = "FixCursorHold.nvim";
-    src = pkgs.fetchFromGitHub {
-      owner = "antoinemadec";
-      repo = "FixCursorHold.nvim";
-      rev = "b5158c93563ee6192ce8d903bfef839393bfeccd";
-      sha256 = "sha256-/6fpdYCXyqQi+iVcYgZmID4pB6HitL+GWx8ZQffZ0Pg=";
-    };
-  };
-  nvim-comment = pkgs.vimUtils.buildVimPlugin {
-    buildPhase = ":";
-    configurePhase = ":";
-    name = "nvim-comment";
-    src = pkgs.fetchFromGitHub {
-      owner = "terrortylor";
-      repo = "nvim-comment";
-      rev = "05feb57a7b1f2db36794063fa5e738bbdc12315a";
-      sha256 = "sha256-hJJxEw4iTrsW3e7Mxn0YNLH95hFPq4KhoqrXEhr2YUo=";
-    };
-    doCheck = false;
+    opt = true;
   };
   theme = import ./colors.nix { };
   normal = theme.normal;
@@ -53,8 +18,8 @@ let
   vim = theme.vim;
 in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
-  home.file.".config/nvim".source = ./nvim;
-  home.file.".config/nvim".recursive = true;
+  xdg.configFile."nvim/plugins".source = ./nvim;
+  xdg.configFile."nvim/plugins".recursive = true;
 
   programs.neovim = {
     enable = true;
@@ -107,6 +72,7 @@ in {
       autocmd! ColorScheme * highlight! link ColorColumn CursorLine
       set cursorline
       set termguicolors
+      let mapleader = " "
 
       nmap <C-M> :noh<CR>
       nmap / /\v
@@ -123,222 +89,233 @@ in {
         au BufWinLeave ?* mkview 1
         au BufWinEnter ?* silent! loadview 1
       augroup END
+
+      lua require'plugins.plugins'
     '';
-    plugins = with pkgs.vimPlugins; [
+    plugins = with pkgs.vimPlugins;
+      [
+        # # markdown-preview-nvim
+        packer
 
-      auto-pairs
-      lsp-colors-nvim
-      lsp-status-nvim
-      lsp_extensions-nvim
-      lsp_signature-nvim
-      # markdown-preview-nvim
-      vim-easyescape
-      vim-go
-      vim-nix
-      vim-startuptime
-      vim-surround
-      vim-vsnip
-      which-key-nvim
+        # done
+        # {
+        #   plugin = tokyonight;
+        #   config = ''
+        #     let g:tokyonight_style = 'night'
+        #     let g:tokyonight_enable_italic = 1
 
-      {
-        plugin = tokyonight;
-        config = ''
-          let g:tokyonight_style = 'night'
-          let g:tokyonight_enable_italic = 1
+        #     colorscheme tokyonight
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = nvim-colorizer-lua;
+        #   config = ''
+        #     " needed because home-mananger puts this stuff at the top
+        #     lua require "colorizer".setup()
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = nvim-treesitter;
+        #   config = luaConfig ''
+        #     require'nvim-treesitter.configs'.setup {
+        #       ensure_installed = { "c", "cpp", "go", "gomod", "lua", "nix", "rust", "toml", "yaml", "zig" },
+        #       highlight = {
+        #         enable = true, -- false will disable the whole extension
+        #       },
+        #     }
+        #   '';
+        # }
+        # # {
+        # #   plugin = nvim-autopairs;
+        # #   config = luaConfig ''
+        # #     require('nvim-autopairs').setup({
+        # #       enable_check_bracket_line = false
+        # #     })
 
-          colorscheme tokyonight
-        '';
-      }
-      {
-        plugin = nvim-colorizer-lua;
-        config = ''
-          let mapleader = " "
-          " needed because home-mananger puts this stuff at the top
-          lua require "colorizer".setup()
-        '';
-      }
-      {
-        plugin = nvim-treesitter;
-        config = luaConfig ''
-          require'nvim-treesitter.configs'.setup {
-            ensure_installed = { "c", "cpp", "go", "gomod", "lua", "nix", "rust", "toml", "yaml", "zig" },
-            highlight = {
-              enable = true, -- false will disable the whole extension
-            },
-          }
-        '';
-      }
-      # {
-      #   plugin = nvim-autopairs;
-      #   config = luaConfig ''
-      #     require('nvim-autopairs').setup({
-      #       enable_check_bracket_line = false
-      #     })
+        # #     require("nvim-autopairs.completion.compe").setup({
+        # #       map_cr = true, --  map <CR> on insert mode
+        # #       map_complete = true -- it will auto insert `(` after select function or method item
+        # #     })
 
-      #     require("nvim-autopairs.completion.compe").setup({
-      #       map_cr = true, --  map <CR> on insert mode
-      #       map_complete = true -- it will auto insert `(` after select function or method item
-      #     })
+        # #     require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
+        # #   '';
+        # # }
+        # done
+        # {
+        #   plugin = nvim-compe;
+        #   config = "luafile $HOME/.config/nvim/nvim-compe.lua";
+        # }
+        # done
+        # {
+        #   plugin = nvim-lspconfig;
+        #   config = "luafile $HOME/.config/nvim/nvim-lspconfig.lua";
+        # }
+        # done
+        # {
+        #   plugin = nvim-bufferline-lua;
+        #   config = "luafile $HOME/.config/nvim/bufferline.lua";
+        # }
+        # done
+        # {
+        #   plugin = telescope-nvim;
+        #   config = "luafile $HOME/.config/nvim/telescope-nvim.lua";
+        # }
+        # done
+        # {
+        #   plugin = formatter;
+        #   config = "luafile $HOME/.config/nvim/format.lua";
+        # }
+        # done
+        # {
+        #   plugin = gitsigns-nvim;
+        #   config = "luafile $HOME/.config/nvim/gitsigns.lua";
+        # }
+        # done
+        # {
+        #   plugin = zig-vim;
+        #   config = ''
+        #     let g:zig_fmt_autosave = 0
+        #     autocmd BufNewFile,BufRead gyro.zzz set filetype=yaml
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = nvim-comment;
+        #   config = luaConfig ''
+        #     require('nvim_comment').setup({
+        #       -- Linters prefer comment and line to have a space in between markers
+        #       marker_padding = true,
+        #       -- should comment out empty or whitespace only lines
+        #       comment_empty = false,
+        #       -- Should key mappings be created
+        #       create_mappings = false,
+        #     })
 
-      #     require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
-      #   '';
-      # }
-      {
-        plugin = nvim-compe;
-        config = "luafile $HOME/.config/nvim/nvim-compe.lua";
-      }
-      {
-        plugin = nvim-lspconfig;
-        config = "luafile $HOME/.config/nvim/nvim-lspconfig.lua";
-      }
-      {
-        plugin = nvim-bufferline-lua;
-        config = "luafile $HOME/.config/nvim/bufferline.lua";
-      }
-      {
-        plugin = telescope-nvim;
-        config = "luafile $HOME/.config/nvim/telescope-nvim.lua";
-      }
-      {
-        plugin = formatter;
-        config = "luafile $HOME/.config/nvim/format.lua";
-      }
-      {
-        plugin = gitsigns-nvim;
-        config = "luafile $HOME/.config/nvim/gitsigns.lua";
-      }
-      {
-        plugin = zig-vim;
-        config = ''
-          let g:zig_fmt_autosave = 0
-          autocmd BufNewFile,BufRead gyro.zzz set filetype=yaml
-        '';
-      }
-      {
-        plugin = nvim-comment;
-        config = luaConfig ''
-          require('nvim_comment').setup({
-            -- Linters prefer comment and line to have a space in between markers
-            marker_padding = true,
-            -- should comment out empty or whitespace only lines
-            comment_empty = false,
-            -- Should key mappings be created
-            create_mappings = false,
-          })
-
-          local function map(mode, lhs, rhs, opts)
-              local options = {noremap = true}
-              if opts then options = vim.tbl_extend("force", options, opts) end
-              vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-          end
-          map("n", "++", [[:CommentToggle<CR>]], opt)
-          map("v", "++", [[:'<,'>CommentToggle<CR>]], opt)
-        '';
-      }
-      {
-        plugin = vim-fugitive;
-        config = ''
-          nmap <leader>gs :G<CR>
-          nmap <leader>gj :diffget //3<CR>
-          nmap <leader>gf :diffget //2<CR>
-        '';
-      }
-      {
-        plugin = nvim-tree-lua;
-        config = "luafile $HOME/.config/nvim/nvimTree.lua";
-      }
-      {
-        plugin = lspsaga-nvim;
-        config = luaConfig ''
-          require('lspsaga').init_lsp_saga {
-            code_action_keys = {
-              quit = 'q',exec = '<CR>'
-            },
-            rename_action_keys = {
-              quit = 'q',exec = '<CR>'  -- quit can be a table
-            },
-          }
-        '';
-      }
-      {
-        plugin = rust-vim;
-        config = ''
-          augroup rust
-            au!
-            autocmd FileType rust let g:rustfmt_autosave=0
-            autocmd Filetype rust let g:cargo_shell_command_runner="!"
-            autocmd FileType rust nmap <leader>cc :Ccheck<CR>
-            autocmd FileType rust nmap <leader>cb :Cbuild<CR>
-            autocmd FileType rust nmap <leader>cr :Crun<CR>
-            autocmd FileType rust nmap <leader>cl :Cclean<CR>
-            autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{
-              \ highlight = "NonText",
-              \ prefix = " » ",
-              \ enabled = {"TypeHint", "ChainingHint", "ParameterHint"}
-            \ }
-          augroup END
-        '';
-      }
-      {
-        plugin = nvim-ts-rainbow;
-        config = luaConfig ''
-          require'nvim-treesitter.configs'.setup {
-            rainbow = {
-              enable = true,
-              extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-              max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-              colors = {
-                "${vim.blue}",
-                "${vim.cyan}",
-                "${vim.blue1}",
-                "${vim.blue0}",
-                "${vim.green1}",
-                "${vim.green2}",
-                "${vim.fg}",
-              },
-            }
-          }
-        '';
-      }
-      {
-        plugin = lualine-nvim;
-        config = "luafile $HOME/.config/nvim/statusline.lua";
-      }
-      {
-        plugin = nvim-web-devicons;
-        config = "luafile $HOME/.config/nvim/web-devicons.lua";
-      }
-      {
-        plugin = fch;
-        config = ''
-          let g:cursorhold_updatetime = 100
-          autocmd CursorHold * lua require('lspsaga.diagnostic').show_cursor_diagnostics()
-        '';
-      }
-      {
-        plugin = indentLine;
-        config = ''
-          let g:indentLine_enabled = 1
-          let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-        '';
-      }
-      {
-        plugin = vim-markdown;
-        config = ''
-          let g:vim_markdown_folding_disabled = 1
-          augroup markdown
-            au!
-            autocmd BufNewFile,BufRead *.md set filetype=markdown
-            autocmd FileType markdown set conceallevel=2
-            autocmd Filetype markdown set wrap
-            autocmd FileType markdown set colorcolumn=
-            autocmd FileType markdown set scrolloff=999
-            autocmd FileType markdown nmap <leader>cp :!compilenote %<CR>
-            autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &
-            autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
-          augroup END
-        '';
-      }
-    ];
+        #     local function map(mode, lhs, rhs, opts)
+        #         local options = {noremap = true}
+        #         if opts then options = vim.tbl_extend("force", options, opts) end
+        #         vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+        #     end
+        #     map("n", "++", [[:CommentToggle<CR>]], opt)
+        #     map("v", "++", [[:'<,'>CommentToggle<CR>]], opt)
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = vim-fugitive;
+        #   config = ''
+        #     nmap <leader>gs :G<CR>
+        #     nmap <leader>gj :diffget //3<CR>
+        #     nmap <leader>gf :diffget //2<CR>
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = nvim-tree-lua;
+        #   config = "luafile $HOME/.config/nvim/nvimTree.lua";
+        # }
+        # done
+        # {
+        #   plugin = lspsaga-nvim;
+        #   config = luaConfig ''
+        #     require('lspsaga').init_lsp_saga {
+        #       code_action_keys = {
+        #         quit = 'q',exec = '<CR>'
+        #       },
+        #       rename_action_keys = {
+        #         quit = 'q',exec = '<CR>'  -- quit can be a table
+        #       },
+        #     }
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = rust-vim;
+        #   config = ''
+        #     augroup rust
+        #       au!
+        #       autocmd FileType rust let g:rustfmt_autosave=0
+        #       autocmd Filetype rust let g:cargo_shell_command_runner="!"
+        #       autocmd FileType rust nmap <leader>cc :Ccheck<CR>
+        #       autocmd FileType rust nmap <leader>cb :Cbuild<CR>
+        #       autocmd FileType rust nmap <leader>cr :Crun<CR>
+        #       autocmd FileType rust nmap <leader>cl :Cclean<CR>
+        #       autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{
+        #         \ highlight = "NonText",
+        #         \ prefix = " » ",
+        #         \ enabled = {"TypeHint", "ChainingHint", "ParameterHint"}
+        #       \ }
+        #     augroup END
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = nvim-ts-rainbow;
+        #   config = luaConfig ''
+        #     require'nvim-treesitter.configs'.setup {
+        #       rainbow = {
+        #         enable = true,
+        #         extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+        #         max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+        #         colors = {
+        #           "${vim.blue}",
+        #           "${vim.cyan}",
+        #           "${vim.blue1}",
+        #           "${vim.blue0}",
+        #           "${vim.green1}",
+        #           "${vim.green2}",
+        #           "${vim.fg}",
+        #         },
+        #       }
+        #     }
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = lualine-nvim;
+        #   config = "luafile $HOME/.config/nvim/statusline.lua";
+        # }
+        # done
+        # {
+        #   plugin = nvim-web-devicons;
+        #   config = "luafile $HOME/.config/nvim/web-devicons.lua";
+        # }
+        # done
+        # {
+        #   plugin = fch;
+        #   config = ''
+        #     let g:cursorhold_updatetime = 100
+        #     autocmd CursorHold * lua require('lspsaga.diagnostic').show_cursor_diagnostics()
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = indentLine;
+        #   config = ''
+        #     let g:indentLine_enabled = 1
+        #     let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+        #   '';
+        # }
+        # done
+        # {
+        #   plugin = vim-markdown;
+        #   config = ''
+        #     let g:vim_markdown_folding_disabled = 1
+        #     augroup markdown
+        #       au!
+        #       autocmd BufNewFile,BufRead *.md set filetype=markdown
+        #       autocmd FileType markdown set conceallevel=2
+        #       autocmd Filetype markdown set wrap
+        #       autocmd FileType markdown set colorcolumn=
+        #       autocmd FileType markdown set scrolloff=999
+        #       autocmd FileType markdown nmap <leader>cp :!compilenote %<CR>
+        #       autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &
+        #       autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
+        #     augroup END
+        #   '';
+        # }
+      ];
   };
 }

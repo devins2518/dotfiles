@@ -19,18 +19,6 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {
     text = "",
     numhl = "LspDiagnosticsSignInformation"
 })
-local lsp_status = require('lsp-status')
-lsp_status.register_progress()
-
-lsp_status.config({
-    current_function = false,
-    diagnostics = false,
-    indicator_errors = '',
-    indicator_warnings = '',
-    indicator_info = '',
-    indicator_hint = '',
-    indicator_ok = '﫠'
-})
 
 vim.cmd("nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.definition()<CR>")
 vim.cmd("nnoremap <silent> <leader>lD <cmd>lua vim.lsp.buf.declaration()<CR>")
@@ -66,6 +54,7 @@ local function documentHighlight(client, bufnr)
     end
 end
 local lsp_config = {}
+local lsp_status = require('lsp-status')
 
 function lsp_config.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
