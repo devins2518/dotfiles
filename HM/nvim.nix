@@ -126,11 +126,12 @@ in {
     '';
     plugins = with pkgs.vimPlugins; [
 
+      auto-pairs
       lsp-colors-nvim
       lsp-status-nvim
       lsp_extensions-nvim
       lsp_signature-nvim
-      markdown-preview-nvim
+      # markdown-preview-nvim
       vim-easyescape
       vim-go
       vim-nix
@@ -167,21 +168,21 @@ in {
           }
         '';
       }
-      {
-        plugin = nvim-autopairs;
-        config = luaConfig ''
-          require('nvim-autopairs').setup({
-            enable_check_bracket_line = false
-          })
+      # {
+      #   plugin = nvim-autopairs;
+      #   config = luaConfig ''
+      #     require('nvim-autopairs').setup({
+      #       enable_check_bracket_line = false
+      #     })
 
-          require("nvim-autopairs.completion.compe").setup({
-            map_cr = true, --  map <CR> on insert mode
-            map_complete = true -- it will auto insert `(` after select function or method item
-          })
+      #     require("nvim-autopairs.completion.compe").setup({
+      #       map_cr = true, --  map <CR> on insert mode
+      #       map_complete = true -- it will auto insert `(` after select function or method item
+      #     })
 
-          require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
-        '';
-      }
+      #     require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
+      #   '';
+      # }
       {
         plugin = nvim-compe;
         config = "luafile $HOME/.config/nvim/nvim-compe.lua";
@@ -194,10 +195,10 @@ in {
         plugin = nvim-bufferline-lua;
         config = "luafile $HOME/.config/nvim/bufferline.lua";
       }
-      # {
-      #   plugin = telescope-nvim;
-      #   config = "luafile $HOME/.config/nvim/telescope-nvim.lua";
-      # }
+      {
+        plugin = telescope-nvim;
+        config = "luafile $HOME/.config/nvim/telescope-nvim.lua";
+      }
       {
         plugin = formatter;
         config = "luafile $HOME/.config/nvim/format.lua";

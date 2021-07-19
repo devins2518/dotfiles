@@ -23,6 +23,8 @@ local lsp_status = require('lsp-status')
 lsp_status.register_progress()
 
 lsp_status.config({
+    current_function = false,
+    diagnostics = false,
     indicator_errors = '',
     indicator_warnings = '',
     indicator_info = '',

@@ -33,25 +33,11 @@ require("telescope").setup {
         grep_previewer = require"telescope.previewers".vim_buffer_vimgrep.new,
         qflist_previewer = require"telescope.previewers".vim_buffer_qflist.new,
         -- Developer configurations: Not meant for general override
-        buffer_previewer_maker = require"telescope.previewers".buffer_previewer_maker
+        buffer_previewer_maker = require"telescope.previewers".buffer_previewer_maker,
+        mappings = {n = {["q"] = require('telescope.actions').close}}
     },
     pickers = {
-        -- Your special builtin config goes in here
-        buffers = {
-            sort_lastused = true,
-            theme = "dropdown",
-            previewer = false,
-            mappings = {
-                n = {
-                    ["<leader>tf"] = require('telescope.builtin').find_files(),
-                    -- ["<Leader>tp"] = require('telescope').extensions.media_files
-                    --     .media_files(),
-                    ["<Leader>tb"] = require('telescope.builtin').buffers(),
-                    ["<Leader>th"] = require('telescope.builtin').help_tags(),
-                    ["<Leader>to"] = require('telescope.builtin').oldfiles()
-                }
-            }
-        },
+        buffers = {sort_lastused = true, theme = "dropdown", previewer = true},
         find_files = {theme = "dropdown"}
     },
     extensions = {
@@ -63,3 +49,11 @@ require("telescope").setup {
 }
 
 -- require("telescope").load_extension("media_files")
+vim.cmd(
+    "nnoremap <silent> <leader>tf <cmd>lua require('telescope.builtin').find_files()<CR>")
+vim.cmd(
+    "nnoremap <silent> <leader>tb <cmd>lua require('telescope.builtin').buffers()<CR>")
+vim.cmd(
+    "nnoremap <silent> <leader>th <cmd>lua require('telescope.builtin').help_tags()<CR>")
+vim.cmd(
+    "nnoremap <silent> <leader>to <cmd>lua require('telescope.builtin').oldfiles()<CR>")

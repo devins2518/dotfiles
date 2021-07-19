@@ -7,9 +7,8 @@ require('formatter').setup({
             end
         },
         lua = {
-            -- luafmt
             function()
-                return {exe = "lua-format", args = "-i", stdin = true}
+                return {exe = "lua-format", args = {"-i"}, stdin = true}
             end
         },
         cpp = {
