@@ -77,6 +77,7 @@
       Option "AccelSpeed" "0"
     ''];
     exportConfiguration = true;
+    displayManager.lightdm.greeters.gtk.cursorTheme.size = 16;
   };
 
   environment.systemPackages = with pkgs; [ gimp minicom nvfancontrol ];

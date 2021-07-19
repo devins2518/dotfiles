@@ -80,6 +80,8 @@ in {
         background-color = mkLiteral normal.yellow;
         text-color = "@background-color";
       };
+
+      "element-icon" = { size = mkLiteral "2ch"; };
     };
 
   };
