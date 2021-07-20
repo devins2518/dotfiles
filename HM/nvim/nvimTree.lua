@@ -1,6 +1,8 @@
 -- TODO broken
 local g = vim.g
 
+vim.cmd "autocmd VimEnter * NvimTreeOpen | wincmd p"
+
 g["nvim_tree_add_trailing"] = 1
 g["nvim_tree_allow_resize"] = 1
 g["nvim_tree_auto_close"] = 0
@@ -64,12 +66,4 @@ g["nvim_tree_bindings"] = {
     {key = "-", cb = tree_cb("dir_up")}
 }
 
-local function map(mode, lhs, rhs, opts)
-    local options = {noremap = true, silent = true}
-    if opts then options = vim.tbl_extend("force", options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-local opt = {}
-
-map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
+Map("n", "<C-n>", ":NvimTreeToggle<CR>", {})

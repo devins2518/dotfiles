@@ -256,6 +256,7 @@ return packer.startup(function()
     -- Bars
     use {
         "akinsho/nvim-bufferline.lua",
+        event = "TabEnter",
         config = function() require 'buffer' end
     }
     use {
@@ -316,7 +317,14 @@ return packer.startup(function()
     use {"tpope/vim-surround"}
     use {"hrsh7th/vim-vsnip"}
     -- use {"windwp/nvim-autopairs"}
-    use {"kyazdani42/nvim-tree.lua", config = function() require 'nvimTree' end}
+    -- TODO
+    -- use {
+    --     "kyazdani42/nvim-tree.lua",
+    --     config = function()
+    --         vim.cmd [[packadd nvim-tree.lua]]
+    --         require 'nvimTree'
+    --     end
+    -- }
     use {
         "Yggdroot/indentLine",
         config = function()
