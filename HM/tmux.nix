@@ -28,6 +28,11 @@ in {
         # Enable mouse control (clickable windows, panes, resizable panes)
         set -g mouse on
 
+        bind -r k select-pane -U
+        bind -r j select-pane -D
+        bind -r h select-pane -L
+        bind -r l select-pane -R
+
         # Switch window with alt num
         bind-key -n M-1 select-window -t 0
         bind-key -n M-2 select-window -t 1
@@ -38,10 +43,6 @@ in {
         bind-key -n M-7 select-window -t 6
         bind-key -n M-8 select-window -t 7
         bind-key -n M-9 select-window -t 8
-        bind-key -n C-S-k select-pane -U
-        bind-key -n C-S-j select-pane -D
-        bind-key -n C-S-h select-pane -L
-        bind-key -n C-S-l select-pane -R
 
         # Kill session on close
         set-option -g detach-on-destroy off

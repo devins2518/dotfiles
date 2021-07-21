@@ -68,12 +68,11 @@ _G.s_tab_complete = function()
     end
 end
 
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()",
-                        {noremap = true, silent = true, expr = true})
-vim.api.nvim_set_keymap("i", "<CR>",
-                        "compe#confirm(luaeval(\"require 'nvim-autopairs'.autopairs_cr()\"))",
-                        {noremap = true, silent = true, expr = true})
+local opts = {expr = true}
+Map("i", "<Tab>", "v:lua.tab_complete()", opts)
+Map("i", "<Tab>", "v:lua.tab_complete()", opts)
+Map("s", "<Tab>", "v:lua.tab_complete()", opts)
+Map("i", "<S-Tab>", "v:lua.s_tab_complete()", opts)
+Map("s", "<S-Tab>", "v:lua.s_tab_complete()", opts)
+Map("i", "<C-Space>", "compe#complete()",
+    {noremap = true, silent = true, expr = true})

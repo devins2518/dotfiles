@@ -54,7 +54,6 @@ local function documentHighlight(client, bufnr)
     end
 end
 local lsp_config = {}
-local lsp_status = require('lsp-status')
 
 function lsp_config.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -74,7 +73,6 @@ function lsp_config.common_on_attach(client, bufnr)
         },
         extra_trigger_chars = {}
     })
-    return lsp_status.on_attach
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -83,20 +81,14 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
 local nvim_lsp = require('lspconfig')
-local servers = {"rust_analyzer", "gopls", "zls", "rnix", "sumneko_lua"}
+local servers = {
+    "clangd", "rust_analyzer", "gopls", "zls", "rnix", "sumneko_lua"
+}
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        on_attach = lsp_config.common_on_attach,
-        capabilities = lsp_status.capabilities
-    }
+    nvim_lsp[lsp].setup {on_attach = lsp_config.common_on_attach}
 end
 
-nvim_lsp.clangd.setup({
-    handlers = lsp_status.extensions.clangd.setup(),
-    init_options = {clangdFileStatus = true},
-    on_attach = lsp_status.on_attach,
-    capabilities = lsp_status.capabilities
-})
+nvim_lsp.clangd.setup({init_options = {clangdFileStatus = true}})
 
 -- 	https://github.com/golang/go/issues/41081
 nvim_lsp.gopls.setup {

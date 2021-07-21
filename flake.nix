@@ -21,7 +21,7 @@
         ########### Not done
         # add other scripts here
         ./HM/shell-scripts.nix
-        ./HM/kakoune.nix
+        # ./HM/kakoune.nix
         ########### Done for despair
         ./HM/bspwm.nix
         ./HM/dev

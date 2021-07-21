@@ -22,26 +22,13 @@ local function dirname()
     return "  " .. dir_name .. " "
 end
 
--- TODO: Doesn't update
--- local function lsp_progress()
---     local messages = vim.lsp.util.get_progress_messages()
---     if #messages == 0 then return end
---     local status = {}
---     for _, msg in pairs(messages) do
---         local name = msg.name
---         local count = #status
---         for i = 0, count do status[i] = nil end
---         table.insert(status, name .. " " .. (msg.percentage or 0) .. "%%")
---     end
---     return table.concat(status)
--- end
-
 require("lualine").setup({
     options = {
-        theme = "tokyonight",
-        section_separators = {"", ""},
         component_separators = {"", ""},
-        icons_enabled = true
+        disabled_filetypes = {'NvimTree'},
+        icons_enabled = true,
+        section_separators = {"", ""},
+        theme = "tokyonight"
     },
     sections = {
         lualine_a = {"mode"},
@@ -57,10 +44,7 @@ require("lualine").setup({
             }
         },
         lualine_d = {dirname},
-        lualine_x = {
-            {"diagnostics", sources = {"nvim_lsp"}},
-            require("lsp-status").status
-        },
+        lualine_x = {{"diagnostics", sources = {"nvim_lsp"}}, 'lsp_progress'},
         lualine_y = {"progress"}
     },
     inactive_sections = {
@@ -70,8 +54,7 @@ require("lualine").setup({
         lualine_x = {},
         lualine_y = {},
         lualine_z = {}
-    },
-    extensions = {"nvim-tree"}
+    }
 })
 
 -- local gl = require("galaxyline")
