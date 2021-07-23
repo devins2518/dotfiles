@@ -43,23 +43,25 @@ require"bufferline".setup {
 
             if error ~= 0 then
                 table.insert(result,
-                             {text = "  " .. error, guifg = "#EC5241"})
+                    { text = "  " .. error, guifg = "#EC5241" })
             end
 
             if warning ~= 0 then
                 table.insert(result,
-                             {text = "  " .. warning, guifg = "#EFB839"})
+                    { text = "  " .. warning, guifg = "#EFB839" })
             end
 
             if hint ~= 0 then
-                table.insert(result, {text = "  " .. hint, guifg = "#A3BA5E"})
+                table.insert(result,
+                    { text = "  " .. hint, guifg = "#A3BA5E" })
             end
 
             if info ~= 0 then
-                table.insert(result, {text = "  " .. info, guifg = "#7EA9A7"})
+                table.insert(result,
+                    { text = "  " .. info, guifg = "#7EA9A7" })
             end
             return result
         end
     },
-    extensions = {"nvim-tree"}
+    extensions = { "nvim-tree" }
 }

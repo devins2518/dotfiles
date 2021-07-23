@@ -1,8 +1,13 @@
 require("telescope").setup {
     defaults = {
         vimgrep_arguments = {
-            "rg", "--color=always", "--no-heading", "--with-filename",
-            "--line-number", "--column", "--smart-case"
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case'
         },
         prompt_prefix = "» ",
         selection_caret = "» ",
@@ -12,8 +17,8 @@ require("telescope").setup {
         sorting_strategy = "descending",
         layout_strategy = "horizontal",
         layout_config = {
-            horizontal = {mirror = false, preview_width = 0.5},
-            vertical = {mirror = false}
+            horizontal = { mirror = false, preview_width = 0.5 },
+            vertical = { mirror = false }
             -- prompt_position = "bottom",
             -- preview_cutoff = 120,
             -- results_height = 1,
@@ -22,23 +27,22 @@ require("telescope").setup {
         file_sorter = require"telescope.sorters".get_fuzzy_file,
         file_ignore_patterns = {},
         generic_sorter = require"telescope.sorters".get_generic_fuzzy_sorter,
-        path_display = shorten,
+        path_display = "shorten",
         winblend = 15,
         border = {},
-        borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         color_devicons = true,
         use_less = true,
-        set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
+        set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
         file_previewer = require"telescope.previewers".vim_buffer_cat.new,
         grep_previewer = require"telescope.previewers".vim_buffer_vimgrep.new,
-        qflist_previewer = require"telescope.previewers".vim_buffer_qflist.new,
-        -- Developer configurations: Not meant for general override
+        qflist_previewer = require"telescope.previewers".vim_buffer_qflist.new, -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require"telescope.previewers".buffer_previewer_maker,
-        mappings = {n = {["q"] = require('telescope.actions').close}}
+        mappings = { n = { ["q"] = require('telescope.actions').close } }
     },
     pickers = {
-        buffers = {sort_lastused = true, theme = "dropdown", previewer = true},
-        find_files = {theme = "dropdown"}
+        buffers = { sort_lastused = true, theme = "dropdown", previewer = true },
+        find_files = { theme = "dropdown" }
     },
     extensions = {
         -- media_files = {
@@ -49,11 +53,3 @@ require("telescope").setup {
 }
 
 -- require("telescope").load_extension("media_files")
-vim.cmd(
-    "nnoremap <silent> <leader>tf <cmd>lua require('telescope.builtin').find_files()<CR>")
-vim.cmd(
-    "nnoremap <silent> <leader>tb <cmd>lua require('telescope.builtin').buffers()<CR>")
-vim.cmd(
-    "nnoremap <silent> <leader>th <cmd>lua require('telescope.builtin').help_tags()<CR>")
-vim.cmd(
-    "nnoremap <silent> <leader>to <cmd>lua require('telescope.builtin').oldfiles()<CR>")

@@ -24,37 +24,34 @@ end
 
 require("lualine").setup({
     options = {
-        component_separators = {"", ""},
-        disabled_filetypes = {'NvimTree'},
+        component_separators = { "", "" },
+        disabled_filetypes = { 'NvimTree' },
         icons_enabled = true,
-        section_separators = {"", ""},
+        section_separators = { "", "" },
         theme = "tokyonight"
     },
     sections = {
-        lualine_a = {"mode"},
-        lualine_b = {"filetype", "filename"},
+        lualine_a = { "mode" },
+        lualine_b = { "filetype", "filename" },
         lualine_c = {
-            "branch", {
+            "branch",
+            {
                 "diff",
                 color_added = colors.fg_green,
                 color_modified = colors.yellow,
                 color_removed = colors.red,
-                symbols = {added = ' ', modified = ' ', removed = ' '}
+                symbols = { added = ' ', modified = ' ', removed = ' ' }
 
             }
         },
-        lualine_d = {dirname},
-        lualine_x = {{"diagnostics", sources = {"nvim_lsp"}}, 'lsp_progress'},
-        lualine_y = {"progress"}
+        lualine_d = { dirname },
+        lualine_x = {
+            { "diagnostics", sources = { "nvim_lsp" } },
+            'lsp_progress'
+        },
+        lualine_y = { "progress" }
     },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {}
-    }
+    inactive_sections = {}
 })
 
 -- local gl = require("galaxyline")

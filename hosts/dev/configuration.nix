@@ -10,7 +10,7 @@
 
   # Use the GRUB boot loader.
   boot = {
-    consoleLogLevel = 3;
+    consoleLogLevel = 2;
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -31,6 +31,14 @@
             search --fs-uuid --set=root F5F4-286C
             chainloader /EFI/Microsoft/Boot/bootmgfw.efi
           }
+        '';
+
+        extraConfig = ''
+          if keystatus --shift ; then
+              set timeout=-1
+          else
+              set timeout=0
+          fi
         '';
       };
     };

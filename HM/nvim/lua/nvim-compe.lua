@@ -13,21 +13,19 @@ require'compe'.setup {
     max_kind_width = 100,
     max_menu_width = 100,
     documentation = {
-        border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
     },
-
     source = {
-        path = {kind = "   (Path)"},
+        path = { kind = "   (Path)" },
         buffer = false,
-        calc = {kind = "   (Calc)"},
-        vsnip = {kind = "   (Snippet)"},
-        nvim_lsp = {kind = "   (LSP)"},
-        -- nvim_lua = {kind = "  "},
-        nvim_lua = {filetypes = {"lua"}},
-        spell = {kind = "   (Spell)", filetypes = {"markdown", "text"}},
+        calc = { kind = "   (Calc)" },
+        vsnip = { kind = "   (Snippet)" },
+        nvim_lsp = { kind = "   (LSP)" }, -- nvim_lua = {kind = "  "},
+        nvim_lua = { filetypes = { "lua" } },
+        spell = { kind = "   (Spell)", filetypes = { "markdown", "text" } },
         tags = false,
         vim_dadbod_completion = false,
-        emoji = {kind = " ﲃ  (Emoji)", filetypes = {"markdown", "text"}}
+        emoji = { kind = " ﲃ  (Emoji)", filetypes = { "markdown", "text" } }
     }
 }
 
@@ -50,7 +48,7 @@ end
 _G.tab_complete = function()
     if vim.fn.pumvisible() == 1 then
         return t "<C-n>"
-    elseif vim.fn.call("vsnip#available", {1}) == 1 then
+    elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
         return t "<Plug>(vsnip-expand-or-jump)"
     elseif check_back_space() then
         return t "<Tab>"
@@ -61,18 +59,9 @@ end
 _G.s_tab_complete = function()
     if vim.fn.pumvisible() == 1 then
         return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
+    elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
         return t "<Plug>(vsnip-jump-prev)"
     else
         return t "<S-Tab>"
     end
 end
-
-local opts = {expr = true}
-Map("i", "<Tab>", "v:lua.tab_complete()", opts)
-Map("i", "<Tab>", "v:lua.tab_complete()", opts)
-Map("s", "<Tab>", "v:lua.tab_complete()", opts)
-Map("i", "<S-Tab>", "v:lua.s_tab_complete()", opts)
-Map("s", "<S-Tab>", "v:lua.s_tab_complete()", opts)
-Map("i", "<C-Space>", "compe#complete()",
-    {noremap = true, silent = true, expr = true})

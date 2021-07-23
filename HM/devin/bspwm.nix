@@ -12,7 +12,6 @@ in {
       bspwm = {
         monitors = { "eDP1" = [ "I" "II" "III" "IV" "V" "VI" ]; };
 
-
         extraConfig = ''
           bspc rule -a Pavucontrol state=floating rectangle=1000x750+450+70
           bspc rule -a Nm-connection-editor state=floating rectangle=600x600+500+70
