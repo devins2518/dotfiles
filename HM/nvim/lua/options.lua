@@ -13,16 +13,16 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.swapfile = false
 opt.backup = false
-opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
+opt.undodir = os.getenv('HOME') .. '/.config/nvim/undodir'
 opt.undofile = true
 opt.incsearch = true
 opt.ruler = true
-opt.formatoptions = "tcqrn1"
+opt.formatoptions = 'tcqrn1'
 opt.expandtab = true
 opt.shiftround = false
 opt.scrolloff = 4
-opt.backspace = "indent,eol,start"
-opt.matchpairs:append("<:>")
+opt.backspace = 'indent,eol,start'
+opt.matchpairs:append('<:>')
 opt.laststatus = 2
 opt.showmode = true
 opt.showcmd = true
@@ -30,43 +30,41 @@ opt.hlsearch = true
 opt.showmatch = true
 opt.splitbelow = true
 opt.splitright = true
-opt.signcolumn = "yes:1"
-opt.mouse = "nv"
+opt.signcolumn = 'yes:1'
+opt.mouse = 'nv'
 opt.numberwidth = 2
 opt.cmdheight = 1
 opt.updatetime = 250
-opt.clipboard = "unnamedplus"
+opt.clipboard = 'unnamedplus'
 opt.list = true
-opt.listchars = "tab:▸\\ ,eol:¬"
-opt.colorcolumn = "100"
-vim.cmd("autocmd! ColorScheme * highlight! link ColorColumn CursorLine")
+vim.cmd [[autocmd! VimEnter * highlight! link ColorColumn CursorLine]]
+opt.listchars = 'tab:▸\\ ,eol:¬'
+opt.colorcolumn = '100'
 opt.cursorline = true
 opt.termguicolors = true
 vim.cmd [[let &fcs='eob: ']]
-opt.whichwrap:append("<>hl")
+opt.whichwrap:append('<>hl')
 
-G["mapleader"] = " "
-G["loaded_gzip"] = 0
-G["loaded_tar"] = 0
-G["loaded_tarPlugin"] = 0
-G["loaded_zipPlugin"] = 0
-G["loaded_2html_plugin"] = 0
-G["loaded_netrw"] = 0
-G["loaded_netrwPlugin"] = 0
-G["loaded_matchit"] = 0
-G["loaded_matchparen"] = 0
-G["loaded_spec"] = 0
+G['mapleader'] = ' '
+G['loaded_gzip'] = 1
+G['loaded_tar'] = 1
+G['loaded_tarPlugin'] = 1
+G['loaded_zipPlugin'] = 1
+G['loaded_2html_plugin'] = 1
+G['loaded_netrw'] = 1
+G['loaded_netrwPlugin'] = 1
+G['loaded_matchit'] = 1
+G['loaded_matchparen'] = 1
+G['loaded_spec'] = 1
 
-Augroup("remember_folds", {
+Augroup('remember_folds', {
     [[autocmd BufWinLeave ?* mkview 1]],
     [[autocmd BufWinEnter ?* silent! loadview 1]]
 })
 
-Augroup("zig", { [[autocmd BufNewFile,BufRead gyro.zzz set filetype=yaml]] })
+Augroup('zig', { [[autocmd BufNewFile,BufRead gyro.zzz set filetype=yaml]] })
 
-Augroup("rust", {
-    [[autocmd FileType rust let g:rustfmt_autosave=0]],
-    [[autocmd Filetype rust let g:cargo_shell_command_runner="!"]],
+Augroup('rust', {
     [[autocmd FileType rust nmap <leader>cc :Ccheck<CR>]],
     [[autocmd FileType rust nmap <leader>cb :Cbuild<CR>]],
     [[autocmd FileType rust nmap <leader>cr :Crun<CR>]],
@@ -74,7 +72,7 @@ Augroup("rust", {
     [[autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{ highlight = "NonText", prefix = " » " ,enabled = {"TypeHint", "ChainingHint", "ParameterHint"}}]]
 })
 
-Augroup("Markdown", {
+Augroup('Markdown', {
     [[autocmd BufNewFile,BufRead *.md set filetype=markdown]],
     [[autocmd FileType markdown set conceallevel=2]],
     [[autocmd Filetype markdown set wrap]],
@@ -84,3 +82,10 @@ Augroup("Markdown", {
     [[autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &]],
     [[autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif]]
 })
+
+-- Augroup('NvimTree', {
+--     [[autocmd VimEnter * NvimTreeOpen]],
+--     [[autocmd VimEnter * wincmd p]]
+-- })
+
+Augroup('Format', { [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix FormatWrite]] })

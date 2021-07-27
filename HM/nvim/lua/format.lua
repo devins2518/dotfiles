@@ -1,29 +1,23 @@
 require('formatter').setup({
     logging = false,
     filetype = {
-        rust = {
-            function()
-                return {
-                    exe = "rustfmt",
-                    args = { "--emit=stdout" },
-                    stdin = true
-                }
-            end
-        },
         lua = {
             function()
                 return {
                     exe = "lua-format",
                     args = {
                         "-i",
-                        "--no-align-args",
+                        "--break-after-operator",
                         "--break-after-table-lb",
                         "--break-before-table-rb",
-                        "--break-after-operator",
-                        "--spaces-inside-table-braces",
+                        "--chop-down-table",
+                        "--double-quote-to-single-quote",
+                        "--no-align-args",
+                        "--no-align-parameter",
+                        "--no-align-table-field",
                         "--no-keep-simple-control-block-one-line",
                         "--no-keep-simple-function-one-line",
-                        "--chop-down-table"
+                        "--spaces-inside-table-braces"
                     },
                     stdin = true
                 }
@@ -43,18 +37,6 @@ require('formatter').setup({
             function()
                 return { exe = "nixfmt", stdin = true }
             end
-        },
-        zig = {
-            function()
-                return { exe = "zig", args = { "fmt" }, stdin = true }
-            end
         }
     }
 })
-
-vim.api.nvim_exec([[
-augroup Format
-  autocmd!
-  autocmd BufWritePost *.zig,*.rs,*.lua,*.c,*.cpp,*.nix FormatWrite
-augroup END
-]], true)

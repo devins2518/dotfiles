@@ -68,13 +68,24 @@
 
       channels.nixpkgs-unstable = { input = nixpkgs; };
 
+      x-org = with self.nixosModules; [
+        xorg
+        ({ pkgs, ... }: {
+          home-manager.useUserPackages = true;
+          home-manager.useGlobalPkgs = true;
+          home-manager.users.devin = ({ config, pkgs, ... }:
+            with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+              imports = [ bspwm dunst polybar rofi xorg-hm ];
+            });
+        })
+      ];
+
       hosts = {
         dev = {
           modules = with self.nixosModules; [
             # system wide config
             ./hosts/dev/configuration.nix
             network
-            xorg
             ({ pkgs, ... }: {
               home-manager.useUserPackages = true;
               home-manager.useGlobalPkgs = true;
@@ -112,47 +123,41 @@
           ];
         };
         devin = {
-          modules = with self.nixosModules; [
-            # system wide config
-            ./hosts/devin/configuration.nix
-            network
-            nixos-hardware.nixosModules.microsoft-surface
-            xorg
-            ({ pkgs, ... }: {
-              home-manager.useUserPackages = true;
-              home-manager.useGlobalPkgs = true;
-              home-manager.users.devin = ({ config, pkgs, ... }:
-                with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                  imports = [
-                    alacritty
-                    bspwm
-                    defaults
-                    devin
-                    dunst
-                    git
-                    gtk
-                    mpv
-                    nvim
-                    pass
-                    pdf
-                    polybar
-                    qt
-                    rofi
-                    tmux
-                    xorg-hm
-                    zathura
-                    zsh
-                  ];
+          modules = with self.nixosModules;
+            [
+              # system wide config
+              ./hosts/devin/configuration.nix
+              network
+              nixos-hardware.nixosModules.microsoft-surface
+              ({ pkgs, ... }: {
+                home-manager.useUserPackages = true;
+                home-manager.useGlobalPkgs = true;
+                home-manager.users.devin = ({ config, pkgs, ... }:
+                  with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+                    imports = [
+                      alacritty
+                      defaults
+                      git
+                      gtk
+                      mpv
+                      nvim
+                      pass
+                      pdf
+                      qt
+                      tmux
+                      zathura
+                      zsh
+                    ] ++ devin.x-org ++ devin.default;
 
-                  home.packages = with pkgs; [
-                    autoclose
-                    compilenote
-                    screenshot
-                    airplane-mode
-                  ];
-                });
-            })
-          ];
+                    home.packages = with pkgs; [
+                      autoclose
+                      compilenote
+                      screenshot
+                      airplane-mode
+                    ];
+                  });
+              })
+            ] ++ x-org;
         };
       };
 
