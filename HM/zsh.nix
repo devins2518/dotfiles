@@ -8,6 +8,9 @@
       history = {
         path = ".zsh/HISTFILE";
         size = 2000;
+        expireDuplicatesFirst = true;
+        ignoreDups = true;
+        share = false;
       };
 
       initExtra = ''

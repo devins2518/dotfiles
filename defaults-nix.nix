@@ -5,7 +5,6 @@ let
     devins2518.bunnyfetch-rs
     devins2518.gyro
     devins2518.zigup
-    fortuneteller2k.impure.eww
   ];
 in {
   home-manager.useUserPackages = true;
@@ -102,6 +101,7 @@ in {
       clang-tools
       discord
       dunst
+      eww
       feh
       ffmpeg
       firefox

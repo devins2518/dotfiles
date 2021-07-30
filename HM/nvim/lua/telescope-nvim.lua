@@ -1,4 +1,4 @@
-require("telescope").setup {
+require('telescope').setup {
     defaults = {
         vimgrep_arguments = {
             'rg',
@@ -9,13 +9,13 @@ require("telescope").setup {
             '--column',
             '--smart-case'
         },
-        prompt_prefix = "» ",
-        selection_caret = "» ",
-        entry_prefix = "  ",
-        initial_mode = "insert",
-        selection_strategy = "reset",
-        sorting_strategy = "descending",
-        layout_strategy = "horizontal",
+        prompt_prefix = '» ',
+        selection_caret = '» ',
+        entry_prefix = '  ',
+        initial_mode = 'insert',
+        selection_strategy = 'reset',
+        sorting_strategy = 'descending',
+        layout_strategy = 'horizontal',
         layout_config = {
             horizontal = { mirror = false, preview_width = 0.5 },
             vertical = { mirror = false }
@@ -24,25 +24,29 @@ require("telescope").setup {
             -- results_height = 1,
             -- results_width = 0.8,
         },
-        file_sorter = require"telescope.sorters".get_fuzzy_file,
+        file_sorter = require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {},
-        generic_sorter = require"telescope.sorters".get_generic_fuzzy_sorter,
-        path_display = "shorten",
-        winblend = 15,
+        generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
+        -- path_display = 'shorten',
+        -- winblend = 15,
         border = {},
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         color_devicons = true,
         use_less = true,
-        set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+        set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
         file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
         grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
         qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new, -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
-        mappings = { n = { ["q"] = require'telescope.actions'.close } }
+        mappings = {
+            n = {
+                ['q'] = require'telescope.actions'.close,
+                ['jk'] = require'telescope.actions'.close
+            }
+        }
     },
     pickers = {
-        buffers = { sort_lastused = true, theme = "dropdown", previewer = true },
-        find_files = { theme = "dropdown" }
+        buffers = { sort_lastused = true, theme = 'dropdown', previewer = true }
     },
     extensions = {
         -- media_files = {

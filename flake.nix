@@ -10,11 +10,12 @@
     nur.url = "github:nix-community/NUR/master";
     home-manager.url = "github:nix-community/home-manager";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
+    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
   };
 
   outputs = { self, nixpkgs, home-manager, utils, nixos-hardware, neovim-nightly
-    , agenix, nur }@inputs:
-    utils.lib.systemFlake {
+    , agenix, nur, nixpkgs-f2k }@inputs:
+    utils.lib.systemFlake rec {
       inherit self inputs;
 
       nixosModules = utils.lib.modulesFromList [
@@ -34,6 +35,7 @@
         ./HM/xorg-hm.nix
         ./HM/zathura.nix
         ./xorg.nix
+        ./wayland.nix
         ########### Done fully i think
         ./HM/nvfancontrol.nix
         ./HM/zsh.nix
@@ -79,6 +81,8 @@
             });
         })
       ];
+
+      wayland-opt = with self.nixosModules; [ wayland ];
 
       hosts = {
         dev = {
@@ -161,7 +165,8 @@
         };
       };
 
-      sharedOverlays = [ self.overlay neovim-nightly.overlay nur.overlay ];
+      sharedOverlays =
+        [ self.overlay neovim-nightly.overlay nur.overlay nixpkgs-f2k.overlay ];
 
       packagesBuilder = channels: {
         inherit (channels.nixpkgs) alacritty-ligatures neovim-nightly;
