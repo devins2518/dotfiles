@@ -1,52 +1,52 @@
 -- TODO figure out why this don't work
-vim.fn.sign_define("LspDiagnosticsSignError", {
-    texthl = "LspDiagnosticsSignError",
-    text = "",
-    numhl = "LspDiagnosticsSignError"
+vim.fn.sign_define('LspDiagnosticsSignError', {
+    texthl = 'LspDiagnosticsSignError',
+    text = '',
+    numhl = 'LspDiagnosticsSignError'
 })
-vim.fn.sign_define("LspDiagnosticsSignWarning", {
-    texthl = "LspDiagnosticsSignWarning",
-    text = "",
-    numhl = "LspDiagnosticsSignWarning"
+vim.fn.sign_define('LspDiagnosticsSignWarning', {
+    texthl = 'LspDiagnosticsSignWarning',
+    text = '',
+    numhl = 'LspDiagnosticsSignWarning'
 })
-vim.fn.sign_define("LspDiagnosticsSignHint", {
-    texthl = "LspDiagnosticsSignHint",
-    text = "",
-    numhl = "LspDiagnosticsSignHint"
+vim.fn.sign_define('LspDiagnosticsSignHint', {
+    texthl = 'LspDiagnosticsSignHint',
+    text = '',
+    numhl = 'LspDiagnosticsSignHint'
 })
-vim.fn.sign_define("LspDiagnosticsSignInformation", {
-    texthl = "LspDiagnosticsSignInformation",
-    text = "",
-    numhl = "LspDiagnosticsSignInformation"
+vim.fn.sign_define('LspDiagnosticsSignInformation', {
+    texthl = 'LspDiagnosticsSignInformation',
+    text = '',
+    numhl = 'LspDiagnosticsSignInformation'
 })
 
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
-    "   (Text) ",
-    "   (Method)",
-    "   (Function)",
-    "   (Constructor)",
-    " ﴲ  (Field)",
-    "[] (Variable)",
-    "   (Class)",
-    " ﰮ  (Interface)",
-    "   (Module)",
-    " 襁 (Property)",
-    "   (Unit)",
-    "   (Value)",
-    " 練 (Enum)",
-    "   (Keyword)",
-    "   (Snippet)",
-    "   (Color)",
-    "   (File)",
-    "   (Reference)",
-    "   (Folder)",
-    "   (EnumMember)",
-    " ﲀ  (Constant)",
-    " ﳤ  (Struct)",
-    "   (Event)",
-    "   (Operator)",
-    "   (TypeParameter)"
+    '   (Text) ',
+    '   (Method)',
+    '   (Function)',
+    '   (Constructor)',
+    ' ﴲ  (Field)',
+    '[] (Variable)',
+    '   (Class)',
+    ' ﰮ  (Interface)',
+    '   (Module)',
+    ' 襁 (Property)',
+    '   (Unit)',
+    '   (Value)',
+    ' 練 (Enum)',
+    '   (Keyword)',
+    '   (Snippet)',
+    '   (Color)',
+    '   (File)',
+    '   (Reference)',
+    '   (Folder)',
+    '   (EnumMember)',
+    ' ﲀ  (Constant)',
+    ' ﳤ  (Struct)',
+    '   (Event)',
+    '   (Operator)',
+    '   (TypeParameter)'
 }
 
 local function documentHighlight(client, bufnr)
@@ -73,11 +73,11 @@ function lsp_config.common_on_attach(client, bufnr)
         fix_pos = false,
         hint_enable = true,
         use_lspsaga = true,
-        hi_parameter = "Search",
+        hi_parameter = 'Search',
         max_height = 5,
         max_width = 60,
         handler_opts = {
-            border = "double" -- double, single, shadow, none
+            border = 'double' -- double, single, shadow, none
         },
         extra_trigger_chars = {}
     })
@@ -90,24 +90,30 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- and map buffer local keybindings when the language server attaches
 local nvim_lsp = require('lspconfig')
 local servers = {
-    "clangd",
-    "rust_analyzer",
-    "gopls",
-    "zls",
-    "rnix",
-    "sumneko_lua"
+    'clangd',
+    'rust_analyzer',
+    'gopls',
+    'zls',
+    'rnix',
+    'sumneko_lua'
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup { on_attach = lsp_config.common_on_attach }
 end
 
+nvim_lsp.rust_analyzer.setup({
+    cargo = { allFeatures = true },
+    checkOnSave = { allTargets = true },
+    experimental = { procAttrMacros = true }
+})
+
 nvim_lsp.clangd.setup({ init_options = { clangdFileStatus = true } })
 
 -- 	https://github.com/golang/go/issues/41081
 nvim_lsp.gopls.setup {
-    cmd = { "gopls", "serve" },
+    cmd = { 'gopls', 'serve' },
     settings = {
-        gopls = { staticcheck = true, env = { GOFLAGS = "-tags=test" } }
+        gopls = { staticcheck = true, env = { GOFLAGS = '-tags=test' } }
     }
 }
 
@@ -126,18 +132,18 @@ nvim_lsp.gopls.setup {
 
 local sumneko_root_path = vim.fn.stdpath('cache') ..
                               '/lspconfig/sumneko_lua/lua-language-server'
-local sumneko_binary = "lua-language-server"
+local sumneko_binary = 'lua-language-server'
 
 local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
+table.insert(runtime_path, 'lua/?.lua')
+table.insert(runtime_path, 'lua/?/init.lua')
 require'lspconfig'.sumneko_lua.setup {
-    cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+    cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
     settings = {
         Lua = {
             runtime = { version = 'LuaJIT', path = runtime_path },
             diagnostics = { globals = { 'vim' } },
-            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            workspace = { library = vim.api.nvim_get_runtime_file('', true) },
             telemetry = { enable = false }
         }
     }

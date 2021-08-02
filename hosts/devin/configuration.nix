@@ -10,7 +10,8 @@
 
   # Use the GRUB boot loader.
   boot = {
-    consoleLogLevel = 2;
+    kernelParams = [ "quiet" ];
+    consoleLogLevel = 3;
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -64,6 +65,8 @@
     layout = "us";
     displayManager.lightdm.greeters.gtk.cursorTheme.size = 40;
   };
+
+  systemd.services.iptsd.enable = false;
 
   # check config_hz in /proc/config.gz
   powerManagement = {

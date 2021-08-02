@@ -21,6 +21,11 @@ wk.register({
                 'Show help tags',
                 unpack(gen_opt)
             },
+            g = {
+                '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>',
+                'Grep for string',
+                unpack(gen_opt)
+            },
             o = {
                 '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>',
                 'Show file history',

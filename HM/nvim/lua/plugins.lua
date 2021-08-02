@@ -104,7 +104,7 @@ return packer.startup({
                 require'lspsaga'.init_lsp_saga {
                     code_action_keys = { quit = 'q', exec = '<CR>' },
                     rename_action_keys = {
-                        quit = 'q',
+                        quit = 'jk',
                         exec = '<CR>' -- quit can be a table
                     }
                 }
