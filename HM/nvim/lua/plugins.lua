@@ -178,9 +178,8 @@ return packer.startup({
             end
         }
         use {
-            'hoob3rt/lualine.nvim',
+            'glepnir/galaxyline.nvim',
             after = { 'tokyonight.nvim', 'nvim-web-devicons' },
-            requires = 'arkav/lualine-lsp-progress',
             config = function()
                 require 'statusline'
             end

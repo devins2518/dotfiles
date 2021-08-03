@@ -44,7 +44,23 @@ in {
     };
   };
 
-  boot = { cleanTmpDir = true; };
+  boot = {
+    cleanTmpDir = true;
+    kernelParams = [ "quiet" ];
+    consoleLogLevel = 3;
+
+    loader = {
+      grub = {
+        extraConfig = ''
+          if keystatus --shift ; then
+          set timeout=-1
+          else
+          set timeout=0
+          fi
+        '';
+      };
+    };
+  };
 
   security.sudo.wheelNeedsPassword = false; # wheel ALL=(ALL) NOPASSWD:ALL
 

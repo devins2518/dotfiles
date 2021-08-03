@@ -10,8 +10,6 @@
 
   # Use the GRUB boot loader.
   boot = {
-    kernelParams = [ "quiet" ];
-    consoleLogLevel = 3;
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -36,21 +34,12 @@
             chainloader /EFI/Microsoft/Boot/bootmgfw.efi
           }
         '';
-
-        extraConfig = ''
-          if keystatus --shift ; then
-              set timeout=-1
-          else
-              set timeout=0
-          fi
-        '';
       };
     };
   };
 
   networking = {
     hostName = "devin";
-    networkmanager = { wifi.powersave = false; };
     interfaces.wlp2s0.useDHCP = true;
   };
 

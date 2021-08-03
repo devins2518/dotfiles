@@ -2,7 +2,7 @@
   description = "Devins2518's system config";
 
   inputs = {
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "github:devins2518/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
