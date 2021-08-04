@@ -37,12 +37,6 @@ require('formatter').setup({
             function()
                 return { exe = 'nixfmt', stdin = true }
             end
-        },
-        haskell = {
-            function()
-                return
-                    { exe = 'stylish-haskell', args = { '-i' }, stdin = false }
-            end
         }
     }
 })

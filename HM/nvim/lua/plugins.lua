@@ -150,30 +150,6 @@ return packer.startup({
             end
         }
         use {
-            'neovimhaskell/haskell-vim',
-            ft = { 'haskell', 'lhaskell' },
-            config = function()
-                G['haskell_enable_quantification'] = 1 -- " to enable highlighting of `forall`
-                G['haskell_enable_recursivedo'] = 1 -- " to enable highlighting of `mdo` and `rec`
-                G['haskell_enable_arrowsyntax'] = 1 -- " to enable highlighting of `proc`
-                G['haskell_enable_pattern_synonyms'] = 1 -- " to enable highlighting of `pattern`
-                G['haskell_enable_typeroles'] = 1 -- " to enable highlighting of type roles
-                G['haskell_enable_static_pointers'] = 1 -- " to enable highlighting of `static`
-                G['haskell_backpack'] = 1 -- " to enable highlighting of backpack keywords
-                G['haskell_enable_quantification'] = 1 -- " to enable highlighting of `forall`
-                G['haskell_indent_if'] = 4
-                G['haskell_indent_case'] = 4
-                G['haskell_indent_let'] = 4
-                G['haskell_indent_where'] = 2
-                G['haskell_indent_before_where'] = 4
-                G['haskell_indent_after_bare_where'] = 4
-                G['haskell_indent_do'] = 4
-                G['haskell_indent_in'] = 4
-                G['haskell_indent_guard'] = 4
-
-            end
-        }
-        use {
             'plasticboy/vim-markdown',
             ft = { 'markdown' },
             config = function()

@@ -48,18 +48,6 @@ in {
     cleanTmpDir = true;
     kernelParams = [ "quiet" ];
     consoleLogLevel = 3;
-
-    loader = {
-      grub = {
-        extraConfig = ''
-          if keystatus --shift ; then
-          set timeout=-1
-          else
-          set timeout=0
-          fi
-        '';
-      };
-    };
   };
 
   security.sudo.wheelNeedsPassword = false; # wheel ALL=(ALL) NOPASSWD:ALL
@@ -100,8 +88,6 @@ in {
     command-not-found.enable = false;
     zsh = {
       enable = true;
-      enableGlobalCompInit = false;
-      enableCompletion = false;
       histSize = 2000;
       histFile = "$HOME/.zsh/HISTFILE";
     };
@@ -125,7 +111,6 @@ in {
       gdb
       go
       gopls
-      haskell-language-server
       hyperfine
       jq
       libnotify
@@ -143,7 +128,6 @@ in {
       rust-analyzer
       rustup
       stlink
-      stylish-haskell
       sumneko-lua-language-server
       tabbed
       texlive.combined.scheme-small
@@ -173,7 +157,6 @@ in {
       (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
       font-awesome
       material-design-icons
-      sarasa-gothic
       nur.repos.devins2518.iosevka-serif
       tenderness
     ];
