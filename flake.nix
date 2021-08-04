@@ -33,6 +33,7 @@
         ./HM/tmux.nix
         ./HM/xorg-hm.nix
         ./HM/zathura.nix
+        ./HM/configFolder.nix
         ./xorg.nix
         ./wayland.nix
         ########### Done fully i think
@@ -97,6 +98,7 @@
                   imports = [
                     alacritty
                     bspwm
+                    configFolder
                     defaults
                     dev
                     dunst
@@ -139,6 +141,7 @@
                   with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                     imports = [
                       alacritty
+                      configFolder
                       defaults
                       git
                       gtk

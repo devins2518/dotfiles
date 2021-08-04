@@ -125,6 +125,7 @@ in {
       gdb
       go
       gopls
+      haskell-language-server
       hyperfine
       jq
       libnotify
@@ -142,6 +143,7 @@ in {
       rust-analyzer
       rustup
       stlink
+      stylish-haskell
       sumneko-lua-language-server
       tabbed
       texlive.combined.scheme-small

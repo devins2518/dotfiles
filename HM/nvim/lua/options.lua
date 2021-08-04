@@ -88,4 +88,6 @@ Augroup('Markdown', {
 --     [[autocmd VimEnter * wincmd p]]
 -- })
 
-Augroup('Format', { [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix FormatWrite]] })
+Augroup('Format', {
+    [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix,*.hs,*.lhs silent! FormatWrite]]
+})

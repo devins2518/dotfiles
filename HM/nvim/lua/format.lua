@@ -4,20 +4,20 @@ require('formatter').setup({
         lua = {
             function()
                 return {
-                    exe = "lua-format",
+                    exe = 'lua-format',
                     args = {
-                        "-i",
-                        "--break-after-operator",
-                        "--break-after-table-lb",
-                        "--break-before-table-rb",
-                        "--chop-down-table",
-                        "--double-quote-to-single-quote",
-                        "--no-align-args",
-                        "--no-align-parameter",
-                        "--no-align-table-field",
-                        "--no-keep-simple-control-block-one-line",
-                        "--no-keep-simple-function-one-line",
-                        "--spaces-inside-table-braces"
+                        '-i',
+                        '--break-after-operator',
+                        '--break-after-table-lb',
+                        '--break-before-table-rb',
+                        '--chop-down-table',
+                        '--double-quote-to-single-quote',
+                        '--no-align-args',
+                        '--no-align-parameter',
+                        '--no-align-table-field',
+                        '--no-keep-simple-control-block-one-line',
+                        '--no-keep-simple-function-one-line',
+                        '--spaces-inside-table-braces'
                     },
                     stdin = true
                 }
@@ -26,7 +26,7 @@ require('formatter').setup({
         cpp = {
             function()
                 return {
-                    exe = "clang-format",
+                    exe = 'clang-format',
                     args = {},
                     stdin = true,
                     cwd = vim.fn.expand('%:p:h') -- Run clang-format in cwd of the file.
@@ -35,7 +35,13 @@ require('formatter').setup({
         },
         nix = {
             function()
-                return { exe = "nixfmt", stdin = true }
+                return { exe = 'nixfmt', stdin = true }
+            end
+        },
+        haskell = {
+            function()
+                return
+                    { exe = 'stylish-haskell', args = { '-i' }, stdin = false }
             end
         }
     }

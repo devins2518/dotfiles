@@ -91,11 +91,12 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local nvim_lsp = require('lspconfig')
 local servers = {
     'clangd',
-    'rust_analyzer',
     'gopls',
-    'zls',
+    'hls',
     'rnix',
-    'sumneko_lua'
+    'rust_analyzer',
+    'sumneko_lua',
+    'zls'
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup { on_attach = lsp_config.common_on_attach }
@@ -115,6 +116,10 @@ nvim_lsp.gopls.setup {
     settings = {
         gopls = { staticcheck = true, env = { GOFLAGS = '-tags=test' } }
     }
+}
+
+nvim_lsp.hls.setup {
+    settings = { haskell = { formattingProvider = 'stylish-haskell' } }
 }
 
 -- TODO: fix

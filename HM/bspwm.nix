@@ -33,7 +33,7 @@ in {
           bspc desktop \^2 --layout monocle
           bspc rule -a Firefox desktop='^2' layout=monocle follow=on
           bspc rule -a Gimp-2.10 desktop='^2' layout=monocle follow=on
-          bspc rule -a discord desktop='^3' layout=monocle follow=on
+          bspc rule -a discord desktop='^3' layout=monocle
           bspc rule -a Pavucontrol state=floating rectangle=1000x750+450+70
           bspc rule -a Nm-connection-editor state=floating rectangle=600x600+500+70
         '';

@@ -30,7 +30,7 @@ treesitter.setup {
             '#3d59a1',
             '#73daca',
             '#41a6b5',
-            '#b4f9f8' -- "#1abc9c"  , "#737aa2", "#9d7cd8"
+            '#b4f9f8'
         }
     }
 }
