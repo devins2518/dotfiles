@@ -5,6 +5,8 @@
     zsh = {
       enable = true;
 
+      enableCompletion = false;
+
       history = {
         path = ".zsh/HISTFILE";
         size = 2000;
@@ -39,6 +41,26 @@
       '';
 
       plugins = [
+        {
+          name = "nix-zsh-completions";
+          file = "nix-zsh-completions.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "spwhitt";
+            repo = "nix-zsh-completions";
+            rev = "468d8cf752a62b877eba1a196fbbebb4ce4ebb6f";
+            sha256 = "sha256-TWgo56l+FBXssOYWlAfJ5j4pOHNmontOEolcGdihIJs=";
+          };
+        }
+        {
+          name = "zsh-completions";
+          file = "zsh-completions.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "zsh-users";
+            repo = "zsh-completions";
+            rev = "d4511c23659381b56dec8be8c8553b7ff3dc5fd8";
+            sha256 = "sha256-OOMabAhRcgs7YpCx+g6yIqTHDMwMueBD+s7P+WCdHPk=";
+          };
+        }
         {
           name = "zsh-powerlevel10k";
           file = "powerlevel10k.zsh-theme";

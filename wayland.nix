@@ -14,7 +14,7 @@
       NO_AT_BRIDGE = "1";
     };
 
-    systemPackages = with pkgs; [ river-git kile-wl-git ];
+    systemPackages = with pkgs; [ river-git kile-wl-git xwayland ];
   };
   services.greetd = {
     enable = true;

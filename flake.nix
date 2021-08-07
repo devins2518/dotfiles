@@ -86,46 +86,40 @@
 
       hosts = {
         dev = {
-          modules = with self.nixosModules; [
-            # system wide config
-            ./hosts/dev/configuration.nix
-            network
-            ({ pkgs, ... }: {
-              home-manager.useUserPackages = true;
-              home-manager.useGlobalPkgs = true;
-              home-manager.users.devin = ({ config, pkgs, ... }:
-                with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                  imports = [
-                    alacritty
-                    bspwm
-                    configFolder
-                    defaults
-                    dev
-                    dunst
-                    git
-                    gtk
-                    mpv
-                    nvfancontrol
-                    nvim
-                    pass
-                    pdf
-                    polybar
-                    qt
-                    rofi
-                    tmux
-                    xorg-hm
-                    zathura
-                    zsh
-                  ];
+          modules = with self.nixosModules;
+            [
+              # system wide config
+              ./hosts/dev/configuration.nix
+              network
+              ({ pkgs, ... }: {
+                home-manager.useUserPackages = true;
+                home-manager.useGlobalPkgs = true;
+                home-manager.users.devin = ({ config, pkgs, ... }:
+                  with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+                    imports = [
+                      alacritty
+                      defaults
+                      git
+                      gtk
+                      mpv
+                      nvfancontrol
+                      nvim
+                      pass
+                      pdf
+                      qt
+                      tmux
+                      zathura
+                      zsh
+                    ] ++ dev.x-org ++ dev.default;
 
-                  home.packages = with pkgs; [
-                    autoclose
-                    compilenote
-                    screenshot
-                  ];
-                });
-            })
-          ];
+                    home.packages = with pkgs; [
+                      autoclose
+                      compilenote
+                      screenshot
+                    ];
+                  });
+              })
+            ] ++ x-org;
         };
         devin = {
           modules = with self.nixosModules;

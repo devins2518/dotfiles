@@ -10,6 +10,8 @@
 
   # Use the GRUB boot loader.
   boot = {
+    kernelParams = [ "quiet" ];
+    consoleLogLevel = 3;
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -18,6 +20,7 @@
       grub = {
         enable = true;
         devices = [ "nodev" ];
+        default = "saved";
         version = 2;
         efiSupport = true;
 
@@ -30,6 +33,24 @@
             search --fs-uuid --set=root F5F4-286C
             chainloader /EFI/Microsoft/Boot/bootmgfw.efi
           }
+        '';
+
+        extraConfig = ''
+          GRUB_SAVEDEFAULT=true
+
+          if [ "x\''${timeout}" != "x-1" ]; then
+            if keystatus; then
+              if keystatus --shift; then
+                set timeout=-1
+              else
+                set timeout=0
+              fi
+            else
+              if sleep --interruptible ''${GRUB_HIDDEN_TIMEOUT} ; then
+                set timeout=0
+              fi
+            fi
+          fi
         '';
       };
     };

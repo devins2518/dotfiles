@@ -1,1 +1,5 @@
-{ imports = [ ./bspwm.nix ./rofi.nix ./polybar.nix ./zsh.nix ]; }
+rec {
+  default = [ ./zsh.nix ];
+  x-org = [ ./bspwm.nix ./rofi.nix ./polybar.nix ];
+  wayland = [ ];
+}
