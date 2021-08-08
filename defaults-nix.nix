@@ -148,10 +148,7 @@ in {
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" ];
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
+  console = { keyMap = "us"; };
   fonts = {
     fonts = with pkgs; [
       (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
@@ -159,6 +156,7 @@ in {
       material-design-icons
       nur.repos.devins2518.iosevka-serif
       tenderness
+      spleen
     ];
   };
 }

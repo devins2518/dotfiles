@@ -21,6 +21,8 @@
         ########### Not done
         # add other scripts here
         ./HM/shell-scripts.nix
+        ./HM/river.nix
+        ./HM/foot.nix
         # ./HM/kakoune.nix
         ########### Done for despair
         ./HM/bspwm.nix
@@ -77,12 +79,20 @@
           home-manager.useGlobalPkgs = true;
           home-manager.users.devin = ({ config, pkgs, ... }:
             with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-              imports = [ bspwm dunst polybar rofi xorg-hm ];
+              imports = [ alacritty bspwm dunst polybar rofi xorg-hm ];
             });
         })
       ];
 
-      wayland-opt = with self.nixosModules; [ wayland ];
+      wayland-opt = with self.nixosModules; [
+        wayland
+        ({ pkgs, ... }: {
+          home-manager.useUserPackages = true;
+          home-manager.useGlobalPkgs = true;
+          home-manager.users.devin =
+            ({ config, pkgs, ... }: { imports = [ foot river ]; });
+        })
+      ];
 
       hosts = {
         dev = {
@@ -97,7 +107,6 @@
                 home-manager.users.devin = ({ config, pkgs, ... }:
                   with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                     imports = [
-                      alacritty
                       defaults
                       git
                       gtk
@@ -134,7 +143,6 @@
                 home-manager.users.devin = ({ config, pkgs, ... }:
                   with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                     imports = [
-                      alacritty
                       configFolder
                       defaults
                       git

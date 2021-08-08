@@ -13,7 +13,7 @@ in {
     keybindings = {
       "super + Return" = "alacritty";
       # program launcher
-      "super + d" = "rofi -show drun";
+      "super + space" = "rofi -show drun";
       # Open rofi as root
       "super + shift + d" = "sudo rofi -show drun -show-icons";
       # make sxhkd reload its configuration files:

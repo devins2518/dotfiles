@@ -1,4 +1,6 @@
-{ pkgs, config, lib, inputs, ... }: {
+{ pkgs, config, lib, inputs, ... }:
+let nur-packages = with pkgs.nur.repos.devins2518; [ paper midle ];
+in {
   environment = {
     sessionVariables = {
       XDG_SESSION_TYPE = "wayland";
@@ -14,7 +16,9 @@
       NO_AT_BRIDGE = "1";
     };
 
-    systemPackages = with pkgs; [ river-git kile-wl-git xwayland ];
+    systemPackages = with pkgs;
+      [ river-git kile-wl-git xwayland swaylock wofi light libinput wlr-randr ]
+      ++ nur-packages;
   };
   services.greetd = {
     enable = true;

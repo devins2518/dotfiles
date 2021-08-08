@@ -38,12 +38,7 @@ require('telescope').setup {
         grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
         qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new, -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
-        mappings = {
-            n = {
-                ['q'] = require'telescope.actions'.close,
-                ['jk'] = require'telescope.actions'.close
-            }
-        }
+        mappings = { n = { ['q'] = require'telescope.actions'.close } }
     },
     pickers = {
         buffers = { sort_lastused = true, theme = 'dropdown', previewer = true }
