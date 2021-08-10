@@ -43,6 +43,10 @@ rec {
     # Mod+H and Mod+L to decrease/increase the main ratio of rivertile(1)
     riverctl map normal $mod H send-layout-cmd rivertile "main-ratio -0.05"
     riverctl map normal $mod L send-layout-cmd rivertile "main-ratio +0.05"
+    riverctl map normal $mod Print spawn 'screenshot 0 0'
+    riverctl map normal $mod+Shift Print spawn 'screenshot 1 0'
+    riverctl map normal $mod+Control Print spawn 'screenshot 0 1'
+    riverctl map normal $mod+Shift+Control Print spawn 'screenshot 1 1'
 
     # Mod+Shift+H and Mod+Shift+L to increment/decrement the main count of rivertile(1)
     riverctl map normal $mod+Shift H send-layout-cmd rivertile "main-count +1"
