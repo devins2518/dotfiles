@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, clipboard, sstool, selarg, ... }:
 
 rec {
   screenshot = pkgs.writeScriptBin "screenshot" ''
@@ -7,30 +7,29 @@ rec {
     # syntax screenshot.sh local fullscreen
 
     if [ $1 == "1" ]; then
+        filename=$HOME/Pictures/$(date "+%Y-%m-%d_%H%M%S")_${sstool}.png
         if [ $2 == "1" ]; then
-            maim $HOME/'Pictures/%Y-%m-%d_%H%M%S-$wx$h_maim.png'
+            ${sstool} $filename
         else
-            maim -s $HOME/'Pictures/%Y-%m-%d_%H%M%S-$wx$h_maim.png'
+            ${sstool} ${selarg} $filename
         fi
-        notify-send -t 2000 "Screenshot taken!"
+        # notify-send -t 2000 "Screenshot taken!"
         exit 0
     else
         if [ $2 == "1" ]; then
-            maim /tmp/screenshot.png
+            ${sstool} /tmp/screenshot.png
         else
-            maim -s /tmp/screenshot.png
+            ${sstool} ${selarg} /tmp/screenshot.png
         fi
     fi
     if [[ $? == 1 ]]; then exit 1; fi
-    notify-send -t 2000 "Screenshot taken, uploading..."
+    # notify-send -t 2000 "Screenshot taken, uploading..."
 
     # URL to uplaod to
     url="https://0x0.st"
-    # JSON key to image URl
-    image="url"
 
-    curl -F "file=@/tmp/screenshot.png" $url | xclip -selection clipboard
-    notify-send "Screenshot uploaded!"
+    curl -F "file=@/tmp/screenshot.png" $url | ${clipboard}
+    # notify-send "Screenshot uploaded!"
     rm /tmp/screenshot.png
   '';
 

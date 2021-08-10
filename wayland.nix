@@ -17,8 +17,21 @@ in {
     };
 
     systemPackages = with pkgs;
-      [ river-git kile-wl-git xwayland swaylock wofi light libinput wlr-randr ]
-      ++ nur-packages;
+      [
+        grim
+        kile-wl-git
+        libinput
+        light
+        quintom-cursor-theme
+        river-git
+        slurp
+        swaylock
+        whitesur-gtk-theme
+        wl-clipboard
+        wlr-randr
+        wofi
+        xwayland
+      ] ++ nur-packages;
   };
   services.greetd = {
     enable = true;

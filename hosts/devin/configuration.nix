@@ -60,10 +60,18 @@
     wacom.enable = false;
     dpi = 192;
     layout = "us";
-    displayManager.lightdm.greeters.gtk.cursorTheme.size = 40;
+    displayManager.lightdm.greeters.gtk.cursorTheme.size = 32;
   };
 
-  systemd.services.iptsd.enable = false;
+  systemd = {
+    services.iptsd.enable = false;
+    sleep.extraConfig = ''
+      AllowSuspend=yes
+      AllowHibernation=yes
+      AllowSuspendThenHibernate=yes
+      HibernateDelaySec=1h
+    '';
+  };
 
   # check config_hz in /proc/config.gz
   powerManagement = {
@@ -101,11 +109,11 @@
   # List packages installed in system profile.
   environment = {
     variables = {
-      GDK_SCALE = "2";
-      GDK_DPI_SCALE = "0.5";
-      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+      # GDK_SCALE = "2";
+      # GDK_DPI_SCALE = "0.5";
+      # _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
       # Doesn't work?
-      XCURSOR_SIZE = "32px";
+      XCURSOR_SIZE = "24px";
     };
   };
 

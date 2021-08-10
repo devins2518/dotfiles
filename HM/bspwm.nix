@@ -9,11 +9,6 @@ in {
   home.packages = with pkgs; [ bspwm ];
   xsession = {
     enable = true;
-    pointerCursor = {
-      name = "Quintom_Ink";
-      package = pkgs.quintom-cursor-theme;
-    };
-
     windowManager = {
       bspwm = {
         enable = true;

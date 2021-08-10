@@ -92,7 +92,6 @@ local nvim_lsp = require('lspconfig')
 local servers = {
     'clangd',
     'gopls',
-    'hls',
     'rnix',
     'rust_analyzer',
     'sumneko_lua',
@@ -116,10 +115,6 @@ nvim_lsp.gopls.setup {
     settings = {
         gopls = { staticcheck = true, env = { GOFLAGS = '-tags=test' } }
     }
-}
-
-nvim_lsp.hls.setup {
-    settings = { haskell = { formattingProvider = 'stylish-haskell' } }
 }
 
 -- TODO: fix

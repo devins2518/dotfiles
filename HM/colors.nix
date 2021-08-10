@@ -1,4 +1,4 @@
-{ }:
+{ lib ? null, ... }:
 
 rec {
   primary = {
@@ -26,6 +26,27 @@ rec {
     magenta = "#bb9af7";
     cyan = "#0db9d7";
     white = "#acb0d0";
+  };
+
+  foot = with lib.strings; {
+    foreground = removePrefix "#" primary.foreground;
+    background = removePrefix "#" primary.background;
+    regular0 = removePrefix "#" normal.black;
+    regular1 = removePrefix "#" normal.red;
+    regular2 = removePrefix "#" normal.green;
+    regular3 = removePrefix "#" normal.yellow;
+    regular4 = removePrefix "#" normal.blue;
+    regular5 = removePrefix "#" normal.magenta;
+    regular6 = removePrefix "#" normal.cyan;
+    regular7 = removePrefix "#" normal.white;
+    bright0 = removePrefix "#" bright.black;
+    bright1 = removePrefix "#" bright.red;
+    bright2 = removePrefix "#" bright.green;
+    bright3 = removePrefix "#" bright.yellow;
+    bright4 = removePrefix "#" bright.blue;
+    bright5 = removePrefix "#" bright.magenta;
+    bright6 = removePrefix "#" bright.cyan;
+    bright7 = removePrefix "#" bright.white;
   };
 
   vim = {

@@ -35,6 +35,7 @@
         ./HM/tmux.nix
         ./HM/xorg-hm.nix
         ./HM/zathura.nix
+        ./HM/cursor.nix
         ./HM/configFolder.nix
         ./xorg.nix
         ./wayland.nix
@@ -44,6 +45,7 @@
         ###########
         ./HM/alacritty.nix
         ./HM/defaults.nix
+        ./HM/dconf.nix
         ./HM/git.nix
         ./HM/gtk.nix
         ./HM/mpv.nix
@@ -78,8 +80,15 @@
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
           home-manager.users.devin = ({ config, pkgs, ... }:
-            with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+            with import ./HM/shell-scripts.nix {
+              inherit pkgs;
+              clipboard = "xclip -selection clipboard";
+              sstool = "maim";
+              selarg = "-s";
+            }; {
               imports = [ alacritty bspwm dunst polybar rofi xorg-hm ];
+
+              home.packages = with pkgs; [ autoclose compilenote screenshot ];
             });
         })
       ];
@@ -89,8 +98,17 @@
         ({ pkgs, ... }: {
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
-          home-manager.users.devin =
-            ({ config, pkgs, ... }: { imports = [ foot river ]; });
+          home-manager.users.devin = ({ config, pkgs, ... }:
+            with import ./HM/shell-scripts.nix {
+              inherit pkgs;
+              clipboard = "wl-copy";
+              sstool = "grim -c";
+              selarg = ''-g "$(slurp)"'';
+            }; {
+              imports = [ foot river dconf ];
+
+              home.packages = with pkgs; [ autoclose compilenote screenshot ];
+            });
         })
       ];
 
@@ -104,29 +122,23 @@
               ({ pkgs, ... }: {
                 home-manager.useUserPackages = true;
                 home-manager.useGlobalPkgs = true;
-                home-manager.users.devin = ({ config, pkgs, ... }:
-                  with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                    imports = [
-                      defaults
-                      git
-                      gtk
-                      mpv
-                      nvfancontrol
-                      nvim
-                      pass
-                      pdf
-                      qt
-                      tmux
-                      zathura
-                      zsh
-                    ] ++ dev.x-org ++ dev.default;
-
-                    home.packages = with pkgs; [
-                      autoclose
-                      compilenote
-                      screenshot
-                    ];
-                  });
+                home-manager.users.devin = ({ config, pkgs, ... }: {
+                  imports = [
+                    defaults
+                    git
+                    gtk
+                    mpv
+                    cursor
+                    nvfancontrol
+                    nvim
+                    pass
+                    pdf
+                    qt
+                    tmux
+                    zathura
+                    zsh
+                  ] ++ dev.x-org ++ dev.default;
+                });
               })
             ] ++ x-org;
         };
@@ -140,32 +152,25 @@
               ({ pkgs, ... }: {
                 home-manager.useUserPackages = true;
                 home-manager.useGlobalPkgs = true;
-                home-manager.users.devin = ({ config, pkgs, ... }:
-                  with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                    imports = [
-                      configFolder
-                      defaults
-                      git
-                      gtk
-                      mpv
-                      nvim
-                      pass
-                      pdf
-                      qt
-                      tmux
-                      zathura
-                      zsh
-                    ] ++ devin.x-org ++ devin.default;
-
-                    home.packages = with pkgs; [
-                      autoclose
-                      compilenote
-                      screenshot
-                      airplane-mode
-                    ];
-                  });
+                home-manager.users.devin = ({ config, pkgs, ... }: {
+                  imports = [
+                    configFolder
+                    defaults
+                    git
+                    cursor
+                    gtk
+                    mpv
+                    nvim
+                    pass
+                    pdf
+                    qt
+                    tmux
+                    zathura
+                    zsh
+                  ] ++ devin.wayland ++ devin.default;
+                });
               })
-            ] ++ x-org;
+            ] ++ wayland-opt;
         };
       };
 

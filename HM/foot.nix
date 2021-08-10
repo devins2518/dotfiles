@@ -1,6 +1,6 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 
-let theme = import ./colors.nix { };
+let theme = import ./colors.nix { lib = lib; };
 in {
   programs.foot = {
     enable = true;
@@ -10,10 +10,11 @@ in {
         font = "Iosevka Nerd Font Mono:size=12";
         font-bold = "Iosevka Nerd Font Mono:size=12";
         pad = "20x20";
+        dpi-aware = "yes";
       };
 
       mouse = { hide-when-typing = "yes"; };
-      tweak = { allow-overflowing-double-width-glyphs = "true"; };
+      colors = theme.foot;
       # font = {
       #   normal = {
       #     style = "Medium";

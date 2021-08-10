@@ -6,8 +6,6 @@ let
   bright = theme.bright;
 in {
   xsession = {
-    pointerCursor.size = 40;
-
     windowManager = {
       bspwm = {
         monitors = { "eDP1" = [ "I" "II" "III" "IV" "V" "VI" ]; };

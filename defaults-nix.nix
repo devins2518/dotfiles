@@ -40,7 +40,8 @@ in {
         "$6$frNducsvL8EJ7hUe$P6PbYTwjzFpi9ZIPl2lczGlg4Lx5B0prno1STZe/mAo4h8zSPCSETzaBpQl0b911ujMFinaNG580o78ss6lIm.";
       shell = pkgs.zsh;
       description = "Devin Singh";
-      extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+      extraGroups =
+        [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
     };
   };
 
@@ -135,8 +136,6 @@ in {
       tree
       wkhtmltopdf
       xarchiver
-      xclip
-      xdotool
       zls
       zsh
     ] ++ nur-packages;

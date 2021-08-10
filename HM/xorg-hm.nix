@@ -31,6 +31,7 @@ in {
       # close and kill
       "super + {_,shift + }q" = "bspc node -{c,k}";
       # alternate between the tiled and monocle layout
+      # ---
       "super + m" = "bspc desktop -l next";
       # Picture in picture mode
       "super + p" =
