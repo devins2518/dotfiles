@@ -141,7 +141,8 @@ in {
     ] ++ nur-packages;
 
   # Needed for home manager to not get borked
-  services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  # https://nix-community.github.io/home-manager/options.html#opt-services.gpg-agent.pinentryFlavor
+  services.dbus.packages = with pkgs; [ gnome3.dconf gcr ];
 
   time.timeZone = "America/Chicago";
 

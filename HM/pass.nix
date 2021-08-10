@@ -5,6 +5,7 @@
 
   services.gpg-agent = {
     enable = true;
-    pinentryFlavor = "gtk2";
+    pinentryFlavor = "gnome3";
   };
+
 }
