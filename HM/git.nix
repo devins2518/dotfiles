@@ -18,6 +18,8 @@
       cush = "!git commit && git push";
     };
 
+    ignores = [ "**/shell.nix" ];
+
     extraConfig = {
       pull = { rebase = true; };
       advice = {

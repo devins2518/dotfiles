@@ -47,6 +47,8 @@ rec {
     bright5 = removePrefix "#" bright.magenta;
     bright6 = removePrefix "#" bright.cyan;
     bright7 = removePrefix "#" bright.white;
+
+    alpha = "0.8";
   };
 
   vim = {

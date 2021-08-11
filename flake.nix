@@ -34,6 +34,7 @@
         ./HM/rofi.nix
         ./HM/tmux.nix
         ./HM/xorg-hm.nix
+        ./HM/mako.nix
         ./HM/zathura.nix
         ./HM/cursor.nix
         ./HM/configFolder.nix
@@ -105,7 +106,7 @@
               sstool = "grim -c";
               selarg = ''-g "$(slurp)"'';
             }; {
-              imports = [ foot river dconf ];
+              imports = [ foot river dconf mako ];
 
               home.packages = with pkgs; [ autoclose compilenote screenshot ];
             });

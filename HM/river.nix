@@ -1,16 +1,22 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
-rec {
+let
+  theme = import ./colors.nix { };
+  normal = theme.normal;
+  bright = theme.bright;
+  vim = theme.vim;
+in rec {
   home.packages = with pkgs; [ pamixer ];
 
   xdg.configFile."river/init".text = ''
     #!/usr/bin/env bash
 
-    set -x
-
-    riverctl spawn "wlr-randr --output eDP-1 --scale 2"
-    riverctl spawn 'kile'
+    riverctl spawn "wlr-randr --output eDP-1 --scale 2 &"
     riverctl spawn "paper -i /etc/wallpaper/wallpaper.png"
+    riverctl spawn 'kile'
+    riverctl spawn 'mako'
+
+    source ~/.config/river/layout
 
     # Use the "logo" key as the primary modifier
     mod="Mod4"
@@ -31,6 +37,17 @@ rec {
     riverctl map normal $mod+Shift J swap next
     riverctl map normal $mod+Shift K swap previous
 
+
+    # Border color focused
+    riverctl border-color-focused "0x${
+      lib.strings.removePrefix "#" normal.blue
+    }"
+
+    # Border color focused
+    riverctl border-color-unfocused "0x${
+      lib.strings.removePrefix "#" normal.cyan
+    }"
+
     # Mod+Period and Mod+Comma to focus the next/previous output
     riverctl map normal $mod Period focus-output next
     riverctl map normal $mod Comma focus-output previous
@@ -40,17 +57,14 @@ rec {
     riverctl map normal $mod+Shift Period send-to-output next
     riverctl map normal $mod+Shift Comma send-to-output previous
 
-    # Mod+H and Mod+L to decrease/increase the main ratio of rivertile(1)
-    riverctl map normal $mod H send-layout-cmd rivertile "main-ratio -0.05"
-    riverctl map normal $mod L send-layout-cmd rivertile "main-ratio +0.05"
-    riverctl map normal $mod Print spawn 'screenshot 0 0'
-    riverctl map normal $mod+Shift Print spawn 'screenshot 1 0'
-    riverctl map normal $mod+Control Print spawn 'screenshot 0 1'
-    riverctl map normal $mod+Shift+Control Print spawn 'screenshot 1 1'
-
-    # Mod+Shift+H and Mod+Shift+L to increment/decrement the main count of rivertile(1)
-    riverctl map normal $mod+Shift H send-layout-cmd rivertile "main-count +1"
-    riverctl map normal $mod+Shift L send-layout-cmd rivertile "main-count -1"
+    riverctl map normal None Print spawn 'screenshot 0 0'
+    riverctl map normal None+Shift Print spawn 'screenshot 1 0'
+    riverctl map normal None+Control Print spawn 'screenshot 0 1'
+    riverctl map normal None+Shift+Control Print spawn 'screenshot 1 1'
+    riverctl input "1118:2024:Microsoft_Surface_Type_Cover_Touchpad" accel-profile adaptive
+    riverctl input "1118:2024:Microsoft_Surface_Type_Cover_Touchpad" pointer-accel 0
+    riverctl input "1118:2024:Microsoft_Surface_Type_Cover_Touchpad" natural-scroll enabled
+    riverctl input "1118:2024:Microsoft_Surface_Type_Cover_Touchpad" tap enabled
 
     # Mod+Alt+{H,J,K,L} to move views
     riverctl map normal $mod+Mod1 H move left 100
@@ -93,24 +107,15 @@ rec {
         riverctl map normal $mod+Shift+Control $i toggle-view-tags $tags
     done
 
-
     # Mod+0 to focus all tags
     # Mod+Shift+0 to tag focused view with all tags
     all_tags=$(((1 << 32) - 1))
     riverctl map normal $mod 0 set-focused-tags $all_tags
     riverctl map normal $mod+Shift 0 set-view-tags $all_tags
-
-    # Mod+Space to toggle float
-    # riverctl map normal $mod Space toggle-float
+    riverctl map normal $mod Z zoom
 
     # Mod+F to toggle fullscreen
     riverctl map normal $mod F toggle-fullscreen
-
-    # Mod+{Up,Right,Down,Left} to change layout orientation
-    riverctl map normal $mod Up    send-layout-cmd rivertile "main-location top"
-    riverctl map normal $mod Right send-layout-cmd rivertile "main-location right"
-    riverctl map normal $mod Down  send-layout-cmd rivertile "main-location bottom"
-    riverctl map normal $mod Left  send-layout-cmd rivertile "main-location left"
 
     # Declare a passthrough mode. This mode has only a single mapping to return to
     # normal mode. This makes it useful for testing a nested wayland compositor
@@ -142,6 +147,9 @@ rec {
         riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
     done
 
+    # Focused view will stay at top of stack
+    riverctl attach-mode bottom
+
     # Set repeat rate
     riverctl set-repeat 50 300
 
@@ -152,10 +160,51 @@ rec {
     # Set app-ids of views which should use client side decorations
     riverctl csd-filter-add "gedit"
 
-    # Set and exec into the default layout generator, rivertile.
-    # River will send the process group of the init executable SIGTERM on exit.
-    riverctl default-layout rivertile
-    riverctl spawn "rivertile"
+    # Mod+H and Mod+L to decrease/increase the width of the master column by 5%
+    riverctl map normal $mod H send-layout-cmd "kile" "mod_main_factor -0.05"
+    riverctl map normal $mod L send-layout-cmd "kile" "mod_main_factor 0.05"
+
+    # Mod+Shift+{K, L} to increment/decrement the number of master views in the layout
+    riverctl map normal $mod+Control K send-layout-cmd "kile" "mod_main_amount 1"
+    riverctl map normal $mod+Control J send-layout-cmd "kile" "mod_main_amount -1"
+
+    # Mod+Shift+{K, L} to move the index of the main views in the layout
+    riverctl map normal Control+Mod1 K send-layout-cmd "kile" "mod_main_index 1"
+    riverctl map normal Control+Mod1 J send-layout-cmd "kile" "mod_main_index -1"
+
+    # Mod+Alt+{J,K} to decrease/increase the view padding
+    riverctl map normal $mod+Mod1 J send-layout-cmd "kile" "mod_view_padding -5"
+    riverctl map normal $mod+Mod1 K send-layout-cmd "kile" "mod_view_padding +5"
+
+    # Custom layouts
+    riverctl map normal $mod T send-layout-cmd "kile" "focused $DECK"
+    riverctl map normal $mod G send-layout-cmd "kile" "focused $STACK"
+    riverctl map normal $mod D send-layout-cmd "kile" "focused $DWINDLE"
+    # riverctl map normal $mod Q send-layout-cmd "kile" "focused $CENTERED"
+    riverctl map normal $mod+Shift G send-layout-cmd "kile" "focused $RSTACK"
+    riverctl map normal $mod+Shift T send-layout-cmd "kile" "focused $RDECK"
+
+    # Default layout
+    riverctl default-layout kile
+
+    # Kile configuration
+    for output in "eDP-1"
+    do
+      case $output in
+        eDP-1)
+          riverctl send-layout-cmd kile "all $DECK"
+          riverctl send-layout-cmd kile "view_padding 10"
+          riverctl send-layout-cmd kile "smart_padding false"
+          ;;
+        HDMI-A-1)
+          riverctl send-layout-cmd kile "all $RDECK"
+          riverctl send-layout-cmd kile "8 $GROUP"
+          riverctl send-layout-cmd kile "view_padding 10"
+          ;;
+      esac
+      riverctl send-layout-cmd kile "outer_padding 10"
+      riverctl focus-output next
+    done
   '';
   xdg.configFile."river/init".executable = true;
 
@@ -193,7 +242,8 @@ rec {
       # After 3 splits windows are stacked
       read -r -d ''' DWINDLE << EOM
       (
-        { ver: hor $HORIZONTAL
+        { ver: 
+          hor $HORIZONTAL
         } 1 0.55
       )
       EOM

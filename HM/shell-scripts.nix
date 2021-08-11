@@ -13,7 +13,7 @@ rec {
         else
             ${sstool} ${selarg} $filename
         fi
-        # notify-send -t 2000 "Screenshot taken!"
+        notify-send -t 2000 "Screenshot taken!"
         exit 0
     else
         if [ $2 == "1" ]; then
@@ -23,13 +23,13 @@ rec {
         fi
     fi
     if [[ $? == 1 ]]; then exit 1; fi
-    # notify-send -t 2000 "Screenshot taken, uploading..."
+    notify-send -t 2000 "Screenshot taken, uploading..."
 
     # URL to uplaod to
     url="https://0x0.st"
 
     curl -F "file=@/tmp/screenshot.png" $url | ${clipboard}
-    # notify-send "Screenshot uploaded!"
+    notify-send "Screenshot uploaded!"
     rm /tmp/screenshot.png
   '';
 

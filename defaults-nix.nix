@@ -142,7 +142,7 @@ in {
 
   # Needed for home manager to not get borked
   # https://nix-community.github.io/home-manager/options.html#opt-services.gpg-agent.pinentryFlavor
-  services.dbus.packages = with pkgs; [ gnome3.dconf gcr ];
+  services.dbus.packages = with pkgs; [ gnome3.dconf ];
 
   time.timeZone = "America/Chicago";
 
