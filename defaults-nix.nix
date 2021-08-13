@@ -11,24 +11,9 @@ in {
   home-manager.useGlobalPkgs = true;
 
   environment = {
-    homeBinInPath = true;
-    sessionVariables = { NIXOS_CONFIG = "/home/devin/Repos/dotfiles"; };
     shellAliases = {
-      nix-repl = "nix repl ${inputs.utils.lib.repl}";
-      nshell = "nix-shell";
-      fupdate =
-        "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'";
-      fclup =
-        "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#'; sudo nix-collect-garbage -d";
-      ls = "ls -l --color=always";
-      grep = "rg";
     };
     etc."wallpaper/wallpaper.png" = {
-      source = pkgs.fetchurl {
-        url =
-          "https://raw.githubusercontent.com/manderio/manpapers/main/edited/devins2518/dark_road_upscaled_tokyonight.png";
-        sha256 = "sha256-aebWDaDAG0wkOXLKrApbQkrrChzdrmi1Vn/JZV77nPw=";
-      };
     };
   };
 
@@ -50,8 +35,6 @@ in {
     kernelParams = [ "quiet" ];
     consoleLogLevel = 3;
   };
-
-  security.sudo.wheelNeedsPassword = false; # wheel ALL=(ALL) NOPASSWD:ALL
 
   nix = {
     extraOptions = ''
@@ -83,15 +66,6 @@ in {
       "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
       "devins2518.cachix.org-1:VQepMECpWpT95AjVOU30xz6kbrBRUMpHAOdKP/tulB0="
     ];
-  };
-
-  programs = {
-    command-not-found.enable = false;
-    zsh = {
-      enable = true;
-      histSize = 2000;
-      histFile = "$HOME/.zsh/HISTFILE";
-    };
   };
 
   nixpkgs.config = { allowUnfree = true; };
