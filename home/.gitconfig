@@ -14,3 +14,5 @@
 	colorMoved = zebra
 [core]
 	editor = nvim
+[credential]
+	helper = store
