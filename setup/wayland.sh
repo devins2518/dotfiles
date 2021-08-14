@@ -23,6 +23,8 @@ wayland_pkgs=(
     greetd-tuigreet-bin
     grim
     kile-wl
+    mako
+    midle-wl
     paper-wl
     river-git
     slurp

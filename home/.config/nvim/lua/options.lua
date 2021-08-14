@@ -90,5 +90,6 @@ Augroup('Markdown', {
 -- })
 
 Augroup('Format', {
-    [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix,*.hs,*.lhs silent! FormatWrite]]
+    [[autocmd BufWritePost *.lua,*.c,*.cpp,*.sh silent! FormatWrite]],
+    [[autocmd FileType sh silent! FormatWrite]]
 })

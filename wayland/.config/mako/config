@@ -1,0 +1,11 @@
+anchor=top-right
+border-radius=4
+border-size=4
+default-timeout=5000
+icon-path=/usr/share/icons/WhiteSur-dark
+
+group-by=app-name
+format=<b>%s</b>\n<b><span size='small' color='#6f6f6f'>%a</span></b>\n\n<span size='small'>%b</span>
+
+[urgency=high]
+ignore-timeout=1

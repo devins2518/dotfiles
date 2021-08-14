@@ -1,0 +1,43 @@
+set default-bg                  "#1a1b26"
+set default-fg                  "#acb0d0"
+
+set statusbar-bg                "#3b4261"
+set statusbar-fg                "#acb0d0"
+
+set inputbar-bg                 "#3b4261"
+set inputbar-fg                 "#7aa2f7"
+
+set notification-bg             "#acb0d0"
+set notification-fg             "#414868"
+
+set notification-error-bg       "#f7768e"
+set notification-error-fg       "#414868"
+
+set notification-warning-bg     "#e0af68"
+set notification-warning-fg     "#414868"
+
+set highlight-color             "#3d59a1"
+set highlight-active-color      "#7aa2f7"
+
+set completion-bg               "#1a1b26"
+set completion-fg               "#7aa2f7"
+
+set completion-highlight-fg     "#1a1b26"
+set completion-highlight-bg     "#acb0d0"
+
+set recolor-lightcolor          "#1a1b26"
+set recolor-darkcolor           "#acb0d0"
+
+set recolor                     "true"
+set recolor-keephue             "true"
+
+set font                        "tenderness 12"
+
+set show-recent                 "0"
+set selection-clipboard         "clipboard"
+set window-title-basename       "true"
+set statusbar-basename          "true"
+
+map <C-r> reload
+map <C-j> zoom in
+map <C-k> zoom out

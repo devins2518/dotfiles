@@ -1,6 +1,15 @@
 require('formatter').setup({
     logging = false,
     filetype = {
+        sh = {
+            function()
+                return {
+                    exe = 'shfmt',
+                    args = { '-w', '-s', '-i 4', '' .. vim.fn.expand('%:p') },
+                    stdin = false
+                }
+            end
+        },
         lua = {
             function()
                 return {

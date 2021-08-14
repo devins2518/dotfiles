@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+radio="$(nmcli radio all | awk 'FNR == 2 {print $2}')"
+
+if [ "$radio" = "enabled" ]
+ then
+    nmcli radio all off
+    notify-send "Airplane mode enabled"
+else
+    nmcli radio all on
+    notify-send "Airplane mode disabled"
+fi
+
+if rfkill list bluetooth | grep -q 'yes$' ; then
+    sudo rfkill unblock bluetooth
+else
+    sudo rfkill block bluetooth
+fi

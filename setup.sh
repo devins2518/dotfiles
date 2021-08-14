@@ -19,43 +19,60 @@ environment=(
 
 pkgs=(
     bottom
+    bunnyfetch-git
+    efibootmgr
+    eww-git
     ffmpeg
     firefox-bin
     gcc
     git
-    gopls
     grub-holdshift
     hyperfine
     inferno-git
+    iosevka-serif
     jq
     libnotify
+    light
+    linux
+    linux-firmware
+    linux-headers
     lm_sensors
     lua-format
-    lua-language-server-git
+    namcap
     neovim-git
     networkmanager
     os-prober
+    otf-tenderness
     pamixer
+    pandoc-bin
     pavucontrol
-    pcmanfm
     perf
     pulseaudio
     ripgrep
-    rust-analyzer-nightly-bin
+    rustup
+    shfmt
     spleen-font
+    stow
+    thunar
     tokei
     tree
     update-grub
     whitesur-cursor-theme-git
     whitesur-gtk-theme-git
     whitesur-icon-theme-git
-    zls
+    xdg-user-dirs
+    yay
+    zathura
     zsh
+    zsh-autosuggestions
+    zsh-completions
+    zsh-fast-syntax-highlighting
+    zsh-theme-powerlevel10k-git
 )
 
 grep "Repos/dotfiles" /etc/environment -q || { echo "DOT=/home/devin/Repos/dotfiles" | sudo tee -a /etc/environment && echo "Added DOT envvar"; }
 wallpaper="/etc/wallpaper/wallpaper.png"
-if [[ ! -f "$wallpaper" ]]; then
+if [[ ! -f $wallpaper ]]; then
     sudo mkdir /etc/wallpaper
     sudo curl https://raw.githubusercontent.com/manderio/manpapers/main/edited/devins2518/dark_road_upscaled_tokyonight.png -o $wallpaper
     echo "$wallpaper downloaded."
@@ -95,11 +112,17 @@ export pkgs
 export useronly
 export environment
 
-if [[ "$DOT_INTEL" == "1" ]]; then
+if [[ $DOT_INTEL == "1" ]]; then
     . ${DOT:=/home/devin/Repos/dotfiles}/setup/intel.sh
 fi
-if [[ "$DOT_WAYLAND" == 1 ]]; then
+if [[ $DOT_NVIDIA == "1" ]]; then
+    . ${DOT:=/home/devin/Repos/dotfiles}/setup/nvidia.sh
+fi
+if [[ $DOT_WAYLAND == 1 ]]; then
     . ${DOT:=/home/devin/Repos/dotfiles}/setup/wayland.sh
+fi
+if [[ "$(whoami)" != *"root"* ]]; then
+    . ${DOT:=/home/devin/Repos/dotfiles}/setup/pdfs.sh
 fi
 
 echo ""
@@ -107,13 +130,13 @@ echo "Stowing apps for user: ${whoami}"
 
 # install apps available to local users and root
 for app in ${base[@]}; do
-    stowit "${HOME}" $app 
+    stowit "${HOME}" $app
 done
 
 # install only user space folders
 for app in ${useronly[@]}; do
-    if [[ ! "$(whoami)" = *"root"* ]]; then
-        stowit "${HOME}" $app 
+    if [[ "$(whoami)" != *"root"* ]]; then
+        stowit "${HOME}" $app
     fi
 done
 
@@ -122,7 +145,19 @@ for app in ${environment[@]}; do
     sudo bash -c "$(declare -f stowit); stowit "/etc" $app"
 done
 
-yay -S --noconfirm --norebuild --noredownload --notimeupdate --needed ${pkgs[@]}
+echo "Installing apps"
+for app in ${pkgs[@]}; do
+    if [[ ! $(pacman -Qi $app 2>/dev/null) ]]; then
+        yay -S --noconfirm --needed --removemake $app
+    fi
+done
+
+# packages=$(pacman -Qqe)
+# for package in ${packages[@]}; do
+#     if [[ ! " ${pkgs[@]} " =~ " ${package} " ]]; then
+#         echo "$package is not explicitly installed"
+#     fi
+# done
 
 echo ""
 echo "##### ALL DONE"
