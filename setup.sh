@@ -33,7 +33,6 @@ pkgs=(
     jq
     libnotify
     light
-    linux
     linux-firmware
     linux-headers
     lm_sensors
@@ -89,6 +88,8 @@ envvars=(
     DOT_NVIDIA
     DOT_WAYLAND
     DOT_X
+    DOT_SURFACE
+    DOT_DESKTOP
 )
 
 for var in ${envvars[@]}; do
@@ -120,6 +121,12 @@ if [[ $DOT_NVIDIA == "1" ]]; then
 fi
 if [[ $DOT_WAYLAND == 1 ]]; then
     . ${DOT:=/home/devin/Repos/dotfiles}/setup/wayland.sh
+fi
+if [[ $DOT_X == 1 ]]; then
+    . ${DOT:=/home/devin/Repos/dotfiles}/setup/xorg.sh
+fi
+if [[ $DOT_SURFACE == 1 ]]; then
+    . ${DOT:=/home/devin/Repos/dotfiles}/setup/surface.sh
 fi
 if [[ "$(whoami)" != *"root"* ]]; then
     . ${DOT:=/home/devin/Repos/dotfiles}/setup/pdfs.sh

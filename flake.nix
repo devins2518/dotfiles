@@ -12,8 +12,7 @@
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
   };
 
-  outputs = { self, nixpkgs, home-manager, utils, nixos-hardware, neovim-nightly
-    , agenix, nur, nixpkgs-f2k }@inputs:
+  outputs = {}@inputs:
     utils.lib.systemFlake rec {
       inherit self inputs;
 
@@ -36,25 +35,15 @@
             [
               # system wide config
               ./hosts/dev/configuration.nix
-              network
               ({ pkgs, ... }: {
                 home-manager.useUserPackages = true;
                 home-manager.useGlobalPkgs = true;
                 home-manager.users.devin = ({ config, pkgs, ... }: {
                   imports = [
-                    defaults
-                    git
-                    gtk
                     mpv
-                    cursor
-                    nvfancontrol
-                    nvim
-                    pass
                     pdf
                     qt
                     tmux
-                    zathura
-                    zsh
                   ] ++ dev.x-org ++ dev.default;
                 });
               })

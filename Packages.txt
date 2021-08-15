@@ -66,6 +66,7 @@ ripgrep
 river-git
 rustup
 sed
+shfmt
 slurp
 spleen-font
 stow
@@ -73,7 +74,6 @@ sudo
 swaylock
 texinfo
 thunar
-tmux
 tokei
 tree
 update-grub
