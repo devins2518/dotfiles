@@ -166,6 +166,7 @@ riverctl map normal $mod D send-layout-cmd "kile" "focused $DWINDLE"
 # riverctl map normal $mod Q send-layout-cmd "kile" "focused $CENTERED"
 riverctl map normal $mod+Shift G send-layout-cmd "kile" "focused $RSTACK"
 riverctl map normal $mod+Shift T send-layout-cmd "kile" "focused $RDECK"
+riverctl map normal $mod+Shift d send-layout-cmd "kile" "focused $VSTACK"
 
 # Default layout
 riverctl default-layout kile
@@ -174,7 +175,7 @@ riverctl default-layout kile
 for output in "eDP-1"; do
     case $output in
     eDP-1)
-        riverctl send-layout-cmd kile "1 $DECK"
+        riverctl send-layout-cmd kile "1 $VSTACK"
         riverctl send-layout-cmd kile "2 FULL"
         riverctl send-layout-cmd kile "3 FULL"
         riverctl send-layout-cmd kile "view_padding 10"

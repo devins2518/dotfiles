@@ -10,6 +10,9 @@ pdf_path=$HOME/pdfs
 if [ ! -d "$pdf_path" ]; then
     mkdir $pdf_path
 fi
+if [ ! -d "$pdf_path/chaaya" ]; then
+    mkdir $pdf_path/chaaya
+fi
 
 for path in ${files[@]}; do
     full_path=$pdf_path/$path

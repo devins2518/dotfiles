@@ -17,7 +17,9 @@ surface_pkgs=(
     cpupower
     linux-surface
     linux-surface-headers
+    acpi
     upower
 )
 
 pkgs=(${pkgs[@]} ${surface_pkgs[@]})
+environment+=(surface)

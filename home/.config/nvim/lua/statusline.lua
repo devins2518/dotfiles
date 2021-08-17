@@ -24,70 +24,60 @@ local colors = {
 }
 local function dirname()
     local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-    return '  ' .. dir_name .. ' '
+    return '   ' .. dir_name .. ' '
 end
+
 local gls = gl.section
 local condition = require('galaxyline.condition')
 local fileinfo = require('galaxyline.provider_fileinfo')
 gl.short_line_list = {}
-gls.left[1] = {
-    FirstElement = {
-        provider = function()
-            return ''
-        end,
-        highlight = { colors.fg, colors.line_bg }
-    }
-}
-gls.left[2] = {
-    statusIcon = {
-        provider = function()
-            return ' '
-        end,
-        highlight = { colors.line_bg, colors.fg },
-        separator = ' ',
-        separator_highlight = { colors.fg, colors.line_bg }
-    }
-}
 gls.left[3] = {
     FirstElement = {
         provider = function()
             return ''
         end,
-        highlight = { colors.lightbg, colors.line_bg }
+        highlight = {
+            require('galaxyline.provider_fileinfo').get_file_icon_color,
+            -- colors.lightbg, 
+            colors.line_bg
+        }
     }
 }
 gls.left[4] = {
     FileIcon = {
         provider = function()
             local str = fileinfo.get_file_icon():gsub('%s+', '')
-            return '  ' .. str .. ' '
+            return ' ' .. str .. ' '
         end,
         condition = condition.buffer_not_empty,
         highlight = {
-            require('galaxyline.provider_fileinfo').get_file_icon_color,
-            colors.lightbg
+            colors.lightbg,
+            require('galaxyline.provider_fileinfo').get_file_icon_color
         }
     }
 }
-gls.left[5] = {
-    FileName = {
-        provider = function()
-            return fileinfo.get_current_file_name():gsub('%s+', '') .. '  '
-        end,
-        condition = condition.buffer_not_empty,
-        highlight = { colors.white, colors.lightbg },
-        separator = '',
-        separator_highlight = { colors.lightbg, colors.line_bg }
-    }
-}
+-- gls.left[5] = {
+--     FileName = {
+--         provider = function()
+--             return fileinfo.get_current_file_name():gsub('%s+', '') .. '  '
+--         end,
+--         condition = condition.buffer_not_empty,
+--         highlight = { colors.lightbg, colors.lightbg },
+--         separator = '',
+--         separator_highlight = { colors.lightbg, colors.lightbg }
+--     }
+-- }
 gls.left[5] = {
     current_dir = {
         provider = function()
             return dirname()
         end,
-        highlight = { colors.lightbg2, colors.statusline_bg },
+        highlight = {
+            require('galaxyline.provider_fileinfo').get_file_icon_color,
+            colors.lightbg
+        },
         separator = '',
-        separator_highlight = { colors.lightbg2, colors.statusline_bg }
+        separator_highlight = { colors.lightbg, colors.statusline_bg }
     }
 }
 local checkwidth = function()
@@ -135,12 +125,11 @@ gls.left[10] = {
         highlight = { colors.yellow, colors.statusline_bg }
     }
 }
-gls.right[1] = {
+gls.left[11] = {
     lsp_status = {
         provider = function()
             if #vim.lsp.get_active_clients() > 0 then
-                -- return ' ' .. require('lsp-status').status()
-                return ''
+                return ' ' .. require('lsp-status').status()
             else
                 return ''
             end
@@ -175,7 +164,7 @@ gls.right[4] = {
         provider = function()
             return ' '
         end,
-        highlight = { colors.statusline_bg, colors.red },
+        highlight = { colors.lightbg, colors.red },
         separator = ' ',
         separator_highlight = { colors.red, colors.statusline_bg }
     }
@@ -199,7 +188,7 @@ gls.right[5] = {
                 return '  ' .. current_Mode .. ' '
             end
         end,
-        highlight = { colors.red, colors.statusline_bg }
+        highlight = { colors.red, colors.lightbg }
     }
 }
 gls.right[6] = {

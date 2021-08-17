@@ -49,6 +49,12 @@ pkgs=(
     pulseaudio
     ripgrep
     rustup
+    ccls
+    gopls
+    cmake
+    rust-analyzer
+    lua-language-server-git
+    zls-bin
     shfmt
     spleen-font
     stow

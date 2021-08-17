@@ -81,7 +81,7 @@ return packer.startup({
         -- LSP
         use {
             'neovim/nvim-lspconfig',
-            after = 'lsp_signature.nvim',
+            after = { 'lsp_signature.nvim', 'lsp-status.nvim' },
             config = function()
                 vim.cmd [[packadd nvim-lspconfig]]
                 require 'nvim-lspconfig'
@@ -126,6 +126,7 @@ return packer.startup({
         }
         use { 'ray-x/lsp_signature.nvim' }
         use { 'folke/lsp-colors.nvim', after = 'nvim-compe' }
+        use { 'nvim-lua/lsp-status.nvim' }
 
         -- Filetypes
         use { 'LnL7/vim-nix', ft = { 'nix' } }
@@ -175,7 +176,7 @@ return packer.startup({
         }
         use {
             'glepnir/galaxyline.nvim',
-            after = { 'tokyonight.nvim', 'nvim-web-devicons' },
+            after = { 'tokyonight.nvim', 'nvim-web-devicons', 'lsp-status.nvim' },
             config = function()
                 require 'statusline'
             end
