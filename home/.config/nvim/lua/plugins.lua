@@ -15,25 +15,13 @@ return packer.startup({
 
         -- Colorscheme
         use {
-            'folke/tokyonight.nvim',
+            'sainnhe/gruvbox-material',
             config = function()
-                G['tokyonight_style'] = 'night'
-                G['tokyonight_italic_comments'] = true
-                G['tokyonight_italic_keywords'] = true
-                G['tokyonight_dark_sidebar'] = true
-                G['tokyonight_sidebars'] = {
-                    'qf',
-                    'vista_kind',
-                    'terminal',
-                    'packer',
-                    'NvimTree'
-                }
-                require('tokyonight').colorscheme()
-
-                Augroup('Links', {
-                    'autocmd ColorScheme * highlight! link ColorColumn CursorLine',
-                    'autocmd ColorScheme * highlight! link NvimTreeNormal Normal'
-                })
+                vim.cmd 'set background=dark'
+                G['gruvbox_material_background'] = 'hard'
+                G['gruvbox_material_palette'] = 'mix'
+                G['gruvbox_material_enable_italic'] = 1
+                vim.cmd 'colorscheme gruvbox-material'
             end
         }
         use {
@@ -168,26 +156,16 @@ return packer.startup({
         -- Bars
         use {
             'akinsho/nvim-bufferline.lua',
-            after = { 'tokyonight.nvim', 'nvim-web-devicons' },
+            after = { 'gruvbox-material', 'nvim-web-devicons' },
             config = function()
-                vim.cmd [[packadd nvim-bufferline.lua]]
                 require 'buffer'
             end
         }
         use {
             'glepnir/galaxyline.nvim',
-            after = { 'tokyonight.nvim', 'nvim-web-devicons', 'lsp-status.nvim' },
+            after = { 'gruvbox-material', 'nvim-web-devicons', 'lsp-status.nvim' },
             config = function()
                 require 'statusline'
-            end
-        }
-
-        -- Telescope
-        use {
-            'nvim-telescope/telescope.nvim',
-            requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim' },
-            config = function()
-                require 'telescope-nvim'
             end
         }
 
@@ -241,13 +219,6 @@ return packer.startup({
             end
         }
         use { 'tpope/vim-surround' }
-        -- use {
-        --     'kyazdani42/nvim-tree.lua',
-        --     after = { 'tokyonight.nvim', 'nvim-web-devicons' },
-        --     config = function()
-        --         require 'nvimTree'
-        --     end
-        -- }
         use {
             'Yggdroot/indentLine',
             config = function()

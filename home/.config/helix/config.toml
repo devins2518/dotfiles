@@ -1,0 +1,7 @@
+theme = "gruvmaterial-mix-dark"
+
+[editor]
+line-number = "relative"
+
+[lsp]
+display-messages = true

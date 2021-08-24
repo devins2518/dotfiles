@@ -16,6 +16,7 @@ grep "^HibernateDelaySec" /etc/systemd/sleep.conf -q ||
 surface_pkgs=(
     cpupower
     linux-surface
+    powertop
     linux-surface-headers
     acpi
     upower

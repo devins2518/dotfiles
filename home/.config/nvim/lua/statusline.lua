@@ -47,9 +47,11 @@ gls.left[4] = {
     FileIcon = {
         provider = function()
             local str = fileinfo.get_file_icon():gsub('%s+', '')
+            if str == '' then
+                str = ''
+            end
             return ' ' .. str .. ' '
         end,
-        condition = condition.buffer_not_empty,
         highlight = {
             colors.lightbg,
             require('galaxyline.provider_fileinfo').get_file_icon_color

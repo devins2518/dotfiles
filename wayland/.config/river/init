@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 riverctl spawn "wlr-randr --output eDP-1 --scale 2 &"
-riverctl spawn "paper -i /etc/wallpaper/wallpaper.png"
+# riverctl spawn "paper -i /etc/wallpaper/wallpaper.png"
 riverctl spawn 'kile'
 riverctl spawn 'mako'
 
@@ -161,12 +161,7 @@ riverctl map normal $mod+Mod1 K send-layout-cmd "kile" "mod_view_padding +5"
 
 # Custom layouts
 riverctl map normal $mod T send-layout-cmd "kile" "focused $DECK"
-riverctl map normal $mod G send-layout-cmd "kile" "focused $STACK"
-riverctl map normal $mod D send-layout-cmd "kile" "focused $DWINDLE"
-# riverctl map normal $mod Q send-layout-cmd "kile" "focused $CENTERED"
-riverctl map normal $mod+Shift G send-layout-cmd "kile" "focused $RSTACK"
-riverctl map normal $mod+Shift T send-layout-cmd "kile" "focused $RDECK"
-riverctl map normal $mod+Shift d send-layout-cmd "kile" "focused $VSTACK"
+riverctl map normal $mod G send-layout-cmd "kile" "focused $VSTACK"
 
 # Default layout
 riverctl default-layout kile

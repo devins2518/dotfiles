@@ -6,7 +6,7 @@ end
 G['nvim_tree_add_trailing'] = 1
 G['nvim_tree_allow_resize'] = 1
 G['nvim_tree_auto_close'] = 1
-G['nvim_tree_auto_open'] = 0
+G['nvim_tree_auto_open'] = 1
 G['nvim_tree_disable_default_keybindings'] = 1
 G['nvim_tree_follow'] = 1
 G['nvim_tree_git_hl'] = 1

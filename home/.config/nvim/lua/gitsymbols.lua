@@ -35,7 +35,9 @@ require('gitsigns').setup {
     watch_index = { interval = 100 },
     sign_priority = 5,
     status_formatter = nil, -- Use default
-    current_line_blame = true,
-    current_line_blame_delay = 1000,
-    current_line_blame_position = 'eol'
+    current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol',
+        delay = 1000
+    }
 }

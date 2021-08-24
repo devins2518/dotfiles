@@ -4,34 +4,6 @@ local gen_opt = { mode = 'n', noremap = true, silent = true }
 local git_opt = { mode = 'n', noremap = true }
 wk.register({
     ['<leader>'] = {
-        t = {
-            name = 'Telescope',
-            b = {
-                '<cmd>lua require(\'telescope.builtin\').buffers()<CR>',
-                'Show buffers',
-                unpack(gen_opt)
-            },
-            f = {
-                '<cmd>lua require(\'telescope.builtin\').find_files()<CR>',
-                'Show files',
-                unpack(gen_opt)
-            },
-            h = {
-                '<cmd>lua require(\'telescope.builtin\').help_tags()<CR>',
-                'Show help tags',
-                unpack(gen_opt)
-            },
-            g = {
-                '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>',
-                'Grep for string',
-                unpack(gen_opt)
-            },
-            o = {
-                '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>',
-                'Show file history',
-                unpack(gen_opt)
-            }
-        },
         g = {
             name = 'Git Fugitive',
             s = { ':G<CR>', 'Show git status' },
@@ -78,19 +50,19 @@ wk.register({
                 'Show declaration',
                 unpack(gen_opt)
             },
-            r = {
-                [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]],
-                'Show references',
-                unpack(gen_opt)
-            },
+            -- r = {
+            --     '<cmd>Lspsaga references<CR>',
+            --     'Show references',
+            --     unpack(gen_opt)
+            -- },
             i = {
-                [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]],
+                '<cmd>Lspsaga implement<CR>',
                 'Show implementation',
                 unpack(gen_opt)
             },
             c = {
-                [[<cmd>lua require('telescope.builtin').lsp_code_actions()<CR>]],
-                'Show blame',
+                '<cmd>Lspsaga code_action<CR>',
+                'Show code actions',
                 unpack(gen_opt)
             },
             n = { '<cmd>Lspsaga rename<CR>', 'Show blame', unpack(gen_opt) }
