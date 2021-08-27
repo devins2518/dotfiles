@@ -5,22 +5,19 @@ if not present1 then
 end
 
 local colors = {
-    bg = '#1a1b26',
+    bg = '#282828',
     line_bg = '#1f2335',
-    fg = '#c5cdd9',
+    fg = '#fbf1c7',
     fg_green = '#a0c980',
     yellow = '#deb974',
     cyan = '#44adb3',
     darkblue = '#5b8dc2',
-    green = '#b2e08f',
+    green = '#8ec07c',
     orange = '#FF8800',
-    purple = '#a57ec8',
-    magenta = '#d38aea',
-    blue = '#6cb6eb',
-    red = '#ec7279',
-    lightbg = '#363a49',
-    nord = '#81A1C1',
-    greenYel = '#EBCB8B'
+    magenta = '#d3869b',
+    blue = '#83a598',
+    red = '#cc241d',
+    lightbg = '#363a49'
 }
 local function dirname()
     local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
@@ -38,7 +35,6 @@ gls.left[3] = {
         end,
         highlight = {
             require('galaxyline.provider_fileinfo').get_file_icon_color,
-            -- colors.lightbg, 
             colors.line_bg
         }
     }
@@ -58,17 +54,6 @@ gls.left[4] = {
         }
     }
 }
--- gls.left[5] = {
---     FileName = {
---         provider = function()
---             return fileinfo.get_current_file_name():gsub('%s+', '') .. '  '
---         end,
---         condition = condition.buffer_not_empty,
---         highlight = { colors.lightbg, colors.lightbg },
---         separator = '',
---         separator_highlight = { colors.lightbg, colors.lightbg }
---     }
--- }
 gls.left[5] = {
     current_dir = {
         provider = function()
