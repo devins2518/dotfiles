@@ -4,6 +4,63 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
+
+  # Use the GRUB boot loader.
+  boot = {
+    kernelParams = [ "quiet" ];
+    consoleLogLevel = 3;
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot"; # ← use the same mount point here.
+      };
+      grub = {
+        enable = true;
+        devices = [ "nodev" ];
+        default = "saved";
+        version = 2;
+        efiSupport = true;
+
+        extraEntries = ''
+          menuentry "Windows" {
+            insmod part_gpt
+            insmod fat
+            insmod search_fs_uuid
+            insmod chain
+            search --fs-uuid --set=root F5F4-286C
+            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+          }
+        '';
+
+        extraConfig = ''
+          GRUB_SAVEDEFAULT=true
+
+          if [ "x\''${timeout}" != "x-1" ]; then
+            if keystatus; then
+              if keystatus --shift; then
+                set timeout=-1
+              else
+                set timeout=0
+              fi
+            else
+              if sleep --interruptible ''${GRUB_HIDDEN_TIMEOUT} ; then
+                set timeout=0
+              fi
+            fi
+          fi
+        '';
+      };
+    };
+  };
+
+  networking = {
+    hostName = "dev";
+    interfaces.enp5s0.useDHCP = true;
+    interfaces.wlp4s0.useDHCP = true;
+  };
 
   # Enable the X11 windowing system.
   services.xserver = {

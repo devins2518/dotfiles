@@ -9,6 +9,42 @@
   ];
 
   # Use the GRUB boot loader.
+  boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot"; # ← use the same mount point here.
+      };
+      grub = {
+        enable = true;
+        devices = [ "nodev" ];
+        version = 2;
+        # Doesn't work?
+        font = "${pkgs.grub2}/share/grub/unicode.pf2";
+        fontSize = 16;
+        efiSupport = true;
+
+        extraEntries = ''
+          menuentry "Windows" {
+            insmod part_gpt
+            insmod fat
+            insmod search_fs_uuid
+            insmod chain
+            search --fs-uuid --set=root 3087-B4EC
+            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+          }
+        '';
+
+        # extraConfig = ''
+        #   if keystatus --shift ; then
+        #       set timeout=-1
+        #   else
+        #       set timeout=0
+        #   fi
+        # '';
+      };
+    };
+  };
 
   networking = {
     hostName = "devin";
@@ -27,6 +63,22 @@
     displayManager.lightdm.greeters.gtk.cursorTheme.size = 32;
   };
 
+  systemd = {
+    services.iptsd.enable = false;
+    sleep.extraConfig = ''
+      AllowSuspend=yes
+      AllowHibernation=yes
+      AllowSuspendThenHibernate=yes
+      HibernateDelaySec=1h
+    '';
+  };
+
+  # check config_hz in /proc/config.gz
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "powersave";
+    powertop.enable = true;
+  };
 
   # Enable sound.
   sound.enable = true;
@@ -46,6 +98,13 @@
     };
   };
 
+  services.upower = { enable = true; };
+
+  services.logind.extraConfig = ''
+    # don’t shutdown when power button is short-pressed
+    HandlePowerKey=suspend
+  '';
+
   nixpkgs.config = { allowUnfree = true; };
   # List packages installed in system profile.
   environment = {
@@ -58,7 +117,10 @@
     };
   };
 
-  fonts = { fontconfig.dpi = 192; };
+#  fonts = { fontconfig.dpi = 192; };
+
+  console = { font = "${pkgs.spleen}/share/consolefonts/spleen-16x32.psfu"; };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

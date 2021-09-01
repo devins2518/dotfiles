@@ -2,30 +2,30 @@
 
 rec {
   primary = {
-    background = "#1a1b26";
-    foreground = "#a9b1d6";
+    background = "#1d2021";
+    foreground = "#d4be98";
   };
 
   normal = {
-    black = "#32344a";
-    red = "#f7768e";
-    green = "#9ece6a";
-    yellow = "#e0af68";
-    blue = "#7aa2f7";
-    magenta = "#ad8ee6";
-    cyan = "#449dab";
-    white = "#787c99";
+    black = "#32302f";
+    red = "#ea6962";
+    green = "#a9b665";
+    yellow = "#d8a657";
+    blue = "#7daea3";
+    magenta = "#d3869b";
+    cyan = "#89b482";
+    white = "#d4be98";
   };
 
   bright = {
-    black = "#444b6a";
-    red = "#ff7a93";
-    green = "#b9f27c";
-    yellow = "#ff9e64";
-    blue = "#7da6ff";
-    magenta = "#bb9af7";
-    cyan = "#0db9d7";
-    white = "#acb0d0";
+    black = "#32302f";
+    red = "#ea6962";
+    green = "#a9b665";
+    yellow = "#d8a657";
+    blue = "#7daea3";
+    magenta = "#d3869b";
+    cyan = "#89b482";
+    white = "#d4be98";
   };
 
   foot = with lib.strings; {
@@ -47,8 +47,6 @@ rec {
     bright5 = removePrefix "#" bright.magenta;
     bright6 = removePrefix "#" bright.cyan;
     bright7 = removePrefix "#" bright.white;
-
-    alpha = "0.8";
   };
 
   vim = {
