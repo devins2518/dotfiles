@@ -21,7 +21,7 @@ in {
 
         settings = {
           border_width = 3;
-          top_padding = 40;
+          top_padding = 10;
           left_padding = 10;
           right_padding = 10;
           bottom_padding = 10;

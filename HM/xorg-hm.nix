@@ -19,8 +19,6 @@ in {
       # make sxhkd reload its configuration files:
       "super + Escape" = "pkill -USR1 -x sxhkd";
       "super + e" = "pcmanfm";
-      # Volume keys
-      "Audio{Raise,Lower}Volume" = "amixer sset Master {1+,1-} unmute";
       #################
       # bspwm hotkeys #
       #################
@@ -37,8 +35,9 @@ in {
       "super + p" =
         "bspc node --state floating; bspc node -g sticky; xdotool getactivewindow windowsize 768 432 windowmove 1137 632";
       # Change volume
-      "XF86Audio{Raise,Lower}Volume" = "pactl -- set-sink-volume 0 {+,-}2%";
-      "XF86AudioMute" = "~/.config/eww/scripts/mute";
+      "XF86Audio{Raise,Lower}Volume" = "pamixer -{i,d} 5";
+      "XF86AudioMute" = "pamixer --toggle-mute";
+      # "XF86AudioMute" = "~/.config/eww/scripts/mute";
       # lockscreen
       "alt + shift + x" = "betterlockscreen -l blur";
       ###############

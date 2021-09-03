@@ -30,8 +30,8 @@
         }
         export EDITOR=nvim
         export VISUAL=nvim
-        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=blue,underline"
         export GPG_TTY=$(tty)
+        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#928374"
       '';
 
       initExtraFirst = ''

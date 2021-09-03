@@ -17,7 +17,7 @@ in {
           "feh --bg-fill /etc/wallpaper/wallpaper.png"
           "picom --config $HOME/.config/picom.conf"
           "alttab -w 1 -i 128x128"
-          "xset r rate 500 50"
+          "xset r rate 300 50"
         ];
 
         extraConfig = ''

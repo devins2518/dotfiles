@@ -120,6 +120,7 @@ in {
       maim
       nixfmt
       nixpkgs-review
+      pamixer
       pandoc
       pavucontrol
       pcmanfm

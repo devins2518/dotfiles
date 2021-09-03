@@ -6,7 +6,13 @@ in {
     enable = true;
     package = pkgs.alacritty-ligatures;
     settings = {
-      window = { decorations = "none"; };
+      window = {
+        decorations = "none";
+        padding = {
+          x = 20;
+          y = 20;
+        };
+      };
 
       font = {
         ligatures = true;
@@ -34,8 +40,6 @@ in {
         normal = theme.normal;
         bright = theme.bright;
       };
-
-      background_opacity = 0.7;
 
       shell = {
         program = "/run/current-system/sw/bin/zsh";

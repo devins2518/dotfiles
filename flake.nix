@@ -30,7 +30,6 @@
         ./HM/devin
         ./HM/dunst.nix
         ./HM/pdf.nix
-        ./HM/polybar.nix
         ./HM/rofi.nix
         ./HM/tmux.nix
         ./HM/xorg-hm.nix
@@ -86,7 +85,7 @@
               sstool = "maim";
               selarg = "-s";
             }; {
-              imports = [ alacritty bspwm dunst polybar rofi xorg-hm ];
+              imports = [ alacritty bspwm dunst rofi xorg-hm ];
 
               home.packages = with pkgs; [ autoclose compilenote screenshot ];
             });
