@@ -37,7 +37,4 @@ jobs:
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Build nix packages
       # TODO switch to default nixpkgs channel once nix-build-uncached 1.0.0 is in stable
-      run: |
-        echo $PWD
-        ls -la
-        nix build './#nixosConfigurations.devin.config.system.build.toplevel'
+      run: nix build './#nixosConfigurations.devin.config.system.build.toplevel' | cachix push devins2518
