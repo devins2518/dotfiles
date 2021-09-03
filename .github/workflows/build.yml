@@ -11,16 +11,10 @@ jobs:
   tests:
     strategy:
       matrix:
-        # The repo name as used in
-        # https://github.com/nix-community/NUR/blob/master/repos.json
-        nurRepo:
-          - devins2518
         cachixName:
           - devins2518
         nixPath:
-          - nixpkgs=channel:nixos-unstable
           - nixpkgs=channel:nixpkgs-unstable
-          #- nixpkgs=channel:nixos-21.05
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
@@ -40,4 +34,6 @@ jobs:
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Build nix packages
       # TODO switch to default nixpkgs channel once nix-build-uncached 1.0.0 is in stable
-      run: nix build './#nixosConfigurations.devin.config.system.build.toplevel'
+      run: |
+        echo $PWD
+        nix build './#nixosConfigurations.devin.config.system.build.toplevel'
