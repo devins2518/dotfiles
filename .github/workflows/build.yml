@@ -36,4 +36,5 @@ jobs:
       # TODO switch to default nixpkgs channel once nix-build-uncached 1.0.0 is in stable
       run: |
         echo $PWD
+        ls -la
         nix build './#nixosConfigurations.devin.config.system.build.toplevel'
