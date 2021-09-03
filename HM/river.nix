@@ -10,7 +10,8 @@ in rec {
     #!/usr/bin/env bash
 
     riverctl spawn "wlr-randr --output eDP-1 --scale 2 &"
-    riverctl spawn "paper -i /etc/wallpaper/wallpaper.png"
+    riverctl spawn "paper -c '#FF282828'"
+    # riverctl spawn "paper -i /etc/wallpaper/wallpaper.png"
     # riverctl spawn 'swaybg -c "#282828"'
     riverctl spawn 'kile'
     riverctl spawn 'mako'
