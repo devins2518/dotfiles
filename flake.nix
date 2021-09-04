@@ -10,10 +10,15 @@
     home-manager.url = "github:nix-community/home-manager";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      # this line assume that you also have nixpkgs as an input
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, utils, nixos-hardware, neovim-nightly
-    , nur, nixpkgs-f2k }@inputs:
+    , nix-ld, nur, nixpkgs-f2k }@inputs:
     utils.lib.systemFlake rec {
       inherit self inputs;
 
@@ -61,6 +66,7 @@
         modules = [
           home-manager.nixosModules.home-manager
           self.nixosModules.defaults-nix
+          nix-ld.nixosModules.nix-ld
           utils.nixosModules.saneFlakeDefaults
         ];
         extraArgs = { inherit utils inputs; };

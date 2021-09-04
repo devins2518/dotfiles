@@ -394,6 +394,27 @@
         "type": "github"
       }
     },
+    "nix-ld": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1619081966,
+        "narHash": "sha256-QYPg8wPpq7q5Xd1jW17Lh36iKFSsVkN/gWYoQRv2XoU=",
+        "owner": "Mic92",
+        "repo": "nix-ld",
+        "rev": "cac5bd577da26aefdabc742340a156414ac08890",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "nix-ld",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1627929269,
@@ -608,11 +629,12 @@
       "inputs": {
         "home-manager": "home-manager",
         "neovim-nightly": "neovim-nightly",
+        "nix-ld": "nix-ld",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-f2k": "nixpkgs-f2k",
         "nur": "nur",
-        "utils": "utils"
+        "utils": "utils_2"
       }
     },
     "rust-analyzer-src": {
@@ -684,6 +706,21 @@
       }
     },
     "utils": {
+      "locked": {
+        "lastModified": 1610051610,
+        "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_2": {
       "inputs": {
         "flake-utils": "flake-utils_5"
       },
