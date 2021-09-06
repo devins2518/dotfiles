@@ -100,7 +100,7 @@
     displayManager.lightdm.greeters.gtk.cursorTheme.size = 16;
   };
 
-  environment.systemPackages = with pkgs; [ gimp minicom nvfancontrol ];
+  environment.systemPackages = with pkgs; [ gimp minicom nvfancontrol cachix ];
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;

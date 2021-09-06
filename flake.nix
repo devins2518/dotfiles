@@ -127,23 +127,26 @@
               ({ pkgs, ... }: {
                 home-manager.useUserPackages = true;
                 home-manager.useGlobalPkgs = true;
-                home-manager.users.devin = ({ config, pkgs, ... }: {
-                  imports = [
-                    defaults
-                    git
-                    gtk
-                    mpv
-                    cursor
-                    nvfancontrol
-                    nvim
-                    pass
-                    pdf
-                    qt
-                    tmux
-                    zathura
-                    zsh
-                  ] ++ dev.x-org ++ dev.default;
-                });
+                home-manager.users.devin = ({ config, pkgs, ... }:
+                  with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+                    imports = [
+                      defaults
+                      git
+                      gtk
+                      mpv
+                      cursor
+                      nvfancontrol
+                      nvim
+                      pass
+                      pdf
+                      qt
+                      tmux
+                      zathura
+                      zsh
+                    ] ++ dev.x-org ++ dev.default;
+
+                    home.packages = with pkgs; [ cachix-push ];
+                  });
               })
             ] ++ x-org;
         };

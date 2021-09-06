@@ -1,4 +1,4 @@
-{ pkgs, clipboard, sstool, selarg, ... }:
+{ pkgs, clipboard ? null, sstool ? null, selarg ? null, ... }:
 
 rec {
   screenshot = pkgs.writeScriptBin "screenshot" ''
@@ -77,5 +77,12 @@ rec {
     else
         sudo rfkill block bluetooth
     fi
-      '';
+  '';
+  cachix-push = pkgs.writeScriptBin "cachix-push" ''
+    #!/usr/bin/env bash
+
+    export CACHIX_AUTH_TOKEN=$(cat ~/.cachix_auth)
+
+    nix path-info --all | cachix push devins2518
+  '';
 }
