@@ -26,7 +26,7 @@ require('gitsigns').setup {
         },
         changedelete = {
             hl = 'GitSignsChange',
-            text = '~',
+            text = '│',
             numhl = 'GitSignsChangeNr',
             linehl = 'GitSignsChangeLn'
         }
