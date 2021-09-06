@@ -8,7 +8,7 @@
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
     nur.url = "github:nix-community/NUR/master";
     home-manager.url = "github:nix-community/home-manager";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     nix-ld = {
       url = "github:Mic92/nix-ld";
@@ -112,7 +112,7 @@
             }; {
               imports = [ foot river dconf mako ];
 
-              home.packages = with pkgs; [ autoclose compilenote screenshot ];
+              home.packages = with pkgs; [ compilenote screenshot ];
             });
         })
       ];
@@ -160,23 +160,26 @@
               ({ pkgs, ... }: {
                 home-manager.useUserPackages = true;
                 home-manager.useGlobalPkgs = true;
-                home-manager.users.devin = ({ config, pkgs, ... }: {
-                  imports = [
-                    configFolder
-                    defaults
-                    git
-                    cursor
-                    gtk
-                    mpv
-                    nvim
-                    pass
-                    #pdf
-                    qt
-                    tmux
-                    zathura
-                    zsh
-                  ] ++ devin.wayland ++ devin.default;
-                });
+                home-manager.users.devin = ({ config, pkgs, ... }:
+                  with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+                    imports = [
+                      configFolder
+                      defaults
+                      git
+                      cursor
+                      gtk
+                      mpv
+                      nvim
+                      pass
+                      #pdf
+                      qt
+                      tmux
+                      zathura
+                      zsh
+                    ] ++ devin.wayland ++ devin.default;
+
+                    home.packages = with pkgs; [ airplane-mode cachix-push ];
+                  });
               })
             ] ++ wayland-opt;
         };

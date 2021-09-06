@@ -101,6 +101,7 @@ in {
       alttab
       bottom
       bsp-layout
+      cachix
       clang-tools
       discord
       dunst
