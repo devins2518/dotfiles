@@ -137,6 +137,7 @@ in {
       tree
       wkhtmltopdf
       xarchiver
+      xxd
       zls
       zsh
     ] ++ nur-packages;

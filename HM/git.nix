@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ git-lfs ];
   programs.git = {
     enable = true;
 
@@ -17,6 +16,8 @@
         "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all";
       cush = "!git commit && git push";
     };
+
+    lfs.enable = true;
 
     ignores = [ "**/shell.nix" ];
 
