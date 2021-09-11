@@ -44,10 +44,10 @@ return packer.startup({
                         js = { icon = '', color = '#EBCB8B', name = 'js' },
                         kt = { icon = '󱈙', color = '#ffcb91', name = 'kt' },
                         lock = { icon = '', color = '#DE6B74', name = 'lock' },
-                        lua = { icon = '', color = '#61afef', name = 'lua' },
+                        lua = { icon = '', color = '#7daea3', name = 'lua' },
                         mp3 = { icon = '', color = '#C8CCD4', name = 'mp3' },
                         mp4 = { icon = '', color = '#C8CCD4', name = 'mp4' },
-                        nix = { icon = '', color = '#61afef', name = 'nix' },
+                        nix = { icon = '', color = '#7daea3', name = 'nix' },
                         out = { icon = '', color = '#C8CCD4', name = 'out' },
                         png = { icon = ' ', color = '#BD77DC', name = 'png' },
                         toml = { icon = '', color = '#61afef', name = 'toml' },
@@ -76,17 +76,23 @@ return packer.startup({
             end
         }
         use {
-            'hrsh7th/nvim-compe',
+            'hrsh7th/nvim-cmp',
             after = { 'nvim-lspconfig' },
-            requires = 'hrsh7th/vim-vsnip',
+            requires = {
+                'hrsh7th/cmp-nvim-lsp',
+                'hrsh7th/cmp-vsnip',
+                'hrsh7th/cmp-calc',
+                'hrsh7th/cmp-path',
+                'hrsh7th/cmp-nvim-lua',
+                'hrsh7th/vim-vsnip'
+            },
             config = function()
-                vim.cmd [[packadd nvim-compe]]
                 require 'nvim-compe'
             end
         }
         use {
             'glepnir/lspsaga.nvim',
-            after = { 'FixCursorHold.nvim', 'nvim-compe' },
+            after = { 'FixCursorHold.nvim', 'nvim-cmp' },
             config = function()
                 vim.cmd [[packadd lspsaga.nvim]]
                 require'lspsaga'.init_lsp_saga {
@@ -99,7 +105,7 @@ return packer.startup({
         }
         use {
             'nvim-lua/lsp_extensions.nvim',
-            after = 'nvim-compe',
+            after = 'nvim-cmp',
             config = function()
                 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp
                                                                           .with(
@@ -113,7 +119,7 @@ return packer.startup({
             end
         }
         use { 'ray-x/lsp_signature.nvim' }
-        use { 'folke/lsp-colors.nvim', after = 'nvim-compe' }
+        use { 'folke/lsp-colors.nvim', after = 'nvim-cmp' }
         use { 'nvim-lua/lsp-status.nvim' }
 
         -- Filetypes

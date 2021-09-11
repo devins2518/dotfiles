@@ -26,11 +26,12 @@
       advice = {
         #  detachedHead = false;
       };
-      init = { defaultBranch = "master"; };
+      init = { defaultBranch = "main"; };
       rebase = { abbreviateCommands = true; };
       pack = { threads = 0; };
       core = { editor = "nvim"; };
       credential = { helper = "store --file ~/.git-credentials"; };
+      diff = { colorMoved = "zebra"; };
     };
   };
 }

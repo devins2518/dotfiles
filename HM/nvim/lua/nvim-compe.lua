@@ -1,67 +1,82 @@
-vim.o.completeopt = "menuone,noselect"
+local present, cmp = pcall(require, 'cmp')
+local compare = require('cmp.config.compare')
 
-require'compe'.setup {
-    enabled = true,
-    autocomplete = true,
-    debug = false,
-    min_length = 1,
-    preselect = 'enable',
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
-    },
-    source = {
-        path = { kind = "   (Path)" },
-        buffer = false,
-        calc = { kind = "   (Calc)" },
-        vsnip = { kind = "   (Snippet)" },
-        nvim_lsp = { kind = "   (LSP)" }, -- nvim_lua = {kind = "  "},
-        nvim_lua = { filetypes = { "lua" } },
-        spell = { kind = "   (Spell)", filetypes = { "markdown", "text" } },
-        tags = false,
-        vim_dadbod_completion = false,
-        emoji = { kind = " ﲃ  (Emoji)", filetypes = { "markdown", "text" } }
-    }
-}
+if not present then
+    return
+end
+
+vim.opt.completeopt = 'menuone,noselect,noinsert'
 
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
+    local col = vim.fn.col '.' - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' ~= nil
 end
 
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-n>"
-    elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
-        return t "<Plug>(vsnip-expand-or-jump)"
-    elseif check_back_space() then
-        return t "<Tab>"
-    else
-        return vim.fn['compe#complete']()
-    end
-end
-_G.s_tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
-    else
-        return t "<S-Tab>"
-    end
-end
+-- nvim-cmp setup
+cmp.setup {
+    snippet = {
+        expand = function(args)
+            vim.fn['vsnip#anonymous'](args.body)
+        end
+    },
+    formatting = {
+        format = function(entry, vim_item)
+            -- load lspkind icons
+            -- vim_item.kind = string.format('%s %s', require(
+            --     'plugins.configs.lspkind_icons').icons[vim_item.kind],
+            --     vim_item.kind)
+
+            vim_item.menu = ({
+                nvim_lsp = '[LSP]',
+                nvim_lua = '[Lua]',
+                buffer = '[BUF]'
+            })[entry.source.name]
+
+            return vim_item
+        end
+    },
+    mapping = {
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true
+        }),
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if vim.fn.pumvisible() == 1 then
+                vim.fn.feedkeys(t('<C-n>'), 'n')
+            elseif vim.fn.call('vsnip#available', { 1 }) == 1 then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes(
+                    '<Plug>(vsnip-expand-or-jump)', true, true, true), '')
+            elseif check_back_space() then
+                vim.fn.feedkeys(t('<Tab>'), 'n')
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if vim.fn.pumvisible() == 1 then
+                vim.fn.feedkeys(t('<C-p>'), 'n')
+            elseif vim.fn.call('vsnip#available', { -1 }) == 1 then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes(
+                    '<Plug>(vsnip-expand-or-jump)', true, true, true), '')
+            else
+                fallback()
+            end
+        end, { 'i', 's' })
+    },
+    sorting = {
+        priority_weight = 2.,
+        comparators = { compare.score, compare.exact, compare.order }
+    },
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' },
+        { name = 'vsnip' },
+        { name = 'path' },
+        { name = 'nvim_lua' }
+    }
+}

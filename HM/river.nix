@@ -10,7 +10,8 @@ in rec {
     #!/usr/bin/env bash
 
     riverctl spawn "wlr-randr --output eDP-1 --scale 2 &"
-    riverctl spawn "paper -c '#FF282828'"
+    # TODO: broken because of scaling
+    # riverctl spawn "paper -c '#FF282828'"
     # riverctl spawn "paper -i /etc/wallpaper/wallpaper.png"
     # riverctl spawn 'swaybg -c "#282828"'
     riverctl spawn 'kile'
@@ -191,20 +192,6 @@ in rec {
         riverctl send-layout-cmd kile "outer_padding 10"
         riverctl focus-output next
     done
-
-    # Fix GTK settings
-    config="''${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini"
-    if [ ! -f "$config" ]; then exit 1; fi
-
-    gnome_schema="org.gnome.desktop.interface"
-    gtk_theme="$(grep 'gtk-theme-name' "$config" | sed 's/.*\s*=\s*//')"
-    icon_theme="$(grep 'gtk-icon-theme-name' "$config" | sed 's/.*\s*=\s*//')"
-    cursor_theme="$(grep 'gtk-cursor-theme-name' "$config" | sed 's/.*\s*=\s*//')"
-    font_name="$(grep 'gtk-font-name' "$config" | sed 's/.*\s*=\s*//')"
-    gsettings set "$gnome_schema" gtk-theme "$gtk_theme"
-    gsettings set "$gnome_schema" icon-theme "$icon_theme"
-    gsettings set "$gnome_schema" cursor-theme "$cursor_theme"
-    gsettings set "$gnome_schema" font-name "$font_name"
   '';
   xdg.configFile."river/init".executable = true;
 
@@ -212,160 +199,55 @@ in rec {
     text = ''
       #!/usr/bin/env bash
 
+      ROW="((h: h d) 2 0.65)"
+
       # Nested layouts (examples)
 
       # Horizontal split layout with stacking on the last area
-      read -r -d ''' HORIZONTAL <<EOM
-      horizontal
-      (
-        { hor:
-          ver
-          (
-            { ver: full full }
-            1 0.5
-          )
-        } 1 0.62
-      )
-      EOM
+      HORIZONTAL="horizontal
+      ((h:
+          v
+          ((v: f d) 1 0.5)) 1 0.62)"
+
 
       # Simple vertical version of stack
-      read -r -d ''' VSTACK <<EOM
-      vstack
-      (
-        { hor:
-          ver
-          (
-            { ver: full deck }
-            1 0.5 0
-          )
-        } 1 0.65 0
-      )
-      EOM
-
+      VSTACK="vstack
+      (( h:
+          v
+          (( v: f d ) 1 0.5 0)
+        ) 1 0.65 0)"
 
       # The classic centered master layout
       # https://media.discordapp.net/attachments/769673106842845194/780095998239834142/unknown.png
       # Bran - BlingCorp
-      read -r -d ''' CENTERED <<EOM
-      centered
-      (
-        { ver:
-          hor $HORIZONTAL hor
-        } 1 0.5 1
-      )
-      EOM
+      CENTERED="centered
+      ((v:
+          $ROW
+        ((h: f d) 1 0.63)
+          $ROW
+      ) 1 0.47 1)"
 
       # Mosaic, a neat proof of concept layout for my smaller monitor
-      read -r -d ''' MOSAIC <<EOM
-      mosaic
-      (
-        { ver:
-        	$HORIZONTAL
-          (
-            { hor: full deck }
-            1 0.62 0
-          )
-        } 3 0.60
-      )
-      EOM
+      MOSAIC="mosaic
+      ((3 > ( v:
+      	$HORIZONTAL
+          ((h: f d) 1 0.62)
+        ) ? ((v: h h) 1)) 3 0.6)"
+
 
       # A layout meant for grouping a shit ton of windows
-      read -r -d ''' GROUP <<EOM
-      group
-      (
-        { ver:
-          { hor: deck deck }
+      GROUP="group
+      (( v:
+          ( h: d d )
           $HORIZONTAL 
-          { hor: deck deck }
-        } 1 0.45 1
-      )
-      EOM
+          ( h: d d )
+        ) 1 0.45 1)"
 
-      # Looks like the ordinary master and stack layout when main_count is one
-      # but when increased, the additional windows in the main area will be
-      # vertically aligned below the main window.
-      read -r -d ''' STACK <<EOM
-      stack
-      (
-        { ver:
-          (
-            { hor: full ver }
-            1 0.6 0
-          )
-          hor
-        } 1 0.65 0
-      )
-      EOM
-
-      # Like STACK except the main and slave areas are inverted
-      read -r -d ''' RSTACK <<EOM
-      rstack
-      (
-        { ver:
-          hor
-          (
-            { hor: full ver }
-            1 0.60 0
-          )
-        } 1 0.65 1
-      )
-      EOM
-
-      # Splits the output area vertically in 2 areas.
-      # The main area has a count of one and a horizontal layout.
-      # Below the the top window in the slave area windows are stacked on
-      # top of each others like a deck of cards.
       # Inspired by Stacktile - https://git.sr.ht/~leon_plickat/stacktile
-      read -r -d ''' DECK <<EOM
-      deck
-      (
-        { ver:
-          hor
-          (
-            { hor: full deck }
-            1 0.62 0
-          )
-        } 1 0.6 0
-      )
-      EOM
-
-      # Like DECK except the main and slave areas are inverted
-      read -r -d ''' RDECK <<EOM
-      rdeck
-      (
-        { ver:
-          (
-            { hor: full deck }
-            1 0.62 0
-          )
-          hor
-        } 1 0.6 1
-      )
-      EOM
-
-      # Experimental fibonnacci layout
-      read -r -d ''' FIBONACCI <<EOM
-      fibonacci
-      (
-        { ver:
-          hor 
-          ( 
-            { hor : full 
-              (
-                { ver:
-                  (
-                    { hor: 
-                      ver full
-                    } 1 0.5 1
-                  )
-                  full 
-                } 1 0.5 1
-              )
-            } 1 0.5 
-          )
-        } 1 0.55
-      )
-      EOM
+      STACKTILE="stacktile
+      ((v:
+        ((h: f d) 1 0.62)
+        ((h: f d) 1 0.62)) 1 0.6 1)"
     '';
     executable = true;
   };
