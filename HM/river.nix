@@ -13,7 +13,7 @@ in rec {
     # TODO: broken because of scaling
     # riverctl spawn "paper -c '#FF282828'"
     # riverctl spawn "paper -i /etc/wallpaper/wallpaper.png"
-    # riverctl spawn 'swaybg -c "#282828"'
+    riverctl spawn 'swaybg -c "#282828"'
     riverctl spawn 'kile'
     riverctl spawn 'mako'
 

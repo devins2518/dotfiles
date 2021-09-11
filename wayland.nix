@@ -25,6 +25,7 @@ in {
         quintom-cursor-theme
         river-git
         slurp
+        swaybg
         swaylock
         whitesur-gtk-theme
         wl-clipboard
