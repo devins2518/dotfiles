@@ -7,14 +7,16 @@ in {
     server.enable = true;
     settings = {
       main = {
+        shell = "zsh -l -c 'tmux new || tmux'";
         font = "Iosevka Nerd Font Mono:size=12";
         font-bold = "Iosevka Nerd Font Mono:style=SemiBold:size=12";
         font-italic = "Iosevka Nerd Font Mono:style=Oblique:size=12";
         font-bold-italic =
           "Iosevka Nerd Font Mono:style=SemiBold Oblique:size=12";
-        pad = "20x20";
         dpi-aware = "auto";
-        shell = "zsh -l -c 'tmux new || tmux'";
+        pad = "20x20";
+        word-delimiters = '',│`|:"'()[]{}<>/\'';
+        selection-target = "both";
       };
 
       scrollback = {
