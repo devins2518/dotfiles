@@ -113,6 +113,7 @@ in {
       gdb
       go
       gopls
+      helix-git
       hyperfine
       jq
       libnotify

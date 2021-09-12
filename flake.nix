@@ -50,6 +50,7 @@
         ###########
         ./HM/alacritty.nix
         ./HM/defaults.nix
+        ./HM/helix.nix
         ./HM/dconf.nix
         ./HM/git.nix
         ./HM/gtk.nix
@@ -130,11 +131,12 @@
                 home-manager.users.devin = ({ config, pkgs, ... }:
                   with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                     imports = [
+                      cursor
                       defaults
                       git
                       gtk
+                      helix
                       mpv
-                      cursor
                       nvfancontrol
                       nvim
                       pass
@@ -164,10 +166,11 @@
                   with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                     imports = [
                       configFolder
+                      cursor
                       defaults
                       git
-                      cursor
                       gtk
+                      helix
                       mpv
                       nvim
                       pass
@@ -189,12 +192,13 @@
         [ self.overlay neovim-nightly.overlay nur.overlay nixpkgs-f2k.overlay ];
 
       packagesBuilder = channels: {
-        inherit (channels.nixpkgs) alacritty-ligatures neovim-nightly;
+        inherit (channels.nixpkgs) alacritty-ligatures neovim-nightly helix-git;
       };
 
       appsBuilder = channels:
         with channels.nixpkgs; {
           alacritty-ligatures = utils.lib.mkApp { drv = alacritty-ligatures; };
+          helix-git = utils.lib.mkApp { drv = helix-git; };
         };
 
       overlay = import ./overlays;

@@ -1,5 +1,6 @@
 final: prev: {
   alacritty-ligatures = prev.callPackage ./alacritty-ligatures { };
+  helix-git = prev.callPackage ./helix-git { };
 
   picom = (prev.picom.overrideAttrs (old: {
     src = prev.fetchFromGitHub {
