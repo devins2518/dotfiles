@@ -34,14 +34,21 @@ in {
 
   users = {
     defaultUserShell = pkgs.zsh;
-    users.devin = {
-      isNormalUser = true;
-      hashedPassword =
-        "$6$frNducsvL8EJ7hUe$P6PbYTwjzFpi9ZIPl2lczGlg4Lx5B0prno1STZe/mAo4h8zSPCSETzaBpQl0b911ujMFinaNG580o78ss6lIm.";
-      shell = pkgs.zsh;
-      description = "Devin Singh";
-      extraGroups =
-        [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
+    users = {
+      greeter = {
+        group = "greeter";
+        isSystemUser = true;
+      };
+
+      devin = {
+        isNormalUser = true;
+        hashedPassword =
+          "$6$frNducsvL8EJ7hUe$P6PbYTwjzFpi9ZIPl2lczGlg4Lx5B0prno1STZe/mAo4h8zSPCSETzaBpQl0b911ujMFinaNG580o78ss6lIm.";
+        shell = pkgs.zsh;
+        description = "Devin Singh";
+        extraGroups =
+          [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
+      };
     };
   };
 
