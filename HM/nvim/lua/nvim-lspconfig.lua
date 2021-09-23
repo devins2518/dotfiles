@@ -76,7 +76,7 @@ function lsp_config.common_on_attach(client, bufnr)
         floating_window = true,
         fix_pos = false,
         hint_enable = true,
-        use_lspsaga = true,
+        use_lspsaga = false,
         hi_parameter = 'Search',
         max_height = 5,
         max_width = 60,
@@ -90,6 +90,13 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local lsp = vim.lsp
+local handlers = lsp.handlers
+
+-- Hover doc popup
+local pop_opts = { border = 'rounded', max_width = 80 }
+handlers['textDocument/hover'] = lsp.with(handlers.hover, pop_opts)
 
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches

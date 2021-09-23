@@ -90,19 +90,19 @@ return packer.startup({
                 require 'nvim-compe'
             end
         }
-        use {
-            'glepnir/lspsaga.nvim',
-            after = { 'FixCursorHold.nvim', 'nvim-cmp' },
-            config = function()
-                vim.cmd [[packadd lspsaga.nvim]]
-                require'lspsaga'.init_lsp_saga {
-                    code_action_keys = { quit = 'q', exec = '<CR>' },
-                    rename_action_keys = {
-                        exec = '<CR>' -- quit can be a table
-                    }
-                }
-            end
-        }
+        -- use {
+        --     'glepnir/lspsaga.nvim',
+        --     after = { 'FixCursorHold.nvim', 'nvim-cmp' },
+        --     config = function()
+        --         vim.cmd [[packadd lspsaga.nvim]]
+        --         require'lspsaga'.init_lsp_saga {
+        --             code_action_keys = { quit = 'q', exec = '<CR>' },
+        --             rename_action_keys = {
+        --                 exec = '<CR>' -- quit can be a table
+        --             }
+        --         }
+        --     end
+        -- }
         use {
             'nvim-lua/lsp_extensions.nvim',
             after = 'nvim-cmp',

@@ -56,16 +56,20 @@ wk.register({
             --     unpack(gen_opt)
             -- },
             i = {
-                '<cmd>Lspsaga implement<CR>',
+                '<cmd>lua vim.lsp.buf.implementation()<CR>',
                 'Show implementation',
                 unpack(gen_opt)
             },
             c = {
-                '<cmd>Lspsaga code_action<CR>',
+                '<cmd>lua vim.lsp.buf.code_action()<CR>',
                 'Show code actions',
                 unpack(gen_opt)
             },
-            n = { '<cmd>Lspsaga rename<CR>', 'Show blame', unpack(gen_opt) }
+            n = {
+                '<cmd>lua vim.lsp.buf.rename()<CR>',
+                'Show blame',
+                unpack(gen_opt)
+            }
         }
     },
     ['['] = {
@@ -76,7 +80,7 @@ wk.register({
             unpack(git_opt)
         },
         d = {
-            [[:Lspsaga diagnostic_jump_prev<CR>]],
+            '<cmd>vim.lsp.diagnostic.goto_prev({popup_opts={focusable=false,border=\'rounded\'}})<CR>',
             'Previous diagnostic',
             unpack(gen_opt)
         }
@@ -89,7 +93,7 @@ wk.register({
             unpack(git_opt)
         },
         d = {
-            [[:Lspsaga diagnostic_jump_next<CR>]],
+            '<cmd>vim.lsp.diagnostic.goto_next({popup_opts={focusable=false,border=\'rounded\'}})<CR>',
             'Next diagnostic',
             unpack(gen_opt)
         }
