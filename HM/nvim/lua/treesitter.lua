@@ -16,7 +16,8 @@ treesitter.setup {
         'nix',
         'python',
         'rust',
-        'toml'
+        'toml',
+        'zig'
     },
     highlight = { enable = true, use_languagetree = true },
     rainbow = {

@@ -32,7 +32,7 @@ require('gitsigns').setup {
         }
     },
     numhl = false,
-    watch_index = { interval = 100 },
+    watch_gitdir = { interval = 100 },
     sign_priority = 5,
     status_formatter = nil, -- Use default
     current_line_blame_opts = {

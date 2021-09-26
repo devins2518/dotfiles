@@ -80,7 +80,7 @@ wk.register({
             unpack(git_opt)
         },
         d = {
-            '<cmd>vim.lsp.diagnostic.goto_prev({popup_opts={focusable=false,border=\'rounded\'}})<CR>',
+            '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
             'Previous diagnostic',
             unpack(gen_opt)
         }
@@ -93,7 +93,7 @@ wk.register({
             unpack(git_opt)
         },
         d = {
-            '<cmd>vim.lsp.diagnostic.goto_next({popup_opts={focusable=false,border=\'rounded\'}})<CR>',
+            '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
             'Next diagnostic',
             unpack(gen_opt)
         }

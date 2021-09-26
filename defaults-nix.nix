@@ -4,7 +4,6 @@ let
   nur-packages = with pkgs.nur.repos; [
     devins2518.bunnyfetch-rs
     devins2518.gyro
-    devins2518.zigup
   ];
 in {
   home-manager.useUserPackages = true;
@@ -148,6 +147,7 @@ in {
       wkhtmltopdf
       xarchiver
       xxd
+      zig
       zls
       zsh
     ] ++ nur-packages;
