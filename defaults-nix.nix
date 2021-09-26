@@ -22,6 +22,7 @@ in {
         "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#' --fast && sudo nix-collect-garbage -d";
       ls = "ls -l --color=always";
       grep = "rg";
+      g = "gyro";
     };
     etc."wallpaper/wallpaper.png" = {
       source = pkgs.fetchurl {
