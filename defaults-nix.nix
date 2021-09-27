@@ -4,6 +4,7 @@ let
   nur-packages = with pkgs.nur.repos; [
     devins2518.bunnyfetch-rs
     devins2518.gyro
+    devins2518.zig-master
   ];
 in {
   home-manager.useUserPackages = true;
@@ -22,6 +23,8 @@ in {
       ls = "ls -l --color=always";
       grep = "rg";
       g = "gyro";
+      update-zig =
+        "zigup master --install-dir /home/devin/.zigup --path-link /home/devin/bin/zig";
     };
     etc."wallpaper/wallpaper.png" = {
       source = pkgs.fetchurl {
@@ -147,7 +150,6 @@ in {
       wkhtmltopdf
       xarchiver
       xxd
-      zig
       zls
       zsh
     ] ++ nur-packages;

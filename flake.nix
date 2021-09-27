@@ -2,14 +2,14 @@
   description = "Devins2518's system config";
 
   inputs = {
-    nixos-hardware.url = "github:devins2518/nixos-hardware";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    nixos-hardware.url = "github:devins2518/nixos-hardware";
+    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
     nur.url = "github:nix-community/NUR/master";
-    home-manager.url = "github:nix-community/home-manager";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     nix-ld = {
       url = "github:Mic92/nix-ld";
       # this line assume that you also have nixpkgs as an input
@@ -179,12 +179,12 @@
                       tmux
                       zathura
                       zsh
-                    ] ++ devin.wayland ++ devin.default;
+                    ] ++ devin.x-org ++ devin.default;
 
                     home.packages = with pkgs; [ airplane-mode cachix-push ];
                   });
               })
-            ] ++ wayland-opt;
+            ] ++ x-org;
         };
       };
 
