@@ -179,12 +179,12 @@
                       tmux
                       zathura
                       zsh
-                    ] ++ devin.x-org ++ devin.default;
+                    ] ++ devin.wayland ++ devin.default;
 
                     home.packages = with pkgs; [ airplane-mode cachix-push ];
                   });
               })
-            ] ++ x-org;
+            ] ++ wayland-opt;
         };
       };
 
