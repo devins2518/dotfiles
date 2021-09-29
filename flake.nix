@@ -19,10 +19,10 @@
 
   outputs = { self, nixpkgs, home-manager, utils, nixos-hardware, neovim-nightly
     , nix-ld, nur, nixpkgs-f2k }@inputs:
-    utils.lib.systemFlake rec {
+    utils.lib.mkFlake rec {
       inherit self inputs;
 
-      nixosModules = utils.lib.modulesFromList [
+      nixosModules = utils.lib.exportModules [
         ########### Not done
         # add other scripts here
         ./HM/shell-scripts.nix
@@ -68,7 +68,6 @@
           home-manager.nixosModules.home-manager
           self.nixosModules.defaults-nix
           nix-ld.nixosModules.nix-ld
-          utils.nixosModules.saneFlakeDefaults
         ];
         extraArgs = { inherit utils inputs; };
       };

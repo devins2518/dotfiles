@@ -14,7 +14,6 @@ in {
     homeBinInPath = true;
     sessionVariables = { NIXOS_CONFIG = "/home/devin/Repos/dotfiles"; };
     shellAliases = {
-      nix-repl = "nix repl ${inputs.utils.lib.repl}";
       nshell = "nix-shell";
       fupdate =
         "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#' --fast";
@@ -71,6 +70,8 @@ in {
     trustedUsers = [ "root" "devin" ];
 
     maxJobs = 4;
+
+    generateRegistryFromInputs = true;
 
     gc = {
       automatic = true;
