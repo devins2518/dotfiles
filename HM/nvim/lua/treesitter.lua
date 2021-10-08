@@ -4,22 +4,12 @@ if not present then
 end
 
 treesitter.setup {
-    ensure_installed = {
-        'bash',
-        'c',
-        'comment',
-        'cpp',
-        'go',
-        'gomod',
-        'json',
-        'lua',
-        'nix',
-        'python',
-        'rust',
-        'toml',
-        'zig'
+    ensure_installed = { 'gomod' },
+    highlight = {
+        enable = true,
+        use_languagetree = true,
+        disable = { 'cpp', 'c' }
     },
-    highlight = { enable = true, use_languagetree = true },
     rainbow = {
         enable = true,
         extended_mode = true, -- Highlight also non-parentheses delimiters
@@ -32,6 +22,7 @@ treesitter.setup {
             '#73daca',
             '#41a6b5',
             '#b4f9f8'
-        }
+        },
+        disable = { 'c', 'cpp' }
     }
 }

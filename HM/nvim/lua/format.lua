@@ -32,11 +32,21 @@ require('formatter').setup({
                 }
             end
         },
+        c = {
+            function()
+                return {
+                    exe = 'clang-format',
+                    args = { '--style="{IndentWidth: 4}"' },
+                    stdin = true,
+                    cwd = vim.fn.expand('%:p:h') -- Run clang-format in cwd of the file.
+                }
+            end
+        },
         cpp = {
             function()
                 return {
                     exe = 'clang-format',
-                    args = {},
+                    args = { '--style="{IndentWidth: 4}"' },
                     stdin = true,
                     cwd = vim.fn.expand('%:p:h') -- Run clang-format in cwd of the file.
                 }

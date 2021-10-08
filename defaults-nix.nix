@@ -117,7 +117,6 @@ in {
       clang
       clang-tools
       discord
-      llvm
       dunst
       eww
       feh
@@ -130,7 +129,9 @@ in {
       helix-git
       hyperfine
       jq
+      libllvm
       libnotify
+      llvm
       lm_sensors
       luaformatter
       maim
