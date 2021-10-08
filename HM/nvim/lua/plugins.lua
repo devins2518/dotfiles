@@ -226,6 +226,13 @@ return packer.startup({
         }
         use { 'tpope/vim-surround' }
         use {
+            'kyazdani42/nvim-tree.lua',
+            after = { 'gruvbox-material', 'nvim-web-devicons' },
+            config = function()
+                require 'nvimTree'
+            end
+        }
+        use {
             'Yggdroot/indentLine',
             config = function()
                 G['indentLine_enabled'] = 1

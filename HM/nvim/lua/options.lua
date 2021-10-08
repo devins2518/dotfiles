@@ -84,6 +84,11 @@ Augroup('Markdown', {
     [[autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif]]
 })
 
+Augroup('NvimTree', {
+    [[autocmd VimEnter * NvimTreeOpen]],
+    [[autocmd VimEnter * wincmd p]]
+})
+
 Augroup('Format', {
     [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix,*.sh silent! FormatWrite]],
     [[autocmd FileType sh silent! FormatWrite]]

@@ -131,6 +131,7 @@
                   with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                     imports = [
                       cursor
+                      dconf
                       defaults
                       git
                       gtk

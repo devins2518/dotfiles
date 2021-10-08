@@ -103,6 +103,7 @@ in {
       histSize = 2000;
       histFile = "$HOME/.zsh/HISTFILE";
     };
+    dconf.enable = true;
   };
 
   nixpkgs.config = { allowUnfree = true; };
@@ -113,8 +114,10 @@ in {
       bottom
       bsp-layout
       cachix
+      clang
       clang-tools
       discord
+      llvm
       dunst
       eww
       feh
@@ -131,6 +134,8 @@ in {
       lm_sensors
       luaformatter
       maim
+      meson
+      ninja
       nixfmt
       nixpkgs-review
       pamixer
@@ -144,7 +149,6 @@ in {
       rustup
       stlink
       sumneko-lua-language-server
-      tabbed
       texlive.combined.scheme-small
       tokei
       tree
