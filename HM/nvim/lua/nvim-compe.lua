@@ -58,8 +58,8 @@ cmp.setup {
             end
         end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if vim.fn.pumvisible() == 1 then
-                vim.fn.feedkeys(t('<C-p>'), 'n')
+            if cmp.visible() then
+                cmp.select_prev_item()
             elseif vim.fn.call('vsnip#available', { -1 }) == 1 then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes(
                     '<Plug>(vsnip-expand-or-jump)', true, true, true), '')
