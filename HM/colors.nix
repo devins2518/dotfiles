@@ -2,30 +2,30 @@
 
 rec {
   primary = {
-    background = "#1d2021";
-    foreground = "#d4be98";
+    background = "#192330";
+    foreground = "#cdcecf";
   };
 
   normal = {
-    black = "#32302f";
-    red = "#ea6962";
-    green = "#a9b665";
-    yellow = "#d8a657";
-    blue = "#7daea3";
-    magenta = "#d3869b";
-    cyan = "#89b482";
-    white = "#d4be98";
+    black = "#393b44";
+    red = "#c94f6d";
+    green = "#81b29a";
+    yellow = "#dbc074";
+    blue = "#719cd6";
+    magenta = "#9d79d6";
+    cyan = "#63cdcf";
+    white = "#dfdfe0";
   };
 
   bright = {
-    black = "#32302f";
-    red = "#ea6962";
-    green = "#a9b665";
-    yellow = "#d8a657";
-    blue = "#7daea3";
-    magenta = "#d3869b";
-    cyan = "#89b482";
-    white = "#d4be98";
+    black = "#475072";
+    red = "#d6616b";
+    green = "#58cd8b";
+    yellow = "#ffe37e";
+    blue = "#84cee4";
+    magenta = "#b8a1e3";
+    cyan = "#59f0ff";
+    white = "#f2f2f2";
   };
 
   foot = with lib.strings; {

@@ -13,15 +13,23 @@ return packer.startup({
     function()
         use { 'wbthomason/packer.nvim' }
 
-        -- Colorscheme
         use {
-            'sainnhe/gruvbox-material',
+            'EdenEast/nightfox.nvim',
             config = function()
-                vim.cmd 'set background=dark'
-                G['gruvbox_material_background'] = 'hard'
-                G['gruvbox_material_palette'] = 'mix'
-                G['gruvbox_material_enable_italic'] = 1
-                vim.cmd 'colorscheme gruvbox-material'
+                -- local nightfox = require('nightfox')
+
+                -- nightfox.setup({
+                --    fox = 'nightfox',
+                --    styles = {
+                --        comments = 'italic',
+                --        keywords = 'bold',
+                --        functions = 'italic,bold'
+                --    },
+                --    inverse = { match_paren = true }
+                -- })
+
+                vim.cmd 'colorscheme nightfox'
+                -- require('nightfox').load('nightfox')
             end
         }
         use {
@@ -148,6 +156,7 @@ return packer.startup({
                 G['vim_markdown_folding_disabled'] = 1
             end
         }
+        use { 'octol/vim-cpp-enhanced-highlight', ft = { 'c', 'cpp' } }
 
         -- Git
         use {
@@ -162,14 +171,14 @@ return packer.startup({
         -- Bars
         use {
             'akinsho/nvim-bufferline.lua',
-            after = { 'gruvbox-material', 'nvim-web-devicons' },
+            after = { 'nightfox.nvim', 'nvim-web-devicons' },
             config = function()
                 require 'buffer'
             end
         }
         use {
             'glepnir/galaxyline.nvim',
-            after = { 'gruvbox-material', 'nvim-web-devicons', 'lsp-status.nvim' },
+            after = { 'nightfox.nvim', 'nvim-web-devicons', 'lsp-status.nvim' },
             config = function()
                 require 'statusline'
             end
@@ -227,7 +236,7 @@ return packer.startup({
         use { 'tpope/vim-surround' }
         use {
             'kyazdani42/nvim-tree.lua',
-            after = { 'gruvbox-material', 'nvim-web-devicons' },
+            after = { 'nightfox.nvim', 'nvim-web-devicons' },
             config = function()
                 require 'nvimTree'
             end
