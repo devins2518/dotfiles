@@ -19,16 +19,10 @@ require('telescope').setup {
         layout_config = {
             horizontal = { mirror = false, preview_width = 0.5 },
             vertical = { mirror = false }
-            -- prompt_position = "bottom",
-            -- preview_cutoff = 120,
-            -- results_height = 1,
-            -- results_width = 0.8,
         },
         file_sorter = require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {},
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
-        -- path_display = 'shorten',
-        -- winblend = 15,
         border = {},
         borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         color_devicons = true,
@@ -42,13 +36,5 @@ require('telescope').setup {
     },
     pickers = {
         buffers = { sort_lastused = true, theme = 'dropdown', previewer = true }
-    },
-    extensions = {
-        -- media_files = {
-        --     filetypes = {"png", "webp", "jpg", "jpeg"},
-        --     find_cmd = "rg" -- find command (defaults to `fd`)
-        -- }
     }
 }
-
--- require("telescope").load_extension("media_files")

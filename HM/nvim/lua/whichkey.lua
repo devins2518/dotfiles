@@ -50,24 +50,54 @@ wk.register({
                 'Show declaration',
                 unpack(gen_opt)
             },
-            -- r = {
-            --     '<cmd>Lspsaga references<CR>',
-            --     'Show references',
-            --     unpack(gen_opt)
-            -- },
+            r = {
+                '<cmd>Lspsaga references<CR>',
+                'Show references',
+                unpack(gen_opt)
+            },
             i = {
-                '<cmd>lua vim.lsp.buf.implementation()<CR>',
+                '<cmd>Lspsaga implement<CR>',
                 'Show implementation',
                 unpack(gen_opt)
             },
             c = {
-                '<cmd>lua vim.lsp.buf.code_action()<CR>',
+                '<cmd>Lspsaga code_action<CR>',
                 'Show code actions',
                 unpack(gen_opt)
             },
-            n = {
-                '<cmd>lua vim.lsp.buf.rename()<CR>',
-                'Show blame',
+            n = { '<cmd>Lspsaga rename<CR>', 'Show blame', unpack(gen_opt) }
+        },
+        t = {
+            name = 'Telescope',
+            f = { '<cmd>Telescope find_files<cr>', 'Show files', unpack(gen_opt) },
+            g = { '<cmd>Telescope live_grep<cr>', 'Grep files', unpack(gen_opt) },
+            b = { '<cmd>Telescope buffers<cr>', 'Show buffers', unpack(gen_opt) }
+        },
+        d = {
+            name = 'Debugging',
+            s = {
+                ':NvimTreeToggle<cr><cmd>lua require("dapui").toggle()<CR>',
+                'Toggle debug UI',
+                unpack(gen_opt)
+            },
+            c = {
+                '<cmd>lua require"dap".continue()<CR>',
+                'Debug continue',
+                unpack(gen_opt)
+            },
+            o = {
+                '<cmd>lua require"dap".step_over()<CR>',
+                'Step over',
+                unpack(gen_opt)
+            },
+            i = {
+                '<cmd>lua require"dap".step_into()<CR>',
+                'Step into',
+                unpack(gen_opt)
+            },
+            b = {
+                '<cmd>lua require"dap".toggle_breakpoint()<CR>',
+                'Toggle breakpoint',
                 unpack(gen_opt)
             }
         }
@@ -80,7 +110,7 @@ wk.register({
             unpack(git_opt)
         },
         d = {
-            '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
+            [[:Lspsaga diagnostic_jump_prev<CR>]],
             'Previous diagnostic',
             unpack(gen_opt)
         }

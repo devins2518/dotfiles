@@ -154,6 +154,8 @@ in {
       texlive.combined.scheme-small
       tokei
       tree
+      unzip
+      wget
       wkhtmltopdf
       xarchiver
       xxd

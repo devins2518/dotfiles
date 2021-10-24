@@ -383,11 +383,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1631525093,
-        "narHash": "sha256-wIPvR8Cr4B2kqDmbJLndJx/bepf4RwcbezCD7TnPiso=",
+        "lastModified": 1634471440,
+        "narHash": "sha256-dWhtT9CJWd4CLcy8oWXWdwY6vc4fJC4HIW+RuIL1nvg=",
         "owner": "Mic92",
         "repo": "nix-ld",
-        "rev": "6b7c79223bd1e22c94bc71f4656dcd3da3231e5a",
+        "rev": "55086c739b537e8257b7714aeffecaf7271932a6",
         "type": "github"
       },
       "original": {

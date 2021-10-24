@@ -16,20 +16,7 @@ return packer.startup({
         use {
             'EdenEast/nightfox.nvim',
             config = function()
-                -- local nightfox = require('nightfox')
-
-                -- nightfox.setup({
-                --    fox = 'nightfox',
-                --    styles = {
-                --        comments = 'italic',
-                --        keywords = 'bold',
-                --        functions = 'italic,bold'
-                --    },
-                --    inverse = { match_paren = true }
-                -- })
-
-                vim.cmd 'colorscheme nightfox'
-                -- require('nightfox').load('nightfox')
+                require('nightfox').load('nightfox')
             end
         }
         use {
@@ -98,19 +85,19 @@ return packer.startup({
                 require 'nvim-compe'
             end
         }
-        -- use {
-        --     'glepnir/lspsaga.nvim',
-        --     after = { 'FixCursorHold.nvim', 'nvim-cmp' },
-        --     config = function()
-        --         vim.cmd [[packadd lspsaga.nvim]]
-        --         require'lspsaga'.init_lsp_saga {
-        --             code_action_keys = { quit = 'q', exec = '<CR>' },
-        --             rename_action_keys = {
-        --                 exec = '<CR>' -- quit can be a table
-        --             }
-        --         }
-        --     end
-        -- }
+        use {
+            'tami5/lspsaga.nvim',
+            after = { 'FixCursorHold.nvim', 'nvim-cmp' },
+            config = function()
+                vim.cmd [[packadd lspsaga.nvim]]
+                require'lspsaga'.init_lsp_saga {
+                    code_action_keys = { quit = 'q', exec = '<CR>' },
+                    rename_action_keys = {
+                        exec = '<CR>' -- quit can be a table
+                    }
+                }
+            end
+        }
         use {
             'nvim-lua/lsp_extensions.nvim',
             after = 'nvim-cmp',
@@ -129,6 +116,21 @@ return packer.startup({
         use { 'ray-x/lsp_signature.nvim' }
         use { 'folke/lsp-colors.nvim', after = 'nvim-cmp' }
         use { 'nvim-lua/lsp-status.nvim' }
+
+        -- Debugger
+        use {
+            'mfussenegger/nvim-dap',
+            config = function()
+                vim.cmd [[packadd dap]]
+                require 'debugger'
+            end,
+            requires = {
+                'nvim-telescope/telescope-dap.nvim',
+                'rcarriga/nvim-dap-ui',
+                'Pocco81/DAPInstall.nvim'
+            },
+            ft = { 'c', 'cpp', 'rust' }
+        }
 
         -- Filetypes
         use { 'LnL7/vim-nix', ft = { 'nix' } }
@@ -246,6 +248,13 @@ return packer.startup({
             config = function()
                 G['indentLine_enabled'] = 1
                 G['indentLine_char_list'] = { '|', '¦', '┆', '┊' }
+            end
+        }
+        use {
+            'nvim-telescope/telescope.nvim',
+            requires = { { 'nvim-lua/plenary.nvim' } },
+            config = function()
+                require 'ts'
             end
         }
     end
