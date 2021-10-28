@@ -10,7 +10,7 @@ in rec {
     #!/usr/bin/env bash
 
     riverctl spawn "wlr-randr --output eDP-1 --scale 2 &"
-    riverctl spawn "paper -c '#FF282828'"
+    riverctl spawn "paper -c '#FF192330'"
     riverctl spawn 'kile'
     riverctl spawn 'mako'
 
