@@ -53,8 +53,8 @@ in {
 
 
         # Neovim settings
-        set-option -sa terminal-overrides 'foot:RGB'
-        set-option -g default-terminal "tmux-256color"
+        set-option -sa terminal-overrides ',foot*:Tc'
+        set-option -sa terminal-overrides ",alacritty*:Tc"
         set-option -g focus-events on
 
         # Undercurl

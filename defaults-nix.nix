@@ -132,6 +132,7 @@ in {
       jq
       libllvm
       libnotify
+      lldb
       llvm
       lm_sensors
       luaformatter
