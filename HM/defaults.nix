@@ -22,4 +22,9 @@
   home.homeDirectory = "/home/devin";
 
   news.display = "silent";
+
+  home.file.".lldbinit".text = ''
+    settings set stop-line-count-before 20
+    settings set stop-line-count-after 20
+  '';
 }
