@@ -70,7 +70,10 @@ Augroup('rust', {
     [[autocmd FileType rust nmap <leader>cb :Cbuild<CR>]],
     [[autocmd FileType rust nmap <leader>cr :Crun<CR>]],
     [[autocmd FileType rust nmap <leader>cl :Cclean<CR>]],
-    [[autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{ highlight = "NonText", prefix = " » " ,enabled = {"TypeHint", "ChainingHint", "ParameterHint"}}]]
+    [[autocmd BufEnter,BufWinEnter,BufWritePost,InsertLeave, \
+        TabEnterBufEnter,BufWinEnter,BufWritePost,InsertLeave,TabEnter *.rs \
+        :lua require'lsp_extensions'.inlay_hints{ highlight = "NonText", prefix = \
+        " » " ,enabled = {"TypeHint", "ChainingHint", "ParameterHint"}}]]
 })
 
 Augroup('Markdown', {
