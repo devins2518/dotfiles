@@ -25,6 +25,7 @@ in {
       update-zig =
         "zigup master --install-dir /home/devin/.zigup --path-link /home/devin/bin/zig";
       mbuild = "meson compile -C build";
+      mtest = "meson test -C build";
     };
     etc."wallpaper/wallpaper.png" = {
       source = pkgs.fetchurl {
