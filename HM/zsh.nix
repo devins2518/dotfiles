@@ -5,8 +5,6 @@
     zsh = {
       enable = true;
 
-      enableCompletion = false;
-
       history = {
         path = ".zsh/HISTFILE";
         size = 2000;
@@ -39,6 +37,21 @@
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
       '';
+
+      shellAliases = {
+        nshell = "nix-shell";
+        fupdate =
+          "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#' --fast";
+        fclup =
+          "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#' --fast && sudo nix-collect-garbage -d";
+        ls = "ls -l --color=always";
+        grep = "rg";
+        g = "gyro";
+        update-zig =
+          "zigup master --install-dir /home/devin/.zigup --path-link /home/devin/bin/zig";
+        mbuild = "meson compile -C build";
+        mtest = "meson test -C build";
+      };
 
       plugins = [
         {
