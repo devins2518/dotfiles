@@ -93,22 +93,20 @@ in {
   environment.systemPackages = with pkgs;
     [
       aerc
-      alttab
+      binutils.bintools
       bottom
-      bsp-layout
       cachix
       clang
       clang-tools
-      discord
       dunst
-      eww
-      feh
       ffmpeg
       firefox
       gcc
-      gdb
+      ghc
       go
       gopls
+      haskell-language-server
+      ormolu
       helix-git
       hyperfine
       jq
@@ -118,28 +116,28 @@ in {
       llvm
       lm_sensors
       luaformatter
-      maim
       meson
       ninja
       nixfmt
       nixpkgs-review
+      ocaml
+      ocamlPackages.ocaml-lsp
+      ocamlformat
+      opam
       pamixer
       pandoc
       pavucontrol
       pcmanfm
-      picom
       ripgrep
       rnix-lsp
       rust-analyzer
       rustup
-      stlink
+      stack
       sumneko-lua-language-server
-      texlive.combined.scheme-small
       tokei
       tree
       unzip
       wget
-      wkhtmltopdf
       xarchiver
       xxd
       zls

@@ -143,6 +143,11 @@ return packer.startup({
             end
         }
         use {
+            'ocaml/vim-ocaml',
+            ft = { 'ocaml', 'dune', 'oasis', 'opam', 'ocpbuild' }
+        }
+        use { 'neovimhaskell/haskell-vim', ft = 'haskell' }
+        use {
             'rust-lang/rust.vim',
             ft = { 'rust' },
             after = 'lsp_extensions.nvim',

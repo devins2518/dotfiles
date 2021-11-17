@@ -29,6 +29,8 @@
         export EDITOR=nvim
         export VISUAL=nvim
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#928374"
+
+        [[ ! -r /home/devin/.opam/opam-init/init.zsh ]] || source /home/devin/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
       '';
 
       initExtraFirst = ''

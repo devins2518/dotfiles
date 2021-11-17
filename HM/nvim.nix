@@ -18,6 +18,8 @@ in {
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-go}/parser";
   # xdg.configFile."nvim/parser/gomod.so".source =
   #   "${pkgs.tree-sitter.builtGrammars.tree-sitter-gomod}/parser";
+  xdg.configFile."nvim/parser/haskell.so".source =
+    "${pkgs.tree-sitter.builtGrammars.tree-sitter-haskell}/parser";
   xdg.configFile."nvim/parser/json.so".source =
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-json}/parser";
   xdg.configFile."nvim/parser/lua.so".source =

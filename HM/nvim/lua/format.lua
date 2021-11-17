@@ -56,6 +56,20 @@ require('formatter').setup({
             function()
                 return { exe = 'nixfmt', stdin = true }
             end
+        },
+        ocaml = {
+            function()
+                return {
+                    exe = 'ocamlformat',
+                    args = {
+                        '-p ocamlformat',
+                        '--enable-outside-detected-project',
+                        '--impl',
+                        '-'
+                    },
+                    stdin = true
+                }
+            end
         }
     }
 })

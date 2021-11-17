@@ -105,6 +105,8 @@ capabilities = vim.tbl_extend('keep', capabilities or {},
 local servers = {
     'clangd',
     'gopls',
+    'hls',
+    'ocamllsp',
     'rnix',
     'rust_analyzer',
     'sumneko_lua',

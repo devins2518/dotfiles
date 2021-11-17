@@ -6,7 +6,18 @@ let
   bright = theme.bright;
   vim = theme.vim;
 in {
-  home.packages = with pkgs; [ bspwm ];
+  home.packages = with pkgs; [
+    bspwm
+    bsp-layout
+    picom
+    alttab
+    discord
+    eww
+    feh
+    stlink
+    texlive.combined.scheme-small
+    wkhtmltopdf
+  ];
   xsession = {
     enable = true;
     windowManager = {
