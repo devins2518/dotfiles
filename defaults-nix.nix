@@ -57,8 +57,6 @@ in {
 
     trustedUsers = [ "root" "devin" ];
 
-    maxJobs = 4;
-
     generateRegistryFromInputs = true;
 
     gc = {
