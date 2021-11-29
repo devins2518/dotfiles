@@ -24,6 +24,42 @@
         sha256 = "sha256-NstSuLL45O2PWEpS/WDtgXOhajPtzIkw5nDdErlPr20=";
       };
     };
+    "pdfs/maqi/rfc2821 - smtp.pdf" = {
+      source = pkgs.fetchurl {
+        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc2821.txt.pdf";
+        sha256 = "sha256-yCMjOCASyKyXaL18FuSkShZbxUGCj6p409aQgACZWJc=";
+      };
+    };
+    "pdfs/maqi/rfc9051 - imapv4r2.pdf" = {
+      source = pkgs.fetchurl {
+        url = "https://www.ietf.org/rfc/rfc9051.pdf";
+        sha256 = "sha256-El1HKcrvjO/ZgOfVE//NFx6NJyrMiNSmzkfzBxqx6uE=";
+      };
+    };
+    "pdfs/maqi/rfc2087 - imap quota.pdf" = {
+      source = pkgs.fetchurl {
+        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc2087.txt.pdf";
+        sha256 = "sha256-Oin5K5mw7XQUV9GBdbcUS62zrRX+MKRaKNQNNlU7V8c=";
+      };
+    };
+    "pdfs/maqi/rfc5322 - imap imf.pdf" = {
+      source = pkgs.fetchurl {
+        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc5322.txt.pdf";
+        sha256 = "sha256-pqdmt2O1NXz0JYIDQJgCwCi7ZGn6U8ZpuUkMjWIwScs=";
+      };
+    };
+    "pdfs/maqi/rfc2045 - imap mimep1.pdf" = {
+      source = pkgs.fetchurl {
+        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc2045.txt.pdf";
+        sha256 = "sha256-BFCY5BN1RotHyiF92Y5fzMxJ09ynPzRiwwLknhzRH5o=";
+      };
+    };
+    "pdfs/maqi/rfc5234 - imap syntax.pdf" = {
+      source = pkgs.fetchurl {
+        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc5234.txt.pdf";
+        sha256 = "sha256-zsg2xDz+MvuWRgVE7Vnf1yAGjX0lZLPvnP4GWP3gN0U=";
+      };
+    };
     "pdfs/chaaya/armv5.pdf" = {
       source = pkgs.fetchurl {
         url =
@@ -32,21 +68,21 @@
       };
     };
     # TODO: fix
-    "pdfs/chaaya/gbatek.pdf" = {
-      source = pkgs.fetchurl {
-        url = "http://www.problemkaputt.de/gbatek.htm";
+    #     "pdfs/chaaya/gbatek.pdf" = {
+    #       source = pkgs.fetchurl {
+    #         url = "http://www.problemkaputt.de/gbatek.htm";
 
-        #buildPackages = [ pkgs.iconv pkgs.pandoc ];
-        #${lib.getBin pkgs.libiconv}/bin/iconv -f ISO-8859-1 -t UTF-8//TRANSLIT $downloadedFile -o gbatek.html
+    #         #buildPackages = [ pkgs.iconv pkgs.pandoc ];
+    #         #${lib.getBin pkgs.libiconv}/bin/iconv -f ISO-8859-1 -t UTF-8//TRANSLIT $downloadedFile -o gbatek.html
 
-        postFetch = ''
-          ${pkgs.recode}/bin/recode ms-ansi..utf8 $downloadedFile
-          ${pkgs.pandoc}/bin/pandoc --pdf-engine=wkhtmltopdf -t html5 -V margin-top=1 -V margin-left=0 -V margin-right=0 -V margin-bottom=1 -V papersize=letter -o $out -s $downloadedFile
-        '';
+    #         postFetch = ''
+    #           ${pkgs.recode}/bin/recode ms-ansi..utf8 $downloadedFile
+    #           ${pkgs.pandoc}/bin/pandoc --pdf-engine=wkhtmltopdf -t html5 -V margin-top=1 -V margin-left=0 -V margin-right=0 -V margin-bottom=1 -V papersize=letter -o $out -s $downloadedFile
+    #         '';
 
-        sha256 = "sha256-Yy8oUXU+97b35lHVS896um2PWkNKdTHnCCTDCGzbSLI=";
-      };
-    };
+    #         sha256 = "sha256-Yy8oUXU+97b35lHVS896um2PWkNKdTHnCCTDCGzbSLI=";
+    #       };
+    #     };
 
   };
 }

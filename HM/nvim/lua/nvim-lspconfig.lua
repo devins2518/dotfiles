@@ -106,7 +106,6 @@ local servers = {
     'clangd',
     'gopls',
     'hls',
-    'ocamllsp',
     'rnix',
     'rust_analyzer',
     'sumneko_lua',

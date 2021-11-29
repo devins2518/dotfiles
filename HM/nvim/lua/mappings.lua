@@ -6,6 +6,8 @@ Map('n', '<C-k>', '<C-W><C-K>', {})
 Map('n', '<C-l>', '<C-W><C-L>', {})
 Map('n', '<C-h>', '<C-W><C-H>', {})
 Map('n', '<C-S-.>', '<C-W>>', {})
+Map('v', 'd', '"_d', { noremap = true })
+Map('n', 'd', '"_d', { noremap = true })
 Map('n', 'gb', '<C-^>', { noremap = true, silent = true })
 
 -- LSP

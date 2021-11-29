@@ -174,7 +174,7 @@
                       mpv
                       nvim
                       pass
-                      #pdf
+                      pdf
                       qt
                       tmux
                       zathura

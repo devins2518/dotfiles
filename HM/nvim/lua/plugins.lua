@@ -142,10 +142,6 @@ return packer.startup({
                 G['zig_fmt_autosave'] = 1
             end
         }
-        use {
-            'ocaml/vim-ocaml',
-            ft = { 'ocaml', 'dune', 'oasis', 'opam', 'ocpbuild' }
-        }
         use { 'neovimhaskell/haskell-vim', ft = 'haskell' }
         use {
             'rust-lang/rust.vim',

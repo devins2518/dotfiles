@@ -94,6 +94,7 @@ in {
       binutils.bintools
       bottom
       cachix
+      cargo-tarpaulin
       clang
       clang-tools
       dunst
@@ -101,10 +102,10 @@ in {
       firefox
       gcc
       ghc
+      gnumake
       go
       gopls
       haskell-language-server
-      ormolu
       helix-git
       hyperfine
       jq
@@ -118,10 +119,7 @@ in {
       ninja
       nixfmt
       nixpkgs-review
-      ocaml
-      ocamlPackages.ocaml-lsp
-      ocamlformat
-      opam
+      ormolu
       pamixer
       pandoc
       pavucontrol
