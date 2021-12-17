@@ -6,9 +6,6 @@ let
   bright = theme.bright;
   vim = theme.vim;
 in rec {
-  home.packages = with pkgs; [
-    maim
-  ];
   xdg.configFile."river/init".text = ''
     #!/usr/bin/env bash
 

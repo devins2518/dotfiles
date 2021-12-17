@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  environment = { systemPackages = with pkgs; [ xclip xdotool ]; };
+  environment = { systemPackages = with pkgs; [ xclip xdotool maim ]; };
 
   # Enable the X11 windowing system.
   services.xserver = {
