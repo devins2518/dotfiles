@@ -33,19 +33,16 @@ require('dapui').setup({
     windows = { indent = 1 }
 })
 
-local dap_install = require('dap-install')
-
-dap_install.setup(
-    { installation_path = vim.fn.stdpath('data') .. '/dapinstall/' })
-dap_install.config('ccppr_vsc')
-dap.adapters.cppdbg = {
+dap.adapters.lldb = {
     type = 'executable',
-    command = '/home/devin/.local/share/nvim/dapinstall/ccppr_vsc/extension/debugAdapters/bin/OpenDebugAD7'
+    command = 'lldb-vscode', -- adjust as needed
+    name = 'lldb'
 }
+
 dap.configurations.cpp = {
     {
         name = 'Launch file',
-        type = 'cppdbg',
+        type = 'lldb',
         request = 'launch',
         program = function()
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/',
@@ -56,11 +53,11 @@ dap.configurations.cpp = {
     },
     {
         name = 'Attach to gdbserver :1234',
-        type = 'cppdbg',
+        type = 'lldb',
         request = 'launch',
-        MIMode = 'gdb',
+        MIMode = 'lldb',
         miDebuggerServerAddress = 'localhost:1234',
-        miDebuggerPath = 'gdb',
+        miDebuggerPath = 'lldb',
         cwd = '${workspaceFolder}',
         program = function()
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/',

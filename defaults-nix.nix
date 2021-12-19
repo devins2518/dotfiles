@@ -133,6 +133,7 @@ in {
       tokei
       tree
       unzip
+      vscode-extensions.vadimcn.vscode-lldb
       wget
       xarchiver
       xxd
