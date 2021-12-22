@@ -179,13 +179,6 @@ return packer.startup({
                 require 'buffer'
             end
         }
-        use {
-            'glepnir/galaxyline.nvim',
-            after = { 'nightfox.nvim', 'nvim-web-devicons', 'lsp-status.nvim' },
-            config = function()
-                require 'statusline'
-            end
-        }
 
         -- Formatting
         use {

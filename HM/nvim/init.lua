@@ -19,3 +19,4 @@ end
 require 'plugins'
 require 'mappings'
 require 'options'
+require 'statusline'

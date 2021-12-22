@@ -1,206 +1,185 @@
-local present1, gl = pcall(require, 'galaxyline')
-if not present1 then
-    print('galxyline not found')
-    return
-end
+local fn = vim.fn
+local api = vim.api
 
-local colors = {
-    bg = '#282828',
-    line_bg = '#1f2335',
-    fg = '#fbf1c7',
-    fg_green = '#a0c980',
-    yellow = '#deb974',
-    cyan = '#44adb3',
-    darkblue = '#5b8dc2',
-    green = '#8ec07c',
-    orange = '#FF8800',
-    magenta = '#d3869b',
-    blue = '#83a598',
-    red = '#cc241d',
-    lightbg = '#363a49'
-}
-local function dirname()
-    local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-    return '   ' .. dir_name .. ' '
-end
+local M = {}
 
-local gls = gl.section
-local condition = require('galaxyline.condition')
-local fileinfo = require('galaxyline.provider_fileinfo')
-gl.short_line_list = {}
-gls.left[3] = {
-    FirstElement = {
-        provider = function()
-            return ''
-        end,
-        highlight = {
-            require('galaxyline.provider_fileinfo').get_file_icon_color,
-            colors.line_bg
-        }
-    }
+-- possible values are 'arrow' | 'rounded' | 'blank'
+local active_sep = 'blank'
+
+-- change them if you want to different separator
+M.separators = {
+    arrow = { '', '' },
+    rounded = { '', '' },
+    blank = { '', '' }
 }
-gls.left[4] = {
-    FileIcon = {
-        provider = function()
-            local str = fileinfo.get_file_icon():gsub('%s+', '')
-            if str == '' then
-                str = ''
-            end
-            return ' ' .. str .. ' '
-        end,
-        highlight = {
-            colors.lightbg,
-            require('galaxyline.provider_fileinfo').get_file_icon_color
-        }
-    }
+
+-- highlight groups
+M.colors = {
+    active = '%#StatusLine#',
+    inactive = '%#StatuslineNC#',
+    mode = '%#Mode#',
+    mode_alt = '%#ModeAlt#',
+    git = '%#Git#',
+    git_alt = '%#GitAlt#',
+    filetype = '%#Filetype#',
+    filetype_alt = '%#FiletypeAlt#',
+    line_col = '%#LineCol#',
+    line_col_alt = '%#LineColAlt#'
 }
-gls.left[5] = {
-    current_dir = {
-        provider = function()
-            return dirname()
-        end,
-        highlight = {
-            require('galaxyline.provider_fileinfo').get_file_icon_color,
-            colors.lightbg
-        },
-        separator = '',
-        separator_highlight = { colors.lightbg, colors.statusline_bg }
-    }
-}
-local checkwidth = function()
-    local squeeze_width = vim.fn.winwidth(0) / 2
-    if squeeze_width > 30 then
-        return true
+
+M.trunc_width = setmetatable({
+    mode = 80,
+    git_status = 90,
+    filename = 140,
+    line_col = 60
+}, {
+    __index = function()
+        return 80
     end
-    return false
+})
+
+M.is_truncated = function(_, width)
+    local current_width = api.nvim_win_get_width(0)
+    return current_width < width
 end
-gls.left[6] = {
-    DiffAdd = {
-        provider = 'DiffAdd',
-        condition = checkwidth,
-        icon = '  ',
-        highlight = { colors.fg_green, colors.statusline_bg }
-    }
-}
-gls.left[7] = {
-    DiffModified = {
-        provider = 'DiffModified',
-        condition = checkwidth,
-        icon = '   ',
-        highlight = { colors.yellow, colors.statusline_bg }
-    }
-}
-gls.left[8] = {
-    DiffRemove = {
-        provider = 'DiffRemove',
-        condition = checkwidth,
-        icon = '  ',
-        highlight = { colors.red, colors.statusline_bg }
-    }
-}
-gls.left[9] = {
-    DiagnosticError = {
-        provider = 'DiagnosticError',
-        icon = '  ',
-        highlight = { colors.red, colors.statusline_bg }
-    }
-}
-gls.left[10] = {
-    DiagnosticWarn = {
-        provider = 'DiagnosticWarn',
-        icon = '  ',
-        highlight = { colors.yellow, colors.statusline_bg }
-    }
-}
-gls.left[11] = {
-    lsp_status = {
-        provider = function()
-            if #vim.lsp.get_active_clients() > 0 then
-                return ' ' .. require('lsp-status').status()
-            else
-                return ''
-            end
-        end,
-        condition = condition.check_active_lsp,
-        highlight = {
-            require('galaxyline.provider_fileinfo').get_file_icon_color,
-            colors.statusline_bg
-        }
-    }
-}
-gls.right[2] = {
-    GitIcon = {
-        provider = function()
-            return ' '
-        end,
-        condition = require('galaxyline.condition').check_git_workspace,
-        highlight = { colors.grey_fg2, colors.statusline_bg },
-        separator = ' ',
-        separator_highlight = { colors.statusline_bg, colors.statusline_bg }
-    }
-}
-gls.right[3] = {
-    GitBranch = {
-        provider = 'GitBranch',
-        condition = require('galaxyline.condition').check_git_workspace,
-        highlight = { colors.grey_fg2, colors.statusline_bg }
-    }
-}
-gls.right[4] = {
-    viMode_icon = {
-        provider = function()
-            return ' '
-        end,
-        highlight = { colors.lightbg, colors.red },
-        separator = ' ',
-        separator_highlight = { colors.red, colors.statusline_bg }
-    }
-}
-gls.right[5] = {
-    ViMode = {
-        provider = function()
-            local alias = {
-                n = 'Normal',
-                i = 'Insert',
-                c = 'Command',
-                V = 'Visual',
-                [''] = 'Visual',
-                v = 'Visual',
-                R = 'Replace'
-            }
-            local current_Mode = alias[vim.fn.mode()]
-            if current_Mode == nil then
-                return '  Terminal '
-            else
-                return '  ' .. current_Mode .. ' '
-            end
-        end,
-        highlight = { colors.red, colors.lightbg }
-    }
-}
-gls.right[6] = {
-    some_icon = {
-        provider = function()
-            return ' '
-        end,
-        separator = '',
-        separator_highlight = { colors.green, colors.lightbg },
-        highlight = { colors.lightbg, colors.green }
-    }
-}
-gls.right[7] = {
-    line_percentage = {
-        provider = function()
-            local current_line = vim.fn.line('.')
-            local total_line = vim.fn.line('$')
-            if current_line == 1 then
-                return '  Top '
-            elseif current_line == vim.fn.line('$') then
-                return '  Bot '
-            end
-            local result, _ = math.modf((current_line / total_line) * 100)
-            return '  ' .. result .. '% '
-        end,
-        highlight = { colors.green, colors.lightbg }
-    }
-}
+
+M.modes = setmetatable({
+    ['n'] = { 'Normal', 'N' },
+    ['no'] = { 'N·Pending', 'N·P' },
+    ['v'] = { 'Visual', 'V' },
+    ['V'] = { 'V·Line', 'V·L' },
+    [''] = { 'V·Block', 'V·B' }, -- this is not ^V, but it's , they're different
+    ['s'] = { 'Select', 'S' },
+    ['S'] = { 'S·Line', 'S·L' },
+    [''] = { 'S·Block', 'S·B' }, -- same with this one, it's not ^S but it's 
+    ['i'] = { 'Insert', 'I' },
+    ['ic'] = { 'Insert', 'I' },
+    ['R'] = { 'Replace', 'R' },
+    ['Rv'] = { 'V·Replace', 'V·R' },
+    ['c'] = { 'Command', 'C' },
+    ['cv'] = { 'Vim·Ex ', 'V·E' },
+    ['ce'] = { 'Ex ', 'E' },
+    ['r'] = { 'Prompt ', 'P' },
+    ['rm'] = { 'More ', 'M' },
+    ['r?'] = { 'Confirm ', 'C' },
+    ['!'] = { 'Shell ', 'S' },
+    ['t'] = { 'Terminal ', 'T' }
+}, {
+    __index = function()
+        return { 'Unknown', 'U' } -- handle edge cases
+    end
+})
+
+M.get_current_mode = function(self)
+    local current_mode = api.nvim_get_mode().mode
+
+    if self:is_truncated(self.trunc_width.mode) then
+        return string.format(' %s ', self.modes[current_mode][2]):upper()
+    end
+    return string.format(' %s ', self.modes[current_mode][1]):upper()
+end
+
+M.get_git_status = function(self)
+    -- use fallback because it doesn't set this variable on the initial `BufEnter`
+    local signs = vim.b.gitsigns_status_dict or
+                      { head = '', added = 0, changed = 0, removed = 0 }
+    local is_head_empty = signs.head ~= ''
+
+    if self:is_truncated(self.trunc_width.git_status) then
+        return is_head_empty and string.format('  %s ', signs.head or '') or
+                   ''
+    end
+
+    return is_head_empty and
+               string.format(' +%s ~%s -%s |  %s ', signs.added,
+            signs.changed, signs.removed, signs.head) or ''
+end
+
+M.get_filename = function(self)
+    if self:is_truncated(self.trunc_width.filename) then
+        return ' %<%f '
+    end
+    return ' %<%F '
+end
+
+M.get_filetype = function()
+    local file_name, file_ext = fn.expand('%:t'), fn.expand('%:e')
+    local icon = require'nvim-web-devicons'.get_icon(file_name, file_ext,
+        { default = true })
+    local filetype = vim.bo.filetype
+
+    if filetype == '' then
+        return ''
+    end
+    return string.format(' %s %s ', icon, filetype):lower()
+end
+
+M.get_line_col = function(self)
+    if self:is_truncated(self.trunc_width.line_col) then
+        return ' %l:%c '
+    end
+    return ' Ln %l, Col %c '
+end
+
+M.set_active = function(self)
+    local colors = self.colors
+
+    local mode = colors.mode .. self:get_current_mode()
+    local mode_alt = colors.mode_alt .. self.separators[active_sep][1]
+    local git = colors.git .. self:get_git_status()
+    local git_alt = colors.git_alt .. self.separators[active_sep][1]
+    local filename = colors.inactive .. self:get_filename()
+    local filetype_alt = colors.filetype_alt .. self.separators[active_sep][2]
+    local filetype = colors.filetype .. self:get_filetype()
+    local line_col = colors.line_col .. self:get_line_col()
+    local line_col_alt = colors.line_col_alt .. self.separators[active_sep][2]
+
+    return table.concat({
+        colors.active,
+        mode,
+        mode_alt,
+        git,
+        git_alt,
+        '%=',
+        filename,
+        '%=',
+        filetype_alt,
+        filetype,
+        line_col_alt,
+        line_col
+    })
+end
+
+M.set_inactive = function(self)
+    return self.colors.inactive .. '%= %F %='
+end
+
+M.set_explorer = function(self)
+    local title = self.colors.mode .. '   '
+    local title_alt = self.colors.mode_alt .. self.separators[active_sep][2]
+
+    return table.concat({ self.colors.active, title, title_alt })
+end
+
+Statusline = setmetatable(M, {
+    __call = function(statusline, mode)
+        if mode == 'active' then
+            return statusline:set_active()
+        end
+        if mode == 'inactive' then
+            return statusline:set_inactive()
+        end
+        if mode == 'explorer' then
+            return statusline:set_explorer()
+        end
+    end
+})
+
+api.nvim_exec([[
+  augroup Statusline
+  au!
+  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline('active')
+  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline('inactive')
+  au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline('explorer')
+  augroup END
+]], false)
