@@ -1,0 +1,109 @@
+# Author : Devin Singh <drsingh2518@icloud.com>
+# A port of the nightfox colorscheme. https://github.com/EdenEast/nightfox.nvim
+
+# "attribute" = { fg = "purple" }
+"keyword" = { fg = "magenta" }
+# "keyword.directive" = { fg = "purple", modifiers = ["italic"] }
+"keyword.operator" = { fg = "fg_alt" }
+"namespace" = { fg = "cyan" }
+"punctuation" = { fg = "fg_alt" }
+"punctuation.delimiter" = { fg = "fg_alt" }
+"punctuation.special" = { fg = "harsh" }
+"operator" = { fg = "fg_alt" }
+"special" = { fg = "blue" }
+"property" = { fg = "green" }
+# "variable" = { fg = "fg0" }
+# "variable.property" = { fg = "green" }
+"variable.builtin" = { fg = "red", modifiers = ["italic"] }
+"type" = { fg = "yellow" }
+"type.builtin" = { fg = "yellow" }
+"constructor" = { fg = "magenta" }
+"function" = { fg = "magenta" }
+"function.macro" = { fg = "red" }
+"function.builtin" = { fg = "cyan" }
+"comment" = { fg = "comment_dr" }
+"constant" = { fg = "orange" }
+"constant.builtin" = { fg = "alt_orange" }
+"string" = { fg = "green" }
+"number" = { fg = "alt_orange" }
+"escape" = { fg = "magenta" }
+"label" = { fg = "blue" }
+"module" = { fg = "cyan" }
+# 
+"warning" = { bg = "warning" }
+"error" = { bg = "error" }
+"info" = { bg = "info" }
+"hint" = { bg = "hint" }
+# 
+"ui.background" = { fg = "fg", bg = "bg" }
+"ui.linenr" = { fg = "fg_gutter" }
+"ui.linenr.selected" = { fg = "fg_alt" }
+"ui.statusline" = { fg = "fg_sidebar", bg = "bg_statusline" }
+"ui.statusline.inactive" = { fg = "fg_gutter", bg = "bg_statusline" }
+# 
+"ui.cursor.match" = { fg = "bg", bg = "fg" }
+"ui.cursor.primary" = { modifiers = ["reversed"] }
+"ui.menu" = { fg = "fg_alt", bg = "bg_popup" }
+"ui.menu.selected" = { fg = "cyan", bg = "bg_highlight" }
+# # ????????
+"ui.popup" = { fg = "fg_alt", bg = "bg_popup" }
+"ui.popup.selected" = { fg = "cyan", bg = "bg_highlight" }
+"ui.window" = { bg = "bg" }
+"ui.help" = { bg = "bg", fg = "fg" }
+"ui.text" = { fg = "fg" }
+"ui.text.focus" = { fg = "fg_alt" }
+"ui.selection" = { bg = "bg_visual", modifiers = ["reversed"] }
+# 
+"diagnostic" = { modifiers = ["underlined"] }
+
+[palette]
+none       = "NONE"
+bg         = "#192330"
+
+fg         = "#cdcecf"
+fg_alt     = "#aeafb0"
+fg_gutter  = "#3b4261"
+
+black      = "#393b44"
+red        = "#c94f6d"
+green      = "#81b29a"
+yellow     = "#dbc074"
+blue       = "#719cd6"
+magenta    = "#9d79d6"
+cyan       = "#63cdcf"
+white      = "#dfdfe0"
+orange     = "#f4a261"
+pink       = "#d67ad2"
+
+black_br   = "#475072"
+red_br     = "#d6616b"
+green_br   = "#58cd8b"
+yellow_br  = "#ffe37e"
+blue_br    = "#84cee4"
+magenta_br = "#b8a1e3"
+cyan_br    = "#59f0ff"
+white_br   = "#f2f2f2"
+orange_br  = "#f6a878"
+pink_br    = "#df97db"
+
+# 15 brightness -15 saturation
+black_dm   = "#32343b"
+red_dm     = "#ad425c"
+green_dm   = "#689c83"
+yellow_dm  = "#c7a957"
+blue_dm    = "#5483c1"
+magenta_dm = "#835dc1"
+cyan_dm    = "#4ab8ba"
+white_dm   = "#bdbdc0"
+orange_dm  = "#e28940"
+pink_dm    = "#c15dbc"
+
+comment_dr    = "#526175"
+
+harsh = "#dfdfe0"
+subtle = "#393b44"
+
+error = "#c94f6d"
+warning = "#dbc074"
+info = "#719cd6"
+hint = "#63cdcf"

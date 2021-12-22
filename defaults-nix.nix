@@ -101,16 +101,15 @@ in {
       ffmpeg
       firefox
       gcc
-      ghc
       gnumake
       go
       gopls
-      haskell-language-server
       helix-git
       hyperfine
       jq
       libllvm
       libnotify
+      lldb
       lldb
       llvm
       lm_sensors
@@ -133,7 +132,6 @@ in {
       tokei
       tree
       unzip
-      vscode-extensions.vadimcn.vscode-lldb
       wget
       xarchiver
       xxd
