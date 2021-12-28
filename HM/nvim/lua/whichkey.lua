@@ -123,7 +123,7 @@ wk.register({
             unpack(git_opt)
         },
         d = {
-            '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
+            [[:Lspsaga diagnostic_jump_next<CR>]],
             'Next diagnostic',
             unpack(gen_opt)
         }

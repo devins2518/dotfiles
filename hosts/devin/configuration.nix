@@ -48,7 +48,7 @@
 
   networking = {
     hostName = "devin";
-    interfaces.wlp2s0.useDHCP = true;
+    interfaces.wlp2s0.useDHCP = false;
   };
 
   # Enable the X11 windowing system.

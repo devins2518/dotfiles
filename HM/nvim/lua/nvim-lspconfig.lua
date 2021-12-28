@@ -53,23 +53,10 @@ vim.lsp.protocol.CompletionItemKind = {
     '   (TypeParameter)'
 }
 
-local function documentHighlight(client, bufnr)
-    -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_exec([[
-            augroup lsp_document_highlight
-              autocmd! * <buffer>
-              autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-              autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-            augroup END
-        ]], false)
-    end
-end
 local lsp_config = {}
 
-function lsp_config.common_on_attach(client, bufnr)
+function lsp_config.common_on_attach(_, _)
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    documentHighlight(client, bufnr)
     require('lsp_signature').on_attach({
         bind = false,
         doc_lines = 2,
