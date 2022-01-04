@@ -102,14 +102,11 @@ in {
       firefox
       gcc
       gnumake
-      go
-      gopls
       helix-git
       hyperfine
       jq
       libllvm
       libnotify
-      lldb
       lldb
       llvm
       lm_sensors

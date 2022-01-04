@@ -5,7 +5,7 @@ if not present then
     return
 end
 
-vim.opt.completeopt = 'menuone,noselect,noinsert'
+vim.opt.completeopt = 'menuone,noselect'
 
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -74,7 +74,6 @@ cmp.setup {
     },
     sources = {
         { name = 'nvim_lsp' },
-        { name = 'vsnip' },
         { name = 'vsnip' },
         { name = 'path' },
         { name = 'nvim_lua' }
