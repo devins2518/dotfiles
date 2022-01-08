@@ -1,7 +1,6 @@
-G['format_run'] = 1
-vim.api.nvim_add_user_command('FormatToggle', [[
-    let g:format_run=!g:format_run
-    let g:rustfmt_autosave=g:format_run
+vim.api.nvim_add_user_command('ToggleFormat', [[
+    let b:format_run=!b:format_run
+    let b:rustfmt_autosave=b:format_run
     ]], {})
 
 require('formatter').setup({
