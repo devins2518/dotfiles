@@ -23,7 +23,7 @@ in {
         libinput
         light
         quintom-cursor-theme
-        river-git
+        river
         slurp
         swaybg
         swaylock

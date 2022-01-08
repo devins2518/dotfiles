@@ -11,7 +11,7 @@
 
   cargoDeps = old.cargoDeps.overrideAttrs (_: {
     inherit src;
-    outputHash = "sha256-DzjFoa9NynDDXQk1Whxa/uRqJwEyChzB4VK8XqOOozM=";
+    outputHash = "sha256-QAfdNd5iH4iZwzQIghzyTDilJmf9/VUyXMCQtz/fb/A=";
   });
 
   passthru.updateScript =

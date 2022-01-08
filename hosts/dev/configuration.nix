@@ -58,8 +58,8 @@
 
   networking = {
     hostName = "dev";
-    interfaces.enp5s0.useDHCP = true;
-    interfaces.wlp4s0.useDHCP = true;
+    interfaces.enp5s0.useDHCP = false;
+    interfaces.wlp4s0.useDHCP = false;
   };
 
   # Enable the X11 windowing system.
