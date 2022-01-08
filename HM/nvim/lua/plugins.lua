@@ -183,7 +183,6 @@ return packer.startup({
         -- Formatting
         use {
             'mhartington/formatter.nvim',
-            cmd = 'FormatWrite',
             config = function()
                 require 'format'
             end

@@ -95,6 +95,6 @@ Augroup('NvimTree', {
 Augroup('Header', { [[autocmd BufEnter *.h :TSBufDisable highlight]] })
 
 Augroup('Format', {
-    [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml silent! FormatWrite]],
+    [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml if g:format_run | silent! FormatWrite | endif]],
     [[autocmd FileType sh silent! FormatWrite]]
 })
