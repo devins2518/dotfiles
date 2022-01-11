@@ -3,16 +3,17 @@
 {
   programs.gpg = { enable = true; };
 
-  services.gpg-agent = if pkgs.stdenv.isLinux then {
-    enable = true;
-    pinentryFlavor = "gtk2";
-  } else {
-    enable = false;
+  services = lib.mkIf pkgs.stdenv.isLinux {
+    gpg-agent = {
+      enable = true;
+      pinentryFlavor = "gtk2";
+    };
   };
 
-  home.file.".gnupg/gpg-agent.conf".text = if pkgs.stdenv.isDarwin then ''
-    pinentry-program ${pkgs.pinentry_mac}
-  '' else
-    "";
+  home = lib.mkIf pkgs.stdenv.isDarwin {
+    file.".gnupg/gpg-agent.conf".text = ''
+      pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
+    '';
+  };
 
 }

@@ -66,20 +66,20 @@ in {
   environment.systemPackages = with pkgs;
     [
       #binutils.bintools
+      #clang
+      #clang-tools
       #gcc
       #libllvm
       #ormolu
       #zls
-      iterm2
       bottom
       cachix
       cargo-tarpaulin
-      clang
-      clang-tools
       ffmpeg
       gnumake
       helix-git
       hyperfine
+      iterm2
       jq
       lldb
       llvm
@@ -103,22 +103,8 @@ in {
       zsh
     ] ++ nur-packages;
 
-  #homebrew = {
-  #  enable = true;
-  #  brewPrefix = "/opt/homebrew/bin";
-  #  autoUpdate = true;
-  #  cleanup = "zap";
-  #  global = {
-  #    brewfile = true;
-  #    noLock = true;
-  #  };
-
-  #  taps = [ "homebrew/core" "homebrew/cask" ];
-
-  #  casks = [ "iterm2" ];
-  #};
-
   programs.gnupg.agent.enable = true;
+
   system.activationScripts.applications.text = pkgs.lib.mkForce (''
       echo "setting up /Applications/Nix..."
       rm -rf /Applications/Nix
