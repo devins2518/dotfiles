@@ -123,7 +123,7 @@ in {
       ripgrep
       rnix-lsp
       rust-analyzer
-      rustup
+      rust-bin.stable.latest.default
       stack
       sumneko-lua-language-server
       tokei

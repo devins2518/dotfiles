@@ -42,11 +42,6 @@
 
       shellAliases = {
         nshell = "nix-shell";
-        fupdate =
-          "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#' --fast";
-        fclup =
-          "sudo nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#' --fast && sudo nix-collect-garbage -d";
-        ls = "ls -l --color=always";
         grep = "rg";
         g = "gyro";
         update-zig =
@@ -90,10 +85,10 @@
           name = "fast-syntax-highlighting";
           file = "fast-syntax-highlighting.plugin.zsh";
           src = pkgs.fetchFromGitHub {
-            owner = "zdharma";
+            owner = "zdharma-continuum";
             repo = "fast-syntax-highlighting";
-            rev = "817916dfa907d179f0d46d8de355e883cf67bd97";
-            sha256 = "sha256-rHdOnA0Y/i/ISDlriGrGDXr5rD2nZ4T7iuG7PFUVIFQ=";
+            rev = "585c089968caa1c904cbe926ff04a1be9e3d8f42";
+            sha256 = "sha256-x+4C2u03RueNo6/ZXsueqmYoPIpDHnKAZXP5IiKsidE=";
           };
         }
         {

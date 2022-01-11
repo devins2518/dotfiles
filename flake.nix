@@ -2,6 +2,10 @@
   description = "Devins2518's system config";
 
   inputs = {
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager.url = "github:nix-community/home-manager";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     nixos-hardware.url = "github:devins2518/nixos-hardware";
@@ -10,6 +14,7 @@
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
     nur.url = "github:nix-community/NUR/master";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    rust-overlay.url = "github:oxalica/rust-overlay";
     nix-ld = {
       url = "github:Mic92/nix-ld";
       # this line assume that you also have nixpkgs as an input
@@ -17,8 +22,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, utils, nixos-hardware, neovim-nightly
-    , nix-ld, nur, nixpkgs-f2k }@inputs:
+  outputs = { self, darwin, fenix, nixpkgs, home-manager, utils, nixos-hardware
+    , neovim-nightly, nix-ld, nur, nixpkgs-f2k, rust-overlay }@inputs:
     utils.lib.mkFlake rec {
       inherit self inputs;
 
@@ -26,6 +31,7 @@
         ########### Not done
         # add other scripts here
         ./HM/shell-scripts.nix
+        ./HM/iterm2.nix
         ./HM/river.nix
         ./HM/foot.nix
         # ./HM/kakoune.nix
@@ -33,6 +39,7 @@
         ./HM/bspwm.nix
         ./HM/dev
         ./HM/devin
+        ./HM/Devins-MacBook-Pro
         ./HM/dunst.nix
         ./HM/pdf.nix
         ./HM/rofi.nix
@@ -60,6 +67,7 @@
         ./HM/qt.nix
         #./HM/firefox.nix
         ./defaults-nix.nix
+        ./defaults-darwin.nix
         ./network.nix
       ];
 
@@ -72,12 +80,14 @@
         extraArgs = { inherit utils inputs; };
       };
 
-      channels.nixpkgs = {
-        input = nixpkgs;
-        config = { allowUnfree = true; };
+      channels = {
+        nixpkgs = {
+          input = nixpkgs;
+          config = { allowUnfree = true; };
+        };
+        nixpkgs-unstable = { input = nixpkgs; };
+        darwin = { input = darwin; };
       };
-
-      channels.nixpkgs-unstable = { input = nixpkgs; };
 
       x-org = with self.nixosModules; [
         xorg
@@ -116,6 +126,28 @@
             });
         })
       ];
+
+      darwinConfigurations."Devins-MacBook-Pro" = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = with self.nixosModules; [
+          # system wide config
+          ./hosts/Devins-MacBook-Pro/configuration.nix
+          home-manager.darwinModule
+          defaults-darwin
+          ({ pkgs, ... }: {
+            nixpkgs.overlays = sharedOverlays;
+            home-manager.useUserPackages = true;
+            home-manager.useGlobalPkgs = true;
+            home-manager.users.devin = ({ config, pkgs, ... }:
+              with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+                imports = [ nvim git pdf zsh iterm2 pass ]
+                  ++ Devins-MacBook-Pro.default;
+
+                home.packages = with pkgs; [ cachix-push ];
+              });
+          })
+        ];
+      };
 
       hosts = {
         dev = {
@@ -188,8 +220,13 @@
         };
       };
 
-      sharedOverlays =
-        [ self.overlay neovim-nightly.overlay nur.overlay nixpkgs-f2k.overlay ];
+      sharedOverlays = [
+        self.overlay
+        neovim-nightly.overlay
+        nur.overlay
+        nixpkgs-f2k.overlay
+        rust-overlay.overlay
+      ];
 
       packagesBuilder = channels: {
         inherit (channels.nixpkgs) alacritty-ligatures neovim-nightly helix-git;

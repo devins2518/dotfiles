@@ -1,0 +1,1 @@
+rec { default = [ ./zsh.nix ]; }
