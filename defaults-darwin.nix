@@ -20,8 +20,7 @@ in {
   environment = {
     variables = {
       NIXOS_CONFIG = "/Users/devin/Repos/dotfiles";
-      HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
-      HOMEBREW_REPOSITORY = "/opt/homebrew";
+      GNUPGHOME = "/Users/devin/.gnupg";
     };
     systemPath = [ "/opt/homebrew/bin" ];
   };
