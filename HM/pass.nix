@@ -3,7 +3,7 @@
 {
   programs.gpg = {
     enable = true;
-    homedir = "/Users/devin/.local/share/gnupg";
+    homedir = "/Users/devin/.gnupg";
   };
 
   services = lib.mkIf pkgs.stdenv.isLinux {
@@ -13,10 +13,9 @@
     };
   };
 
-  home = lib.mkIf pkgs.stdenv.isDarwin {
-    file.".gnupg/gpg-agent.conf".text = ''
-      pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
-    '';
-  };
-
+  # home = lib.mkIf pkgs.stdenv.isDarwin {
+  #   file.".gnupg/gpg-agent.conf".text = ''
+  #     pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
+  #   '';
+  # };
 }
