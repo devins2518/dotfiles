@@ -3,7 +3,7 @@
 {
   programs.gpg = {
     enable = true;
-    homedir = "${config.xdg.dataHome}/.gnupg";
+    homedir = "/Users/devin/.local/share/gnupg";
   };
 
   services = lib.mkIf pkgs.stdenv.isLinux {

@@ -140,6 +140,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.users.devin = ({ config, pkgs, ... }:
               with import ./HM/shell-scripts.nix { inherit pkgs; }; {
+                # FIXME: Can't add defaults since something inside nix-darwin is running
+                # home-manager as root which messes up directories
                 imports = [ nvim git pdf zsh iterm2 pass ]
                   ++ Devins-MacBook-Pro.default;
 

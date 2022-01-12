@@ -15,8 +15,11 @@
     enableZshIntegration = true;
   };
 
-  home.username = "devin";
-  home.homeDirectory = "/home/devin";
+  home = {
+    username = "devin";
+    homeDirectory =
+      if pkgs.stdenv.isDarwin then "/Users/devin" else "/home/devin";
+  };
 
   news.display = "silent";
 
