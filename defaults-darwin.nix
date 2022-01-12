@@ -20,9 +20,7 @@ in {
   environment = {
     variables = {
       NIXOS_CONFIG = "/Users/devin/Repos/dotfiles";
-      GNUPGHOME = "/Users/devin/.gnupg";
     };
-    systemPath = [ "/opt/homebrew/bin" ];
   };
 
   nix = {
