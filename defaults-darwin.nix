@@ -18,9 +18,7 @@ in {
   home-manager.useGlobalPkgs = true;
 
   environment = {
-    variables = {
-      NIXOS_CONFIG = "/Users/devin/Repos/dotfiles";
-    };
+    variables = { NIXOS_CONFIG = "/Users/devin/Repos/dotfiles"; };
   };
 
   nix = {
