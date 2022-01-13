@@ -14,7 +14,7 @@
   };
 
   home = lib.mkIf pkgs.stdenv.isDarwin {
-    file."$GNUPGHOME/gpg-agent.conf".text =
+    file."${config.programs.gpg.homedir}/gpg-agent.conf".text =
       "pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac";
   };
 }
