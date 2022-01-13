@@ -1,12 +1,9 @@
 { config, pkgs, lib, ... }:
 
-let
-  pinentry-path =
-    "${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac";
-in {
+{
   programs.gpg = {
     enable = true;
-    homedir = "/Users/devin/.gnupg";
+    # homedir = "${config.xdg.dataHome}/gnupg";
   };
 
   services = lib.mkIf pkgs.stdenv.isLinux {
@@ -17,6 +14,7 @@ in {
   };
 
   home = lib.mkIf pkgs.stdenv.isDarwin {
-    file.".gnupg/gpg-agent.conf".text = "pinentry-program ${pinentry-path}";
+    file."$GNUPGHOME/gpg-agent.conf".text =
+      "pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac";
   };
 }

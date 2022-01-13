@@ -6,7 +6,10 @@
       url = "github:ryantking/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     nixos-hardware.url = "github:devins2518/nixos-hardware";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";

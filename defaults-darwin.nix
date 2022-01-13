@@ -1,4 +1,4 @@
-{ pkgs, config, lib, inputs, mkIf, ... }:
+{ pkgs, config, lib, inputs, ... }:
 
 let
   inherit (lib)
@@ -21,6 +21,16 @@ in {
     variables = { NIXOS_CONFIG = "/Users/devin/Repos/dotfiles"; };
   };
 
+  users = {
+    users = {
+      devin = {
+        shell = pkgs.zsh;
+        description = "Devin Singh";
+        home = "/Users/devin";
+      };
+    };
+  };
+
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -36,8 +46,13 @@ in {
       options = "--delete-older-than 7d";
     };
 
-    #nixPath = { nixpkgs="${pkgs.path}"; home-manager="${inputs.home-manager}"; darwin="${inputs.darwin}"; };
-    nixPath = nixPathInputs;
+    nixPath = {
+      nixpkgs = "${pkgs.path}";
+      darwin-config =
+        "$HOME/Repos/dotfiles/hosts/Devins-MacBook-Pro/configuration.nix";
+      # home-manager = "${inputs.home-manager}";
+      darwin = "${inputs.darwin}";
+    };
 
     binaryCaches = [
       "https://cache.nixos.org?priority=10"
@@ -54,19 +69,10 @@ in {
     ];
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnsupportedSystem = true;
-  };
+  nixpkgs.config = { allowUnfree = true; };
+
   environment.systemPackages = with pkgs;
     [
-      #binutils.bintools
-      #clang
-      #clang-tools
-      #gcc
-      #libllvm
-      #ormolu
-      #zls
       bottom
       cachix
       cargo-tarpaulin
@@ -108,7 +114,7 @@ in {
       find ${config.system.build.applications}/Applications -maxdepth 1 -type l | while read f; do
         src="$(/usr/bin/stat -f%Y $f)"
         appname="$(basename $src)"
-        osascript -e "tell app \"Finder\" to make alias file at POSIX file \"/Applications/Nix/\" to POSIX file \"$src\" with properties {name: \"$appname\"}";
+        cp -r $src /Applications/Nix
     done
   '');
 
