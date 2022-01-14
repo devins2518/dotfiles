@@ -47,9 +47,9 @@ in {
         nshell = "nix-shell";
         ls = "ls -l --color=always -H";
         fupdate =
-          "${nix-command} switch --flake '/home/devin/Repos/dotfiles/#' --fast";
+          "${nix-command} switch --flake '${config.home.homeDirectory}/Repos/dotfiles/#'";
         fclup =
-          "${nix-command} nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#' --fast && sudo nix-collect-garbage -d";
+          "${nix-command} nixos-rebuild switch --flake '${config.home.homeDirectory}/Repos/dotfiles/#' && sudo nix-collect-garbage -d";
         grep = "rg";
         g = "gyro";
         update-zig =
@@ -73,10 +73,10 @@ in {
           name = "zsh-completions";
           file = "zsh-completions.plugin.zsh";
           src = pkgs.fetchFromGitHub {
-            owner = "zsh-users";
+            owner = "clarketm";
             repo = "zsh-completions";
-            rev = "d4511c23659381b56dec8be8c8553b7ff3dc5fd8";
-            sha256 = "sha256-OOMabAhRcgs7YpCx+g6yIqTHDMwMueBD+s7P+WCdHPk=";
+            rev = "ed901ab5f741fb3b9076022ec0c1ba1220beb0d7";
+            sha256 = "sha256-CKky9u0bnCme/jGCqkxD4YaKYwvgmdWoBE0SGiYM1MI=";
           };
         }
         {
@@ -121,4 +121,7 @@ in {
       ];
     };
   };
+
+  # Prevent `last login` message from being shown
+  home = lib.mkIf pkgs.stdenv.isDarwin { file.".hushlogin".text = ""; };
 }

@@ -1,10 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  programs.gpg = {
-    enable = true;
-    # homedir = "${config.xdg.dataHome}/gnupg";
-  };
+  programs.gpg = { enable = true; };
 
   services = lib.mkIf pkgs.stdenv.isLinux {
     gpg-agent = {

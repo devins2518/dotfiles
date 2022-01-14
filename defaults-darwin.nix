@@ -104,7 +104,13 @@ in {
       zsh
     ] ++ nur-packages;
 
-  programs.gnupg.agent.enable = true;
+  programs = {
+    gnupg.agent.enable = true;
+    zsh = {
+      enable = true;
+      enableCompletion = false;
+    };
+  };
 
   system.activationScripts.applications.text = pkgs.lib.mkForce (''
       echo "setting up /Applications/Nix..."
