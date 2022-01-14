@@ -15,9 +15,7 @@
     enableZshIntegration = true;
   };
 
-  home = {
-    username = "devin";
-  };
+  home = { username = "devin"; };
 
   news.display = "silent";
 

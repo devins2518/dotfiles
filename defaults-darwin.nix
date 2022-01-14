@@ -76,6 +76,8 @@ in {
       bottom
       cachix
       cargo-tarpaulin
+      # FIXME: only ptb has mach o universal
+      # discord-ptb
       ffmpeg
       gnumake
       helix-git
