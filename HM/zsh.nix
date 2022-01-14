@@ -1,6 +1,9 @@
 { pkgs, config, lib, inputs, ... }:
 
-{
+let
+  nix-command =
+    if pkgs.stdenv.isDarwin then "darwin-rebuild" else "sudo nixos-rebuild";
+in {
   programs = {
     zsh = {
       enable = true;
@@ -42,6 +45,11 @@
 
       shellAliases = {
         nshell = "nix-shell";
+        ls = "ls -l --color=always -H";
+        fupdate =
+          "${nix-command} switch --flake '/home/devin/Repos/dotfiles/#' --fast";
+        fclup =
+          "${nix-command} nixos-rebuild switch --flake '/home/devin/Repos/dotfiles/#' --fast && sudo nix-collect-garbage -d";
         grep = "rg";
         g = "gyro";
         update-zig =
