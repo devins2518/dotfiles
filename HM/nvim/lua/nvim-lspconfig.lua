@@ -77,6 +77,7 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lsp = vim.lsp
 local handlers = lsp.handlers
@@ -85,8 +86,6 @@ local handlers = lsp.handlers
 local pop_opts = { border = 'rounded', max_width = 80 }
 handlers['textDocument/hover'] = lsp.with(handlers.hover, pop_opts)
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
 capabilities = vim.tbl_extend('keep', capabilities or {},
     lsp_status.capabilities)
 local servers = {
@@ -101,7 +100,7 @@ local servers = {
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = lsp_config.common_on_attach,
-        capabilities = lsp_status.capabilities
+        capabilities = capabilities
     }
 end
 

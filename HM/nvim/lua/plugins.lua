@@ -105,10 +105,9 @@ return packer.startup({
                 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp
                                                                           .with(
                     vim.lsp.diagnostic.on_publish_diagnostics, {
+                        virtual_text = false,
                         underline = true,
-                        virtual_text = { prefix = '', spacing = 2 },
-                        signs = { enable = true, priority = 20 },
-                        update_in_insert = true
+                        signs = { enable = true, priority = 20 }
                     }, require('lsp_extensions.workspace.diagnostic').handler,
                     { signs = { severity_limit = 'Error' } })
             end

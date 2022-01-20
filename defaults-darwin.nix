@@ -77,7 +77,7 @@ in {
       cachix
       cargo-tarpaulin
       # FIXME: only ptb has mach o universal
-      # discord-ptb
+      discord-ptb
       ffmpeg
       gnumake
       helix-git
@@ -116,13 +116,12 @@ in {
 
   system.activationScripts.applications.text = pkgs.lib.mkForce (''
       echo "setting up /Applications/Nix..."
-      rm -rf /Applications/Nix
       mkdir -p /Applications/Nix
       chown devin /Applications/Nix
-      find ${config.system.build.applications}/Applications -maxdepth 1 -type l | while read f; do
-        src="$(/usr/bin/stat -f%Y $f)"
+      find "${config.system.build.applications}/Applications" -maxdepth 1 -type l | while read f; do
+        src="$(/usr/bin/stat -f%Y "$f")"
         appname="$(basename $src)"
-        cp -r $src /Applications/Nix
+        cp -r "$src" /Applications/Nix
     done
   '');
 

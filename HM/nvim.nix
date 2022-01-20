@@ -16,8 +16,6 @@ in {
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-comment}/parser";
   xdg.configFile."nvim/parser/go.so".source =
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-go}/parser";
-  # xdg.configFile."nvim/parser/gomod.so".source =
-  #   "${pkgs.tree-sitter.builtGrammars.tree-sitter-gomod}/parser";
   xdg.configFile."nvim/parser/haskell.so".source =
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-haskell}/parser";
   xdg.configFile."nvim/parser/json.so".source =
@@ -28,8 +26,8 @@ in {
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-nix}/parser";
   xdg.configFile."nvim/parser/python.so".source =
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-python}/parser";
-  xdg.configFile."nvim/parser/rust.so".source =
-    "${pkgs.tree-sitter.builtGrammars.tree-sitter-rust}/parser";
+  # xdg.configFile."nvim/parser/rust.so".source =
+  #   "${pkgs.tree-sitter.builtGrammars.tree-sitter-rust}/parser";
   xdg.configFile."nvim/parser/toml.so".source =
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-toml}/parser";
   xdg.configFile."nvim/parser/zig.so".source =

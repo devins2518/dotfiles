@@ -57,6 +57,10 @@ G['loaded_netrwPlugin'] = 1
 G['loaded_matchit'] = 1
 G['loaded_matchparen'] = 1
 G['loaded_spec'] = 1
+G['lsp_hover'] = true
+vim.api.nvim_add_user_command('LSPHover', [[
+    lua vim.g.lsp_hover = not vim.g.lsp_hover
+    ]], {})
 
 Augroup('remember_folds', {
     [[autocmd BufWinLeave ?* mkview 1]],
@@ -98,4 +102,9 @@ Augroup('Format', {
     [[autocmd BufEnter * let b:format_run=1]],
     [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml if b:format_run | silent! FormatWrite | endif]],
     [[autocmd FileType sh silent! FormatWrite]]
+})
+
+Augroup('LSP', {
+    [[autocmd CursorHold,CursorHoldI * lua if vim.g.lsp_hover then vim.diagnostic.open_float(nil, {focus=false, scope="cursor", source="always"}) end]],
+    [[autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()]]
 })
