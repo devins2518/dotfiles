@@ -17,7 +17,7 @@
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
     nur.url = "github:nix-community/NUR/master";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.url = "github:nix-community/fenix";
     nix-ld = {
       url = "github:Mic92/nix-ld";
       # this line assume that you also have nixpkgs as an input

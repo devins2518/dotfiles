@@ -114,7 +114,6 @@ return packer.startup({
         }
         use { 'ray-x/lsp_signature.nvim' }
         use { 'folke/lsp-colors.nvim', after = 'nvim-cmp' }
-        use { 'nvim-lua/lsp-status.nvim' }
 
         -- Debugger
         use {

@@ -104,7 +104,4 @@ Augroup('Format', {
     [[autocmd FileType sh silent! FormatWrite]]
 })
 
-Augroup('LSP', {
-    [[autocmd CursorHold,CursorHoldI * lua if vim.g.lsp_hover then vim.diagnostic.open_float(nil, {focus=false, scope="cursor", source="always"}) end]],
-    [[autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()]]
-})
+Augroup('LSP', { [[autocmd CursorHold * Lspsaga show_line_diagnostics]] })

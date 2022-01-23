@@ -76,7 +76,6 @@ in {
       bottom
       cachix
       cargo-tarpaulin
-      # FIXME: only ptb has mach o universal
       discord-ptb
       ffmpeg
       gnumake
@@ -94,8 +93,14 @@ in {
       pandoc
       ripgrep
       rnix-lsp
-      rust-analyzer
-      rust-bin.stable.latest.default
+      (fenix.complete.withComponents [
+        "cargo"
+        "clippy"
+        "rust-src"
+        "rustc"
+        "rustfmt"
+      ])
+      rust-analyzer-nightly
       stack
       sumneko-lua-language-server
       tokei

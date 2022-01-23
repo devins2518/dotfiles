@@ -55,24 +55,38 @@ vim.lsp.protocol.CompletionItemKind = {
 
 local lsp_config = {}
 
+local cfg = {
+    log_path = vim.fn.stdpath('cache') .. '/lsp_signature.log',
+    verbose = false,
+    bind = true,
+    doc_lines = 10,
+    floating_window = true,
+    floating_window_above_cur_line = true,
+    floating_window_off_x = 1,
+    floating_window_off_y = 1,
+    fix_pos = true,
+    hint_enable = true,
+    hint_prefix = '➤',
+    hint_scheme = 'String',
+    hi_parameter = 'LspSignatureActiveParameter',
+    max_height = 12,
+    max_width = 80,
+    handler_opts = {
+        border = 'rounded' -- double, rounded, single, shadow, none
+    },
+    always_trigger = false, -- sometime show signature on new line or in middle of parameter can be confusing, set it to false for #58
+    auto_close_after = nil, -- autoclose signature float win after x sec, disabled if nil.
+    extra_trigger_chars = {}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
+    zindex = 200, -- by default it will be on top of all floating windows, set to <= 50 send it to bottom
+    padding = '', -- character to pad on left and right of signature can be ' ', or '|'  etc
+    transparency = nil, -- disabled by default, allow floating win transparent value 1~100
+    timer_interval = 100, -- default timer check interval set to lower value if you want to reduce latency
+    toggle_key = nil -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+}
+require'lsp_signature'.setup(cfg)
+
 function lsp_config.common_on_attach(_, _)
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    require('lsp_signature').on_attach({
-        bind = false,
-        doc_lines = 2,
-        floating_window = true,
-        fix_pos = false,
-        hint_enable = true,
-        use_lspsaga = false,
-        hi_parameter = 'Search',
-        max_height = 5,
-        max_width = 60,
-        handler_opts = {
-            border = 'double' -- double, single, shadow, none
-        },
-        extra_trigger_chars = {}
-    })
-    return lsp_status.on_attach
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
