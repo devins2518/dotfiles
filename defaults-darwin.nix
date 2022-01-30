@@ -13,7 +13,7 @@ let
       #devins2518.gyro
       #devins2518.zig-master
     ];
-in {
+in rec {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
@@ -93,13 +93,6 @@ in {
       pandoc
       ripgrep
       rnix-lsp
-      (fenix.complete.withComponents [
-        "cargo"
-        "clippy"
-        "rust-src"
-        "rustc"
-        "rustfmt"
-      ])
       rust-analyzer-nightly
       stack
       sumneko-lua-language-server
@@ -109,7 +102,50 @@ in {
       wget
       xxd
       zsh
-    ] ++ nur-packages;
+    ] ++ nur-packages ++ [
+      (fenix.complete.withComponents [
+        "cargo"
+        "clippy"
+        "rust-src"
+        "rustc"
+        "rustfmt"
+      ])
+      (emacsWithPackagesFromUsePackage {
+        config = ./HM/emacs/init.el;
+        package = pkgs.emacsGcc;
+        alwaysEnsure = true;
+        extraEmacsPackages = epkgs:
+          with epkgs; [
+            # Dylib broken on M1
+            # tree-sitter
+            all-the-icons
+            dashboard
+            doom-themes
+            evil
+            evil-collection
+            evil-numbers
+            evil-surround
+            evil-surround
+            general
+            highlight-indent-guides
+            key-chord
+            lsp-mode
+            projectile
+            rainbow-delimiters
+            smartparens
+            treemacs
+            flycheck
+            company
+            flycheck-inline
+            lsp-mode
+            lsp-ui
+            treemacs-evil
+            use-package
+            which-key
+          ];
+
+      })
+    ];
 
   programs = {
     gnupg.agent.enable = true;
@@ -123,10 +159,10 @@ in {
       echo "setting up /Applications/Nix..."
       mkdir -p /Applications/Nix
       chown devin /Applications/Nix
-      find "${config.system.build.applications}/Applications" -maxdepth 1 -type l | while read f; do
-        src="$(/usr/bin/stat -f%Y "$f")"
-        appname="$(basename $src)"
-        cp -r "$src" /Applications/Nix
+      find ${config.system.build.applications}/Applications -maxdepth 1 -type l | while read f; do
+        src=$(/usr/bin/stat -f%Y "$f")
+        appname=$(basename $src)
+        cp -rf "$src" /Applications/Nix
     done
   '');
 

@@ -11,6 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    emacs-nightly.url = "github:nix-community/emacs-overlay";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     nixpkgs.url = "github:devins2518/nixpkgs/dots";
@@ -26,7 +27,8 @@
   };
 
   outputs = { self, darwin, fenix, nixpkgs, home-manager, utils, nixos-hardware
-    , neovim-nightly, nix-ld, nur, nixpkgs-f2k, rust-overlay }@inputs:
+    , neovim-nightly, nix-ld, emacs-nightly, nur, nixpkgs-f2k, rust-overlay
+    }@inputs:
     utils.lib.mkFlake rec {
       inherit self inputs;
 
@@ -35,6 +37,7 @@
         # add other scripts here
         ./HM/shell-scripts.nix
         ./HM/iterm2.nix
+        ./HM/emacs.nix
         ./HM/river.nix
         ./HM/foot.nix
         # ./HM/kakoune.nix
@@ -143,7 +146,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.users.devin = ({ config, pkgs, ... }:
               with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                imports = [ nvim git pdf zsh iterm2 pass ];
+                imports = [ emacs git iterm2 nvim pass pdf zsh ];
 
                 home.packages = with pkgs; [ cachix-push ];
               });
@@ -223,11 +226,12 @@
       };
 
       sharedOverlays = [
-        self.overlay
+        emacs-nightly.overlay
         neovim-nightly.overlay
-        nur.overlay
         nixpkgs-f2k.overlay
+        nur.overlay
         rust-overlay.overlay
+        self.overlay
       ];
 
       packagesBuilder = channels: {

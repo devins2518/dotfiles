@@ -64,7 +64,7 @@ return packer.startup({
         -- LSP
         use {
             'neovim/nvim-lspconfig',
-            after = { 'lsp_signature.nvim', 'lsp-status.nvim' },
+            after = { 'lsp_signature.nvim' },
             config = function()
                 vim.cmd [[packadd nvim-lspconfig]]
                 require 'nvim-lspconfig'
@@ -114,6 +114,14 @@ return packer.startup({
         }
         use { 'ray-x/lsp_signature.nvim' }
         use { 'folke/lsp-colors.nvim', after = 'nvim-cmp' }
+        use {
+            'j-hui/fidget.nvim',
+            after = 'nvim-cmp',
+            config = function()
+                vim.cmd [[packadd fidget.nvim]]
+                require'fidget'.setup {}
+            end
+        }
 
         -- Debugger
         use {
