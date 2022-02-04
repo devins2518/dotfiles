@@ -1,4 +1,4 @@
-(setq gc-cons-threshold 50000000)
+(setq gc-cons-threshold (* 50 1000 1000))
 (setq large-file-warning-threshold 100000000)
 (setq-default truncate-lines t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -8,6 +8,7 @@
 (setq default-directory (expand-file-name "~/"))
 (setq-default indent-tabs-mode nil)
 
+(use-package esup)
 (use-package general)
 (use-package evil
   :after general
@@ -106,10 +107,12 @@
     :after flycheck
     :hook (flycheck-mode . flycheck-inline-mode))
 (use-package company
+  :after lsp-mode
   :hook (prog-mode . company-mode)
   :config (setq company-tooltip-align-annotations t)
           (setq company-minimum-prefix-length 1))
 (use-package lsp-mode
+  :defer t
   :commands lsp
   :hook ((prog-mode . lsp-mode)
          (lsp-mode . lsp-enable-which-key-integration))
@@ -134,9 +137,12 @@
     (setq lsp-lens-enable nil)
     (setq lsp-ui-sideline-enable nil)
     (setq lsp-eldoc-enable-hover nil))
-(use-package toml-mode)
+(use-package toml-mode
+  :mode "\\.toml\\'")
 (use-package rust-mode
-  :hook (rust-mode . lsp))
+  :mode "\\.rs\\'"
+  :hook ((rust-mode . lsp) 
+        (rust-mode . tree-sitter-mode)))
 (use-package flycheck-rust
   :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
@@ -154,10 +160,52 @@
   (exec-path-from-shell-initialize))
 
 ;; Dylib fetching broken for M1
-					; (use-package tree-sitter
-					;   :init
-					;   (setq tsc-dyn-get-from :compilation)
-					;   :config
-					;   (cl-pushnew (expand-file-name "~/.config/nvim/parser") tree-sitter-load-path)
-					;   (global-tree-sitter-mode)
-					;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(use-package tree-sitter
+  :preface
+  (setq tsc-dyn-get-from '(:compilation))
+  :config
+  (cl-pushnew (expand-file-name "~/.config/nvim/parser") tree-sitter-load-path)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+  (setq tree-sitter-major-mode-language-alist
+  '((agda-mode       . agda)
+                  (sh-mode         . bash)
+                  (c-mode          . c)
+                  (csharp-mode     . c-sharp)
+                  (c++-mode        . cpp)
+                  (d-mode          . d)
+                  (css-mode        . css)
+                  (elm-mode        . elm)
+                  (elixir-mode     . elixir)
+                  (go-mode         . go)
+                  (hcl-mode        . hcl)
+                  (html-mode       . html)
+                  (mhtml-mode      . html)
+                  (nix-mode        . nix)
+                  (java-mode       . java)
+                  (javascript-mode . javascript)
+                  (js-mode         . javascript)
+                  (js2-mode        . javascript)
+                  (js3-mode        . javascript)
+                  (json-mode       . json)
+                  (jsonc-mode      . json)
+                  (julia-mode      . julia)
+                  (ocaml-mode      . ocaml)
+                  (php-mode        . php)
+                  (prisma-mode     . prisma)
+                  (python-mode     . python)
+                  (pygn-mode       . pgn)
+                  (rjsx-mode       . javascript)
+                  (ruby-mode       . ruby)
+                  (rust-mode       . rust)
+                  (rustic-mode     . rust)
+                  (scala-mode      . scala)
+                  (swift-mode      . swift)
+                  (tuareg-mode     . ocaml)
+                  (typescript-mode . typescript))))
+; (use-package tree-sitter-langs
+;     :after tree-sitter)
+
+(setq gc-cons-threshold (* 2 1000 1000))
+(setq linum-format "%4d \u2502 ")
+(global-linum-mode)

@@ -16,6 +16,34 @@ local check_back_space = function()
     return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' ~= nil
 end
 
+local kind_icons = {
+    Text = '  ',
+    Method = '  ',
+    Function = '  ',
+    Constructor = '  ',
+    Field = ' ﴲ ',
+    Variable = '[]',
+    Class = '  ',
+    Interface = ' ﰮ ',
+    Module = '  ',
+    Property = ' 襁',
+    Unit = '  ',
+    Value = '  ',
+    Enum = ' 練',
+    Keyword = '  ',
+    Snippet = '  ',
+    Color = '  ',
+    File = '  ',
+    Reference = '  ',
+    Folder = '  ',
+    EnumMember = '  ',
+    Constant = ' ﲀ ',
+    Struct = ' ﳤ ',
+    Event = '  ',
+    Operator = '  ',
+    TypeParameter = '  '
+}
+
 -- nvim-cmp setup
 cmp.setup {
     snippet = {
@@ -24,18 +52,8 @@ cmp.setup {
         end
     },
     formatting = {
-        format = function(entry, vim_item)
-            -- load lspkind icons
-            -- vim_item.kind = string.format('%s %s', require(
-            --     'plugins.configs.lspkind_icons').icons[vim_item.kind],
-            --     vim_item.kind)
-
-            vim_item.menu = ({
-                nvim_lsp = '[LSP]',
-                nvim_lua = '[Lua]',
-                buffer = '[BUF]'
-            })[entry.source.name]
-
+        format = function(_, vim_item)
+            vim_item.kind = (kind_icons[vim_item.kind] or '') .. vim_item.kind
             return vim_item
         end
     },

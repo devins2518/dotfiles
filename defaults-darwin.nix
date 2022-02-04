@@ -117,7 +117,8 @@ in rec {
         extraEmacsPackages = epkgs:
           with epkgs; [
             # Dylib broken on M1
-            # tree-sitter
+            tree-sitter
+            # tree-sitter-langs
             all-the-icons
             dashboard
             doom-themes
@@ -142,6 +143,7 @@ in rec {
             treemacs-evil
             use-package
             which-key
+            esup
           ];
 
       })

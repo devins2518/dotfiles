@@ -22,35 +22,6 @@ vim.fn.sign_define('LspDiagnosticsSignInformation', {
     numhl = 'LspDiagnosticsSignInformation'
 })
 
--- symbols for autocomplete
-vim.lsp.protocol.CompletionItemKind = {
-    '   (Text) ',
-    '   (Method)',
-    '   (Function)',
-    '   (Constructor)',
-    ' ﴲ  (Field)',
-    '[] (Variable)',
-    '   (Class)',
-    ' ﰮ  (Interface)',
-    '   (Module)',
-    ' 襁 (Property)',
-    '   (Unit)',
-    '   (Value)',
-    ' 練 (Enum)',
-    '   (Keyword)',
-    '   (Snippet)',
-    '   (Color)',
-    '   (File)',
-    '   (Reference)',
-    '   (Folder)',
-    '   (EnumMember)',
-    ' ﲀ  (Constant)',
-    ' ﳤ  (Struct)',
-    '   (Event)',
-    '   (Operator)',
-    '   (TypeParameter)'
-}
-
 local lsp_config = {}
 
 function lsp_config.common_on_attach(_, _)
@@ -88,7 +59,8 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
+                                                               .make_client_capabilities())
 
 local lsp = vim.lsp
 local handlers = lsp.handlers
@@ -107,7 +79,10 @@ local servers = {
     'zls'
 }
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup { on_attach = lsp_config.common_on_attach }
+    nvim_lsp[lsp].setup {
+        on_attach = lsp_config.common_on_attach,
+        capabilities = capabilities
+    }
 end
 
 nvim_lsp.rust_analyzer.setup({
