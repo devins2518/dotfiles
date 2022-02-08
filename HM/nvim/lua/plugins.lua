@@ -140,6 +140,13 @@ return packer.startup({
 
         -- Filetypes
         use { 'LnL7/vim-nix', ft = { 'nix' } }
+        use {
+            'ocaml/vim-ocaml',
+            ft = { 'ocaml' },
+            config = function()
+                vim.opt.tabstop = 2
+            end
+        }
         use { 'fatih/vim-go', ft = { 'go' } }
         use {
             'ziglang/zig.vim',

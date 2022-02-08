@@ -3,6 +3,7 @@
 let
   nix-command =
     if pkgs.stdenv.isDarwin then "darwin-rebuild" else "sudo nixos-rebuild";
+  home = if pkgs.stdenv.isDarwin then "/Users/devin" else "/home/devin";
 in {
   programs = {
     zsh = {
@@ -33,7 +34,7 @@ in {
         export VISUAL=nvim
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#928374"
 
-        [[ ! -r /home/devin/.opam/opam-init/init.zsh ]] || source /home/devin/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+        [[ ! -r ${home}/.opam/opam-init/init.zsh ]] || source ${home}/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
       '';
 
       initExtraFirst = ''

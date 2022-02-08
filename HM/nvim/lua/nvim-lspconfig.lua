@@ -72,6 +72,7 @@ handlers['textDocument/hover'] = lsp.with(handlers.hover, pop_opts)
 local servers = {
     'clangd',
     'gopls',
+    'ocamllsp',
     'hls',
     'rnix',
     'rust_analyzer',

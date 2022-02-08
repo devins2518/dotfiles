@@ -100,7 +100,7 @@ Augroup('Header', { [[autocmd BufEnter *.h :TSBufDisable highlight]] })
 
 Augroup('Format', {
     [[autocmd BufEnter * let b:format_run=1]],
-    [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml if b:format_run | silent! FormatWrite | endif]],
+    [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli if b:format_run | silent! FormatWrite | endif]],
     [[autocmd FileType sh silent! FormatWrite]]
 })
 

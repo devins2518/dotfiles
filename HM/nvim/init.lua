@@ -16,7 +16,7 @@ function Augroup(name, commands)
     vim.api.nvim_command([[augroup END]])
 end
 
-require 'plugins'
 require 'mappings'
 require 'options'
 require 'statusline'
+require 'plugins'

@@ -90,11 +90,10 @@ in rec {
       ninja
       nixfmt
       nixpkgs-review
-      pandoc
+      ocamlformat
       ripgrep
       rnix-lsp
       rust-analyzer-nightly
-      stack
       sumneko-lua-language-server
       tokei
       tree

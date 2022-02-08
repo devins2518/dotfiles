@@ -15,6 +15,19 @@ require('formatter').setup({
                 }
             end
         },
+        ocaml = {
+            function()
+                return {
+                    exe = 'ocamlformat',
+                    args = {
+                        '--exp-grouping=preserve',
+                        '-',
+                        '--name ' .. vim.fn.expand('%:p')
+                    },
+                    stdin = true
+                }
+            end
+        },
         lua = {
             function()
                 return {
