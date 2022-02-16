@@ -104,4 +104,4 @@ Augroup('Format', {
     [[autocmd FileType sh silent! FormatWrite]]
 })
 
-Augroup('LSP', { [[autocmd CursorHold * Lspsaga show_cursor_diagnostics]] })
+Augroup('LSP', { [[autocmd CursorHold * Lspsaga show_line_diagnostics]] })
