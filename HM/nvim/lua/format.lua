@@ -15,6 +15,11 @@ require('formatter').setup({
                 }
             end
         },
+        haskell = {
+            function()
+                return { exe = 'stylish-haskell' }
+            end
+        },
         ocaml = {
             function()
                 return {

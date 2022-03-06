@@ -7,12 +7,12 @@ let
   nixPathInputs = mapAttrsToList (n: v: "${n}=${v}") filteredInputs;
   registryInputs = mapAttrs (_: v: { flake = v; }) filteredInputs;
 
-  nur-packages = with pkgs.nur.repos;
-    [
-      devins2518.bunnyfetch-rs
-      #devins2518.gyro
-      #devins2518.zig-master
-    ];
+  nur-packages = with pkgs.nur.repos; [
+    devins2518.bunnyfetch-rs
+    devins2518.gyro
+    devins2518.zig-master
+    devins2518.zls
+  ];
 in rec {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
@@ -76,6 +76,8 @@ in rec {
       bottom
       cachix
       cargo-tarpaulin
+      clang
+      clang-tools
       discord-ptb
       ffmpeg
       gnumake
@@ -94,6 +96,7 @@ in rec {
       ripgrep
       rnix-lsp
       rust-analyzer-nightly
+      stylish-haskell
       sumneko-lua-language-server
       tokei
       tree
@@ -101,7 +104,9 @@ in rec {
       wget
       xxd
       zsh
-    ] ++ nur-packages ++ [
+    ] ++ nur-packages ++
+
+    [
       (fenix.complete.withComponents [
         "cargo"
         "clippy"
@@ -109,43 +114,42 @@ in rec {
         "rustc"
         "rustfmt"
       ])
-      (emacsWithPackagesFromUsePackage {
-        config = ./HM/emacs/init.el;
-        package = pkgs.emacsGcc;
-        alwaysEnsure = true;
-        extraEmacsPackages = epkgs:
-          with epkgs; [
-            # Dylib broken on M1
-            tree-sitter
-            # tree-sitter-langs
-            all-the-icons
-            dashboard
-            doom-themes
-            evil
-            evil-collection
-            evil-numbers
-            evil-surround
-            evil-surround
-            general
-            highlight-indent-guides
-            key-chord
-            lsp-mode
-            projectile
-            rainbow-delimiters
-            smartparens
-            treemacs
-            flycheck
-            company
-            flycheck-inline
-            lsp-mode
-            lsp-ui
-            treemacs-evil
-            use-package
-            which-key
-            esup
-          ];
-
-      })
+      # (emacsWithPackagesFromUsePackage {
+      #   config = ./HM/emacs/init.el;
+      #   package = pkgs.emacsGcc;
+      #   alwaysEnsure = true;
+      #   extraEmacsPackages = epkgs:
+      #     with epkgs; [
+      #       # Dylib broken on M1
+      #       tree-sitter
+      #       # tree-sitter-langs
+      #       all-the-icons
+      #       dashboard
+      #       doom-themes
+      #       evil
+      #       evil-collection
+      #       evil-numbers
+      #       evil-surround
+      #       evil-surround
+      #       general
+      #       highlight-indent-guides
+      #       key-chord
+      #       lsp-mode
+      #       projectile
+      #       rainbow-delimiters
+      #       smartparens
+      #       treemacs
+      #       flycheck
+      #       company
+      #       flycheck-inline
+      #       lsp-mode
+      #       lsp-ui
+      #       treemacs-evil
+      #       use-package
+      #       which-key
+      #       esup
+      #     ];
+      # })
     ];
 
   programs = {

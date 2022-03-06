@@ -39,6 +39,7 @@ opt.updatetime = 250
 opt.clipboard = 'unnamedplus'
 opt.list = true
 vim.cmd [[autocmd! VimEnter * highlight! link ColorColumn CursorLine]]
+vim.cmd [[autocmd! VimEnter * lua require"nvim-tree".toggle(false, true)]]
 opt.listchars = 'tab:▸ ,eol:¬'
 opt.colorcolumn = '100'
 opt.cursorline = true
@@ -89,11 +90,6 @@ Augroup('Markdown', {
     [[autocmd FileType markdown nmap <leader>cp :!compilenote %<CR>]],
     [[autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &]],
     [[autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif]]
-})
-
-Augroup('NvimTree', {
-    [[autocmd VimEnter * NvimTreeOpen]],
-    [[autocmd VimEnter * wincmd p]]
 })
 
 Augroup('Header', { [[autocmd BufEnter *.h :TSBufDisable highlight]] })

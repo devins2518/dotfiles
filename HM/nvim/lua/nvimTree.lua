@@ -3,17 +3,8 @@ if not present then
     return
 end
 
-G['nvim_tree_ignore'] = {
-    '.git',
-    'target',
-    'node_modules',
-    '.cache',
-    'Cargo.lock'
-}
-G['nvim_tree_gitignore'] = 1
 G['nvim_tree_quit_on_open'] = 0
 G['nvim_tree_indent_markers'] = 1
-G['nvim_tree_hide_dotfiles'] = 1
 G['nvim_tree_git_hl'] = 1
 G['nvim_tree_highlight_opened_files'] = 1
 G['nvim_tree_root_folder_modifier'] = ':~'
@@ -59,10 +50,16 @@ tree.setup {
     open_on_tab = false,
     update_to_buf_dir = { enable = true, auto_open = true },
     hijack_cursor = false,
-    update_cwd = false,
+    update_cwd = true,
     diagnostics = { enable = true },
     update_focused_file = { enable = true, update_cwd = true, ignore_list = {} },
     system_open = { cmd = nil, args = {} },
+
+    git = { enable = true, ignore = true, timeout = 500 },
+    filters = {
+        dotfiles = true,
+        custom = { '.git', 'target', 'node_modules', '.cache', 'Cargo.lock' }
+    },
 
     view = {
         width = 25,
@@ -75,32 +72,29 @@ tree.setup {
             -- if true, it will only use your list to set the mappings
             custom_only = false,
             -- list of mappings to set on the tree manually
-            list = {}
+            list = {
+                { key = { '<CR>', 'o', '<2-LeftMouse>' }, action = 'edit' },
+                { key = { '<2-RightMouse>', 'c' }, action = 'cd' },
+                { key = 'vs', action = 'vsplit' },
+                { key = 'sp', action = 'split' },
+                { key = 'tn', action = 'tabnew' },
+                { key = { '<BS>', '<S-CR>' }, action = 'close_node' },
+                { key = '<Tab>', action = 'preview' },
+                { key = 'I', action = 'toggle_ignored' },
+                { key = 'H', action = 'toggle_dotfiles' },
+                { key = 'R', action = 'refresh' },
+                { key = 'n', action = 'create' },
+                { key = 'd', action = 'remove' },
+                { key = 'rn', action = 'rename' },
+                { key = '<C-r>', action = 'full_rename' },
+                { key = 'x', action = 'cut' },
+                { key = 'y', action = 'copy' },
+                { key = 'p', action = 'paste' },
+                { key = '[c', action = 'prev_git_item' },
+                { key = ']c', action = 'next_git_item' },
+                { key = '-', action = 'dir_up' },
+                { key = '?', action = 'toggle_help' }
+            }
         }
     }
-}
-
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-G['nvim_tree_bindings'] = {
-    { key = { '<CR>', 'o', '<2-LeftMouse>' }, cb = tree_cb('edit') },
-    { key = { '<2-RightMouse>', 'c' }, cb = tree_cb('cd') },
-    { key = 'vs', cb = tree_cb('vsplit') },
-    { key = 'sp', cb = tree_cb('split') },
-    { key = 'tn', cb = tree_cb('tabnew') },
-    { key = { '<BS>', '<S-CR>' }, cb = tree_cb('close_node') },
-    { key = '<Tab>', cb = tree_cb('preview') },
-    { key = 'I', cb = tree_cb('toggle_ignored') },
-    { key = 'H', cb = tree_cb('toggle_dotfiles') },
-    { key = 'R', cb = tree_cb('refresh') },
-    { key = 'n', cb = tree_cb('create') },
-    { key = 'd', cb = tree_cb('remove') },
-    { key = 'rn', cb = tree_cb('rename') },
-    { key = '<C-r>', cb = tree_cb('full_rename') },
-    { key = 'x', cb = tree_cb('cut') },
-    { key = 'y', cb = tree_cb('copy') },
-    { key = 'p', cb = tree_cb('paste') },
-    { key = '[c', cb = tree_cb('prev_git_item') },
-    { key = ']c', cb = tree_cb('next_git_item') },
-    { key = '-', cb = tree_cb('dir_up') },
-    { key = '?', cb = tree_cb('toggle_help') }
 }
