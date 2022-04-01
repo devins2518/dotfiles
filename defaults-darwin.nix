@@ -167,7 +167,7 @@ in rec {
       find ${config.system.build.applications}/Applications -maxdepth 1 -type l | while read f; do
         src=$(/usr/bin/stat -f%Y "$f")
         appname=$(basename $src)
-        cp -rf "$src" /Applications/Nix
+        sudo cp -rf "$src" /Applications/Nix
     done
   '');
 

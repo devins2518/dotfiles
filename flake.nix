@@ -14,7 +14,7 @@
     emacs-nightly.url = "github:nix-community/emacs-overlay";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
-    nixpkgs.url = "github:devins2518/nixpkgs/dots";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
     nur.url = "github:nix-community/NUR/master";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
