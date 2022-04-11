@@ -85,8 +85,6 @@ in rec {
       hyperfine
       iterm2
       jq
-      lldb
-      llvm
       luaformatter
       meson
       ninja
@@ -167,6 +165,7 @@ in rec {
       find ${config.system.build.applications}/Applications -maxdepth 1 -type l | while read f; do
         src=$(/usr/bin/stat -f%Y "$f")
         appname=$(basename $src)
+        sudo rm -rf /Applications/Nix/Discord\ PTB.app
         sudo cp -rf "$src" /Applications/Nix
     done
   '');

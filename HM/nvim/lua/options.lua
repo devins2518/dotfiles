@@ -64,40 +64,104 @@ vim.api.nvim_add_user_command('LSPHover', [[
     ]], {})
 
 Augroup('remember_folds', {
-    [[autocmd BufWinLeave ?* mkview 1]],
-    [[autocmd BufWinEnter ?* silent! loadview 1]]
+    { event = 'BufWinLeave', pattern = '?*', command = 'mkview 1' },
+    { event = 'BufWinEnter', pattern = '?*', command = 'silent! loadview 1' }
 })
 
-Augroup('zig', { [[autocmd BufNewFile,BufRead gyro.zzz set filetype=yaml]] })
+Augroup('zig', {
+    {
+        event = 'BufNewFile,BufRead',
+        pattern = 'gyro.zzz',
+        command = 'set filetype=yaml'
+    }
+})
 
 Augroup('rust', {
-    [[autocmd FileType rust nmap <leader>cc :Ccheck<CR>]],
-    [[autocmd FileType rust nmap <leader>cb :Cbuild<CR>]],
-    [[autocmd FileType rust nmap <leader>cr :Crun<CR>]],
-    [[autocmd FileType rust nmap <leader>cl :Cclean<CR>]],
-    [[autocmd BufEnter,BufWinEnter,BufWritePost,InsertLeave, \
-        TabEnterBufEnter,BufWinEnter,BufWritePost,InsertLeave,TabEnter *.rs \
-        :lua require'lsp_extensions'.inlay_hints{ highlight = "NonText", prefix = \
-        " » " ,enabled = {"TypeHint", "ChainingHint", "ParameterHint"}}]]
+    {
+        event = 'FileType',
+        pattern = 'rust',
+        command = 'nmap <leader>cc :Ccheck<CR>'
+    },
+    {
+        event = 'FileType',
+        pattern = 'rust',
+        command = 'nmap <leader>cb :Cbuild<CR>'
+    },
+    {
+        event = 'FileType',
+        pattern = 'rust',
+        command = 'nmap <leader>cr :Crun<CR>'
+    },
+    {
+        event = 'FileType',
+        pattern = 'rust',
+        command = 'nmap <leader>cl :Cclean<CR>'
+    },
+    {
+        event = 'BufEnter,BufWinEnter,BufWritePost,InsertLeave,TabEnterBufEnter,BufWinEnter,BufWritePost,InsertLeave,TabEnter',
+        pattern = '*.rs',
+        callback = function()
+            require'lsp_extensions'.inlay_hints {
+                highlight = 'NonText',
+                prefix = ' » ',
+                enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' }
+            }
+        end
+    }
 })
 
 Augroup('Markdown', {
-    [[autocmd BufNewFile,BufRead *.md set filetype=markdown]],
-    [[autocmd FileType markdown set conceallevel=2]],
-    [[autocmd Filetype markdown set wrap]],
-    [[autocmd FileType markdown set colorcolumn=]],
-    [[autocmd FileType markdown set scrolloff=999]],
-    [[autocmd FileType markdown nmap <leader>cp :!compilenote %<CR>]],
-    [[autocmd InsertLeave /home/devin/Repos/notes/*.md silent! !compilenote % &]],
-    [[autocmd InsertCharPre *.md if search('\v(%^|[.!?#-]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif]]
+    {
+        event = 'FileType',
+        pattern = 'markdown',
+        command = 'set filetype=markdown'
+    },
+    { event = 'FileType', pattern = 'markdown', command = 'set conceallevel=2' },
+    { event = 'FileType', pattern = 'markdown', command = 'set wrap' },
+    { event = 'FileType', pattern = 'markdown', command = 'set colorcolumn=' },
+    { event = 'FileType', pattern = 'markdown', command = 'set scrolloff=999' },
+    {
+        event = 'FileType',
+        pattern = 'markdown',
+        command = 'nmap <leader>cp :!compilenote %<CR>'
+    },
+    {
+        event = 'InsertLeave',
+        pattern = '/home/devin/Repos/notes/*.md',
+        command = 'silent! !compilenote % &'
+    },
+    {
+        event = 'InsertCharPre',
+        pattern = '*.md',
+        command = 'if search(\'\v(%^|[.!?#-]_s)_s*%#\', \'bcnw\') != 0 | let v:char = toupper(v:char) | endif'
+    }
 })
 
-Augroup('Header', { [[autocmd BufEnter *.h :TSBufDisable highlight]] })
+-- Augroup('Header', {
+--     { event = 'BufEnter', pattern = '*.h', command = ':TSBufDisable highlight' }
+-- })
 
 Augroup('Format', {
-    [[autocmd BufEnter * let b:format_run=1]],
-    [[autocmd BufWritePost *.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli if b:format_run | silent! FormatWrite | endif]],
-    [[autocmd FileType sh silent! FormatWrite]]
+    { event = 'BufEnter', pattern = '*', command = 'let b:format_run=1' },
+    {
+        event = 'BufWritePost',
+        pattern = '*.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli',
+        command = 'if b:format_run | silent! FormatWrite | endif'
+    }
 })
 
-Augroup('LSP', { [[autocmd CursorHold * Lspsaga show_line_diagnostics]] })
+Augroup('LSP', {
+    {
+        event = 'CursorHold',
+        pattern = '*',
+        command = 'Lspsaga show_line_diagnostics'
+    }
+})
+
+Augroup('NvimTree', {
+    {
+        event = 'BufEnter',
+        pattern = '*',
+        command = '++nested if winnr(\'$\') == 1 && bufname() == \'NvimTree_\' . tabpagenr() | quit | endif'
+    }
+})

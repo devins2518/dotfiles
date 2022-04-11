@@ -3,23 +3,17 @@ if not present then
     return
 end
 
-G['nvim_tree_quit_on_open'] = 0
 G['nvim_tree_indent_markers'] = 1
 G['nvim_tree_git_hl'] = 1
 G['nvim_tree_highlight_opened_files'] = 1
 G['nvim_tree_root_folder_modifier'] = ':~'
 G['nvim_tree_add_trailing'] = 1
 G['nvim_tree_group_empty'] = 1
-G['nvim_tree_disable_window_picker'] = 1
 G['nvim_tree_icon_padding'] = ' '
 G['nvim_tree_symlink_arrow'] = ' >> '
 G['nvim_tree_respect_buf_cwd'] = 1
 G['nvim_tree_create_in_closed_folder'] = 0
 G['nvim_tree_refresh_wait'] = 500
-G['nvim_tree_window_picker_exclude'] = {
-    filetype = { 'notify', 'packer', 'qf' },
-    buftype = { 'terminal' }
-}
 G['nvim_tree_icons'] = {
     default = ' ',
     symlink = ' ',
@@ -46,7 +40,6 @@ tree.setup {
     hijack_netrw = true,
     open_on_setup = false,
     ignore_ft_on_setup = {},
-    auto_close = true,
     open_on_tab = false,
     update_to_buf_dir = { enable = true, auto_open = true },
     hijack_cursor = false,
@@ -54,6 +47,19 @@ tree.setup {
     diagnostics = { enable = true },
     update_focused_file = { enable = true, update_cwd = true, ignore_list = {} },
     system_open = { cmd = nil, args = {} },
+
+    open_file = {
+        quit_on_open = false,
+        resize_window = true,
+        window_picker = {
+            enable = true,
+            chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+            exclude = {
+                filetype = { 'notify', 'packer', 'qf' },
+                buftype = { 'terminal' }
+            }
+        }
+    },
 
     git = { enable = true, ignore = true, timeout = 500 },
     filters = {
