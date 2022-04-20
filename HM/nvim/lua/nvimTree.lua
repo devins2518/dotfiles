@@ -3,7 +3,6 @@ if not present then
     return
 end
 
-G['nvim_tree_indent_markers'] = 1
 G['nvim_tree_git_hl'] = 1
 G['nvim_tree_highlight_opened_files'] = 1
 G['nvim_tree_root_folder_modifier'] = ':~'
@@ -102,5 +101,6 @@ tree.setup {
                 { key = '?', action = 'toggle_help' }
             }
         }
-    }
+    },
+    renderer = { indent_markers = { enable = true } }
 }

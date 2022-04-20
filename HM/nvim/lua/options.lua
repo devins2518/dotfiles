@@ -59,9 +59,8 @@ G['loaded_matchit'] = 1
 G['loaded_matchparen'] = 1
 G['loaded_spec'] = 1
 G['lsp_hover'] = true
-vim.api.nvim_add_user_command('LSPHover', [[
-    lua vim.g.lsp_hover = not vim.g.lsp_hover
-    ]], {})
+vim.api.nvim_create_user_command('LSPHover',
+    'lua vim.g.lsp_hover = not vim.g.lsp_hover', {})
 
 Augroup('remember_folds', {
     { event = 'BufWinLeave', pattern = '?*', command = 'mkview 1' },
@@ -137,15 +136,11 @@ Augroup('Markdown', {
     }
 })
 
--- Augroup('Header', {
---     { event = 'BufEnter', pattern = '*.h', command = ':TSBufDisable highlight' }
--- })
-
 Augroup('Format', {
     { event = 'BufEnter', pattern = '*', command = 'let b:format_run=1' },
     {
         event = 'BufWritePost',
-        pattern = '*.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli',
+        pattern = '*.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli,*.zig',
         command = 'if b:format_run | silent! FormatWrite | endif'
     }
 })
@@ -158,10 +153,10 @@ Augroup('LSP', {
     }
 })
 
-Augroup('NvimTree', {
+Augroup('NvimTreeClose', {
     {
         event = 'BufEnter',
         pattern = '*',
-        command = '++nested if winnr(\'$\') == 1 && bufname() == \'NvimTree_\' . tabpagenr() | quit | endif'
+        command = [[if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
     }
 })

@@ -1,4 +1,4 @@
-vim.api.nvim_add_user_command('ToggleFormat', [[
+vim.api.nvim_create_user_command('ToggleFormat', [[
     let b:format_run=!b:format_run
     let b:rustfmt_autosave=b:format_run
     ]], {})
@@ -76,6 +76,11 @@ require('formatter').setup({
         nix = {
             function()
                 return { exe = 'nixfmt', stdin = true }
+            end
+        },
+        zig = {
+            function()
+                return { exe = 'zig fmt', args = { '--stdin' }, stdin = true }
             end
         }
     }

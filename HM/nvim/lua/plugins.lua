@@ -152,7 +152,7 @@ return packer.startup({
             'ziglang/zig.vim',
             ft = { 'zig' },
             config = function()
-                G['zig_fmt_autosave'] = 1
+                G['zig_fmt_autosave'] = 0
             end
         }
         use { 'neovimhaskell/haskell-vim', ft = 'haskell' }
