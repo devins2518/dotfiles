@@ -41,7 +41,7 @@ in rec {
     registry = registryInputs;
 
     gc = {
-      automatic = true;
+      automatic = false;
       user = "root";
       options = "--delete-older-than 7d";
     };
@@ -81,7 +81,6 @@ in rec {
       discord-ptb
       ffmpeg
       gnumake
-      helix-git
       hyperfine
       iterm2
       jq

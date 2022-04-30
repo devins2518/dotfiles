@@ -62,9 +62,10 @@ G['lsp_hover'] = true
 vim.api.nvim_create_user_command('LSPHover',
     'lua vim.g.lsp_hover = not vim.g.lsp_hover', {})
 
-Augroup('remember_folds', {
+Augroup('Folds', {
     { event = 'BufWinLeave', pattern = '?*', command = 'mkview 1' },
-    { event = 'BufWinEnter', pattern = '?*', command = 'silent! loadview 1' }
+    { event = 'BufWinEnter', pattern = '?*', command = 'silent! loadview 1' },
+    { event = 'BufWrite', pattern = '*', command = 'normal zx' }
 })
 
 Augroup('zig', {
