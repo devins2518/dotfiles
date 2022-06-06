@@ -19,7 +19,16 @@
 
     lfs.enable = true;
 
-    ignores = [ "**/shell.nix" ".DS_Store" "_build" "_opam" ];
+    ignores = [
+      "shell.nix"
+      ".DS_Store"
+      "_build"
+      "_opam"
+      "out"
+      "zig-cache"
+      "zig-out"
+      ".envrc"
+    ];
 
     extraConfig = {
       pull = { rebase = true; };

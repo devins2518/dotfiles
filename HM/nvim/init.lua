@@ -8,13 +8,14 @@ function Map(mode, lhs, rhs, opts)
 end
 
 function Augroup(name, commands)
-    vim.api.nvim_create_augroup(name, {clear = true});
+    vim.api.nvim_create_augroup(name, { clear = true });
     for _, v in pairs(commands) do
         local a = {
             group = name,
             pattern = v.pattern,
             command = v.command,
-            callback = v.callback
+            callback = v.callback,
+            nested = v.nested or false
         }
         vim.api.nvim_create_autocmd(v.event, a)
     end

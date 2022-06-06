@@ -18,7 +18,11 @@ in rec {
   home-manager.useGlobalPkgs = true;
 
   environment = {
-    variables = { NIXOS_CONFIG = "/Users/devin/Repos/dotfiles"; };
+    variables = {
+      NIXOS_CONFIG = "/Users/devin/Repos/dotfiles";
+      CPATH =
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include";
+    };
   };
 
   users = {
@@ -75,9 +79,9 @@ in rec {
     [
       bottom
       cachix
-      cargo-tarpaulin
       clang
       clang-tools
+      direnv
       discord-ptb
       ffmpeg
       gnumake
@@ -170,7 +174,7 @@ in rec {
   '');
 
   fonts = {
-    enableFontDir = true;
+    fontDir = { enable = true; };
     fonts = with pkgs; [
       (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
       font-awesome

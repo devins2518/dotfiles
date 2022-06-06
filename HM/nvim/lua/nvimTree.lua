@@ -40,38 +40,37 @@ tree.setup {
     open_on_setup = false,
     ignore_ft_on_setup = {},
     open_on_tab = false,
-    update_to_buf_dir = { enable = true, auto_open = true },
+    hijack_directories = { enable = true, auto_open = true },
     hijack_cursor = false,
     update_cwd = true,
     diagnostics = { enable = true },
     update_focused_file = { enable = true, update_cwd = true, ignore_list = {} },
     system_open = { cmd = nil, args = {} },
 
-    open_file = {
-        quit_on_open = false,
-        resize_window = true,
-        window_picker = {
-            enable = true,
-            chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-            exclude = {
-                filetype = { 'notify', 'packer', 'qf' },
-                buftype = { 'terminal' }
-            }
-        }
-    },
-
     git = { enable = true, ignore = true, timeout = 500 },
     filters = {
         dotfiles = true,
         custom = { '.git', 'target', 'node_modules', '.cache', 'Cargo.lock' }
+    },
+    actions = {
+        open_file = {
+            quit_on_open = false,
+            resize_window = true,
+            window_picker = {
+                enable = true,
+                chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                exclude = {
+                    filetype = { 'notify', 'packer', 'qf' },
+                    buftype = { 'terminal' }
+                }
+            }
+        }
     },
 
     view = {
         width = 25,
         height = 30,
         side = 'left',
-        -- if true the tree will resize itself after opening a file
-        auto_resize = true,
         mappings = {
             -- custom only false will merge the list with the default mappings
             -- if true, it will only use your list to set the mappings

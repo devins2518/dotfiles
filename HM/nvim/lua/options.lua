@@ -158,6 +158,7 @@ Augroup('NvimTreeClose', {
     {
         event = 'BufEnter',
         pattern = '*',
-        command = [[if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
+        command = [[if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]],
+        nested = true
     }
 })
