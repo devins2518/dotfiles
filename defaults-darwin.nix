@@ -21,7 +21,7 @@ in rec {
     variables = {
       NIXOS_CONFIG = "/Users/devin/Repos/dotfiles";
       CPATH =
-        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include";
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include";
     };
   };
 
@@ -79,7 +79,6 @@ in rec {
     [
       bottom
       cachix
-      clang
       clang-tools
       direnv
       discord-ptb

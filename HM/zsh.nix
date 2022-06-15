@@ -79,8 +79,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "clarketm";
             repo = "zsh-completions";
-            rev = "ed901ab5f741fb3b9076022ec0c1ba1220beb0d7";
-            sha256 = "sha256-CKky9u0bnCme/jGCqkxD4YaKYwvgmdWoBE0SGiYM1MI=";
+            rev = "82db8e4056c049dc9885979ae6968bf8b244e5d3";
+            sha256 = "sha256-WajQx0ZrjrmGtZ2uvixGhwVslYvEUrxANrpvl3whjp8=";
           };
         }
         {
@@ -89,8 +89,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "romkatv";
             repo = "powerlevel10k";
-            rev = "v1.14.6";
-            sha256 = "1z6xipd7bgq7fc03x9j2dmg3yv59xyjf4ic5f1l6l6pw7w3q4sq7";
+            rev = "6b128d48d675509666ff222eb08922cc6a7b6753";
+            sha256 = "sha256-ZDtreMWnt83HwVfLOds/LbvIppIZtjsY0WFa3mpqGHM=";
           };
         }
         {
@@ -99,8 +99,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "zdharma-continuum";
             repo = "fast-syntax-highlighting";
-            rev = "585c089968caa1c904cbe926ff04a1be9e3d8f42";
-            sha256 = "sha256-x+4C2u03RueNo6/ZXsueqmYoPIpDHnKAZXP5IiKsidE=";
+            rev = "370106d95d1486c3d0d894d1a2a823ce9b0fcdb3";
+            sha256 = "sha256-OvF9kB+EWsSue0XAJs4nODNxKuufKWpAK6Ya3F3iWp0=";
           };
         }
         {
@@ -109,8 +109,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "chisui";
             repo = "zsh-nix-shell";
-            rev = "v0.2.0";
-            sha256 = "1gfyrgn23zpwv1vj37gf28hf5z0ka0w5qm6286a7qixwv7ijnrx9";
+            rev = "af6f8a266ea1875b9a3e86e14796cadbe1cfbf08";
+            sha256 = "sha256-BjgMhILEL/qdgfno4LR64LSB8n9pC9R+gG7IQWwgyfQ=";
           };
         }
         {
@@ -118,8 +118,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "zsh-users";
             repo = "zsh-autosuggestions";
-            rev = "v0.4.0";
-            sha256 = "0z6i9wjjklb4lvr7zjhbphibsyx51psv50gm07mbb0kj9058j6kc";
+            rev = "a411ef3e0992d4839f0732ebeb9823024afaaaa8";
+            sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
           };
         }
       ];
