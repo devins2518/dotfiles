@@ -3,36 +3,7 @@ if not present then
     return
 end
 
-G['nvim_tree_git_hl'] = 1
-G['nvim_tree_highlight_opened_files'] = 1
-G['nvim_tree_root_folder_modifier'] = ':~'
-G['nvim_tree_add_trailing'] = 1
-G['nvim_tree_group_empty'] = 1
-G['nvim_tree_icon_padding'] = ' '
-G['nvim_tree_symlink_arrow'] = ' >> '
-G['nvim_tree_respect_buf_cwd'] = 1
-G['nvim_tree_create_in_closed_folder'] = 0
 G['nvim_tree_refresh_wait'] = 500
-G['nvim_tree_icons'] = {
-    default = ' ',
-    symlink = ' ',
-    git = {
-        unstaged = '✗',
-        staged = '✓',
-        unmerged = '',
-        renamed = '➜',
-        untracked = '★'
-    },
-    folder = {
-        default = '',
-        open = '',
-        empty = '',
-        empty_open = '',
-        symlink = '',
-        symlink_open = ''
-    },
-    lsp = { hint = '', info = '', warning = '', error = '' }
-}
 
 tree.setup {
     disable_netrw = true,
@@ -43,9 +14,15 @@ tree.setup {
     hijack_directories = { enable = true, auto_open = true },
     hijack_cursor = false,
     update_cwd = true,
-    diagnostics = { enable = true },
+    diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+        icons = { hint = '', info = '', warning = '', error = '' }
+    },
     update_focused_file = { enable = true, update_cwd = true, ignore_list = {} },
     system_open = { cmd = nil, args = {} },
+    respect_buf_cwd = true,
+    create_in_closed_folder = false,
 
     git = { enable = true, ignore = true, timeout = 500 },
     filters = {
@@ -101,5 +78,37 @@ tree.setup {
             }
         }
     },
-    renderer = { indent_markers = { enable = true } }
+
+    renderer = {
+        highlight_git = true,
+        highlight_opened_files = 'icon',
+        root_folder_modifier = ':~',
+        add_trailing = true,
+        group_empty = true,
+        indent_markers = { enable = true },
+
+        icons = {
+            padding = ' ',
+            symlink_arrow = ' >> ',
+            glyphs = {
+                default = ' ',
+                symlink = ' ',
+                git = {
+                    unstaged = '✗',
+                    staged = '✓',
+                    unmerged = '',
+                    renamed = '➜',
+                    untracked = '★'
+                },
+                folder = {
+                    default = '',
+                    open = '',
+                    empty = '',
+                    empty_open = '',
+                    symlink = '',
+                    symlink_open = ''
+                }
+            }
+        }
+    }
 }

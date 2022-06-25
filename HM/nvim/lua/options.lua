@@ -64,8 +64,7 @@ vim.api.nvim_create_user_command('LSPHover',
 
 Augroup('Folds', {
     { event = 'BufWinLeave', pattern = '?*', command = 'mkview 1' },
-    { event = 'BufWinEnter', pattern = '?*', command = 'silent! loadview 1' },
-    { event = 'BufWrite', pattern = '*', command = 'normal zx' }
+    { event = 'BufWinEnter', pattern = '?*', command = 'silent! loadview 1' }
 })
 
 Augroup('zig', {
