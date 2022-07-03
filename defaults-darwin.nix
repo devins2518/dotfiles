@@ -165,8 +165,10 @@ in rec {
     rm -rf /Applications/Nix/*
     mkdir -p /Applications/Nix
     chown devin /Applications/Nix
+    # avoid racey conditions
+    sleep 1
     find ~/Applications/Nix\ Apps/* -type l | while read f; do
-      osascript -e "tell app \"Finder\" to make new alias file at POSIX file \"/Applications/Nix\" to POSIX file \"$(/usr/bin/stat -f%Y "$f")\"";
+      osascript -e "tell app \"Finder\" to make alias file at POSIX file \"/Applications/Nix\" to POSIX file \"$(/usr/bin/stat -f%Y "$f")\"";
     done
 
     # find ~/Applications/Nix\ Apps/* -type l | while read f; do
