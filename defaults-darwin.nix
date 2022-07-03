@@ -161,15 +161,23 @@ in rec {
   };
 
   system.activationScripts.applications.text = pkgs.lib.mkForce (''
-      echo "setting up /Applications/Nix..."
-      mkdir -p /Applications/Nix
-      chown devin /Applications/Nix
-      find ${config.system.build.applications}/Applications -maxdepth 1 -type l | while read f; do
-        src=$(/usr/bin/stat -f%Y "$f")
-        appname=$(basename $src)
-        sudo rm -rf /Applications/Nix/Discord\ PTB.app
-        sudo cp -rf "$src" /Applications/Nix
+    echo "setting up /Applications/Nix..."
+    rm -rf /Applications/Nix/*
+    mkdir -p /Applications/Nix
+    chown devin /Applications/Nix
+    find ~/Applications/Nix\ Apps/* -type l | while read f; do
+      osascript -e "tell app \"Finder\" to make new alias file at POSIX file \"/Applications/Nix\" to POSIX file \"$(/usr/bin/stat -f%Y "$f")\"";
     done
+
+    # find ~/Applications/Nix\ Apps/* -type l | while read f; do
+    #   osascript \
+    #   -e "set itExists to application \"System Events\"'s (exists file $(/Applications/Nix/$f))"
+    #   -e "if itExists then"\
+    #       -e "set thisFile to POSIX file outFile as alias"\
+    #       -e "tell application \"Finder\" to move thisFile to trash"\
+    #   -e "end if"\
+    #   -e "tell app \"Finder\" to make new alias file at POSIX file \"/Applications/Nix\" to POSIX file \"$(/usr/bin/stat -f%Y "$f")\"";
+    # done
   '');
 
   fonts = {

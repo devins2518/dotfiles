@@ -34,7 +34,7 @@ function lsp_config.common_on_attach(_, _)
         floating_window = true,
         floating_window_above_cur_line = true,
         floating_window_off_x = 1,
-        floating_window_off_y = 1,
+        floating_window_off_y = -10,
         fix_pos = true,
         hint_enable = true,
         hint_prefix = '➤',
