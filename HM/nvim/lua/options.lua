@@ -25,7 +25,8 @@ opt.backspace = 'indent,eol,start'
 opt.matchpairs:append('<:>')
 opt.laststatus = 2
 opt.showmode = true
-opt.foldmethod = 'manual'
+opt.foldmethod = 'indent'
+opt.foldlevel = 99
 opt.showcmd = true
 opt.hlsearch = true
 opt.showmatch = true

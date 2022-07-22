@@ -146,7 +146,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.users.devin = ({ config, pkgs, ... }:
               with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                imports = [ emacs git iterm2 nvim pass pdf zathura zsh ];
+                imports =
+                  [ defaults emacs git iterm2 nvim pass pdf zathura zsh ];
 
                 home.packages = with pkgs; [ cachix-push ];
               });
@@ -228,7 +229,7 @@
       sharedOverlays = [
         emacs-nightly.overlay
         neovim-nightly.overlay
-        nixpkgs-f2k.overlay
+        nixpkgs-f2k.overlays.default
         nur.overlay
         rust-overlay.overlay
         self.overlay

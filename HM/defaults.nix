@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  xdg = {
+  xdg = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     userDirs = {
       enable = true;
@@ -15,7 +15,10 @@
     enableZshIntegration = true;
   };
 
-  home = { username = "devin"; };
+  home = {
+    username = "devin";
+    stateVersion = "21.11";
+  };
 
   news.display = "silent";
 

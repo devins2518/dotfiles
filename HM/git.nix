@@ -22,6 +22,8 @@
     ignores = [
       "shell.nix"
       ".DS_Store"
+      ".gyro"
+      "gyro.lock"
       "_build"
       "_opam"
       "out"
