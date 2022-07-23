@@ -24,6 +24,7 @@
       ".DS_Store"
       ".gyro"
       "gyro.lock"
+      ".direnv"
       "_build"
       "_opam"
       "out"

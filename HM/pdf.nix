@@ -67,6 +67,20 @@
         sha256 = "sha256-5H+UPGczaz2m2O+RocD3+pW7XnLgFAyhOSZNvrQGyGo=";
       };
     };
+    "pdfs/armv8.pdf" = {
+      source = pkgs.fetchurl {
+        url =
+          "https://documentation-service.arm.com/static/623b2de33b9f553dde8fd3b0";
+        sha256 = "sha256-Yq9NL5CDR8MBi9Y1cvDOHV7fDTSrrivuPBjefJfQbkM=";
+      };
+    };
+    "pdfs/cauemu/op-code-table.html" = {
+      source = pkgs.fetchurl {
+        url = "https://merryhime.github.io/gba-doc/CPU/arm-table.html";
+        sha256 = "sha256-JCrxyAasW+Cwu0P3kmqW2gxoeHnGaY7tOZXHV5Ngwdc=";
+      };
+    };
+
     # TODO: fix
     #     "pdfs/chaaya/gbatek.pdf" = {
     #       source = pkgs.fetchurl {
