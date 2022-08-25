@@ -24,40 +24,40 @@
         sha256 = "sha256-NstSuLL45O2PWEpS/WDtgXOhajPtzIkw5nDdErlPr20=";
       };
     };
-    "pdfs/maqi/rfc2821 - smtp.pdf" = {
+    "pdfs/maqi/rfc2821 - smtp.html" = {
       source = pkgs.fetchurl {
-        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc2821.txt.pdf";
-        sha256 = "sha256-yCMjOCASyKyXaL18FuSkShZbxUGCj6p409aQgACZWJc=";
+        url = "https://www.rfc-editor.org/rfc/rfc2821.html";
+        sha256 = "sha256-x5dHUn6dpBnL8/ZNqXzkMpW9NtpWeGZJZzLoyLZx4yM=";
       };
     };
-    "pdfs/maqi/rfc9051 - imapv4r2.pdf" = {
+    "pdfs/maqi/rfc9051 - imapv4r2.html" = {
       source = pkgs.fetchurl {
-        url = "https://www.ietf.org/rfc/rfc9051.pdf";
-        sha256 = "sha256-El1HKcrvjO/ZgOfVE//NFx6NJyrMiNSmzkfzBxqx6uE=";
+        url = "https://www.rfc-editor.org/rfc/rfc9051.html";
+        sha256 = "sha256-cOK2zX+GDNX+IvaDE2+OCWl2F44CKpBOZftp8JxNluI=";
       };
     };
-    "pdfs/maqi/rfc2087 - imap quota.pdf" = {
+    "pdfs/maqi/rfc2087 - imap quota.html" = {
       source = pkgs.fetchurl {
-        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc2087.txt.pdf";
-        sha256 = "sha256-Oin5K5mw7XQUV9GBdbcUS62zrRX+MKRaKNQNNlU7V8c=";
+        url = "https://www.rfc-editor.org/rfc/rfc2087.html";
+        sha256 = "sha256-NRGKsPx/qeZ7l0b9/eNZX6+fQZwm37emQILTlcYoF78=";
       };
     };
-    "pdfs/maqi/rfc5322 - imap imf.pdf" = {
+    "pdfs/maqi/rfc5322 - imap imf.html" = {
       source = pkgs.fetchurl {
-        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc5322.txt.pdf";
-        sha256 = "sha256-pqdmt2O1NXz0JYIDQJgCwCi7ZGn6U8ZpuUkMjWIwScs=";
+        url = "https://www.rfc-editor.org/rfc/rfc5322.html";
+        sha256 = "sha256-AOIrOz7bPrhoNozKf0XyeMja6lfXBj522bJgLE46c7E=";
       };
     };
-    "pdfs/maqi/rfc2045 - imap mimep1.pdf" = {
+    "pdfs/maqi/rfc2045 - imap mimep1.html" = {
       source = pkgs.fetchurl {
-        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc2045.txt.pdf";
-        sha256 = "sha256-BFCY5BN1RotHyiF92Y5fzMxJ09ynPzRiwwLknhzRH5o=";
+        url = "https://www.rfc-editor.org/rfc/rfc2045.html";
+        sha256 = "sha256-Ss2zVYIGhJ7h3k64ckjW3K462ecfRO/WvDrsphN1xno=";
       };
     };
-    "pdfs/maqi/rfc5234 - imap syntax.pdf" = {
+    "pdfs/maqi/rfc5234 - imap syntax.html" = {
       source = pkgs.fetchurl {
-        url = "https://www.rfc-editor.org/rfc/pdfrfc/rfc5234.txt.pdf";
-        sha256 = "sha256-zsg2xDz+MvuWRgVE7Vnf1yAGjX0lZLPvnP4GWP3gN0U=";
+        url = "https://www.rfc-editor.org/rfc/rfc5234.html";
+        sha256 = "sha256-X8UgnSba8Y6W04QJVN5HHJnay7mOQEmmocOz9MkSmrs=";
       };
     };
     "pdfs/chaaya/armv5.pdf" = {

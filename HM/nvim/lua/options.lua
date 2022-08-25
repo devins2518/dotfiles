@@ -116,10 +116,22 @@ Augroup('Markdown', {
         pattern = 'markdown',
         command = 'set filetype=markdown'
     },
-    { event = 'FileType', pattern = 'markdown', command = 'set conceallevel=2' },
-    { event = 'FileType', pattern = 'markdown', command = 'set wrap' },
-    { event = 'FileType', pattern = 'markdown', command = 'set colorcolumn=' },
-    { event = 'FileType', pattern = 'markdown', command = 'set scrolloff=999' },
+    {
+        event = 'FileType',
+        pattern = 'markdown',
+        command = 'setlocal conceallevel=2'
+    },
+    { event = 'FileType', pattern = 'markdown', command = 'setlocal wrap' },
+    {
+        event = 'FileType',
+        pattern = 'markdown',
+        command = 'setlocal colorcolumn='
+    },
+    {
+        event = 'FileType',
+        pattern = 'markdown',
+        command = 'setlocal scrolloff=999'
+    },
     {
         event = 'FileType',
         pattern = 'markdown',
