@@ -3,7 +3,7 @@
 
   inputs = {
     darwin = {
-      url = "github:ryantking/nix-darwin";
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -231,7 +231,7 @@
         neovim-nightly.overlay
         nixpkgs-f2k.overlays.default
         nur.overlay
-        rust-overlay.overlay
+        rust-overlay.overlays.default
         self.overlay
       ];
 

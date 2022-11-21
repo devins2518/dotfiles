@@ -80,7 +80,8 @@ require('formatter').setup({
         },
         zig = {
             function()
-                return { exe = 'zig fmt', args = { '--stdin' }, stdin = true }
+                return
+                    { exe = 'zig', args = { 'fmt', '--stdin' }, stdin = true }
             end
         }
     }

@@ -28,6 +28,7 @@ in rec {
   users = {
     users = {
       devin = {
+        name = "devin";
         shell = pkgs.zsh;
         description = "Devin Singh";
         home = "/Users/devin";
@@ -39,8 +40,6 @@ in rec {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-
-    trustedUsers = [ "root" "devin" ];
 
     registry = registryInputs;
 
@@ -58,19 +57,23 @@ in rec {
       darwin = "${inputs.darwin}";
     };
 
-    binaryCaches = [
-      "https://cache.nixos.org?priority=10"
-      "https://nix-community.cachix.org"
-      "https://fortuneteller2k.cachix.org"
-      "https://devins2518.cachix.org"
-    ];
+    settings = {
+      trusted-users = [ "root" "devin" ];
 
-    binaryCachePublicKeys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
-      "devins2518.cachix.org-1:VQepMECpWpT95AjVOU30xz6kbrBRUMpHAOdKP/tulB0="
-    ];
+      substituters = [
+        "https://cache.nixos.org?priority=10"
+        "https://nix-community.cachix.org"
+        "https://fortuneteller2k.cachix.org"
+        "https://devins2518.cachix.org"
+      ];
+
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
+        "devins2518.cachix.org-1:VQepMECpWpT95AjVOU30xz6kbrBRUMpHAOdKP/tulB0="
+      ];
+    };
   };
 
   nixpkgs.config = { allowUnfree = true; };
@@ -165,7 +168,7 @@ in rec {
     rm -rf /Applications/Nix/*
     mkdir -p /Applications/Nix
     chown devin /Applications/Nix
-    find ~/Applications/* -type l | while read f; do
+    find /Applications/Nix\ Apps/* -type l | while read f; do
       osascript -e "tell app \"Finder\" to make alias file at POSIX file \"/Applications/Nix\" to POSIX file \"$(/usr/bin/stat -f%Y "$f")\"";
     done
   '');
