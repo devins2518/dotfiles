@@ -96,17 +96,6 @@ Augroup('rust', {
         event = 'FileType',
         pattern = 'rust',
         command = 'nmap <leader>cl :Cclean<CR>'
-    },
-    {
-        event = 'BufEnter,BufWinEnter,BufWritePost,InsertLeave,TabEnterBufEnter,BufWinEnter,BufWritePost,InsertLeave,TabEnter',
-        pattern = '*.rs',
-        callback = function()
-            require'lsp_extensions'.inlay_hints {
-                highlight = 'NonText',
-                prefix = ' » ',
-                enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' }
-            }
-        end
     }
 })
 
@@ -154,7 +143,7 @@ Augroup('Format', {
     {
         event = 'BufWritePost',
         pattern = '*.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli,*.zig',
-        command = 'if b:format_run | silent! FormatWrite | endif'
+        command = 'if b:format_run | silent! FormatWriteLock | endif'
     }
 })
 

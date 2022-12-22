@@ -64,7 +64,6 @@ return packer.startup({
         -- LSP
         use {
             'neovim/nvim-lspconfig',
-            after = { 'lsp_signature.nvim' },
             config = function()
                 vim.cmd [[packadd nvim-lspconfig]]
                 require 'nvim-lspconfig'
@@ -74,11 +73,12 @@ return packer.startup({
             'hrsh7th/nvim-cmp',
             after = { 'nvim-lspconfig' },
             requires = {
-                'hrsh7th/cmp-nvim-lsp',
-                'hrsh7th/cmp-vsnip',
                 'hrsh7th/cmp-calc',
-                'hrsh7th/cmp-path',
+                'hrsh7th/cmp-nvim-lsp',
+                'hrsh7th/cmp-nvim-lsp-signature-help',
                 'hrsh7th/cmp-nvim-lua',
+                'hrsh7th/cmp-path',
+                'hrsh7th/cmp-vsnip',
                 'hrsh7th/vim-vsnip'
             },
             config = function()
@@ -86,33 +86,16 @@ return packer.startup({
             end
         }
         use {
-            'tami5/lspsaga.nvim',
+            'glepnir/lspsaga.nvim',
             after = { 'FixCursorHold.nvim', 'nvim-cmp' },
             config = function()
                 vim.cmd [[packadd lspsaga.nvim]]
                 require'lspsaga'.init_lsp_saga {
                     code_action_keys = { quit = 'q', exec = '<CR>' },
-                    rename_action_keys = {
-                        exec = '<CR>' -- quit can be a table
-                    }
+                    rename_action_quit = 'q'
                 }
             end
         }
-        use {
-            'nvim-lua/lsp_extensions.nvim',
-            after = 'nvim-cmp',
-            config = function()
-                vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp
-                                                                          .with(
-                    vim.lsp.diagnostic.on_publish_diagnostics, {
-                        virtual_text = false,
-                        underline = true,
-                        signs = { enable = true, priority = 20 }
-                    }, require('lsp_extensions.workspace.diagnostic').handler,
-                    { signs = { severity_limit = 'Error' } })
-            end
-        }
-        use { 'ray-x/lsp_signature.nvim' }
         use { 'folke/lsp-colors.nvim', after = 'nvim-cmp' }
         use {
             'j-hui/fidget.nvim',
@@ -159,7 +142,6 @@ return packer.startup({
         use {
             'rust-lang/rust.vim',
             ft = { 'rust' },
-            after = 'lsp_extensions.nvim',
             config = function()
                 require 'rust'
             end

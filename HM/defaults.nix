@@ -45,9 +45,9 @@
     AllowAllConstructorInitializersOnNextLine: true
     AllowAllParametersOfDeclarationOnNextLine: true
     AllowShortEnumsOnASingleLine: true
-    AllowShortBlocksOnASingleLine: false
+    AllowShortBlocksOnASingleLine: Empty
     AllowShortCaseLabelsOnASingleLine: false
-    AllowShortFunctionsOnASingleLine: false
+    AllowShortFunctionsOnASingleLine: Empty
     AllowShortLambdasOnASingleLine: All
     AllowShortIfStatementsOnASingleLine: Never
     AllowShortLoopsOnASingleLine: false

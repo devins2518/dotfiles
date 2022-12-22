@@ -90,10 +90,15 @@ cmp.setup {
         priority_weight = 2.,
         comparators = { compare.score, compare.exact, compare.order }
     },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered()
+    },
     sources = {
         { name = 'nvim_lsp' },
         { name = 'vsnip' },
         { name = 'path' },
-        { name = 'nvim_lua' }
+        { name = 'nvim_lua' },
+        { name = 'nvim_lsp_signature_help' }
     }
 }

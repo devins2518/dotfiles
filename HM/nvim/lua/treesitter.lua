@@ -8,7 +8,7 @@ treesitter.setup {
     highlight = {
         enable = true,
         use_languagetree = true,
-        disable = { 'cpp', 'c' }
+        disable = { 'cpp', 'c', 'nix' }
     },
     rainbow = {
         enable = true,
@@ -23,6 +23,6 @@ treesitter.setup {
             '#41a6b5',
             '#b4f9f8'
         },
-        disable = { 'c', 'cpp' }
+        disable = { 'c', 'cpp', 'nix' }
     }
 }
