@@ -26,7 +26,7 @@ opt.matchpairs:append('<:>')
 opt.laststatus = 2
 opt.showmode = true
 opt.foldmethod = 'indent'
-opt.foldlevel = 99
+opt.foldlevel = 3
 opt.showcmd = true
 opt.hlsearch = true
 opt.showmatch = true
