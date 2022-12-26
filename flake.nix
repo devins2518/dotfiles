@@ -83,7 +83,7 @@
           self.nixosModules.defaults-nix
           nix-ld.nixosModules.nix-ld
         ];
-        extraArgs = { inherit utils inputs; };
+        extraArgs = { inherit inputs; };
       };
 
       channels = {

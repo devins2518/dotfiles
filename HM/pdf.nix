@@ -27,7 +27,7 @@
     "pdfs/maqi/rfc2821 - smtp.html" = {
       source = pkgs.fetchurl {
         url = "https://www.rfc-editor.org/rfc/rfc2821.html";
-        sha256 = "sha256-x5dHUn6dpBnL8/ZNqXzkMpW9NtpWeGZJZzLoyLZx4yM=";
+        sha256 = "sha256-KmfoQQNYO8WN9v8HNJq2ZNRQxoyxB5WS0MD1U3s1VVE=";
       };
     };
     "pdfs/maqi/rfc9051 - imapv4r2.html" = {
@@ -39,25 +39,25 @@
     "pdfs/maqi/rfc2087 - imap quota.html" = {
       source = pkgs.fetchurl {
         url = "https://www.rfc-editor.org/rfc/rfc2087.html";
-        sha256 = "sha256-NRGKsPx/qeZ7l0b9/eNZX6+fQZwm37emQILTlcYoF78=";
+        sha256 = "sha256-TZ0rT4K4FudL6YRqBEusTXjXT5vdgGCelEEwRrkC6XU=";
       };
     };
     "pdfs/maqi/rfc5322 - imap imf.html" = {
       source = pkgs.fetchurl {
         url = "https://www.rfc-editor.org/rfc/rfc5322.html";
-        sha256 = "sha256-AOIrOz7bPrhoNozKf0XyeMja6lfXBj522bJgLE46c7E=";
+        sha256 = "sha256-smOpQYyt+MzpDZFBSkN3HRnLqvo8r5cANPkt/tB+Tbw=";
       };
     };
     "pdfs/maqi/rfc2045 - imap mimep1.html" = {
       source = pkgs.fetchurl {
         url = "https://www.rfc-editor.org/rfc/rfc2045.html";
-        sha256 = "sha256-Ss2zVYIGhJ7h3k64ckjW3K462ecfRO/WvDrsphN1xno=";
+        sha256 = "sha256-sREn8zZ9h7ZZeXcPa4OeAAMltJeBPIxaqz1qfKbEwDM=";
       };
     };
     "pdfs/maqi/rfc5234 - imap syntax.html" = {
       source = pkgs.fetchurl {
         url = "https://www.rfc-editor.org/rfc/rfc5234.html";
-        sha256 = "sha256-X8UgnSba8Y6W04QJVN5HHJnay7mOQEmmocOz9MkSmrs=";
+        sha256 = "sha256-E0s3vhQ8UqPRnnj9pXycJ3EK1ZVC0xU0HdFG9Tzl+V4=";
       };
     };
     "pdfs/chaaya/armv5.pdf" = {

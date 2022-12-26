@@ -55,8 +55,6 @@ in {
       experimental-features = nix-command flakes
     '';
 
-    trustedUsers = [ "root" "devin" ];
-
     generateRegistryFromInputs = true;
 
     gc = {
@@ -65,21 +63,23 @@ in {
       options = "--delete-older-than 7d";
     };
 
+    settings = {
+      trusted-users = [ "root" "devin" ];
+      substituters = [
+        "https://cache.nixos.org?priority=10"
+        "https://nix-community.cachix.org"
+        "https://fortuneteller2k.cachix.org"
+        "https://devins2518.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
+        "devins2518.cachix.org-1:VQepMECpWpT95AjVOU30xz6kbrBRUMpHAOdKP/tulB0="
+      ];
+    };
+
     nixPath = [ "nixpkgs=${pkgs.path}" "home-manager=${inputs.home-manager}" ];
-
-    binaryCaches = [
-      "https://cache.nixos.org?priority=10"
-      "https://nix-community.cachix.org"
-      "https://fortuneteller2k.cachix.org"
-      "https://devins2518.cachix.org"
-    ];
-
-    binaryCachePublicKeys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
-      "devins2518.cachix.org-1:VQepMECpWpT95AjVOU30xz6kbrBRUMpHAOdKP/tulB0="
-    ];
   };
 
   programs = {
@@ -87,7 +87,11 @@ in {
     dconf.enable = true;
   };
 
-  nixpkgs.config = { allowUnfree = true; };
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [ "qtwebkit-5.212.0-alpha4" ];
+  };
+
   environment.systemPackages = with pkgs;
     [
       aerc
@@ -102,7 +106,6 @@ in {
       firefox
       gcc
       gnumake
-      helix-git
       hyperfine
       jq
       libllvm
@@ -122,8 +125,7 @@ in {
       pcmanfm
       ripgrep
       rnix-lsp
-      rust-analyzer
-      rust-bin.stable.latest.default
+      rust-analyzer-nightly
       stack
       sumneko-lua-language-server
       tokei
@@ -134,10 +136,18 @@ in {
       xxd
       zls
       zsh
-    ] ++ nur-packages;
+    ] ++ nur-packages ++ [
+      (fenix.complete.withComponents [
+        "cargo"
+        "clippy"
+        "rust-src"
+        "rustc"
+        "rustfmt"
+      ])
+    ];
 
   # Needed for home manager to not get borked
-  services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  services.dbus.packages = with pkgs; [ dconf ];
 
   time.timeZone = "America/Chicago";
 

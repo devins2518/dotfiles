@@ -16,7 +16,7 @@ in {
     feh
     stlink
     texlive.combined.scheme-small
-    wkhtmltopdf
+    # wkhtmltopdf
   ];
   xsession = {
     enable = true;
