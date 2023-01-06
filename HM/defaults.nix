@@ -17,7 +17,7 @@
 
   home = {
     username = "devin";
-    stateVersion = lib.mkIf pkgs.stdenv.isLinux "21.11";
+    stateVersion = "21.11";
   };
 
   news.display = "silent";

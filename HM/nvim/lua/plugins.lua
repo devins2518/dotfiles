@@ -91,6 +91,7 @@ return packer.startup({
             config = function()
                 vim.cmd [[packadd lspsaga.nvim]]
                 require'lspsaga'.init_lsp_saga {
+                    border_style = 'rounded',
                     code_action_keys = { quit = 'q', exec = '<CR>' },
                     rename_action_quit = 'q'
                 }
