@@ -31,6 +31,8 @@
       "zig-cache"
       "zig-out"
       ".envrc"
+      "*.dSYM"
+      "*.o"
     ];
 
     extraConfig = {

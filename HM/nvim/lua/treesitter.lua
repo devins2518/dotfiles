@@ -8,7 +8,12 @@ treesitter.setup {
     highlight = {
         enable = true,
         use_languagetree = true,
-        disable = { 'cpp', 'c', 'nix' }
+        disable = {
+            'cpp',
+            'c',
+            'nix',
+            'zig' -- LSP Handles highlighting
+        }
     },
     rainbow = {
         enable = true,

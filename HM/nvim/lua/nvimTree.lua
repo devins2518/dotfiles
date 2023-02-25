@@ -13,7 +13,7 @@ tree.setup {
     open_on_tab = false,
     hijack_directories = { enable = true, auto_open = true },
     hijack_cursor = false,
-    update_cwd = true,
+    update_cwd = false,
     diagnostics = {
         enable = true,
         show_on_dirs = true,

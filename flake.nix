@@ -40,6 +40,7 @@
         ./HM/emacs.nix
         ./HM/river.nix
         ./HM/foot.nix
+        ./HM/ssh.nix
         # ./HM/kakoune.nix
         ########### Done for despair
         ./HM/bspwm.nix
@@ -147,7 +148,7 @@
             home-manager.users.devin = ({ config, pkgs, ... }:
               with import ./HM/shell-scripts.nix { inherit pkgs; }; {
                 imports =
-                  [ defaults emacs git iterm2 nvim pass pdf zathura zsh ];
+                  [ defaults emacs git iterm2 nvim pass pdf ssh zathura zsh ];
 
                 home.packages = with pkgs; [ cachix-push ];
               });

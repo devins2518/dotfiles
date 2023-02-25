@@ -107,6 +107,7 @@ in rec {
       wget
       xxd
       zsh
+      texlive.combined.scheme-medium
     ] ++ nur-packages ++
 
     [
