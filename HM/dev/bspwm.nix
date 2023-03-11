@@ -5,9 +5,8 @@ let
   normal = theme.normal;
   bright = theme.bright;
 in {
+  home = { pointerCursor.size = 16; };
   xsession = {
-    pointerCursor.size = 16;
-
     windowManager = {
       bspwm = {
         monitors = { "DP-2" = [ "I" "II" "III" "IV" "V" "VI" ]; };

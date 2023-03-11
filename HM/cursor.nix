@@ -1,5 +1,5 @@
 { pkgs, config, lib, ... }: {
-  xsession = {
+  home = {
     pointerCursor = {
       name = "Quintom_Ink";
       package = pkgs.quintom-cursor-theme;

@@ -1,1 +1,1 @@
-{ pkgs, config, lib, ... }: { xsession = { pointerCursor.size = 16; }; }
+{ pkgs, config, lib, ... }: { home.pointerCursor.size = 16; }
