@@ -90,7 +90,7 @@ return packer.startup({
             after = { 'FixCursorHold.nvim', 'nvim-cmp' },
             config = function()
                 vim.cmd [[packadd lspsaga.nvim]]
-                require'lspsaga'.init_lsp_saga {
+                require'lspsaga'.setup {
                     border_style = 'rounded',
                     code_action_keys = { quit = 'q', exec = '<CR>' },
                     rename_action_quit = 'q'
@@ -156,6 +156,14 @@ return packer.startup({
             end
         }
         use { 'octol/vim-cpp-enhanced-highlight', ft = { 'c', 'cpp' } }
+        use {
+            'lervag/vimtex',
+            ft = { 'tex' },
+            config = function()
+                vim.cmd [[packadd vimtex]]
+                G['vimtex_view_method'] = 'zathura'
+            end
+        }
 
         -- Git
         use {

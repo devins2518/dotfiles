@@ -14,6 +14,10 @@
         HostName asicfab.ecn.purdue.edu
         User socet21
         PasswordAuthentication yes
+      Host asicfabu
+        HostName asicfabu.ecn.purdue.edu
+        User socet21
+        PasswordAuthentication yes
     '';
   };
 }

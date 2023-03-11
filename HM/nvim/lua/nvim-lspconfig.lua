@@ -43,11 +43,12 @@ handlers['textDocument/hover'] = lsp.with(handlers.hover, pop_opts)
 local servers = {
     'clangd',
     'gopls',
-    'ocamllsp',
     'hls',
+    'lua_ls',
+    'ocamllsp',
     'rnix',
     'rust_analyzer',
-    'sumneko_lua',
+    'texlab',
     'zls'
 }
 for _, lsp in ipairs(servers) do
@@ -80,7 +81,7 @@ local sumneko_binary = 'lua-language-server'
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
-require'lspconfig'.sumneko_lua.setup {
+require'lspconfig'.lua_ls.setup {
     cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
     settings = {
         Lua = {

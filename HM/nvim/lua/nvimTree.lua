@@ -19,7 +19,7 @@ tree.setup {
         show_on_dirs = true,
         icons = { hint = '', info = '', warning = '', error = '' }
     },
-    update_focused_file = { enable = true, update_cwd = true, ignore_list = {} },
+    update_focused_file = { enable = true, update_cwd = false, ignore_list = {} },
     system_open = { cmd = nil, args = {} },
     respect_buf_cwd = true,
     create_in_closed_folder = false,

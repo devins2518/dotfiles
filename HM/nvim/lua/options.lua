@@ -138,11 +138,28 @@ Augroup('Markdown', {
     }
 })
 
+Augroup('LaTex', {
+    { event = 'FileType', pattern = 'tex', command = 'set filetype=tex' },
+    { event = 'FileType', pattern = 'tex', command = 'setlocal wrap' },
+    { event = 'FileType', pattern = 'tex', command = 'setlocal linebreak' },
+    { event = 'FileType', pattern = 'tex', command = 'setlocal textwidth=100' },
+    { event = 'FileType', pattern = 'tex', command = 'setlocal colorcolumn=' },
+    {
+        event = 'InsertCharPre',
+        pattern = '*.tex',
+        command = 'if search(\'\v(%^|[.!?#-]_s)_s*%#\', \'bcnw\') != 0 | let v:char = toupper(v:char) | endif'
+    }
+})
+
 Augroup('Format', {
-    { event = 'BufEnter', pattern = '*', command = 'let b:format_run=1' },
+    {
+        event = 'BufEnter',
+        pattern = '*',
+        command = 'let b:format_run=get(b:, \'format_run\', "1")'
+    },
     {
         event = 'BufWritePost',
-        pattern = '*.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli,*.zig',
+        pattern = '*.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli,*.zig,*.tex',
         command = 'if b:format_run | silent! FormatWriteLock | endif'
     }
 })

@@ -23,6 +23,8 @@ in {
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-haskell}/parser";
   xdg.configFile."nvim/parser/json${ext}".source =
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-json}/parser";
+  # xdg.configFile."nvim/parser/latex${ext}".source =
+  #   "${pkgs.tree-sitter.builtGrammars.tree-sitter-latex}/parser";
   xdg.configFile."nvim/parser/lua${ext}".source =
     "${pkgs.tree-sitter.builtGrammars.tree-sitter-lua}/parser";
   xdg.configFile."nvim/parser/nix${ext}".source =

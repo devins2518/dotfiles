@@ -11,6 +11,7 @@ treesitter.setup {
         disable = {
             'cpp',
             'c',
+            'latex',
             'nix',
             'zig' -- LSP Handles highlighting
         }

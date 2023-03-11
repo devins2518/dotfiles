@@ -101,13 +101,14 @@ in rec {
       rust-analyzer-nightly
       stylish-haskell
       sumneko-lua-language-server
+      texlab
+      texlive.combined.scheme-full
       tokei
       tree
       unzip
       wget
       xxd
       zsh
-      texlive.combined.scheme-medium
     ] ++ nur-packages ++
 
     [

@@ -6,6 +6,11 @@ vim.api.nvim_create_user_command('ToggleFormat', [[
 require('formatter').setup({
     logging = false,
     filetype = {
+        tex = {
+            function()
+                return { exe = 'latexindent', args = { '-' }, stdin = true }
+            end
+        },
         sh = {
             function()
                 return {
