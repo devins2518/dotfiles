@@ -92,6 +92,7 @@ in rec {
       jq
       luaformatter
       meson
+      monitorcontrol
       ninja
       nixfmt
       nixpkgs-review
