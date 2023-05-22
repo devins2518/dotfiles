@@ -10,7 +10,7 @@ in {
       enable = true;
 
       history = {
-        path = ".zsh/HISTFILE";
+        path = "$HOME/.zsh/HISTFILE";
         size = 2000;
         expireDuplicatesFirst = true;
         ignoreDups = true;
@@ -64,19 +64,19 @@ in {
           cd llvm
           mkdir build-release
           cd build-release
-          cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/bin/llvm14-release -DCMAKE_PREFIX_PATH=$HOME/.local/bin/llvm14-release -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_TERMINFO=OFF -G Ninja -DLLVM_PARALLEL_LINK_JOBS=1
+          cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/bin/llvm16-release -DCMAKE_PREFIX_PATH=$HOME/.local/bin/llvm16-release -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_TERMINFO=OFF -G Ninja -DLLVM_PARALLEL_LINK_JOBS=1
           ninja install
           cd ../..
           cd lld
           mkdir build-release
           cd build-release
-          cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/bin/llvm14-release -DCMAKE_PREFIX_PATH=$HOME/.local/bin/llvm14-release -DCMAKE_BUILD_TYPE=Release  -G Ninja -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_STANDARD=17
+          cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/bin/llvm16-release -DCMAKE_PREFIX_PATH=$HOME/.local/bin/llvm16-release -DCMAKE_BUILD_TYPE=Release  -G Ninja -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_STANDARD=17
           ninja install
           cd ../..
           cd clang
           mkdir build-release
           cd build-release
-          cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/bin/llvm14-release -DCMAKE_PREFIX_PATH=$HOME/.local/bin/llvm14-release -DCMAKE_BUILD_TYPE=Release  -G Ninja -DLLVM_PARALLEL_LINK_JOBS=1
+          cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/bin/llvm16-release -DCMAKE_PREFIX_PATH=$HOME/.local/bin/llvm16-release -DCMAKE_BUILD_TYPE=Release  -G Ninja -DLLVM_PARALLEL_LINK_JOBS=1
           ninja install
           cd ../..
         '';

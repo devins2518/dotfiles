@@ -3,8 +3,10 @@ if not present then
     return
 end
 
+local parser_dir = vim.fn.stdpath('config');
+vim.opt.runtimepath:append(parser_dir)
 treesitter.setup {
-    ensure_installed = { 'gomod' },
+    parser_install_dir = parser_dir,
     highlight = {
         enable = true,
         use_languagetree = true,

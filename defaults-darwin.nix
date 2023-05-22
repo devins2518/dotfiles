@@ -96,9 +96,10 @@ in rec {
       nixfmt
       nixpkgs-review
       ocamlformat
+      python310Packages.python-lsp-server
       ripgrep
       rnix-lsp
-      rust-analyzer-nightly
+      rust-analyzer
       stylish-haskell
       sumneko-lua-language-server
       texlab

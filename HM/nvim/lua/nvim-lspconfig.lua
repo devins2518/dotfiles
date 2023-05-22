@@ -46,6 +46,7 @@ local servers = {
     'hls',
     'lua_ls',
     'ocamllsp',
+    'pylsp',
     'rnix',
     'rust_analyzer',
     'texlab',

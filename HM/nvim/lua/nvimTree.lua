@@ -8,8 +8,6 @@ G['nvim_tree_refresh_wait'] = 500
 tree.setup {
     disable_netrw = true,
     hijack_netrw = true,
-    open_on_setup = false,
-    ignore_ft_on_setup = {},
     open_on_tab = false,
     hijack_directories = { enable = true, auto_open = true },
     hijack_cursor = false,

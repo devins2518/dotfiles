@@ -40,7 +40,6 @@ opt.updatetime = 250
 opt.clipboard = 'unnamedplus'
 opt.list = true
 vim.cmd [[autocmd! VimEnter * highlight! link ColorColumn CursorLine]]
-vim.cmd [[autocmd! VimEnter * lua require"nvim-tree".toggle(false, true)]]
 opt.listchars = 'tab:▸ ,eol:¬'
 opt.colorcolumn = '100'
 opt.cursorline = true
@@ -164,14 +163,10 @@ Augroup('Format', {
     }
 })
 
-Augroup('LSP', {
-    {
-        event = 'CursorHold',
-        pattern = '*',
-        command = 'Lspsaga show_line_diagnostics'
-    }
-})
-
+local function open_nvim_tree(data)
+    require('nvim-tree.api').tree.toggle({ focus = false })
+end
+vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
 Augroup('NvimTreeClose', {
     {
         event = 'BufEnter',

@@ -3,7 +3,8 @@
 let
   package =
     pkgs.neovim-nightly.overrideAttrs (oldAttrs: rec { NIX_LDFLAGS = [ ]; });
-  ext = if pkgs.stdenv.isLinux then ".so" else ".dylib";
+  # ext = if pkgs.stdenv.isLinux then ".so" else ".dylib";
+  ext = ".so";
 in {
   home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
   xdg.configFile."nvim".source = ./nvim;
