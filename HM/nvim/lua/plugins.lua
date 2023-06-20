@@ -164,6 +164,7 @@ return packer.startup({
                 G['vimtex_view_method'] = 'zathura'
             end
         }
+        use { 'antiagainst/vim-tablegen' }
 
         -- Git
         use {

@@ -49,6 +49,7 @@ local servers = {
     'pylsp',
     'rnix',
     'rust_analyzer',
+    'svls',
     'texlab',
     'zls'
 }
@@ -65,7 +66,14 @@ nvim_lsp.rust_analyzer.setup({
     experimental = { procAttrMacros = true }
 })
 
-nvim_lsp.clangd.setup({ init_options = { clangdFileStatus = true } })
+local clangd
+if vim.loop.os_uname().sysname == 'Darwin' then
+    clangd = { 'xcrun', '-r', 'clangd' }
+else
+    clangd = { 'clangd' }
+end
+nvim_lsp.clangd.setup(
+    { cmd = clangd, init_options = { clangdFileStatus = true } })
 
 -- 	https://github.com/golang/go/issues/41081
 nvim_lsp.gopls.setup {

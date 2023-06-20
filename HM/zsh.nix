@@ -80,6 +80,9 @@ in {
           ninja install
           cd ../..
         '';
+        setup-llvm-debug = ''
+          cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -G Ninja -DLLVM_OPTIMIZED_TABLEGEN=On
+        '';
       };
 
       plugins = [
