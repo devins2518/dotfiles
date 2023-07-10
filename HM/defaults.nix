@@ -49,7 +49,7 @@
     AllowShortCaseLabelsOnASingleLine: false
     AllowShortFunctionsOnASingleLine: Empty
     AllowShortLambdasOnASingleLine: All
-    AllowShortIfStatementsOnASingleLine: Never
+    AllowShortIfStatementsOnASingleLine: AllIfsAndElse
     AllowShortLoopsOnASingleLine: false
     AlwaysBreakAfterDefinitionReturnType: None
     AlwaysBreakAfterReturnType: None

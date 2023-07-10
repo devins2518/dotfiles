@@ -101,6 +101,7 @@ return packer.startup({
         use {
             'j-hui/fidget.nvim',
             after = 'nvim-cmp',
+            tab = 'legacy',
             config = function()
                 vim.cmd [[packadd fidget.nvim]]
                 require'fidget'.setup {}

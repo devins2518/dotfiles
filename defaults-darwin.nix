@@ -103,12 +103,14 @@ in rec {
       rust-analyzer
       stylish-haskell
       sumneko-lua-language-server
+      svlint
       svls
       texlab
       texlive.combined.scheme-full
       tokei
       tree
       unzip
+      # verible
       wget
       xxd
       zsh
