@@ -43,7 +43,7 @@ in {
   };
 
   boot = {
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
     kernelParams = [ "quiet" ];
     consoleLogLevel = 3;
   };
@@ -85,12 +85,14 @@ in {
   programs = {
     command-not-found.enable = false;
     dconf.enable = true;
+
+    zsh = {
+      enable = true;
+      enableCompletion = false;
+    };
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [ "qtwebkit-5.212.0-alpha4" ];
-  };
+  nixpkgs.config = { allowUnfree = true; };
 
   environment.systemPackages = with pkgs;
     [
@@ -134,8 +136,9 @@ in {
       wget
       xarchiver
       xxd
-      zls
+      inputs.zls-master.packages.${pkgs.system}.default
       zsh
+      zigpkgs.master
     ] ++ nur-packages ++ [
       (fenix.complete.withComponents [
         "cargo"

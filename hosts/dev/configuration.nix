@@ -21,7 +21,6 @@
         enable = true;
         devices = [ "nodev" ];
         default = "saved";
-        version = 2;
         efiSupport = true;
 
         extraEntries = ''

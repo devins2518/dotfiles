@@ -24,11 +24,15 @@
       # this line assume that you also have nixpkgs as an input
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zig-overlay.url = "github:mitchellh/zig-overlay";
+    zig-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    zls-master.url = "github:zigtools/zls";
+    zls-master.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, darwin, fenix, nixpkgs, home-manager, utils, nixos-hardware
     , neovim-nightly, nix-ld, emacs-nightly, nur, nixpkgs-f2k, rust-overlay
-    }@inputs:
+    , zig-overlay, zls-master }@inputs:
     utils.lib.mkFlake rec {
       inherit self inputs;
 
@@ -233,6 +237,7 @@
         nixpkgs-f2k.overlays.default
         nur.overlay
         rust-overlay.overlays.default
+        zig-overlay.overlays.default
         self.overlay
       ];
 
