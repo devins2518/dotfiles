@@ -10,8 +10,6 @@ let
   nur-packages = with pkgs.nur.repos; [
     devins2518.bunnyfetch-rs
     devins2518.gyro
-    devins2518.zig-master
-    devins2518.zls
   ];
 in rec {
   home-manager.useUserPackages = true;
@@ -85,7 +83,7 @@ in rec {
       cargo-flamegraph
       clang-tools
       direnv
-      discord-ptb
+      discord
       ffmpeg
       gnumake
       hyperfine
@@ -113,7 +111,9 @@ in rec {
       # verible
       wget
       xxd
+      inputs.zls-master.packages.${pkgs.system}.default
       zsh
+      zigpkgs.master
     ] ++ nur-packages ++
 
     [

@@ -139,6 +139,7 @@
       ];
 
       darwinConfigurations."Devins-MacBook-Pro" = darwin.lib.darwinSystem {
+        inherit inputs;
         system = "aarch64-darwin";
         modules = with self.nixosModules; [
           # system wide config
