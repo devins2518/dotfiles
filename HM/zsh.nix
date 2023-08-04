@@ -83,6 +83,9 @@ in {
         setup-llvm-debug = ''
           cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -G Ninja -DLLVM_OPTIMIZED_TABLEGEN=On
         '';
+        build_zig = ''
+          cmake .. -G Ninja -DZIG_STATIC_LLVM=ON -DCMAKE_PREFIX_PATH=$HOME/.local/bin/llvm16-release
+        '';
       };
 
       plugins = [
