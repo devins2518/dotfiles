@@ -393,13 +393,13 @@
     "known_folders": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-DM5DPZUhPlxDAGATHFT9wSuLiAgb5aXWXaws65G6Y5U=",
+        "narHash": "sha256-U/h4bVarq8CFKbFyNXKl3vBRPubYooLxA1xUz3qMGPE=",
         "type": "tarball",
-        "url": "https://github.com/ziglibs/known-folders/archive/d070896807cbbd2847d24d561438994504b929dd.tar.gz"
+        "url": "https://github.com/ziglibs/known-folders/archive/fa75e1bc672952efa0cf06160bbd942b47f6d59b.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/ziglibs/known-folders/archive/d070896807cbbd2847d24d561438994504b929dd.tar.gz"
+        "url": "https://github.com/ziglibs/known-folders/archive/fa75e1bc672952efa0cf06160bbd942b47f6d59b.tar.gz"
       }
     },
     "neovim-flake": {
@@ -864,11 +864,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1689422879,
-        "narHash": "sha256-GHwQVuGf0BO1VXWyWzd4CcGcS6nkKpMm0G55zovmI1M=",
+        "lastModified": 1691582923,
+        "narHash": "sha256-ETMeFpuC0Pj0xqGioFUv4D4LUIusmZxaQKibjK4nz88=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "ad786ba4c0790f1523202efde4e08bba969d60c3",
+        "rev": "ccbff752a998c4ba7eea52a104f04527ee938248",
         "type": "github"
       },
       "original": {
@@ -887,11 +887,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1689336553,
-        "narHash": "sha256-Fi+iK8QfXLjti5+15hM1YlVhZkajjiZxxAE3y3mQGJM=",
+        "lastModified": 1691195023,
+        "narHash": "sha256-Ud0wU0LospRfKgpfggFSmKVH0Vywww1WozsvQNEUhjo=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "f0e90472d03cf5ddb0ada16e7f62c83ed7c42e5e",
+        "rev": "5b4dec84f870c21f8110f18640f8d4da87e99210",
         "type": "github"
       },
       "original": {
@@ -913,11 +913,11 @@
         "zig-overlay": "zig-overlay_2"
       },
       "locked": {
-        "lastModified": 1689359688,
-        "narHash": "sha256-IkIG+QAzFX0CLY85NkDAnZXGCL+A/Az570Jb4480PTU=",
+        "lastModified": 1691516815,
+        "narHash": "sha256-TytQIpsRP0GzzC9PFvjYorVzKSTLOYH8JK4cKdSzmwU=",
         "owner": "zigtools",
         "repo": "zls",
-        "rev": "958c04bb685eac9a68bc81b6a9c2836c675c4eca",
+        "rev": "9532f4a169c5064cca6cdc5edd60fbd7d66499aa",
         "type": "github"
       },
       "original": {

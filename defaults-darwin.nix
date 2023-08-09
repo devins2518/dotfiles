@@ -16,11 +16,7 @@ in rec {
   home-manager.useGlobalPkgs = true;
 
   environment = {
-    variables = {
-      NIXOS_CONFIG = "/Users/devin/Repos/dotfiles";
-      CPATH =
-        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include";
-    };
+    variables = { NIXOS_CONFIG = "/Users/devin/Repos/dotfiles"; };
   };
 
   users = {
