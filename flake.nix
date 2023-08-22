@@ -10,29 +10,40 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-    emacs-nightly.url = "github:nix-community/emacs-overlay";
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    emacs-nightly = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     nixpkgs.url = "github:NixOS/nixpkgs";
     # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
     nur.url = "github:nix-community/NUR/master";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    rust-overlay.url = "github:nix-community/fenix";
-    nix-ld = {
-      url = "github:Mic92/nix-ld";
-      # this line assume that you also have nixpkgs as an input
+    rust-overlay = {
+      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zig-overlay.url = "github:mitchellh/zig-overlay";
-    zig-overlay.inputs.nixpkgs.follows = "nixpkgs";
-    zls-master.url = "github:zigtools/zls";
-    zls-master.inputs.nixpkgs.follows = "nixpkgs";
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zig-overlay = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zls-master = {
+      url = "github:zigtools/zls";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, darwin, fenix, nixpkgs, home-manager, utils, nixos-hardware
-    , neovim-nightly, nix-ld, emacs-nightly, nur, nixpkgs-f2k, rust-overlay
-    , zig-overlay, zls-master }@inputs:
+    , neovim-nightly, nix-ld, emacs-nightly, nur, rust-overlay, zig-overlay
+    , zls-master }@inputs:
     utils.lib.mkFlake rec {
       inherit self inputs;
 
@@ -235,7 +246,6 @@
       sharedOverlays = [
         emacs-nightly.overlay
         neovim-nightly.overlay
-        nixpkgs-f2k.overlays.default
         nur.overlay
         rust-overlay.overlays.default
         zig-overlay.overlays.default
