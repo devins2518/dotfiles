@@ -175,3 +175,12 @@ Augroup('NvimTreeClose', {
         nested = true
     }
 })
+
+Augroup('Systemverilog', {
+    {
+        event = 'FileType',
+        pattern = '*.svh',
+        command = 'set filetype=systemverilog'
+    },
+    { event = 'FileType', pattern = '*.core', command = 'set filetype=yaml' }
+})

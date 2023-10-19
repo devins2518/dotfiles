@@ -86,7 +86,7 @@ return packer.startup({
             end
         }
         use {
-            'glepnir/lspsaga.nvim',
+            'kkharji/lspsaga.nvim',
             after = { 'FixCursorHold.nvim', 'nvim-cmp' },
             config = function()
                 vim.cmd [[packadd lspsaga.nvim]]
