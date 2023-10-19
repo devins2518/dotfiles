@@ -69,7 +69,7 @@ Augroup('Folds', {
 
 Augroup('zig', {
     {
-        event = 'BufNewFile,BufRead',
+        event = 'FileType',
         pattern = 'gyro.zzz',
         command = 'set filetype=yaml'
     }

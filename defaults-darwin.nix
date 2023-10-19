@@ -168,7 +168,7 @@ in rec {
 
   system.activationScripts.applications.text = lib.mkForce ''
     echo "setting up ~/Applications..." >&2
-    applications="$HOME/Applications"
+    applications="/Users/devin/Applications"
     nix_apps="$applications/Nix Apps"
 
     # Needs to be writable by the user so that home-manager can symlink into it
