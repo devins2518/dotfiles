@@ -45,6 +45,7 @@ local servers = {
     'gopls',
     'hls',
     'lua_ls',
+    'mlir_lsp_server',
     'ocamllsp',
     'pylsp',
     'rnix',

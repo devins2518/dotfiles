@@ -86,14 +86,14 @@ return packer.startup({
             end
         }
         use {
-            'kkharji/lspsaga.nvim',
+            'nvimdev/lspsaga.nvim',
             after = { 'FixCursorHold.nvim', 'nvim-cmp' },
             config = function()
                 vim.cmd [[packadd lspsaga.nvim]]
                 require'lspsaga'.setup {
                     border_style = 'rounded',
                     code_action_keys = { quit = 'q', exec = '<CR>' },
-                    rename_action_quit = 'q'
+                    rename_action_keys = { quit = 'q', exec = '<CR>' }
                 }
             end
         }

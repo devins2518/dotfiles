@@ -32,7 +32,7 @@ in {
         }
         export EDITOR=nvim
         export VISUAL=nvim
-        export PATH=$PATH:~/.local/bin
+        export PATH=$PATH:~/.local/bin:~/.local/circt/bin:~/.local/llvm/bin
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#928374"
 
         [[ ! -r ${home}/.opam/opam-init/init.zsh ]] || source ${home}/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
