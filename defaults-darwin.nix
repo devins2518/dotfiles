@@ -81,6 +81,7 @@ in rec {
       direnv
       discord
       ffmpeg
+      gimp
       gnumake
       hyperfine
       iterm2
@@ -108,8 +109,8 @@ in rec {
       wget
       xxd
       inputs.zls-master.packages.${pkgs.system}.default
-      zsh
       zigpkgs.master
+      zsh
     ] ++ nur-packages ++
 
     [
