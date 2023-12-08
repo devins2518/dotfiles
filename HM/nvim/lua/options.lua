@@ -68,11 +68,7 @@ Augroup('Folds', {
 })
 
 Augroup('zig', {
-    {
-        event = 'FileType',
-        pattern = 'gyro.zzz',
-        command = 'set filetype=yaml'
-    }
+    { event = 'FileType', pattern = 'gyro.zzz', command = 'set filetype=yaml' }
 })
 
 Augroup('rust', {
@@ -179,7 +175,7 @@ Augroup('NvimTreeClose', {
 Augroup('Systemverilog', {
     {
         event = 'FileType',
-        pattern = '*.svh',
+        pattern = '*.svh,*.vh',
         command = 'set filetype=systemverilog'
     },
     { event = 'FileType', pattern = '*.core', command = 'set filetype=yaml' }
