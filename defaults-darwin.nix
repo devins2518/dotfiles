@@ -7,10 +7,13 @@ let
   nixPathInputs = mapAttrsToList (n: v: "${n}=${v}") filteredInputs;
   registryInputs = mapAttrs (_: v: { flake = v; }) filteredInputs;
 
-  nur-packages = with pkgs.nur.repos; [
-    devins2518.bunnyfetch-rs
-    devins2518.gyro
-  ];
+  nur-packages = with pkgs.nur.repos;
+    [
+      devins2518.bunnyfetch-rs
+      # devins2518.gyro
+    ];
+  tex = (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-full syntax; });
+
 in rec {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
@@ -101,7 +104,7 @@ in rec {
       svlint
       svls
       texlab
-      texlive.combined.scheme-full
+      tex
       tokei
       tree
       unzip

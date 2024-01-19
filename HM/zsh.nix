@@ -60,6 +60,11 @@ in {
           "zigup master --install-dir /home/devin/.zigup --path-link /home/devin/bin/zig";
         mbuild = "meson compile -C build";
         mtest = "meson test -C build";
+        pio_upload = "pio run -t upload";
+        pio_monitor = "pio device monitor";
+        pio_debug = "pio debug --interface=gdb -x .pioinit";
+        pio_ccjson = "pio run --target compiledb";
+        pio_run = "pio_upload && pio_monitor";
         build_llvm = ''
           cd llvm
           mkdir build-release
