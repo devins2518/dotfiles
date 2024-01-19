@@ -163,18 +163,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.users.devin = ({ config, pkgs, ... }:
               with import ./HM/shell-scripts.nix { inherit pkgs; }; {
-                imports = [
-                  defaults
-                  emacs
-                  git
-                  iterm2
-                  nvim
-                  pass
-                  pdf
-                  ssh
-                  # zathura
-                  zsh
-                ];
+                imports =
+                  [ defaults emacs git iterm2 nvim pass pdf ssh zathura zsh ];
 
                 home.packages = with pkgs; [ cachix-push ];
               });
