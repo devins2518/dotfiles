@@ -154,7 +154,7 @@ Augroup('Format', {
     },
     {
         event = 'BufWritePost',
-        pattern = '*.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli,*.zig,*.tex',
+        pattern = '*.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli,*.zig,*.tex,*.rs',
         command = 'if b:format_run | silent! FormatWriteLock | endif'
     }
 })

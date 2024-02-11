@@ -62,9 +62,15 @@ for _, lsp in ipairs(servers) do
 end
 
 nvim_lsp.rust_analyzer.setup({
-    cargo = { allFeatures = true },
-    checkOnSave = { allTargets = true },
-    experimental = { procAttrMacros = true }
+    on_attach = on_attach,
+    settings = {
+        ['rust-analyzer'] = {
+            imports = { granularity = { group = 'module' }, prefix = 'self' },
+            cargo = { buildScripts = { enable = true }, allFeatures = true },
+            procMacro = { enable = true },
+            checkOnSave = { allTargets = true }
+        }
+    }
 })
 
 local clangd

@@ -83,11 +83,20 @@ require('formatter').setup({
                 return { exe = 'nixfmt', stdin = true }
             end
         },
+        rust = { require('formatter.filetypes.rust').rustfmt },
         zig = {
             function()
                 return
                     { exe = 'zig', args = { 'fmt', '--stdin' }, stdin = true }
             end
+        },
+
+        -- Use the special "*" filetype for defining formatter configurations on
+        -- any filetype
+        ['*'] = {
+            -- "formatter.filetypes.any" defines default configurations for any
+            -- filetype
+            require('formatter.filetypes.any').remove_trailing_whitespace
         }
     }
 })

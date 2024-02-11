@@ -7,11 +7,11 @@ let
   nixPathInputs = mapAttrsToList (n: v: "${n}=${v}") filteredInputs;
   registryInputs = mapAttrs (_: v: { flake = v; }) filteredInputs;
 
-  nur-packages = with pkgs.nur.repos;
-    [
-      devins2518.bunnyfetch-rs
-      # devins2518.gyro
-    ];
+  nur-packages = with pkgs.nur.repos; [
+    devins2518.bunnyfetch-rs
+    devins2518.platformio
+    # devins2518.gyro
+  ];
   tex = (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-full syntax; });
 
 in rec {
@@ -191,7 +191,7 @@ in rec {
             # It does understand MacOS aliases though, a unique filesystem feature. Sadly they cannot be created
             # from bash (as far as I know), so we use the oh-so-great Apple Script instead.
             osascript -e "
-                set fileToAlias to POSIX file \"$src\" 
+                set fileToAlias to POSIX file \"$src\"
                 set applicationsFolder to POSIX file \"$nix_apps\"
                 tell application \"Finder\"
                     make alias file to fileToAlias at applicationsFolder
