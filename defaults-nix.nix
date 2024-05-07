@@ -116,6 +116,7 @@ in {
       lm_sensors
       luaformatter
       meson
+      nil
       ninja
       nixfmt
       nixpkgs-review
@@ -125,7 +126,6 @@ in {
       pavucontrol
       pcmanfm
       ripgrep
-      rnix-lsp
       rust-analyzer-nightly
       stack
       sumneko-lua-language-server

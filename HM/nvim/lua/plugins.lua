@@ -109,19 +109,19 @@ return packer.startup({
         }
 
         -- Debugger
-        use {
-            'mfussenegger/nvim-dap',
-            config = function()
-                vim.cmd [[packadd dap]]
-                require 'debugger'
-            end,
-            requires = {
-                'nvim-telescope/telescope-dap.nvim',
-                'rcarriga/nvim-dap-ui',
-                'Pocco81/DAPInstall.nvim'
-            },
-            ft = { 'c', 'cpp', 'rust' }
-        }
+        -- use {
+        --     'mfussenegger/nvim-dap',
+        --     config = function()
+        --         vim.cmd [[packadd dap]]
+        --         require 'debugger'
+        --     end,
+        --     requires = {
+        --         'nvim-telescope/telescope-dap.nvim',
+        --         'rcarriga/nvim-dap-ui',
+        --         'Pocco81/DAPInstall.nvim'
+        --     },
+        --     ft = { 'c', 'cpp', 'rust' }
+        -- }
 
         -- Filetypes
         use { 'LnL7/vim-nix', ft = { 'nix' } }

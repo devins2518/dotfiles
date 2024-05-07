@@ -19,6 +19,15 @@
 
     lfs.enable = true;
 
+    delta = {
+      enable = true;
+      options = {
+        side-by-side = true;
+        line-numbers = true;
+        features = "arctic-fox";
+      };
+    };
+
     ignores = [
       "shell.nix"
       ".DS_Store"

@@ -57,7 +57,7 @@ local servers = {
     'mlir_lsp_server',
     'ocamllsp',
     'pylsp',
-    'rnix',
+    'nil_ls',
     'rust_analyzer',
     'svls',
     'texlab',

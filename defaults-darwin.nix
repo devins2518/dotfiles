@@ -91,13 +91,13 @@ in rec {
       jq
       luaformatter
       meson
+      nil
       ninja
       nixfmt
       nixpkgs-review
       ocamlformat
-      python310Packages.python-lsp-server
+      python311Packages.python-lsp-server
       ripgrep
-      rnix-lsp
       rust-analyzer
       stylish-haskell
       sumneko-lua-language-server
