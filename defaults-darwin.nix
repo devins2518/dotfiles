@@ -109,6 +109,7 @@ in rec {
       tree
       unzip
       # verible
+      vscode-extensions.vadimcn.vscode-lldb
       wget
       xxd
       inputs.zls-master.packages.${pkgs.system}.default

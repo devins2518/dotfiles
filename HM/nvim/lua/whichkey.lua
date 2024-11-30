@@ -75,9 +75,19 @@ wk.register({
         },
         d = {
             name = 'Debugging',
-            s = {
-                ':NvimTreeToggle<cr><cmd>lua require("dapui").toggle()<CR>',
-                'Toggle debug UI',
+            b = {
+                '<cmd>lua require"dap".toggle_breakpoint()<CR>',
+                'Toggle breakpoint',
+                unpack(gen_opt)
+            },
+            r = {
+                '<cmd>lua require"dap".run_to_cursor()<CR>',
+                'Run to cursor',
+                unpack(gen_opt)
+            },
+            R = {
+                '<cmd>lua require"dap".restart()<CR>',
+                'Restart',
                 unpack(gen_opt)
             },
             c = {
@@ -85,20 +95,28 @@ wk.register({
                 'Debug continue',
                 unpack(gen_opt)
             },
-            o = {
-                '<cmd>lua require"dap".step_over()<CR>',
-                'Step over',
-                unpack(gen_opt)
-            },
-            i = {
-                '<cmd>lua require"dap".step_into()<CR>',
-                'Step into',
-                unpack(gen_opt)
-            },
-            b = {
-                '<cmd>lua require"dap".toggle_breakpoint()<CR>',
-                'Toggle breakpoint',
-                unpack(gen_opt)
+            s = {
+                name = 'Stepping',
+                i = {
+                    '<cmd>lua require"dap".step_into()<CR>',
+                    'Step into',
+                    unpack(gen_opt)
+                },
+                o = {
+                    '<cmd>lua require"dap".step_over()<CR>',
+                    'Step over',
+                    unpack(gen_opt)
+                },
+                t = {
+                    '<cmd>lua require"dap".step_out()<CR>',
+                    'Step out',
+                    unpack(gen_opt)
+                },
+                b = {
+                    '<cmd>lua require"dap".step_back()<CR>',
+                    'Step back',
+                    unpack(gen_opt)
+                }
             }
         }
     },

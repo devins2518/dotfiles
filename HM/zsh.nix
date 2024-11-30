@@ -33,6 +33,7 @@ in {
         export EDITOR=nvim
         export VISUAL=nvim
         export PATH=$PATH:~/.local/bin:~/.local/circt/bin:~/.local/llvm/bin
+        export CODELLDB_PATH=${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#928374"
 
         [[ ! -r ${home}/.opam/opam-init/init.zsh ]] || source ${home}/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

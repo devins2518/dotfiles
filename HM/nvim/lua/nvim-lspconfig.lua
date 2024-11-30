@@ -58,7 +58,6 @@ local servers = {
     'ocamllsp',
     'pylsp',
     'nil_ls',
-    'rust_analyzer',
     'svls',
     'texlab',
     'zls'
@@ -69,18 +68,6 @@ for _, lsp in ipairs(servers) do
         capabilities = capabilities
     }
 end
-
-nvim_lsp.rust_analyzer.setup({
-    on_attach = on_attach,
-    settings = {
-        ['rust-analyzer'] = {
-            imports = { granularity = { group = 'module' }, prefix = 'self' },
-            cargo = { buildScripts = { enable = true }, allFeatures = true },
-            procMacro = { enable = true },
-            checkOnSave = { allTargets = true }
-        }
-    }
-})
 
 local clangd
 if vim.loop.os_uname().sysname == 'Darwin' then

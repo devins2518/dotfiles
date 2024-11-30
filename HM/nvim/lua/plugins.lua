@@ -109,19 +109,20 @@ return packer.startup({
         }
 
         -- Debugger
-        -- use {
-        --     'mfussenegger/nvim-dap',
-        --     config = function()
-        --         vim.cmd [[packadd dap]]
-        --         require 'debugger'
-        --     end,
-        --     requires = {
-        --         'nvim-telescope/telescope-dap.nvim',
-        --         'rcarriga/nvim-dap-ui',
-        --         'Pocco81/DAPInstall.nvim'
-        --     },
-        --     ft = { 'c', 'cpp', 'rust' }
-        -- }
+        use {
+            'mfussenegger/nvim-dap',
+            config = function()
+                vim.cmd [[packadd dap]]
+                require 'debugger'
+            end,
+            requires = {
+                'rcarriga/nvim-dap-ui',
+                'Pocco81/DAPInstall.nvim',
+                'nvim-neotest/nvim-nio',
+                'mrcjkb/rustaceanvim'
+            },
+            ft = { 'c', 'cpp', 'rust' }
+        }
 
         -- Filetypes
         use { 'LnL7/vim-nix', ft = { 'nix' } }
@@ -142,10 +143,50 @@ return packer.startup({
         }
         use { 'neovimhaskell/haskell-vim', ft = 'haskell' }
         use {
-            'rust-lang/rust.vim',
+            'mrcjkb/rustaceanvim',
+            version = '^4', -- Recommended
             ft = { 'rust' },
+            after = { 'nvim-dap', 'nvim-lspconfig' },
             config = function()
-                require 'rust'
+                -- Update this path
+                local extension_path = os.getenv('CODELLDB_PATH') .. '/'
+                local codelldb_path = extension_path .. 'adapter/codelldb'
+                local liblldb_path = extension_path .. 'lldb/lib/liblldb'
+                local this_os = vim.uv.os_uname().sysname;
+
+                -- The liblldb extension is .so for Linux and .dylib for MacOS
+                liblldb_path = liblldb_path ..
+                                   (this_os == 'Linux' and '.so' or '.dylib')
+
+                local cfg = require('rustaceanvim.config')
+
+                vim.g.rustaceanvim = {
+                    -- Plugin configuration
+                    tools = {},
+                    -- LSP configuration
+                    server = {
+                        on_attach = on_attach,
+                        default_settings = {
+                            -- rust-analyzer language server configuration
+                            ['rust-analyzer'] = {
+                                imports = {
+                                    granularity = { group = 'module' },
+                                    prefix = 'self'
+                                },
+                                cargo = {
+                                    buildScripts = { enable = true },
+                                    allFeatures = true
+                                },
+                                procMacro = { enable = true },
+                                checkOnSave = { allTargets = true }
+                            }
+                        }
+                    },
+                    dap = {
+                        adapter = cfg.get_codelldb_adapter(codelldb_path,
+                            liblldb_path)
+                    }
+                }
             end
         }
         use {

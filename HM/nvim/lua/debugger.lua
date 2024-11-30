@@ -1,6 +1,5 @@
 local dap = require('dap')
-
-require('telescope').load_extension('dap')
+local ui = require('dapui')
 
 require('dapui').setup({
     icons = { expanded = '▾', collapsed = '▸' },
@@ -33,11 +32,18 @@ require('dapui').setup({
     windows = { indent = 1 }
 })
 
-dap.adapters.lldb = {
-    type = 'executable',
-    command = 'lldb-vscode', -- adjust as needed
-    name = 'lldb'
-}
+-- Update this path
+local extension_path = os.getenv('CODELLDB_PATH') .. '/'
+local codelldb_path = extension_path .. 'adapter/codelldb'
+local liblldb_path = extension_path .. 'lldb/lib/liblldb'
+local this_os = vim.uv.os_uname().sysname;
+
+-- The liblldb extension is .so for Linux and .dylib for MacOS
+liblldb_path = liblldb_path .. (this_os == 'Linux' and '.so' or '.dylib')
+
+local cfg = require('rustaceanvim.config')
+
+dap.adapters.lldb = cfg.get_codelldb_adapter(codelldb_path, liblldb_path)
 
 dap.configurations.cpp = {
     {
@@ -67,3 +73,16 @@ dap.configurations.cpp = {
 }
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
+
+dap.listeners.before.attach.dapui_config = function()
+    ui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+    ui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+    ui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+    ui.close()
+end
