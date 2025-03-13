@@ -54,7 +54,7 @@
     AlwaysBreakAfterDefinitionReturnType: None
     AlwaysBreakAfterReturnType: None
     AlwaysBreakBeforeMultilineStrings: false
-    AlwaysBreakTemplateDeclarations: MultiLine
+    AlwaysBreakTemplateDeclarations: Yes
     AttributeMacros:
       - __capability
     BinPackArguments: true

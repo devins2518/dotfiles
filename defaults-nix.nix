@@ -157,7 +157,7 @@ in {
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" ];
   console = { keyMap = "us"; };
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
       font-awesome
       material-design-icons

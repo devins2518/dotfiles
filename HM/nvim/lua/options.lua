@@ -59,6 +59,7 @@ G['loaded_matchit'] = 1
 G['loaded_matchparen'] = 1
 G['loaded_spec'] = 1
 G['lsp_hover'] = true
+G['python3_host_prog'] = '/usr/bin/python3'
 vim.api.nvim_create_user_command('LSPHover',
     'lua vim.g.lsp_hover = not vim.g.lsp_hover', {})
 
@@ -135,10 +136,10 @@ Augroup('Markdown', {
 
 Augroup('LaTex', {
     { event = 'FileType', pattern = 'tex', command = 'set filetype=tex' },
-    { event = 'FileType', pattern = 'tex', command = 'setlocal wrap' },
     { event = 'FileType', pattern = 'tex', command = 'setlocal linebreak' },
     { event = 'FileType', pattern = 'tex', command = 'setlocal textwidth=100' },
     { event = 'FileType', pattern = 'tex', command = 'setlocal colorcolumn=' },
+    { event = 'FileType', pattern = 'tex', command = 'set conceallevel=0' },
     {
         event = 'InsertCharPre',
         pattern = '*.tex',
@@ -154,7 +155,7 @@ Augroup('Format', {
     },
     {
         event = 'BufWritePost',
-        pattern = '*.lua,*.c,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli,*.zig,*.tex,*.rs',
+        pattern = '*.lua,*.c,*.cc,*.cpp,*.nix,*.sh,*.h,*.hpp,*.ml,*.mli,*.zig,*.tex,*.rs',
         command = 'if b:format_run | silent! FormatWriteLock | endif'
     }
 })

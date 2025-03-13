@@ -2,6 +2,7 @@ local present, treesitter = pcall(require, 'nvim-treesitter.configs')
 if not present then
     return
 end
+local rainbow_delimiters = require 'rainbow-delimiters'
 
 local parser_dir = vim.fn.stdpath('config');
 vim.opt.runtimepath:append(parser_dir)
@@ -17,20 +18,29 @@ treesitter.setup {
             'nix',
             'zig' -- LSP Handles highlighting
         }
-    },
-    rainbow = {
-        enable = true,
-        extended_mode = true, -- Highlight also non-parentheses delimiters
-        max_file_lines = 1000,
-        colors = {
-            '#7aa2f7',
-            '#7dcfff',
-            '#2ac3de',
-            '#3d59a1',
-            '#73daca',
-            '#41a6b5',
-            '#b4f9f8'
-        },
-        disable = { 'c', 'cpp', 'nix' }
     }
+}
+
+vim.g.rainbow_delimiters = {
+    strategy = {
+        [''] = rainbow_delimiters.strategy['global'],
+        vim = rainbow_delimiters.strategy['local'],
+    },
+    query = {
+        [''] = 'rainbow-delimiters',
+        lua = 'rainbow-blocks',
+    },
+    priority = {
+        [''] = 110,
+        lua = 210,
+    },
+    highlight = {
+        'RainbowDelimiterRed',
+        'RainbowDelimiterYellow',
+        'RainbowDelimiterBlue',
+        'RainbowDelimiterOrange',
+        'RainbowDelimiterGreen',
+        'RainbowDelimiterViolet',
+        'RainbowDelimiterCyan',
+    },
 }

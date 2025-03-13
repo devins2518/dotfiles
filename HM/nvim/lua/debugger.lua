@@ -1,5 +1,6 @@
 local dap = require('dap')
 local ui = require('dapui')
+local rustaceanvim = require('rustaceanvim')
 
 require('dapui').setup({
     icons = { expanded = '▾', collapsed = '▸' },

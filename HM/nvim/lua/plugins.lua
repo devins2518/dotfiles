@@ -20,7 +20,7 @@ return packer.startup({
             end
         }
         use {
-            'p00f/nvim-ts-rainbow',
+            'HiPhish/rainbow-delimiters.nvim',
             event = 'BufRead',
             config = function()
                 require 'treesitter'
@@ -109,20 +109,20 @@ return packer.startup({
         }
 
         -- Debugger
-        use {
-            'mfussenegger/nvim-dap',
-            config = function()
-                vim.cmd [[packadd dap]]
-                require 'debugger'
-            end,
-            requires = {
-                'rcarriga/nvim-dap-ui',
-                'Pocco81/DAPInstall.nvim',
-                'nvim-neotest/nvim-nio',
-                'mrcjkb/rustaceanvim'
-            },
-            ft = { 'c', 'cpp', 'rust' }
-        }
+        -- use {
+        --     'mfussenegger/nvim-dap',
+        --     config = function()
+        --         vim.cmd [[packadd dap]]
+        --         require 'debugger'
+        --     end,
+        --     requires = {
+        --         'mrcjkb/rustaceanvim',
+        --         'rcarriga/nvim-dap-ui',
+        --         'Pocco81/DAPInstall.nvim',
+        --         'nvim-neotest/nvim-nio'
+        --     },
+        --     ft = { 'c', 'cpp', 'rust' }
+        -- }
 
         -- Filetypes
         use { 'LnL7/vim-nix', ft = { 'nix' } }
@@ -146,7 +146,7 @@ return packer.startup({
             'mrcjkb/rustaceanvim',
             version = '^4', -- Recommended
             ft = { 'rust' },
-            after = { 'nvim-dap', 'nvim-lspconfig' },
+            after = { 'nvim-lspconfig' },
             config = function()
                 -- Update this path
                 local extension_path = os.getenv('CODELLDB_PATH') .. '/'
@@ -267,7 +267,20 @@ return packer.startup({
             end
         }
         use { 'tweekmonster/startuptime.vim', cmd = 'StartupTime' }
-        use { 'zhou13/vim-easyescape' }
+        use {
+            'max397574/better-escape.nvim',
+            config = function()
+                require('better_escape').setup({
+                    mappings = {
+                        i = { j = { k = '<Esc>' } },
+                        c = { j = { k = false, j = false } },
+                        t = { j = { k = false } },
+                        v = { j = { k = false } },
+                        s = { j = { k = false } }
+                    }
+                })
+            end
+        }
 
         use {
             'antoinemadec/FixCursorHold.nvim',

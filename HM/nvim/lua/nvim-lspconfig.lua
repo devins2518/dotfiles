@@ -69,14 +69,7 @@ for _, lsp in ipairs(servers) do
     }
 end
 
-local clangd
-if vim.loop.os_uname().sysname == 'Darwin' then
-    clangd = { 'xcrun', '-r', 'clangd' }
-else
-    clangd = { 'clangd' }
-end
-nvim_lsp.clangd.setup(
-    { cmd = clangd, init_options = { clangdFileStatus = true } })
+nvim_lsp.clangd.setup({ init_options = { clangdFileStatus = true } })
 
 -- 	https://github.com/golang/go/issues/41081
 nvim_lsp.gopls.setup {

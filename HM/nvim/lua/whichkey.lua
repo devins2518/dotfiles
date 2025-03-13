@@ -2,6 +2,7 @@ local wk = require 'which-key'
 
 local gen_opt = { mode = 'n', noremap = true, silent = true }
 local git_opt = { mode = 'n', noremap = true }
+wk.setup({ notify = true })
 wk.register({
     ['<leader>'] = {
         g = {

@@ -7,11 +7,11 @@ let
   nixPathInputs = mapAttrsToList (n: v: "${n}=${v}") filteredInputs;
   registryInputs = mapAttrs (_: v: { flake = v; }) filteredInputs;
 
-  nur-packages = with pkgs.nur.repos; [
-    devins2518.bunnyfetch-rs
-    devins2518.platformio
-    # devins2518.gyro
-  ];
+  nur-packages = with pkgs.nur.repos;
+    [
+      devins2518.bunnyfetch-rs
+      # devins2518.gyro
+    ];
   tex = (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-full syntax; });
 
 in rec {
@@ -33,6 +33,8 @@ in rec {
     };
   };
 
+  ids.uids.nixbld = 300;
+
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -42,7 +44,6 @@ in rec {
 
     gc = {
       automatic = false;
-      user = "root";
       options = "--delete-older-than 7d";
     };
 
@@ -187,7 +188,7 @@ in rec {
     rm -rf "$nix_apps"
     mkdir -p "$nix_apps"
     find ${config.system.build.applications}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-        while read src; do
+        while read -r src; do
             # Spotlight does not recognize symlinks, it will ignore directory we link to the applications folder.
             # It does understand MacOS aliases though, a unique filesystem feature. Sadly they cannot be created
             # from bash (as far as I know), so we use the oh-so-great Apple Script instead.
@@ -204,9 +205,9 @@ in rec {
   '';
 
   fonts = {
-    fontDir = { enable = true; };
-    fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+    packages = with pkgs; [
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
       font-awesome
       material-design-icons
       nur.repos.devins2518.iosevka-serif

@@ -11,16 +11,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # url = "github:nix-community/neovim-nightly-overlay";
+      url = "/Users/devin/Repos/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     emacs-nightly = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs.url = "github:NixOS/nixpkgs";
-    # nixpkgs.url = "/home/devin/Repos/nixpkgs/";
+    nixpkgs.url = "/Users/devin/Repos/nixpkgs";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur.url = "github:nix-community/NUR/master";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     rust-overlay = {
@@ -41,9 +42,9 @@
     };
   };
 
-  outputs = { self, darwin, fenix, nixpkgs, home-manager, utils, nixos-hardware
-    , neovim-nightly, nix-ld, emacs-nightly, nur, rust-overlay, zig-overlay
-    , zls-master }@inputs:
+  outputs = { self, darwin, fenix, nixpkgs, nixpkgs-unstable, home-manager
+    , utils, nixos-hardware, neovim-nightly, nix-ld, emacs-nightly, nur
+    , rust-overlay, zig-overlay, zls-master }@inputs:
     utils.lib.mkFlake rec {
       inherit self inputs;
 
@@ -245,7 +246,7 @@
 
       sharedOverlays = [
         emacs-nightly.overlay
-        neovim-nightly.overlay
+        neovim-nightly.overlays.default
         nur.overlay
         rust-overlay.overlays.default
         zig-overlay.overlays.default

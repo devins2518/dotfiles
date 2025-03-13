@@ -19,15 +19,15 @@
         HostName eceprog.ecn.purdue.edu
         User singh956
         IdentityFile ~/.ssh/id_ed25519_icloud
-        ProxyJump purdueecejump
+        ProxyJump shayececomp
       Host asicfab
         HostName asicfab.ecn.purdue.edu
-        User socet21
+        User singh956
         IdentityFile ~/.ssh/id_ed25519_icloud
-        ProxyJump ececomp
+        ProxyJump shayececomp
       Host asicfabu
         HostName asicfabu.ecn.purdue.edu
-        User socet21
+        User singh956
         IdentityFile ~/.ssh/id_ed25519_icloud
         ProxyJump ececomp
       Host github.com
