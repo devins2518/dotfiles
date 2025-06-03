@@ -59,7 +59,6 @@ G['loaded_matchit'] = 1
 G['loaded_matchparen'] = 1
 G['loaded_spec'] = 1
 G['lsp_hover'] = true
-G['python3_host_prog'] = '/usr/bin/python3'
 vim.api.nvim_create_user_command('LSPHover',
     'lua vim.g.lsp_hover = not vim.g.lsp_hover', {})
 

@@ -207,6 +207,13 @@ return packer.startup({
             end
         }
         use { 'antiagainst/vim-tablegen' }
+        use {
+            'whonore/Coqtail',
+            ft = { 'coq' },
+            config = function()
+                G['coqtail_noimap'] = 1
+            end
+        }
 
         -- Git
         use {

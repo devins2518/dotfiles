@@ -82,8 +82,11 @@ in rec {
       cachix
       cargo-flamegraph
       clang-tools
+      coq
+      coqPackages.coq-lsp
       direnv
       discord
+      dune_3
       ffmpeg
       gimp
       gnumake
@@ -103,6 +106,7 @@ in rec {
       stylish-haskell
       sumneko-lua-language-server
       svlint
+      inputs.neovim-nightly.packages.${pkgs.system}.default
       svls
       texlab
       tex
@@ -114,7 +118,7 @@ in rec {
       wget
       xxd
       inputs.zls-master.packages.${pkgs.system}.default
-      zigpkgs.master
+      inputs.zig-overlay.packages.${pkgs.system}.master
       zsh
     ] ++ nur-packages ++
 

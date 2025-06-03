@@ -11,8 +11,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly = {
-      # url = "github:nix-community/neovim-nightly-overlay";
-      url = "/Users/devin/Repos/neovim-nightly-overlay";
+      url = "github:nix-community/neovim-nightly-overlay";
+      # url = "/Users/devin/Repos/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     emacs-nightly = {

@@ -1,10 +1,8 @@
 { inputs, pkgs, config, lib, ... }:
 
-let
-  package = pkgs.neovim;
-  ext = ".so";
+let ext = ".so";
 in {
-  home.sessionVariables = { EDITOR = "${package}/bin/nvim"; };
+  home.sessionVariables = { EDITOR = "nvim"; };
   xdg.configFile."nvim".source = ./nvim;
   xdg.configFile."nvim".recursive = true;
   # xdg.configFile."nvim/parser/bash${ext}".source =
@@ -39,7 +37,6 @@ in {
   # xdg.configFile."nvim/parser/zig${ext}".source =
   #   "${pkgs.tree-sitter.builtGrammars.tree-sitter-zig}/parser";
 
-  home.packages = [ package ];
   programs.zsh.shellAliases = {
     vim = "nvim";
     vi = "nvim";

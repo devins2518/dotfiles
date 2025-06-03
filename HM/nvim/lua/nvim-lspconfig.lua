@@ -51,6 +51,7 @@ handlers['textDocument/hover'] = lsp.with(handlers.hover, pop_opts)
 
 local servers = {
     'clangd',
+    'coq_lsp',
     'gopls',
     'hls',
     'lua_ls',
