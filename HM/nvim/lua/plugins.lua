@@ -135,7 +135,7 @@ return packer.startup({
         }
         use { 'fatih/vim-go', ft = { 'go' } }
         use {
-            'ziglang/zig.vim',
+            'https://codeberg.org/ziglang/zig.vim.git',
             ft = { 'zig' },
             config = function()
                 G['zig_fmt_autosave'] = 0

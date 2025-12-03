@@ -118,7 +118,7 @@ in rec {
       wget
       xxd
       inputs.zls-master.packages.${pkgs.system}.default
-      inputs.zig-overlay.packages.${pkgs.system}.master
+      inputs.zig-overlay.packages.${pkgs.system}."0.15.1"
       zsh
     ] ++ nur-packages ++
 

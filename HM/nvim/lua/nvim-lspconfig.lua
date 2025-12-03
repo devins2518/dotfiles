@@ -7,7 +7,7 @@ if ok then
     end
 end
 
-local nvim_lsp = require('lspconfig')
+local nvim_lsp = vim.lsp.config
 
 -- TODO figure out why this don't work
 vim.fn.sign_define('LspDiagnosticsSignError', {
@@ -64,21 +64,22 @@ local servers = {
     'zls'
 }
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
+    nvim_lsp(lsp, {
         on_attach = lsp_config.common_on_attach,
         capabilities = capabilities
-    }
+    })
+    vim.lsp.enable(lsp)
 end
 
-nvim_lsp.clangd.setup({ init_options = { clangdFileStatus = true } })
+nvim_lsp('clangd', { init_options = { clangdFileStatus = true } })
 
 -- 	https://github.com/golang/go/issues/41081
-nvim_lsp.gopls.setup {
+nvim_lsp('gopls', {
     cmd = { 'gopls', 'serve' },
     settings = {
         gopls = { staticcheck = true, env = { GOFLAGS = '-tags=test' } }
     }
-}
+})
 
 local sumneko_root_path = vim.fn.stdpath('cache') ..
                               '/lspconfig/sumneko_lua/lua-language-server'
@@ -87,7 +88,7 @@ local sumneko_binary = 'lua-language-server'
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
-require'lspconfig'.lua_ls.setup {
+nvim_lsp('lua_ls', {
     cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
     settings = {
         Lua = {
@@ -97,4 +98,4 @@ require'lspconfig'.lua_ls.setup {
             telemetry = { enable = false }
         }
     }
-}
+})
