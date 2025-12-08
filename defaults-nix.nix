@@ -118,7 +118,7 @@ in {
       meson
       nil
       ninja
-      nixfmt
+      nixfmt-rfc-style
       nixpkgs-review
       ormolu
       pamixer

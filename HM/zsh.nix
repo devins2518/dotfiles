@@ -1,10 +1,44 @@
-{ pkgs, config, lib, inputs, ... }:
-
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}:
 let
-  nix-command =
-    if pkgs.stdenv.isDarwin then "darwin-rebuild" else "sudo nixos-rebuild";
+  nix-command = if pkgs.stdenv.isDarwin then "sudo darwin-rebuild" else "sudo nixos-rebuild";
   home = if pkgs.stdenv.isDarwin then "/Users/devin" else "/home/devin";
-in {
+  initFirst = lib.mkOrder 500 ''
+    bunnyfetch
+    if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+      source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+    fi
+  '';
+  init = lib.mkOrder 1000 ''
+    # Fuzzy finding
+    zstyle ':completion:*' matcher-list "" \
+      'm:{a-z\-}={A-Z\_}' \
+      'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+      'r:|?=** m:{a-z\-}={A-Z\_}'
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+    function top-dir() {
+        (du -ah $1 | sort -n -r | head -n $2) 2>/dev/null
+    }
+    function search() {
+        (find $1 -name "*$2*") 2>/dev/null
+    }
+    export EDITOR=nvim
+    export VISUAL=nvim
+    export PATH=$PATH:~/.local/bin:~/.local/circt/bin:~/.local/llvm/bin
+    export CODELLDB_PATH=${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#928374"
+
+    [[ ! -r ${home}/.opam/opam-init/init.zsh ]] || source ${home}/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+    eval "$(direnv hook zsh)"
+  '';
+in
+{
   programs = {
     zsh = {
       enable = true;
@@ -17,48 +51,19 @@ in {
         share = false;
       };
 
-      initExtra = ''
-        # Fuzzy finding
-        zstyle ':completion:*' matcher-list "" \
-          'm:{a-z\-}={A-Z\_}' \
-          'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-          'r:|?=** m:{a-z\-}={A-Z\_}'
-        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-        function top-dir() {
-            (du -ah $1 | sort -n -r | head -n $2) 2>/dev/null
-        }
-        function search() {
-            (find $1 -name "*$2*") 2>/dev/null
-        }
-        export EDITOR=nvim
-        export VISUAL=nvim
-        export PATH=$PATH:~/.local/bin:~/.local/circt/bin:~/.local/llvm/bin
-        export CODELLDB_PATH=${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb
-        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#928374"
-
-        [[ ! -r ${home}/.opam/opam-init/init.zsh ]] || source ${home}/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
-        eval "$(direnv hook zsh)"
-      '';
-
-      initExtraFirst = ''
-        bunnyfetch
-        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-        fi
-      '';
+      initContent = lib.mkMerge [
+        initFirst
+        init
+      ];
 
       shellAliases = {
         nshell = "nix-shell";
         ls = "ls -l --color=always -H";
-        fupdate =
-          "${nix-command} switch --flake '${config.home.homeDirectory}/Repos/dotfiles/#'";
-        fclup =
-          "${nix-command} nixos-rebuild switch --flake '${config.home.homeDirectory}/Repos/dotfiles/#' && sudo nix-collect-garbage -d";
+        fupdate = "${nix-command} switch --flake '${config.home.homeDirectory}/Repos/dotfiles/#'";
+        fclup = "${nix-command} nixos-rebuild switch --flake '${config.home.homeDirectory}/Repos/dotfiles/#' && sudo nix-collect-garbage -d";
         grep = "rg";
         g = "gyro";
-        update-zig =
-          "zigup master --install-dir /home/devin/.zigup --path-link /home/devin/bin/zig";
+        update-zig = "zigup master --install-dir /home/devin/.zigup --path-link /home/devin/bin/zig";
         mbuild = "meson compile -C build";
         mtest = "meson test -C build";
         pio_upload = "pio run -t upload";

@@ -20,9 +20,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs.url = "/Users/devin/Repos/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nur.url = "github:nix-community/NUR/master";
+    nur.url = "github:nix-community/NUR/main";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     rust-overlay = {
       url = "github:nix-community/fenix";
@@ -157,7 +157,7 @@
         modules = with self.nixosModules; [
           # system wide config
           ./hosts/Devins-MacBook-Pro/configuration.nix
-          home-manager.darwinModule
+          home-manager.darwinModules.home-manager
           defaults-darwin
           ({ pkgs, ... }: {
             nixpkgs.overlays = sharedOverlays;
@@ -248,7 +248,7 @@
       sharedOverlays = [
         emacs-nightly.overlay
         neovim-nightly.overlays.default
-        nur.overlay
+        nur.overlays.default
         rust-overlay.overlays.default
         zig-overlay.overlays.default
         self.overlay
