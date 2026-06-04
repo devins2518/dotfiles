@@ -178,7 +178,8 @@ return packer.startup({
                                     allFeatures = true
                                 },
                                 procMacro = { enable = true },
-                                checkOnSave = { allTargets = true }
+                                checkOnSave = true,
+                                check = { allTargets = true }
                             }
                         }
                     },
@@ -204,6 +205,7 @@ return packer.startup({
             config = function()
                 vim.cmd [[packadd vimtex]]
                 G['vimtex_view_method'] = 'zathura'
+                G['vimtex_syntax_conceal_disable'] = 1
             end
         }
         use { 'antiagainst/vim-tablegen' }
@@ -286,6 +288,20 @@ return packer.startup({
                         s = { j = { k = false } }
                     }
                 })
+            end
+        }
+        use {
+            'Darazaki/indent-o-matic',
+            ft = { 'cpp' },
+            config = function()
+                require('indent-o-matic').setup {
+                    -- Number of lines without indentation before giving up (use -1 for infinite)
+                    max_lines = 2048,
+                    -- Space indentations that should be detected
+                    standard_widths = { 2, 4, 8 },
+                    -- Skip multi-line comments and strings (more accurate detection but less performant)
+                    skip_multiline = true
+                }
             end
         }
 

@@ -36,6 +36,7 @@ let
     [[ ! -r ${home}/.opam/opam-init/init.zsh ]] || source ${home}/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
     eval "$(direnv hook zsh)"
+    setopt incappendhistory
   '';
 in
 {
@@ -48,7 +49,8 @@ in
         size = 2000;
         expireDuplicatesFirst = true;
         ignoreDups = true;
-        share = false;
+        share = true;
+        append = true;
       };
 
       initContent = lib.mkMerge [

@@ -33,7 +33,7 @@ in rec {
     };
   };
 
-  ids.uids.nixbld = 300;
+  ids.uids.nixbld = 350;
 
   nix = {
     extraOptions = ''
